@@ -153,3 +153,8 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+
+# Spring Boot local config
+backend/src/main/resources/application.properties
+backend/src/main/resources/application-local.properties
+backend/src/main/resources/application-dev.properties

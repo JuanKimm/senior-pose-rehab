@@ -158,3 +158,15 @@ __pycache__/
 backend/src/main/resources/application.properties
 backend/src/main/resources/application-local.properties
 backend/src/main/resources/application-dev.properties
+
+# Gradle
+.gradle/
+build/
+
+# Java
+*.class
+
+# 영상 파일
+*.mp4
+*.avi
+*.mov

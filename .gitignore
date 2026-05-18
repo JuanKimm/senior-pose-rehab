@@ -170,3 +170,9 @@ build/
 *.mp4
 *.avi
 *.mov
+
+# Mac
+.DS_Store
+
+# VSCode
+.vscode/

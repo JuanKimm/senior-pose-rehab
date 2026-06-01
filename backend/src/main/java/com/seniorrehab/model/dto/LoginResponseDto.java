@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 public class LoginResponseDto {
 
     private String accessToken;   // JWT 토큰
-    private Long userId;          // 로그인 아이디 (전화번호)
+    private Long userId;          // DB의 회원 번호 (PK, 자동 증가)
     private String name;          // 사용자 이름
-    private String tel;           // 전화번호
-    private String role;          // 사용자 역할
+    private String tel;           // 본인 전화번호 (로그인 아이디로도 사용)
+    private String role;          // 권한 (ROLE_USER 등)
 }

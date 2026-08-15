@@ -1,6 +1,9 @@
 package com.seniorrehab.service;
 
+import com.seniorrehab.model.dto.AccuracyGraphDto;
+import com.seniorrehab.model.dto.BodyPartStatsDto;
 import com.seniorrehab.model.dto.ExerciseRecordDto;
+import com.seniorrehab.model.dto.MonthlySummaryDto;
 import com.seniorrehab.repository.DashboardMapper;
 import lombok.RequiredArgsConstructor;
 import java.util.List;
@@ -34,5 +37,20 @@ public class DashboardService {
     // 운동 기록 단건 상세 조회
     public ExerciseRecordDto getRecordById(Long userId, Long sessionId) {
         return dashboardMapper.findRecordById(userId, sessionId);
+    }
+
+    // 월간 요약 조회
+    public MonthlySummaryDto getMonthlySummary(Long userId, int year, int month) {
+        return dashboardMapper.findMonthlySummary(userId, year, month);
+    }
+
+    // 날짜별 정확도 그래프 조회
+    public List<AccuracyGraphDto> getAccuracyGraph(Long userId) {
+        return dashboardMapper.findAccuracyGraph(userId);
+    }
+
+    // 부위별 통계 조회
+    public List<BodyPartStatsDto> getBodyPartStats(Long userId, int year, int month) {
+        return dashboardMapper.findBodyPartStats(userId, year, month);
     }
 }

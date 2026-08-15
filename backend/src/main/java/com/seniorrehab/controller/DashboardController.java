@@ -1,9 +1,13 @@
 package com.seniorrehab.controller;
 
+import com.seniorrehab.model.dto.AccuracyGraphDto;
+import com.seniorrehab.model.dto.BodyPartStatsDto;
 import com.seniorrehab.model.dto.ExerciseRecordDto;
+import com.seniorrehab.model.dto.MonthlySummaryDto;
 import com.seniorrehab.service.DashboardService;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -56,5 +60,44 @@ public class DashboardController {
             @PathVariable Long recordId) {
         ExerciseRecordDto record = dashboardService.getRecordById(Long.parseLong(userId), recordId);
         return ResponseEntity.ok(record);
+    }
+
+    // 이번 달 요약 조회
+    @GetMapping("/monthly-summary")
+    public ResponseEntity<MonthlySummaryDto> getMonthlySummary(
+            @AuthenticationPrincipal String userId) {
+        LocalDate now = LocalDate.now();
+        MonthlySummaryDto summary = dashboardService.getMonthlySummary(
+                Long.parseLong(userId), now.getYear(), now.getMonthValue());
+        return ResponseEntity.ok(summary);
+    }
+
+    // 특정 월 요약 조회
+    @GetMapping("/monthly-summary/{year}/{month}")
+    public ResponseEntity<MonthlySummaryDto> getMonthlySummaryByYearMonth(
+            @AuthenticationPrincipal String userId,
+            @PathVariable int year,
+            @PathVariable int month) {
+        MonthlySummaryDto summary = dashboardService.getMonthlySummary(
+                Long.parseLong(userId), year, month);
+        return ResponseEntity.ok(summary);
+    }
+
+    // 날짜별 정확도 그래프 조회
+    @GetMapping("/accuracy-graph")
+    public ResponseEntity<List<AccuracyGraphDto>> getAccuracyGraph(
+            @AuthenticationPrincipal String userId) {
+        List<AccuracyGraphDto> graph = dashboardService.getAccuracyGraph(Long.parseLong(userId));
+        return ResponseEntity.ok(graph);
+    }
+
+    // 부위별 통계 조회
+    @GetMapping("/stats/body-parts")
+    public ResponseEntity<List<BodyPartStatsDto>> getBodyPartStats(
+            @AuthenticationPrincipal String userId,
+            @RequestParam(defaultValue = "#{T(java.time.LocalDate).now().getYear()}") int year,
+            @RequestParam(defaultValue = "#{T(java.time.LocalDate).now().getMonthValue()}") int month) {
+        List<BodyPartStatsDto> stats = dashboardService.getBodyPartStats(Long.parseLong(userId), year, month);
+        return ResponseEntity.ok(stats);
     }
 }

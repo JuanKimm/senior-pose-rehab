@@ -86,4 +86,57 @@
         WHERE es.user_id = #{userId}
         AND es.session_id = #{sessionId}
     </select>
+
+    <!-- 월간 요약 조회 -->
+    <select id="findMonthlySummary" resultType="com.seniorrehab.model.dto.MonthlySummaryDto">
+        SELECT
+            COUNT(DISTINCT es.exercise_date) AS totalDays,
+            (SELECT et2.body_part
+            FROM EXERCISE_SESSION es2
+            JOIN EXERCISE_TYPE et2 ON es2.exercise_type_id = et2.exercise_type_id
+            WHERE es2.user_id = #{userId}
+            AND YEAR(es2.exercise_date) = #{year}
+            AND MONTH(es2.exercise_date) = #{month}
+            GROUP BY et2.body_part
+            ORDER BY COUNT(*) DESC
+            LIMIT 1) AS mostFrequentPart,
+            AVG(es.accuracy) AS avgAccuracy,
+            AVG(es.duration_sec) AS avgDurationSec,
+            AVG(es.accuracy) - (
+                SELECT AVG(es3.accuracy)
+                FROM EXERCISE_SESSION es3
+                WHERE es3.user_id = #{userId}
+                AND YEAR(es3.exercise_date) = #{year}
+                AND MONTH(es3.exercise_date) = #{month} - 1
+            ) AS accuracyImprovement
+        FROM EXERCISE_SESSION es
+        WHERE es.user_id = #{userId}
+        AND YEAR(es.exercise_date) = #{year}
+        AND MONTH(es.exercise_date) = #{month}
+    </select>
+
+    <!-- 날짜별 정확도 그래프 조회 -->
+    <select id="findAccuracyGraph" resultType="com.seniorrehab.model.dto.AccuracyGraphDto">
+        SELECT
+            es.exercise_date AS exerciseDate,
+            AVG(es.accuracy) AS avgAccuracy
+        FROM EXERCISE_SESSION es
+        WHERE es.user_id = #{userId}
+        GROUP BY es.exercise_date
+        ORDER BY es.exercise_date ASC
+    </select>
+
+    <!-- 부위별 통계 조회 -->
+    <select id="findBodyPartStats" resultType="com.seniorrehab.model.dto.BodyPartStatsDto">
+        SELECT
+            et.body_part AS bodyPart,
+            COUNT(*) AS totalCount,
+            AVG(es.accuracy) AS avgAccuracy
+        FROM EXERCISE_SESSION es
+        JOIN EXERCISE_TYPE et ON es.exercise_type_id = et.exercise_type_id
+        WHERE es.user_id = #{userId}
+        AND YEAR(es.exercise_date) = #{year}
+        AND MONTH(es.exercise_date) = #{month}
+        GROUP BY et.body_part
+    </select>
 </mapper>

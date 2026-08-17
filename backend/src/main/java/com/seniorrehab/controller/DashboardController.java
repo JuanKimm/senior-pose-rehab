@@ -8,9 +8,16 @@ import com.seniorrehab.model.dto.MonthlySummaryDto;
 import com.seniorrehab.service.DashboardService;
 import lombok.RequiredArgsConstructor;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -108,5 +115,39 @@ public class DashboardController {
             @AuthenticationPrincipal String userId) {
         List<FeedbackDto> feedbacks = dashboardService.getFeedback(Long.parseLong(userId));
         return ResponseEntity.ok(feedbacks);
+    }
+
+    // 영상 스트리밍
+    @GetMapping("/records/{recordId}/video/stream")
+    public ResponseEntity<Resource> streamVideo(
+            @AuthenticationPrincipal String userId,
+            @PathVariable Long recordId) throws IOException {
+        String videoPath = dashboardService.getVideoPath(Long.parseLong(userId), recordId);
+        if (videoPath == null) {
+            return ResponseEntity.notFound().build();
+        }
+        Path path = Paths.get(videoPath);
+        Resource resource = new FileSystemResource(path);
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType("video/mp4"))
+                .body(resource);
+    }
+
+    // 영상 다운로드
+    @GetMapping("/records/{recordId}/video/download")
+    public ResponseEntity<Resource> downloadVideo(
+            @AuthenticationPrincipal String userId,
+            @PathVariable Long recordId) throws IOException {
+        String videoPath = dashboardService.getVideoPath(Long.parseLong(userId), recordId);
+        if (videoPath == null) {
+            return ResponseEntity.notFound().build();
+        }
+        Path path = Paths.get(videoPath);
+        Resource resource = new FileSystemResource(path);
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=\"" + path.getFileName().toString() + "\"")
+                .body(resource);
     }
 }

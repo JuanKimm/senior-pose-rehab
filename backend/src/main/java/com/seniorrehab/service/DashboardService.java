@@ -159,4 +159,9 @@ public class DashboardService {
 
         return feedbacks;
     }
+
+    // 영상 경로 조회
+    public String getVideoPath(Long userId, Long sessionId) {
+        return dashboardMapper.findVideoPathBySessionId(userId, sessionId);
+    }
 }

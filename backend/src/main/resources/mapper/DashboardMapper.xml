@@ -176,4 +176,12 @@
         AND YEAR(es.exercise_date) = #{year}
         AND MONTH(es.exercise_date) = #{month}
     </select>
+
+    <!-- 영상 경로 조회 -->
+    <select id="findVideoPathBySessionId" resultType="String">
+        SELECT video_path
+        FROM EXERCISE_SESSION
+        WHERE user_id = #{userId}
+        AND session_id = #{sessionId}
+    </select>
 </mapper>

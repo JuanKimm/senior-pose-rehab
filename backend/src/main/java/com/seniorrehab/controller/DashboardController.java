@@ -150,4 +150,31 @@ public class DashboardController {
                         "attachment; filename=\"" + path.getFileName().toString() + "\"")
                 .body(resource);
     }
+
+    // 월별 운동 달력 조회
+    @GetMapping("/calendar")
+    public ResponseEntity<List<LocalDate>> getCalendarDates(
+            @AuthenticationPrincipal String userId,
+            @RequestParam int year,
+            @RequestParam int month) {
+        List<LocalDate> dates = dashboardService.getCalendarDates(Long.parseLong(userId), year, month);
+        return ResponseEntity.ok(dates);
+    }
+
+    // 날짜별 기록 팝업 조회
+    @GetMapping("/calendar/{date}")
+    public ResponseEntity<ExerciseRecordDto> getCalendarRecord(
+            @AuthenticationPrincipal String userId,
+            @PathVariable String date) {
+        ExerciseRecordDto record = dashboardService.getCalendarRecord(Long.parseLong(userId), date);
+        return ResponseEntity.ok(record);
+    }
+
+    // 연속 운동일 조회
+    @GetMapping("/calendar/streak")
+    public ResponseEntity<Integer> getStreakDays(
+            @AuthenticationPrincipal String userId) {
+        Integer streak = dashboardService.getStreakDays(Long.parseLong(userId));
+        return ResponseEntity.ok(streak);
+    }
 }

@@ -184,4 +184,43 @@
         WHERE user_id = #{userId}
         AND session_id = #{sessionId}
     </select>
+
+    <!-- 월별 운동 날짜 조회 -->
+    <select id="findCalendarDates" resultType="java.time.LocalDate">
+        SELECT DISTINCT exercise_date
+        FROM EXERCISE_SESSION
+        WHERE user_id = #{userId}
+        AND YEAR(exercise_date) = #{year}
+        AND MONTH(exercise_date) = #{month}
+        ORDER BY exercise_date ASC
+    </select>
+
+    <!-- 날짜별 기록 팝업 조회 -->
+    <select id="findCalendarRecord" resultType="com.seniorrehab.model.dto.ExerciseRecordDto">
+        SELECT
+            es.session_id AS sessionId,
+            et.body_part AS bodyPart,
+            es.total_count AS totalCount,
+            es.duration_sec AS durationSec,
+            es.accuracy AS accuracy,
+            es.video_path AS videoPath,
+            es.exercise_date AS exerciseDate
+        FROM EXERCISE_SESSION es
+        JOIN EXERCISE_TYPE et ON es.exercise_type_id = et.exercise_type_id
+        WHERE es.user_id = #{userId}
+        AND es.exercise_date = #{date}
+        ORDER BY es.created_at DESC
+        LIMIT 1
+    </select>
+
+    <!-- 연속 운동일 조회 -->
+    <select id="findStreakDays" parameterType="Long" resultType="Integer">
+        SELECT COUNT(*)
+        FROM (
+            SELECT exercise_date,
+                DATEDIFF(CURDATE(), exercise_date) - ROW_NUMBER() OVER (ORDER BY exercise_date DESC) AS grp
+            FROM (SELECT DISTINCT exercise_date FROM EXERCISE_SESSION WHERE user_id = #{userId}) t
+        ) t2
+        WHERE grp = 0
+    </select>
 </mapper>

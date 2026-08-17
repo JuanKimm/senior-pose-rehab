@@ -29,4 +29,8 @@ public interface DashboardMapper {
     List<String> findMonthlyBodyParts(@Param("userId") Long userId, @Param("year") int year, @Param("month") int month); // 이번 달 운동한 부위 목록
 
     String findVideoPathBySessionId(@Param("userId") Long userId, @Param("sessionId") Long sessionId); // 영상 경로 조회
+
+    List<LocalDate> findCalendarDates(@Param("userId") Long userId, @Param("year") int year, @Param("month") int month); // 월별 운동 날짜 조회
+    ExerciseRecordDto findCalendarRecord(@Param("userId") Long userId, @Param("date") String date); // 날짜별 기록 팝업
+    Integer findStreakDays(Long userId); // 연속 운동일 조회
 }

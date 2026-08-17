@@ -164,4 +164,19 @@ public class DashboardService {
     public String getVideoPath(Long userId, Long sessionId) {
         return dashboardMapper.findVideoPathBySessionId(userId, sessionId);
     }
+
+    // 월별 운동 날짜 조회
+    public List<LocalDate> getCalendarDates(Long userId, int year, int month) {
+        return dashboardMapper.findCalendarDates(userId, year, month);
+    }
+
+    // 날짜별 기록 팝업 조회
+    public ExerciseRecordDto getCalendarRecord(Long userId, String date) {
+        return dashboardMapper.findCalendarRecord(userId, date);
+    }
+
+    // 연속 운동일 조회
+    public Integer getStreakDays(Long userId) {
+        return dashboardMapper.findStreakDays(userId);
+    }
 }

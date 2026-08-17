@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.seniorrehab.repository.ScheduleMapper">
+
+    <!-- 일정 목록 조회 -->
+    <select id="findSchedules" parameterType="Long" resultType="com.seniorrehab.model.dto.ScheduleDto">
+        SELECT
+            schedule_id AS scheduleId,
+            exercise_day AS exerciseDay,
+            exercise_time AS exerciseTime,
+            use_alert AS useAlert
+        FROM EXERCISE_SCHEDULE
+        WHERE user_id = #{userId}
+        ORDER BY exercise_day ASC
+    </select>
+
+    <!-- 일정 등록 -->
+    <insert id="insertSchedule" useGeneratedKeys="true" keyProperty="dto.scheduleId">
+        INSERT INTO EXERCISE_SCHEDULE (user_id, exercise_day, exercise_time, use_alert)
+        VALUES (#{userId}, #{dto.exerciseDay}, #{dto.exerciseTime}, #{dto.useAlert})
+    </insert>
+
+    <!-- 일정 수정 -->
+    <update id="updateSchedule">
+        UPDATE EXERCISE_SCHEDULE
+        SET exercise_day = #{dto.exerciseDay},
+            exercise_time = #{dto.exerciseTime},
+            use_alert = #{dto.useAlert}
+        WHERE schedule_id = #{scheduleId}
+        AND user_id = #{userId}
+    </update>
+
+    <!-- 일정 삭제 -->
+    <delete id="deleteSchedule">
+        DELETE FROM EXERCISE_SCHEDULE
+        WHERE schedule_id = #{scheduleId}
+        AND user_id = #{userId}
+    </delete>
+
+    <!-- 알림 on/off -->
+    <update id="toggleAlert">
+        UPDATE EXERCISE_SCHEDULE
+        SET use_alert = !use_alert
+        WHERE schedule_id = #{scheduleId}
+        AND user_id = #{userId}
+    </update>
+
+</mapper>

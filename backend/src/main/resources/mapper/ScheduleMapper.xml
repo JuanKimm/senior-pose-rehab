@@ -47,4 +47,22 @@
         AND user_id = #{userId}
     </update>
 
+    <!-- 오늘 발송할 일정 조회 -->
+    <select id="findTodaySchedules" resultType="com.seniorrehab.model.dto.ScheduleDto">
+        SELECT
+            es.schedule_id AS scheduleId,
+            es.exercise_day AS exerciseDay,
+            es.exercise_time AS exerciseTime,
+            es.use_alert AS useAlert,
+            es.user_id AS userId,
+            u.tel AS tel,
+            u.name AS name,
+            u.guardian_tel AS guardianTel
+        FROM EXERCISE_SCHEDULE es
+        JOIN USER u ON es.user_id = u.user_id
+        WHERE es.use_alert = true
+        AND es.exercise_day = DATE_FORMAT(NOW(), '%a')
+        AND es.exercise_time = TIME_FORMAT(NOW(), '%H:%i:00')
+    </select>
+    
 </mapper>

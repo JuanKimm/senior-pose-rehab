@@ -12,4 +12,6 @@ public class NotiHistoryDto {
     private String status;
     private String targetTel;
     private LocalDateTime sentAt;
+    private String shareToken;
+    private LocalDateTime tokenExpiresAt;
 }

@@ -38,6 +38,9 @@ dependencies {
 
 	// Validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// 솔라피 SMS
+    implementation 'net.nurigo:sdk:4.3.0'
 }
 
 tasks.named('test') {

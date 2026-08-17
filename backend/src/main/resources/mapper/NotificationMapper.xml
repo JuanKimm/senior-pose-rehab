@@ -11,7 +11,9 @@
             noti_type AS notiType,
             status,
             target_tel AS targetTel,
-            sent_at AS sentAt
+            sent_at AS sentAt,
+            share_token AS shareToken,
+            token_expires_at AS tokenExpiresAt
         FROM NOTIFICATION
         WHERE user_id = #{userId}
         ORDER BY sent_at DESC
@@ -24,10 +26,18 @@
             noti_type AS notiType,
             status,
             target_tel AS targetTel,
-            sent_at AS sentAt
+            sent_at AS sentAt,
+            share_token AS shareToken,
+            token_expires_at AS tokenExpiresAt
         FROM NOTIFICATION
         WHERE user_id = #{userId}
         AND notification_id = #{notificationId}
     </select>
 
+    <!-- 알림 기록 저장 -->
+    <insert id="insertNotification">
+        INSERT INTO NOTIFICATION (user_id, session_id, noti_type, status, target_tel, share_token, token_expires_at, sent_at)
+        VALUES (#{userId}, #{sessionId}, #{notiType}, #{status}, #{targetTel}, #{shareToken}, #{tokenExpiresAt}, NOW())
+    </insert>
+    
 </mapper>

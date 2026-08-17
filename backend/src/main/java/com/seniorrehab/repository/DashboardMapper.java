@@ -33,4 +33,6 @@ public interface DashboardMapper {
     List<LocalDate> findCalendarDates(@Param("userId") Long userId, @Param("year") int year, @Param("month") int month); // 월별 운동 날짜 조회
     ExerciseRecordDto findCalendarRecord(@Param("userId") Long userId, @Param("date") String date); // 날짜별 기록 팝업
     Integer findStreakDays(Long userId); // 연속 운동일 조회
+
+    ExerciseRecordDto findRecordWithUserBySessionId(@Param("sessionId") Long sessionId); // 결과 알림용 운동 기록 조회
 }

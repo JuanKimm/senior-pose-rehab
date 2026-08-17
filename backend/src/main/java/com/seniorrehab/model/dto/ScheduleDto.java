@@ -11,4 +11,8 @@ public class ScheduleDto {
     private String exerciseDay;
     private LocalTime exerciseTime;
     private Boolean useAlert;
+    private Long userId;
+    private String tel;
+    private String name;
+    private String guardianTel;
 }

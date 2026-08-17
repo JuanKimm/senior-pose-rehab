@@ -223,4 +223,24 @@
         ) t2
         WHERE grp = 0
     </select>
+
+    <!-- 결과 알림용 운동 기록 조회 -->
+    <select id="findRecordWithUserBySessionId" resultType="com.seniorrehab.model.dto.ExerciseRecordDto">
+        SELECT
+            es.session_id AS sessionId,
+            es.user_id AS userId,
+            et.body_part AS bodyPart,
+            es.total_count AS totalCount,
+            es.duration_sec AS durationSec,
+            es.accuracy AS accuracy,
+            es.video_path AS videoPath,
+            es.exercise_date AS exerciseDate,
+            u.tel AS tel,
+            u.name AS name,
+            u.guardian_tel AS guardianTel
+        FROM EXERCISE_SESSION es
+        JOIN EXERCISE_TYPE et ON es.exercise_type_id = et.exercise_type_id
+        JOIN USER u ON es.user_id = u.user_id
+        WHERE es.session_id = #{sessionId}
+    </select>
 </mapper>

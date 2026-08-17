@@ -31,4 +31,18 @@ public class NotificationController {
         NotiHistoryDto history = notificationService.getHistoryById(Long.parseLong(userId), id);
         return ResponseEntity.ok(history);
     }
+
+    // 운동 일정 알림 발송
+    @PostMapping("/send/schedule")
+    public ResponseEntity<Void> sendScheduleAlarm() {
+        notificationService.sendScheduleAlarm();
+        return ResponseEntity.ok().build();
+    }
+
+    // 운동 결과 알림 발송
+    @PostMapping("/send/result")
+    public ResponseEntity<Void> sendResultAlarm(@RequestParam Long sessionId) {
+        notificationService.sendResultAlarm(sessionId);
+        return ResponseEntity.ok().build();
+    }
 }

@@ -14,4 +14,8 @@ public class ExerciseRecordDto {
     private Float accuracy;
     private String videoPath;
     private LocalDate exerciseDate;
+    private String tel;
+    private String name;
+    private String guardianTel;
+    private Long userId;
 }

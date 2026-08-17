@@ -3,6 +3,7 @@ package com.seniorrehab.controller;
 import com.seniorrehab.model.dto.AccuracyGraphDto;
 import com.seniorrehab.model.dto.BodyPartStatsDto;
 import com.seniorrehab.model.dto.ExerciseRecordDto;
+import com.seniorrehab.model.dto.FeedbackDto;
 import com.seniorrehab.model.dto.MonthlySummaryDto;
 import com.seniorrehab.service.DashboardService;
 import lombok.RequiredArgsConstructor;
@@ -99,5 +100,13 @@ public class DashboardController {
             @RequestParam(defaultValue = "#{T(java.time.LocalDate).now().getMonthValue()}") int month) {
         List<BodyPartStatsDto> stats = dashboardService.getBodyPartStats(Long.parseLong(userId), year, month);
         return ResponseEntity.ok(stats);
+    }
+
+    // 피드백 조회
+    @GetMapping("/feedback")
+    public ResponseEntity<List<FeedbackDto>> getFeedback(
+            @AuthenticationPrincipal String userId) {
+        List<FeedbackDto> feedbacks = dashboardService.getFeedback(Long.parseLong(userId));
+        return ResponseEntity.ok(feedbacks);
     }
 }

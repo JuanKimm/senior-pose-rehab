@@ -139,4 +139,41 @@
         AND MONTH(es.exercise_date) = #{month}
         GROUP BY et.body_part
     </select>
+
+    <!-- 마지막 운동 날짜 조회 -->
+    <select id="findLastExerciseDate" parameterType="Long" resultType="java.time.LocalDate">
+        SELECT MAX(exercise_date)
+        FROM EXERCISE_SESSION
+        WHERE user_id = #{userId}
+    </select>
+
+    <!-- 이번 달 운동 일수 조회 -->
+    <select id="findMonthlyExerciseDays" resultType="Integer">
+        SELECT COUNT(DISTINCT exercise_date)
+        FROM EXERCISE_SESSION
+        WHERE user_id = #{userId}
+        AND YEAR(exercise_date) = #{year}
+        AND MONTH(exercise_date) = #{month}
+    </select>
+
+    <!-- 연속 운동 일수 조회 -->
+    <select id="findConsecutiveDays" parameterType="Long" resultType="Integer">
+        SELECT COUNT(*)
+        FROM (
+            SELECT exercise_date,
+                DATEDIFF(CURDATE(), exercise_date) - ROW_NUMBER() OVER (ORDER BY exercise_date DESC) AS grp
+            FROM (SELECT DISTINCT exercise_date FROM EXERCISE_SESSION WHERE user_id = #{userId}) t
+        ) t2
+        WHERE grp = 0
+    </select>
+
+    <!-- 이번 달 운동한 부위 목록 조회 -->
+    <select id="findMonthlyBodyParts" resultType="String">
+        SELECT DISTINCT et.body_part
+        FROM EXERCISE_SESSION es
+        JOIN EXERCISE_TYPE et ON es.exercise_type_id = et.exercise_type_id
+        WHERE es.user_id = #{userId}
+        AND YEAR(es.exercise_date) = #{year}
+        AND MONTH(es.exercise_date) = #{month}
+    </select>
 </mapper>

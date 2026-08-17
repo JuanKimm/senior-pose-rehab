@@ -1,5 +1,6 @@
 package com.seniorrehab.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.seniorrehab.model.dto.AccuracyGraphDto;
@@ -20,4 +21,10 @@ public interface DashboardMapper {
     MonthlySummaryDto findMonthlySummary(@Param("userId") Long userId, @Param("year") int year, @Param("month") int month); // 월간 요약 조회
     List<AccuracyGraphDto> findAccuracyGraph(@Param("userId") Long userId); // 날짜별 정확도 그래프 조회
     List<BodyPartStatsDto> findBodyPartStats(@Param("userId") Long userId, @Param("year") int year, @Param("month") int month); // 부위별 통계 조회
+   
+    // 피드백용 데이터 조회
+    LocalDate findLastExerciseDate(Long userId); // 마지막 운동 날짜
+    Integer findMonthlyExerciseDays(@Param("userId") Long userId, @Param("year") int year, @Param("month") int month); // 이번 달 운동 일수
+    Integer findConsecutiveDays(Long userId); // 연속 운동 일수
+    List<String> findMonthlyBodyParts(@Param("userId") Long userId, @Param("year") int year, @Param("month") int month); // 이번 달 운동한 부위 목록
 }

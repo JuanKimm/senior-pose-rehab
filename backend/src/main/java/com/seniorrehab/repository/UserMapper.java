@@ -23,4 +23,8 @@ public interface UserMapper {
             "VALUES (#{tel}, #{password}, #{name}, #{guardianTel})")
     @Options(useGeneratedKeys = true, keyProperty = "userId")
     int insertUser(User user);
+
+    // 토큰 갱신 시 userId로 유저 조회 (role 필요)
+    @Select("SELECT * FROM USER WHERE user_id = #{userId}")
+    User findByUserId(Long userId);
 }

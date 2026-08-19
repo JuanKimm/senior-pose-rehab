@@ -42,9 +42,9 @@ public class AuthController {
     }
 
     // 전화번호 중복 확인
-    @GetMapping("/check-phone/{phone}")
-    public ResponseEntity<CheckPhoneResponseDto> checkPhone(@PathVariable String phone) {
-        CheckPhoneResponseDto response = authService.checkPhone(phone);
+    @GetMapping("/check-phone/{tel}")
+    public ResponseEntity<CheckPhoneResponseDto> checkPhone(@PathVariable String tel) {
+        CheckPhoneResponseDto response = authService.checkPhone(tel);
         return ResponseEntity.ok(response);
     }
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.seniorrehab.repository.UserMapper">
+
+    <!-- 로그인 시 전화번호로 유저 조회 -->
+    <select id="findByTel" resultType="com.seniorrehab.model.entity.User">
+        SELECT * FROM USER WHERE tel = #{tel}
+    </select>
+
+    <!-- 전화번호 중복 체크 -->
+    <select id="countByTel" resultType="int">
+        SELECT COUNT(*) FROM USER WHERE tel = #{tel}
+    </select>
+
+    <!-- 회원가입 -->
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="user.userId">
+        INSERT INTO USER (tel, password, name, guardian_tel)
+        VALUES (#{user.tel}, #{user.password}, #{user.name}, #{user.guardianTel})
+    </insert>
+
+    <!-- 토큰 갱신 시 userId로 유저 조회 -->
+    <select id="findByUserId" resultType="com.seniorrehab.model.entity.User">
+        SELECT * FROM USER WHERE user_id = #{userId}
+    </select>
+
+</mapper>

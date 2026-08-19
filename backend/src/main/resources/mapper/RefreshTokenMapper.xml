@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.seniorrehab.repository.RefreshTokenMapper">
+
+    <!-- 로그인 시 저장 - 이미 있으면 덮어쓰기(UPSERT), 없으면 새로 추가 -->
+    <insert id="upsertToken">
+        INSERT INTO REFRESH_TOKEN (user_id, token, expired_at)
+        VALUES (#{refreshToken.userId}, #{refreshToken.token}, #{refreshToken.expiredAt})
+        ON DUPLICATE KEY UPDATE token = #{refreshToken.token}, expired_at = #{refreshToken.expiredAt}
+    </insert>
+
+    <!-- 토큰 갱신 시 - DB에 저장된 값과 클라이언트가 보낸 값이 같은지 대조용 -->
+    <select id="findByUserId" resultType="com.seniorrehab.model.entity.RefreshToken">
+        SELECT * FROM REFRESH_TOKEN WHERE user_id = #{userId}
+    </select>
+
+    <!-- 로그아웃 시 삭제 -->
+    <delete id="deleteByUserId">
+        DELETE FROM REFRESH_TOKEN WHERE user_id = #{userId}
+    </delete>
+
+</mapper>

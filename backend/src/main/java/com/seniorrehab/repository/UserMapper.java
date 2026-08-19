@@ -1,30 +1,14 @@
 package com.seniorrehab.repository;
 
 import com.seniorrehab.model.entity.User;
-
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserMapper {
 
-    // 로그인 시 전화번호로 유저 조회
-    @Select("SELECT * FROM USER WHERE tel = #{tel}")
-    User findByTel(String tel);
-
-    // 전화번호 중복 체크
-    @Select("SELECT COUNT(*) FROM USER WHERE tel = #{tel}")
-    int countByTel(String tel);
-
-    // 회원가입
-    @Insert("INSERT INTO USER (tel, password, name, guardian_tel) " +
-            "VALUES (#{tel}, #{password}, #{name}, #{guardianTel})")
-    @Options(useGeneratedKeys = true, keyProperty = "userId")
-    int insertUser(User user);
-
-    // 토큰 갱신 시 userId로 유저 조회 (role 필요)
-    @Select("SELECT * FROM USER WHERE user_id = #{userId}")
-    User findByUserId(Long userId);
+    User findByTel(@Param("tel") String tel);   // 로그인 시 전화번호로 유저 조회
+    int countByTel(@Param("tel") String tel);   // 전화번호 중복 체크
+    int insertUser(@Param("user") User user);   // 회원가입
+    User findByUserId(@Param("userId") Long userId);    // 토큰 갱신 시 userId로 유저 조회
 }

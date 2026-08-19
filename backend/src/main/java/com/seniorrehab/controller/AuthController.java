@@ -1,5 +1,6 @@
 package com.seniorrehab.controller;
 
+import com.seniorrehab.model.dto.CheckPhoneResponseDto;
 import com.seniorrehab.model.dto.LoginRequestDto;
 import com.seniorrehab.model.dto.LoginResponseDto;
 import com.seniorrehab.model.dto.RefreshTokenRequestDto;
@@ -17,6 +18,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +39,13 @@ public class AuthController {
     public ResponseEntity<SignupResponseDto> signup(@Valid @RequestBody SignupRequestDto request) {
         SignupResponseDto response = authService.signup(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);   // 201 Created
+    }
+
+    // 전화번호 중복 확인
+    @GetMapping("/check-phone/{phone}")
+    public ResponseEntity<CheckPhoneResponseDto> checkPhone(@PathVariable String phone) {
+        CheckPhoneResponseDto response = authService.checkPhone(phone);
+        return ResponseEntity.ok(response);
     }
 
     // 로그인

@@ -2,6 +2,7 @@ package com.seniorrehab.service;
 
 import com.seniorrehab.config.CustomUserDetails;
 import com.seniorrehab.config.JwtTokenProvider;
+import com.seniorrehab.model.dto.CheckPhoneResponseDto;
 import com.seniorrehab.model.dto.LoginRequestDto;
 import com.seniorrehab.model.dto.LoginResponseDto;
 import com.seniorrehab.model.dto.RefreshTokenRequestDto;
@@ -32,6 +33,43 @@ public class AuthService {
     private final UserMapper userMapper;
     private final RefreshTokenMapper refreshTokenMapper;
     private final PasswordEncoder passwordEncoder;
+
+    // 회원가입
+    public SignupResponseDto signup(SignupRequestDto request) {
+
+        // 1. 전화번호 중복 체크
+        if (userMapper.countByTel(request.getTel()) > 0) {
+            throw new IllegalArgumentException("이미 가입된 전화번호입니다.");
+        }
+
+        // 2. 비밀번호 BCrypt 암호화
+        String encodedPassword = passwordEncoder.encode(request.getPassword());
+
+        // 3. User 엔티티 만들기 (role, status는 DB DEFAULT로 자동 설정)
+        User user = new User();
+        user.setTel(request.getTel());
+        user.setPassword(encodedPassword);
+        user.setName(request.getName());
+        user.setGuardianTel(request.getGuardianTel());
+
+        // 4. DB INSERT
+        userMapper.insertUser(user);
+
+        // 5. 응답 DTO 반환
+        return SignupResponseDto.builder()
+                .userId(user.getUserId())
+                .tel(user.getTel())
+                .name(user.getName())
+                .build();
+    }
+
+    // 전화번호 중복 확인
+    public CheckPhoneResponseDto checkPhone(String tel) {
+        boolean available = userMapper.countByTel(tel) == 0;
+        return CheckPhoneResponseDto.builder()
+                .avilable(available)
+                .build();
+    }
 
     // 로그인
     public LoginResponseDto login(LoginRequestDto request) {
@@ -69,35 +107,6 @@ public class AuthService {
                 .name(user.getName())
                 .tel(user.getTel())
                 .role(user.getRole())
-                .build();
-    }
-
-    // 회원가입
-    public SignupResponseDto signup(SignupRequestDto request) {
-
-        // 1. 전화번호 중복 체크
-        if (userMapper.countByTel(request.getTel()) > 0) {
-            throw new IllegalArgumentException("이미 가입된 전화번호입니다.");
-        }
-
-        // 2. 비밀번호 BCrypt 암호화
-        String encodedPassword = passwordEncoder.encode(request.getPassword());
-
-        // 3. User 엔티티 만들기 (role, status는 DB DEFAULT로 자동 설정)
-        User user = new User();
-        user.setTel(request.getTel());
-        user.setPassword(encodedPassword);
-        user.setName(request.getName());
-        user.setGuardianTel(request.getGuardianTel());
-
-        // 4. DB INSERT
-        userMapper.insertUser(user);
-
-        // 5. 응답 DTO 반환
-        return SignupResponseDto.builder()
-                .userId(user.getUserId())
-                .tel(user.getTel())
-                .name(user.getName())
                 .build();
     }
 

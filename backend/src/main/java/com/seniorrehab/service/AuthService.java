@@ -13,6 +13,7 @@ import com.seniorrehab.model.entity.RefreshToken;
 import com.seniorrehab.model.entity.User;
 import com.seniorrehab.repository.RefreshTokenMapper;
 import com.seniorrehab.repository.UserMapper;
+import com.seniorrehab.repository.VerificationCodeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +35,8 @@ public class AuthService {
     private final UserMapper userMapper;
     private final RefreshTokenMapper refreshTokenMapper;
     private final PasswordEncoder passwordEncoder;
+    private final SmsService smsService;
+    private final VerificationCodeRepository verificationCodeRepository;
 
     // 회원가입
     public SignupResponseDto signup(SignupRequestDto request) {
@@ -69,6 +73,28 @@ public class AuthService {
         return CheckPhoneResponseDto.builder()
                 .avilable(available)
                 .build();
+    }
+
+    // 인증코드 발송
+    public void sendVerificationCode(String tel) {
+        String code = generateCode();
+        LocalDateTime expiredAt = LocalDateTime.now().plusMinutes(5);
+
+        verificationCodeRepository.save(tel, code, expiredAt);
+
+        System.out.println("[개발용 로그] " + tel + " 인증코드: " + code); // 테스트 -> Solapi 적용 시 삭제할 예정
+
+        try {
+            smsService.sendSms(tel, "[포즈온] 인증번호는 " + code + " 입니다. 5분 이내에 입력해주세요.");
+        } catch (Exception e) {
+            System.out.println("[SMS 발송 실패 - 더미 키 사용 중일 수 있음] " + e.getMessage());    // 테스트 -> Solapi 적용 시 삭제할 예정
+        }
+    }
+
+    // 6자리 인증코드 생성
+    private String generateCode() {
+        int code = ThreadLocalRandom.current().nextInt(100000, 1000000);
+        return String.valueOf(code);
     }
 
     // 로그인

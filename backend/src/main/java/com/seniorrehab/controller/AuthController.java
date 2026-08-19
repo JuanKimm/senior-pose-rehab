@@ -7,6 +7,7 @@ import com.seniorrehab.model.dto.RefreshTokenRequestDto;
 import com.seniorrehab.model.dto.RefreshTokenResponseDto;
 import com.seniorrehab.model.dto.SignupRequestDto;
 import com.seniorrehab.model.dto.SignupResponseDto;
+import com.seniorrehab.model.dto.SmsSendRequestDto;
 import com.seniorrehab.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -48,6 +49,13 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
+    // 인증코드 발송
+    @PostMapping("/sms/send")
+    public ResponseEntity<Void> sendSms(@Valid @RequestBody SmsSendRequestDto request) {
+        authService.sendVerificationCode(request.getTel());
+        return ResponseEntity.ok().build();
+    }
+    
     // 로그인
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody LoginRequestDto request) {

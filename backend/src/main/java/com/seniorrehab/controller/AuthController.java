@@ -8,6 +8,7 @@ import com.seniorrehab.model.dto.RefreshTokenResponseDto;
 import com.seniorrehab.model.dto.SignupRequestDto;
 import com.seniorrehab.model.dto.SignupResponseDto;
 import com.seniorrehab.model.dto.SmsSendRequestDto;
+import com.seniorrehab.model.dto.SmsVerifyRequestDto;
 import com.seniorrehab.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -55,6 +56,13 @@ public class AuthController {
         authService.sendVerificationCode(request.getTel());
         return ResponseEntity.ok().build();
     }
+
+    // 인증코드 확인
+    @PostMapping("/sms/verify")
+    public ResponseEntity<Void> verifySms(@Valid @RequestBody SmsVerifyRequestDto request) {
+        authService.verifyCode(request.getTel(), request.getCode());
+        return ResponseEntity.ok().build();
+    }
     
     // 로그인
     @PostMapping("/login")
@@ -76,7 +84,7 @@ public class AuthController {
         try {
             authService.logout(Long.valueOf(userId));
         } catch (NumberFormatException ignored) {
-            // 토큰 없이(비로그인 상태로) 호출된 경우 - 지울 게 없으니 그냥 무시
+            // 토큰 없이(비로그인 상태로) 호출된 경우
         }
         return ResponseEntity.ok().build();
     }

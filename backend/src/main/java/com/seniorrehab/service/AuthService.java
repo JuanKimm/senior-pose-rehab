@@ -97,6 +97,14 @@ public class AuthService {
         return String.valueOf(code);
     }
 
+    // 인증코드 확인
+    public void verifyCode(String tel, String code) {
+        boolean valid = verificationCodeRepository.verify(tel, code);
+        if (!valid) {
+            throw new IllegalArgumentException("인증번호가 일치하지 않거나 만료되었습니다.");
+        }
+    }
+
     // 로그인
     public LoginResponseDto login(LoginRequestDto request) {
 
@@ -159,7 +167,7 @@ public class AuthService {
             throw new IllegalArgumentException("이미 로그아웃되었거나 무효화된 토큰입니다. 다시 로그인해주세요.");
         }
 
-        // 4. 유저 정보 조회 (새 액세스 토큰에 role을 담아야 하므로)
+        // 4. 유저 정보 조회
         User user = userMapper.findByUserId(userId);
 
         // 5. 새 액세스 토큰 발급

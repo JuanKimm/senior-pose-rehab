@@ -93,7 +93,7 @@ public class AuthService {
         System.out.println("[개발용 로그] " + tel + " 인증코드: " + code); // 테스트 -> Solapi 적용 시 삭제할 예정
 
         try {
-            smsService.sendSms(tel, "[포즈온] 인증번호는 " + code + " 입니다. 5분 이내에 입력해주세요.");
+            smsService.sendSms(tel, "[PoseOn] 인증번호는 " + code + " 입니다. 5분 이내에 입력해주세요.");
         } catch (Exception e) {
             System.out.println("[SMS 발송 실패 - 더미 키 사용 중일 수 있음] " + e.getMessage());    // 테스트 -> Solapi 적용 시 삭제할 예정
         }

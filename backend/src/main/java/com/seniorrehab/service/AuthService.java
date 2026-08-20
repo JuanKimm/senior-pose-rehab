@@ -46,20 +46,28 @@ public class AuthService {
             throw new IllegalArgumentException("이미 가입된 전화번호입니다.");
         }
 
-        // 2. 비밀번호 BCrypt 암호화
+        // 2. 전화번호 인증 완료 여부 확인
+        if (!verificationCodeRepository.isVerified(request.getTel())) {
+            throw new IllegalArgumentException("전화번호 인증을 먼저 완료해주세요.");
+        }
+
+        // 3. 비밀번호 BCrypt 암호화
         String encodedPassword = passwordEncoder.encode(request.getPassword());
 
-        // 3. User 엔티티 만들기 (role, status는 DB DEFAULT로 자동 설정)
+        // 4. User 엔티티 만들기
         User user = new User();
         user.setTel(request.getTel());
         user.setPassword(encodedPassword);
         user.setName(request.getName());
         user.setGuardianTel(request.getGuardianTel());
 
-        // 4. DB INSERT
+        // 5. DB INSERT
         userMapper.insertUser(user);
 
-        // 5. 응답 DTO 반환
+        // 6. 인증 상태 초기화 - 재사용 방지
+        verificationCodeRepository.clearVerified(request.getTel());
+
+        // 7. 응답 DTO 반환
         return SignupResponseDto.builder()
                 .userId(user.getUserId())
                 .tel(user.getTel())
@@ -103,6 +111,9 @@ public class AuthService {
         if (!valid) {
             throw new IllegalArgumentException("인증번호가 일치하지 않거나 만료되었습니다.");
         }
+
+        // 인증 성공 - 회원가입 때 확인할 수 있도록 표시해둠
+        verificationCodeRepository.markVerified(tel);
     }
 
     // 로그인

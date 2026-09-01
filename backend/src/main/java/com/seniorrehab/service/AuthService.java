@@ -3,14 +3,17 @@ package com.seniorrehab.service;
 import com.seniorrehab.config.CustomUserDetails;
 import com.seniorrehab.config.JwtTokenProvider;
 import com.seniorrehab.model.dto.CheckPhoneResponseDto;
+import com.seniorrehab.model.dto.GuardianTokenResponseDto;
 import com.seniorrehab.model.dto.LoginRequestDto;
 import com.seniorrehab.model.dto.LoginResponseDto;
 import com.seniorrehab.model.dto.RefreshTokenRequestDto;
 import com.seniorrehab.model.dto.RefreshTokenResponseDto;
+import com.seniorrehab.model.dto.ShareTokenInfoDto;
 import com.seniorrehab.model.dto.SignupRequestDto;
 import com.seniorrehab.model.dto.SignupResponseDto;
 import com.seniorrehab.model.entity.RefreshToken;
 import com.seniorrehab.model.entity.User;
+import com.seniorrehab.repository.GuardianTokenMapper;
 import com.seniorrehab.repository.RefreshTokenMapper;
 import com.seniorrehab.repository.UserMapper;
 import com.seniorrehab.repository.VerificationCodeRepository;
@@ -37,6 +40,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final SmsService smsService;
     private final VerificationCodeRepository verificationCodeRepository;
+    private final GuardianTokenMapper guardianTokenMapper;
 
     // 회원가입
     public SignupResponseDto signup(SignupRequestDto request) {
@@ -189,6 +193,22 @@ public class AuthService {
 
         return RefreshTokenResponseDto.builder()
                 .accessToken(newAccessToken)
+                .build();
+    }
+
+    // 보호자 일회성 링크 토큰 검증
+    public GuardianTokenResponseDto verifyGuardianToken(String token) {
+        ShareTokenInfoDto info = guardianTokenMapper.findByShareToken(token);
+
+        if (info == null) {
+            throw new IllegalArgumentException("유효하지 않은 링크입니다.");
+        }
+        if (info.getTokenExpiresAt().isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException("만료되었거나 이미 사용된 링크입니다.");
+        }
+
+        return GuardianTokenResponseDto.builder()
+                .sessionId(info.getSessionId())
                 .build();
     }
 

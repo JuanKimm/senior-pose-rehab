@@ -1,6 +1,7 @@
 package com.seniorrehab.controller;
 
 import com.seniorrehab.model.dto.CheckPhoneResponseDto;
+import com.seniorrehab.model.dto.GuardianTokenResponseDto;
 import com.seniorrehab.model.dto.LoginRequestDto;
 import com.seniorrehab.model.dto.LoginResponseDto;
 import com.seniorrehab.model.dto.RefreshTokenRequestDto;
@@ -75,6 +76,13 @@ public class AuthController {
     @PostMapping("/refresh-token")
     public ResponseEntity<RefreshTokenResponseDto> refresh(@Valid @RequestBody RefreshTokenRequestDto request) {
         RefreshTokenResponseDto response = authService.refresh(request);
+        return ResponseEntity.ok(response);
+    }
+
+    // 보호자 일회성 링크 토큰 검증
+    @PostMapping("/guardian-token/{token}")
+    public ResponseEntity<GuardianTokenResponseDto> verifyGuardianToken(@PathVariable String token) {
+        GuardianTokenResponseDto response = authService.verifyGuardianToken(token);
         return ResponseEntity.ok(response);
     }
 

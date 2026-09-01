@@ -1,6 +1,7 @@
 package com.seniorrehab.controller;
 
 import com.seniorrehab.model.dto.CheckPhoneResponseDto;
+import com.seniorrehab.model.dto.FindPasswordRequestDto;
 import com.seniorrehab.model.dto.GuardianTokenResponseDto;
 import com.seniorrehab.model.dto.LoginRequestDto;
 import com.seniorrehab.model.dto.LoginResponseDto;
@@ -62,6 +63,13 @@ public class AuthController {
     @PostMapping("/sms/verify")
     public ResponseEntity<Void> verifySms(@Valid @RequestBody SmsVerifyRequestDto request) {
         authService.verifyCode(request.getTel(), request.getCode());
+        return ResponseEntity.ok().build();
+    }
+
+    // 비밀번호 찾기
+    @PostMapping("/find-password")
+    public ResponseEntity<Void> findPassword(@Valid @RequestBody FindPasswordRequestDto request) {
+        authService.findPassword(request.getTel(), request.getName());
         return ResponseEntity.ok().build();
     }
     

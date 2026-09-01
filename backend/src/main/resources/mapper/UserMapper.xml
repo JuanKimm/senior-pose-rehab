@@ -25,4 +25,14 @@
         SELECT * FROM USER WHERE user_id = #{userId}
     </select>
 
+    <!-- 비밀번호 찾기 - 이름+전화번호 둘 다 일치해야 조회됨 -->
+    <select id="findByTelAndName" resultType="com.seniorrehab.model.entity.User">
+        SELECT * FROM USER WHERE tel = #{tel} AND name = #{name}
+    </select>
+
+    <!-- 비밀번호 찾기 - 임시 비밀번호로 업데이트 -->
+    <update id="updatePassword">
+        UPDATE USER SET password = #{password} WHERE user_id = #{userId}
+    </update>
+
 </mapper>

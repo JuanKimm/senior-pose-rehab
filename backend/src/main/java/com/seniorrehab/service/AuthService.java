@@ -120,6 +120,27 @@ public class AuthService {
         verificationCodeRepository.markVerified(tel);
     }
 
+    // 비밀번호 찾기 - 이름+전화번호 확인 후 임시 비밀번호 발송
+    public void findPassword(String tel, String name) {
+        User user = userMapper.findByTelAndName(tel, name);
+        if (user == null) {
+            throw new IllegalArgumentException("일치하는 회원 정보가 없습니다.");
+        }
+
+        // 6자리 임시 비밀번호 생성
+        String tempPassword = generateCode();
+        String encodedPassword = passwordEncoder.encode(tempPassword);
+        userMapper.updatePassword(user.getUserId(), encodedPassword);
+
+        System.out.println("[개발용 로그] " + tel + " 임시 비밀번호: " + tempPassword);     // 테스트 -> Solapi 적용 시 삭제할 예정
+
+        try {
+            smsService.sendSms(tel, "[PoseOn] 임시 비밀번호는 " + tempPassword + " 입니다. 로그인 후 꼭 비밀번호를 변경해주세요.");
+        } catch (Exception e) {
+            System.out.println("[SMS 발송 실패 - 더미 키 사용 중일 수 있음] " + e.getMessage());
+        }
+    }
+
     // 로그인
     public LoginResponseDto login(LoginRequestDto request) {
 

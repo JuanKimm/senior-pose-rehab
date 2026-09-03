@@ -35,4 +35,15 @@
         UPDATE USER SET password = #{password} WHERE user_id = #{userId}
     </update>
 
+    <!-- 정보 수정 시 - 새 전화번호가 다른 유저 걸로 이미 쓰이고 있는지 확인 (본인 제외) -->
+    <select id="countByTelExcludingUser" resultType="int">
+        SELECT COUNT(*) FROM USER WHERE tel = #{tel} AND user_id != #{userId}
+    </select>
+
+    <!-- 내 정보 수정 -->
+    <update id="updateUserInfo">
+        UPDATE USER SET tel = #{tel}, name = #{name}, guardian_tel = #{guardianTel}
+        WHERE user_id = #{userId}
+    </update>
+
 </mapper>

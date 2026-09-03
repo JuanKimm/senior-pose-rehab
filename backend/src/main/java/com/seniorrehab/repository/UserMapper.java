@@ -17,4 +17,11 @@ public interface UserMapper {
     
     // 비밀번호 찾기 - 임시 비밀번호로 업데이트
     int updatePassword(@Param("userId") Long userId, @Param("password") String password);
+
+    // 정보 수정 시 - 새 전화번호가 "다른" 유저 걸로 이미 쓰이고 있는지 확인 (본인 제외)
+    int countByTelExcludingUser(@Param("tel") String tel, @Param("userId") Long userId);
+
+    // 내 정보 수정
+    int updateUserInfo(@Param("userId") Long userId, @Param("tel") String tel,
+                        @Param("name") String name, @Param("guardianTel") String guardianTel);
 }

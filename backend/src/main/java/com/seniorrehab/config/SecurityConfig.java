@@ -1,5 +1,7 @@
 package com.seniorrehab.config;
 
+import com.seniorrehab.repository.UserMapper;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +29,7 @@ public class SecurityConfig {
     private final JwtTokenProvider jwtTokenProvider;
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
+    private final UserMapper userMapper;
 
     // 1) 비밀번호 암호화 - BCrypt
     @Bean
@@ -74,7 +77,7 @@ public class SecurityConfig {
             )
 
             .addFilterBefore(
-                new JwtAuthenticationFilter(jwtTokenProvider),
+                new JwtAuthenticationFilter(jwtTokenProvider, userMapper),
                 UsernamePasswordAuthenticationFilter.class
             );
 

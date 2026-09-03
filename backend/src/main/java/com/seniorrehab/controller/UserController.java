@@ -3,12 +3,14 @@ package com.seniorrehab.controller;
 import com.seniorrehab.model.dto.ChangePasswordRequestDto;
 import com.seniorrehab.model.dto.UpdateUserRequestDto;
 import com.seniorrehab.model.dto.UserInfoResponseDto;
+import com.seniorrehab.model.dto.WithdrawRequestDto;
 import com.seniorrehab.service.UserService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,6 +46,15 @@ public class UserController {
             @AuthenticationPrincipal String userId,
             @Valid @RequestBody ChangePasswordRequestDto request) {
         userService.changePassword(Long.parseLong(userId), request);
+        return ResponseEntity.ok().build();
+    }
+
+    // 회원 탈퇴
+    @DeleteMapping("/me")
+    public ResponseEntity<Void> withdraw(
+            @AuthenticationPrincipal String userId,
+            @Valid @RequestBody WithdrawRequestDto request) {
+        userService.withdraw(Long.parseLong(userId), request);
         return ResponseEntity.ok().build();
     }
 }

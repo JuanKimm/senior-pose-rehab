@@ -24,4 +24,7 @@ public interface UserMapper {
     // 내 정보 수정
     int updateUserInfo(@Param("userId") Long userId, @Param("tel") String tel,
                         @Param("name") String name, @Param("guardianTel") String guardianTel);
+
+    // 회원 탈퇴
+    int withdraw(@Param("userId") Long userId);
 }

@@ -3,7 +3,9 @@ package com.seniorrehab.service;
 import com.seniorrehab.model.dto.ChangePasswordRequestDto;
 import com.seniorrehab.model.dto.UpdateUserRequestDto;
 import com.seniorrehab.model.dto.UserInfoResponseDto;
+import com.seniorrehab.model.dto.WithdrawRequestDto;
 import com.seniorrehab.model.entity.User;
+import com.seniorrehab.repository.RefreshTokenMapper;
 import com.seniorrehab.repository.UserMapper;
 import com.seniorrehab.repository.VerificationCodeRepository;
 
@@ -19,6 +21,7 @@ public class UserService {
     private final UserMapper userMapper;
     private final VerificationCodeRepository verificationCodeRepository;
     private final PasswordEncoder passwordEncoder;
+    private final RefreshTokenMapper refreshTokenMapper;
 
     // 내 정보 조회
     public UserInfoResponseDto getMyInfo(Long userId) {
@@ -77,6 +80,22 @@ public class UserService {
         // 3. 새 비밀번호 암호화 후 저장
         String encodedPassword = passwordEncoder.encode(request.getNewPassword());
         userMapper.updatePassword(userId, encodedPassword);
+    }
+
+    // 회원 탈퇴
+    public void withdraw(Long userId, WithdrawRequestDto request) {
+
+        // 1. 비밀번호 재확인
+        User user = userMapper.findByUserId(userId);
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+
+        // 2. status를 WITHDRAWN으로 변경
+        userMapper.withdraw(userId);
+
+        // 3. 저장된 리프레시 토큰 삭제 - 즉시 로그아웃 처리
+        refreshTokenMapper.deleteByUserId(userId);
     }
 
     // User 엔티티 -> 응답 DTO 변환 (중복 코드 방지용)

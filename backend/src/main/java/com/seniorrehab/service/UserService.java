@@ -1,5 +1,6 @@
 package com.seniorrehab.service;
 
+import com.seniorrehab.model.dto.ChangePasswordRequestDto;
 import com.seniorrehab.model.dto.UpdateUserRequestDto;
 import com.seniorrehab.model.dto.UserInfoResponseDto;
 import com.seniorrehab.model.entity.User;
@@ -7,6 +8,8 @@ import com.seniorrehab.repository.UserMapper;
 import com.seniorrehab.repository.VerificationCodeRepository;
 
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,6 +18,7 @@ public class UserService {
 
     private final UserMapper userMapper;
     private final VerificationCodeRepository verificationCodeRepository;
+    private final PasswordEncoder passwordEncoder;
 
     // 내 정보 조회
     public UserInfoResponseDto getMyInfo(Long userId) {
@@ -54,6 +58,25 @@ public class UserService {
         // 5. 수정된 정보 다시 조회해서 반환
         User updated = userMapper.findByUserId(userId);
         return toResponseDto(updated);
+    }
+
+    // 비밀번호 변경
+    public void changePassword(Long userId, ChangePasswordRequestDto request) {
+
+        // 1. 기존 비밀번호 일치 여부 확인
+        User user = userMapper.findByUserId(userId);
+        if (!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("기존 비밀번호가 일치하지 않습니다.");
+        }
+
+        // 2. 새 비밀번호가 기존 비밀번호와 같은지 확인
+        if (passwordEncoder.matches(request.getNewPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("새 비밀번호는 기존 비밀번호와 달라야 합니다.");
+        }
+
+        // 3. 새 비밀번호 암호화 후 저장
+        String encodedPassword = passwordEncoder.encode(request.getNewPassword());
+        userMapper.updatePassword(userId, encodedPassword);
     }
 
     // User 엔티티 -> 응답 DTO 변환 (중복 코드 방지용)

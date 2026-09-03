@@ -1,5 +1,6 @@
 package com.seniorrehab.controller;
 
+import com.seniorrehab.model.dto.ChangePasswordRequestDto;
 import com.seniorrehab.model.dto.UpdateUserRequestDto;
 import com.seniorrehab.model.dto.UserInfoResponseDto;
 import com.seniorrehab.service.UserService;
@@ -35,5 +36,14 @@ public class UserController {
             @Valid @RequestBody UpdateUserRequestDto request) {
         UserInfoResponseDto response = userService.updateMyInfo(Long.parseLong(userId), request);
         return ResponseEntity.ok(response);
+    }
+
+    // 비밀번호 변경
+    @PutMapping("/password")
+    public ResponseEntity<Void> changePassword(
+            @AuthenticationPrincipal String userId,
+            @Valid @RequestBody ChangePasswordRequestDto request) {
+        userService.changePassword(Long.parseLong(userId), request);
+        return ResponseEntity.ok().build();
     }
 }

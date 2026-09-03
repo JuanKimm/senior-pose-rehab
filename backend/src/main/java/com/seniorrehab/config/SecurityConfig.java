@@ -25,6 +25,8 @@ import java.util.List;
 public class SecurityConfig {
 
     private final JwtTokenProvider jwtTokenProvider;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
     // 1) 비밀번호 암호화 - BCrypt
     @Bean
@@ -56,6 +58,12 @@ public class SecurityConfig {
             // Spring Security 기본 로그인 화면 비활성화
             .formLogin(AbstractHttpConfigurer::disable)
             .httpBasic(AbstractHttpConfigurer::disable)
+
+            // 인증/인가 실패 시 응답 형식 커스터마이징
+            .exceptionHandling(exceptions -> exceptions
+                .authenticationEntryPoint(customAuthenticationEntryPoint)
+                .accessDeniedHandler(customAccessDeniedHandler)
+            )
 
             // URL별 접근 권한 설정
             .authorizeHttpRequests(auth -> auth

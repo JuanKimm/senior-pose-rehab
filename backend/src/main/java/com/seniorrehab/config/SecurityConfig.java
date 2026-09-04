@@ -5,6 +5,7 @@ import com.seniorrehab.repository.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -72,6 +73,8 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 // 인증 없이 접근 가능 (로그인, 회원가입 등)
                 .requestMatchers("/api/auth/**").permitAll()
+                // 운동 카테고리 목록 조회 - 비회원도 접근 가능
+                .requestMatchers(HttpMethod.GET, "/api/exercise/types").permitAll()
                 // 그 외 모든 요청은 로그인 필요
                 .anyRequest().authenticated()
             )

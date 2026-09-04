@@ -30,4 +30,17 @@
         ORDER BY ev.video_id ASC
     </select>
 
+    <!-- 기준 운동 영상 단건 조회 -->
+    <select id="findVideoById" resultType="com.seniorrehab.model.dto.ExerciseVideoDto">
+        SELECT
+            ev.video_id AS videoId,
+            ev.exercise_type_id AS exerciseTypeId,
+            et.body_part AS bodyPart,
+            ev.title,
+            ev.video_path AS videoPath
+        FROM EXERCISE_VIDEO ev
+        JOIN EXERCISE_TYPE et ON ev.exercise_type_id = et.exercise_type_id
+        WHERE ev.video_id = #{videoId}
+    </select>
+
 </mapper>

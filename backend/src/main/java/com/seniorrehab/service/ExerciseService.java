@@ -22,4 +22,9 @@ public class ExerciseService {
     public List<ExerciseVideoDto> getVideosByTypeId(Long typeId) {
         return exerciseMapper.findVideosByTypeId(typeId);
     }
+
+    // 기준 운동 영상 단건 조회
+    public ExerciseVideoDto getVideoById(Long videoId) {
+        return exerciseMapper.findVideoById(videoId);
+    }
 }

@@ -16,6 +16,18 @@
         ORDER BY exercise_type_id ASC
     </select>
 
+    <!-- 운동 카테고리 단건 조회 (존재 확인용) -->
+    <select id="findExerciseTypeById" resultType="com.seniorrehab.model.dto.ExerciseTypeDto">
+        SELECT
+            exercise_type_id AS exerciseTypeId,
+            body_part AS bodyPart,
+            description,
+            hashtags,
+            card_image_path AS cardImagePath
+        FROM EXERCISE_TYPE
+        WHERE exercise_type_id = #{exerciseTypeId}
+    </select>
+
     <!-- 카테고리별 기준 운동 영상 목록 조회 -->
     <select id="findVideosByTypeId" resultType="com.seniorrehab.model.dto.ExerciseVideoDto">
         SELECT

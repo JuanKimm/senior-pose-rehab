@@ -79,6 +79,8 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/api/exercise/*/videos").permitAll()
                 // 기준 운동 영상 단건 조회 - 비회원도 접근 가능
                 .requestMatchers(HttpMethod.GET, "/api/exercise/video/*").permitAll()
+                // 운동 세션 시작 - 비회원도 접근 가능
+                .requestMatchers(HttpMethod.POST, "/api/exercise/session/start").permitAll()
                 // 그 외 모든 요청은 로그인 필요
                 .anyRequest().authenticated()
             )

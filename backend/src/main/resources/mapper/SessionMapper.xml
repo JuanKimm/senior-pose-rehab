@@ -20,7 +20,7 @@
         WHERE es.session_id = #{sessionId}
     </update>
 
-    <!-- 종료된 세션 결과 조회 -->
+    <!-- 세션 결과 조회 -->
     <select id="findSessionById" resultType="com.seniorrehab.model.dto.ExerciseRecordDto">
         SELECT
             es.session_id AS sessionId,
@@ -35,5 +35,13 @@
         JOIN EXERCISE_TYPE et ON es.exercise_type_id = et.exercise_type_id
         WHERE es.session_id = #{sessionId}
     </select>
+
+    <!-- 게스트 세션을 로그인한 계정에 연결 (결과 저장) -->
+    <update id="claimSession">
+        UPDATE EXERCISE_SESSION
+        SET user_id = #{userId}
+        WHERE session_id = #{sessionId}
+        AND user_id IS NULL
+    </update>
 
 </mapper>

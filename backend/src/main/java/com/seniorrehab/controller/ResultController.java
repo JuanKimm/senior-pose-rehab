@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +34,26 @@ public class ResultController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(Map.of("error", "존재하지 않는 세션입니다"));
         }
+        return ResponseEntity.ok(record);
+    }
+
+    // 운동 결과 단건 조회
+    @GetMapping("/result/{resultId}")
+    public ResponseEntity<?> getResult(
+            @AuthenticationPrincipal String userId,
+            @PathVariable Long resultId) {
+
+        ExerciseRecordDto record = resultService.getResult(resultId);
+        if (record == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("error", "존재하지 않는 결과입니다"));
+        }
+
+        if (record.getUserId() == null || !record.getUserId().equals(Long.parseLong(userId))) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body(Map.of("error", "본인의 운동 결과만 조회할 수 있습니다"));
+        }
+
         return ResponseEntity.ok(record);
     }
 }

@@ -24,4 +24,9 @@ public class ResultService {
         sessionMapper.claimSession(sessionId, userId);
         return sessionMapper.findSessionById(sessionId);
     }
+
+    // 운동 결과 단건 조회
+    public ExerciseRecordDto getResult(Long resultId) {
+        return sessionMapper.findSessionById(resultId);
+    }
 }

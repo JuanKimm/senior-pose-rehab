@@ -10,4 +10,30 @@
         VALUES (#{userId}, #{exerciseTypeId}, CURDATE(), 0, 0)
     </insert>
 
+    <!-- 운동 세션 종료 -->
+    <update id="endSession">
+        UPDATE EXERCISE_SESSION es
+        SET
+            es.total_count = (SELECT COUNT(*) FROM EXERCISE_SCORE WHERE session_id = #{sessionId}),
+            es.duration_sec = TIMESTAMPDIFF(SECOND, es.created_at, NOW()),
+            es.accuracy = (SELECT AVG(action_score) FROM EXERCISE_SCORE WHERE session_id = #{sessionId})
+        WHERE es.session_id = #{sessionId}
+    </update>
+
+    <!-- 종료된 세션 결과 조회 -->
+    <select id="findSessionById" resultType="com.seniorrehab.model.dto.ExerciseRecordDto">
+        SELECT
+            es.session_id AS sessionId,
+            et.body_part AS bodyPart,
+            es.total_count AS totalCount,
+            es.duration_sec AS durationSec,
+            es.accuracy AS accuracy,
+            es.video_path AS videoPath,
+            es.exercise_date AS exerciseDate,
+            es.user_id AS userId
+        FROM EXERCISE_SESSION es
+        JOIN EXERCISE_TYPE et ON es.exercise_type_id = et.exercise_type_id
+        WHERE es.session_id = #{sessionId}
+    </select>
+
 </mapper>

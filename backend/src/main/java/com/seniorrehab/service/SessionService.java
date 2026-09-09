@@ -1,5 +1,6 @@
 package com.seniorrehab.service;
 
+import com.seniorrehab.model.dto.ExerciseRecordDto;
 import com.seniorrehab.model.dto.SessionStartRequestDto;
 import com.seniorrehab.model.dto.SessionStartResponseDto;
 import com.seniorrehab.model.entity.ExerciseSession;
@@ -30,5 +31,14 @@ public class SessionService {
         return SessionStartResponseDto.builder()
                 .sessionId(session.getSessionId())
                 .build();
+    }
+
+    // 운동 세션 종료 - 존재하지 않으면 null 반환
+    public ExerciseRecordDto endSession(Long sessionId) {
+        int updated = sessionMapper.endSession(sessionId);
+        if (updated == 0) {
+            return null;
+        }
+        return sessionMapper.findSessionById(sessionId);
     }
 }

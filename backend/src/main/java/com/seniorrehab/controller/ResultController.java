@@ -56,4 +56,11 @@ public class ResultController {
 
         return ResponseEntity.ok(record);
     }
+
+    // 보호자 공유 링크로 운동 결과 조회 (비회원 접근 가능)
+    @GetMapping("/result/share/{token}")
+    public ResponseEntity<ExerciseRecordDto> getSharedResult(@PathVariable String token) {
+        ExerciseRecordDto record = resultService.getSharedResult(token);
+        return ResponseEntity.ok(record);
+    }
 }

@@ -83,6 +83,8 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/exercise/session/start").permitAll()
                 // 운동 세션 종료
                 .requestMatchers(HttpMethod.PUT, "/api/exercise/session/*/end").permitAll()
+                // 보호자 공유 링크로 운동 결과 조회
+                .requestMatchers(HttpMethod.GET, "/api/exercise/result/share/*").permitAll()
                 // 그 외 모든 요청은 로그인 필요
                 .anyRequest().authenticated()
             )

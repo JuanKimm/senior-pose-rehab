@@ -30,27 +30,32 @@ function MainPage() {
   }, []);
 
   const scrollDown = () => {
+    const headerHeight =
+      document.querySelector(".header")?.offsetHeight || 76;
+
     window.scrollBy({
-      top: window.innerHeight - 76,
+      top: window.innerHeight - headerHeight,
       behavior: "smooth",
     });
   };
 
   const scrollToExercise = () => {
-  const exerciseSection = document.getElementById("exercise-section");
-  const headerHeight = document.querySelector(".header")?.offsetHeight || 76;
+    const exerciseSection = document.getElementById("exercise-section");
+    const headerHeight =
+      document.querySelector(".header")?.offsetHeight || 76;
 
-  if (exerciseSection) {
-    const targetPosition =
-      exerciseSection.getBoundingClientRect().top + window.scrollY - headerHeight;
+    if (exerciseSection) {
+      const targetPosition =
+        exerciseSection.getBoundingClientRect().top +
+        window.scrollY -
+        headerHeight;
 
-    window.scrollTo({
-      top: targetPosition,
-      behavior: "smooth",
-    });
-  }
-};
-  const isLoggedIn = false;
+      window.scrollTo({
+        top: targetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
     <div className="home">

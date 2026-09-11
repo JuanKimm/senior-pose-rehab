@@ -6,7 +6,10 @@ function ExerciseCard({ title, description }) {
       <div className="cardContent">
         <h3>{title}</h3>
         <p>{description}</p>
-        <button>둘러보기 →</button>
+
+        <button type="button" className="cardButton">
+          둘러보기 →
+        </button>
       </div>
     </div>
   );

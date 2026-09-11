@@ -1,36 +1,33 @@
-* {
-  box-sizing: border-box;
-}
-
-html,
-body,
-#root {
-  width: 100%;
-  min-height: 100%;
-  margin: 0;
-}
-
 body {
   overflow-x: hidden;
 }
 
+/* =========================
+   Home
+========================= */
+
 .home {
   width: 100%;
   min-height: 100vh;
-  background-color: white;
-  color: #333;
+  background-color: var(--color-background);
+  color: var(--text-primary);
 }
 
-/* 헤더 */
+/* =========================
+   Header
+========================= */
+
 .header {
   width: 100%;
   height: 76px;
-  border-bottom: 1px solid #ddd;
-  padding: 0 4vw;
+  padding: 0 48px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: white;
+
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-divider);
 
   position: sticky;
   top: 0;
@@ -40,43 +37,53 @@ body {
 .logoText {
   font-size: 24px;
   font-weight: 700;
-  color: #333;
+  color: var(--color-primary);
+
   cursor: pointer;
   user-select: none;
 }
 
 .authText {
-  font-size: 17px;
-  color: #999;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-secondary);
+
   cursor: pointer;
 }
 
-/* 첫 화면 */
+/* =========================
+   Hero Section
+========================= */
+
 .heroSection {
-  position: relative;
-  width: 100%;
+  width: calc(100% - 96px);
+  max-width: var(--content-max-width);
   min-height: calc(100vh - 76px);
 
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  align-items: center;
-  column-gap: 4vw;
+  margin: 0 auto;
+  padding: 48px 0 64px;
 
-  padding: 3vh 3.5vw 7vh;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  column-gap: var(--column-gap);
 }
 
 .imageBox {
   width: 100%;
-  height: min(68vh, 40vw);
   min-height: 420px;
+  aspect-ratio: 4 / 3;
 
-  background-color: #e5e5e5;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  color: #999;
-  font-size: clamp(16px, 1.1vw, 28px);
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-large);
+
+  color: var(--text-tertiary);
+  font-size: 16px;
+  line-height: 26px;
   text-align: center;
 }
 
@@ -85,163 +92,251 @@ body {
 }
 
 .smallTitle {
-  font-size: clamp(14px, 1vw, 24px);
-  color: #999;
-  margin: 0 0 18px;
+  margin: 0 0 16px;
+
+  color: var(--text-tertiary);
+
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
 }
 
 .heroText h1 {
-  font-size: clamp(48px, 4.2vw, 104px);
-  line-height: 1.18;
-  margin: 0 0 34px;
-  letter-spacing: 1px;
+  margin: 0 0 24px;
+
+  color: var(--text-primary);
+
+  font-size: 40px;
+  line-height: 52px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .description {
-  font-size: clamp(16px, 1.25vw, 30px);
-  line-height: 1.75;
-  color: #777;
-  margin: 0 0 42px;
+  margin: 0 0 32px;
+
+  color: var(--text-secondary);
+
+  font-size: 18px;
+  line-height: 30px;
+  font-weight: 400;
 }
+
+/* 운동 시작 버튼 */
 
 .startButton {
-  width: clamp(220px, 15vw, 360px);
-  height: clamp(56px, 4vw, 86px);
+  min-width: 220px;
+  height: 56px;
+  padding: 0 24px;
 
   border: none;
-  border-radius: 5px;
-  background-color: #333;
-  color: white;
+  border-radius: var(--radius-medium);
 
-  font-size: clamp(15px, 1.1vw, 24px);
+  background-color: var(--color-primary);
+  color: var(--text-inverse);
+
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+
   cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
 }
+
+.startButton:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.startButton:active {
+  background-color: var(--color-primary-pressed);
+  transform: translateY(1px);
+}
+
+/* =========================
+   Scroll Arrow
+========================= */
 
 .scrollArrow {
   position: fixed;
   bottom: 24px;
   left: 50%;
+
   transform: translateX(-50%);
 
-  width: 52px;
-  height: 52px;
+  width: 48px;
+  height: 48px;
 
-  border: none;
-  border-radius: 50%;
-  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
 
-  font-size: 42px;
-  color: #777;
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+
+  font-size: 30px;
+
   cursor: pointer;
-
   z-index: 999;
 }
 
-/* 운동 선택 화면 */
+/* =========================
+   Exercise Section
+========================= */
+
 .exerciseSection {
+  width: calc(100% - 96px);
+  max-width: var(--content-max-width);
   min-height: 100vh;
-  padding: 8vh 4vw;
+
+  margin: 0 auto;
+  padding: 64px 0;
 }
 
 .exerciseSection h2 {
+  margin: 0 0 48px;
+
+  color: var(--text-primary);
+
+  font-size: 24px;
+  line-height: 34px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+
   text-align: center;
-  font-size: clamp(28px, 2.3vw, 56px);
-  margin: 0 0 6vh;
-  letter-spacing: 2px;
 }
 
 .cardWrap {
   width: 100%;
+
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1vw;
+  gap: var(--component-gap);
 }
+
+/* =========================
+   Exercise Card
+========================= */
 
 .exerciseCard {
   width: 100%;
-  border: 1px solid #e0e0e0;
-  background-color: white;
+
+  overflow: hidden;
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+
+  background-color: var(--color-surface);
 }
 
 .cardImage {
-  height: 28vh;
-  min-height: 230px;
-  background-color: #ddd;
+  width: 100%;
+  height: 260px;
+
+  background-color: var(--color-primary-light);
 }
 
 .cardContent {
-  padding: 28px;
+  padding: 32px;
 }
 
 .cardContent h3 {
-  font-size: clamp(20px, 1.4vw, 34px);
-  margin: 0 0 18px;
+  margin: 0 0 12px;
+
+  color: var(--text-primary);
+
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 600;
 }
 
 .cardContent p {
-  font-size: clamp(15px, 1vw, 24px);
-  color: #777;
-  line-height: 1.7;
-  margin: 0 0 26px;
+  margin: 0 0 24px;
+
+  color: var(--text-secondary);
+
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
 }
 
-.cardContent button {
-  width: clamp(120px, 9vw, 220px);
-  height: clamp(38px, 3vw, 64px);
+.cardButton {
+  min-width: 120px;
+  height: 48px;
+  padding: 0 24px;
 
   border: none;
-  border-radius: 4px;
-  background-color: #333;
-  color: white;
+  border-radius: var(--radius-medium);
 
-  font-size: clamp(13px, 0.9vw, 20px);
+  background-color: var(--color-primary);
+  color: var(--text-inverse);
+
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+
   cursor: pointer;
+
+  transition: background-color 0.2s ease;
 }
 
-/* 태블릿 */
+.cardButton:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.cardButton:active {
+  background-color: var(--color-primary-pressed);
+}
+
+/* =========================
+   Tablet
+========================= */
+
 @media (max-width: 1024px) {
+  .header {
+    padding: 0 32px;
+  }
+
   .heroSection {
+    width: calc(100% - 64px);
+
     grid-template-columns: 1fr;
     row-gap: 32px;
-    padding: 40px 32px 80px;
+
+    padding: 48px 0 64px;
   }
 
   .imageBox {
-    height: 42vh;
     min-height: 320px;
+    aspect-ratio: 16 / 9;
   }
 
-  .heroText {
-    width: 100%;
-  }
-
-  .heroText h1 {
-    font-size: 48px;
-  }
-
-  .description {
-    font-size: 18px;
+  .exerciseSection {
+    width: calc(100% - 64px);
   }
 
   .cardWrap {
     grid-template-columns: 1fr;
-    gap: 24px;
   }
 
   .cardImage {
-    height: 260px;
+    height: 280px;
   }
 }
 
-/* 모바일 */
+/* =========================
+   Mobile
+========================= */
+
 @media (max-width: 600px) {
   .header {
     height: 60px;
-    padding: 0 20px;
+    padding: 0 16px;
   }
 
   .logoText {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .authText {
@@ -249,86 +344,105 @@ body {
   }
 
   .heroSection {
+    width: calc(100% - 32px);
     min-height: calc(100vh - 60px);
+
     display: flex;
     flex-direction: column;
     align-items: stretch;
     justify-content: center;
 
     gap: 24px;
-    padding: 20px 16px 72px;
+
+    padding: 32px 0 64px;
   }
 
   .imageBox {
-    width: 100%;
-    height: 38vh;
-    min-height: 240px;
+    min-height: 220px;
+    aspect-ratio: 4 / 3;
+
     font-size: 14px;
   }
 
   .smallTitle {
-    font-size: 13px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+
+    font-size: 14px;
+    line-height: 22px;
   }
 
   .heroText h1 {
-    font-size: 34px;
-    line-height: 1.25;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+
+    font-size: 32px;
+    line-height: 42px;
   }
 
   .description {
-    font-size: 14px;
-    line-height: 1.7;
     margin-bottom: 24px;
+
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .description br {
+    display: none;
   }
 
   .startButton {
     width: 100%;
     height: 52px;
-    font-size: 15px;
+
+    font-size: 16px;
   }
 
   .scrollArrow {
+    width: 44px;
+    height: 44px;
+
     bottom: 16px;
-    font-size: 34px;
+
+    font-size: 26px;
   }
 
   .exerciseSection {
-    padding: 56px 16px;
+    width: calc(100% - 32px);
+    padding: 48px 0;
   }
 
   .exerciseSection h2 {
-    font-size: 24px;
-    line-height: 1.4;
     margin-bottom: 32px;
+
+    font-size: 24px;
+    line-height: 34px;
   }
 
   .cardWrap {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 24px;
   }
 
   .cardImage {
-    height: 180px;
-    min-height: 180px;
+    height: 200px;
   }
 
   .cardContent {
-    padding: 20px;
+    padding: 24px;
   }
 
   .cardContent h3 {
-    font-size: 18px;
+    font-size: 20px;
+    line-height: 30px;
   }
 
   .cardContent p {
-    font-size: 14px;
+    font-size: 16px;
+    line-height: 26px;
   }
 
-  .cardContent button {
-    width: 120px;
-    height: 38px;
-    font-size: 13px;
+  .cardButton {
+    width: 100%;
+    height: 48px;
+
+    font-size: 16px;
   }
 }

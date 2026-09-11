@@ -1,0 +1,977 @@
+/* =========================
+   Dashboard
+========================= */
+
+.dashboardPage {
+  width: 100%;
+  min-height: calc(100vh - 76px);
+
+  position: relative;
+
+  background-color: var(--color-background);
+  color: var(--text-primary);
+}
+
+.dashboardContainer {
+  width: calc(100% - 96px);
+  max-width: var(--content-max-width);
+
+  margin: 0 auto;
+  padding: 48px 0 80px;
+}
+
+.dashboardSection {
+  margin-bottom: 64px;
+}
+
+.dashboardSection h2 {
+  margin: 0 0 20px;
+
+  font-size: 24px;
+  line-height: 34px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* =========================
+   데이터 기간 안내
+========================= */
+
+.dataPeriodMessage {
+  margin-bottom: 32px;
+
+  padding: 16px 20px;
+
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-medium);
+
+  color: var(--text-secondary);
+
+  font-size: 16px;
+  line-height: 26px;
+}
+
+/* =========================
+   오늘 운동 기록
+========================= */
+
+.todayRecordCard {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 32px;
+
+  padding: 24px 32px;
+
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+}
+
+.todayRecordInfo {
+  flex: 1;
+}
+
+.recordGuide {
+  margin: 0 0 16px;
+
+  color: var(--text-secondary);
+
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.todayStats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+
+  gap: 16px;
+}
+
+.todayStat {
+  min-height: 86px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 16px;
+
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-medium);
+}
+
+.todayStat span {
+  margin-bottom: 6px;
+
+  color: var(--text-tertiary);
+
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.todayStat strong {
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 700;
+}
+
+.recordVideoButton {
+  min-width: 150px;
+  height: 48px;
+
+  padding: 0 20px;
+
+  border: none;
+  border-radius: var(--radius-full);
+
+  background-color: var(--color-primary);
+  color: var(--text-inverse);
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.recordVideoButton:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.emptyRecord {
+  padding: 48px;
+
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* =========================
+   최근 운동 기록
+========================= */
+
+.recentRecordCard {
+  overflow: hidden;
+
+  padding: 0 32px 20px;
+
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+}
+
+.recentRecordRow {
+  min-height: 96px;
+
+  display: grid;
+  grid-template-columns: 130px repeat(3, 1fr) 100px;
+  align-items: center;
+
+  gap: 24px;
+
+  border-bottom: 1px solid var(--color-divider);
+}
+
+.recordDate {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.recordItem {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.recordItem span {
+  color: var(--text-tertiary);
+
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.recordItem strong {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 500;
+}
+
+.detailButton {
+  border: none;
+  background: none;
+
+  color: var(--text-secondary);
+
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+.detailButton:hover {
+  color: var(--color-primary);
+}
+
+.moreButton {
+  display: block;
+
+  margin: 20px auto 0;
+  padding: 10px 18px;
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+
+  background-color: var(--color-surface);
+  color: var(--text-secondary);
+
+  cursor: pointer;
+}
+
+/* =========================
+   Calendar
+========================= */
+
+.calendarCard {
+  width: 720px;
+  max-width: 100%;
+
+  margin: 0 auto;
+  padding: 32px 40px;
+
+  background-color: var(--color-surface);
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+}
+
+.calendarHeader {
+  display: grid;
+  grid-template-columns: 48px 1fr 48px;
+  align-items: center;
+
+  margin-bottom: 24px;
+}
+
+.calendarHeader strong {
+  text-align: center;
+
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.calendarHeader button {
+  width: 40px;
+  height: 40px;
+
+  border: none;
+  border-radius: var(--radius-full);
+
+  background: none;
+
+  color: var(--text-secondary);
+
+  cursor: pointer;
+}
+
+.calendarHeader button:hover {
+  background-color: var(--color-primary-light);
+}
+
+.calendarWeek {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+
+  margin-bottom: 12px;
+}
+
+.calendarWeek span {
+  color: var(--text-tertiary);
+
+  font-size: 14px;
+
+  text-align: center;
+}
+
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+
+  gap: 8px;
+}
+
+.calendarDay {
+  aspect-ratio: 1 / 0.8;
+
+  border: none;
+  border-radius: var(--radius-small);
+
+  background: none;
+  color: var(--text-secondary);
+
+  font-size: 15px;
+
+  cursor: pointer;
+}
+
+.calendarDay:hover {
+  background-color: var(--color-primary-light);
+}
+
+.calendarDay.exerciseDay {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+
+  font-weight: 700;
+}
+
+.calendarDay.exerciseDay:hover {
+  background-color: var(--color-secondary);
+  color: var(--text-inverse);
+}
+
+/* =========================
+   월간 요약
+========================= */
+
+.monthlySummaryCard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 24px;
+
+  padding: 24px;
+
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+
+  margin-bottom: 32px;
+}
+
+.summaryItem {
+  min-height: 110px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 16px;
+
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-large);
+
+  text-align: center;
+}
+
+.summaryItem span {
+  margin-bottom: 6px;
+
+  color: var(--text-secondary);
+
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.summaryItem strong {
+  font-size: 24px;
+  line-height: 34px;
+  font-weight: 700;
+}
+
+/* =========================
+   그래프
+========================= */
+
+.dashboardCharts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 32px;
+}
+
+.chartCard {
+  min-height: 330px;
+
+  padding: 24px;
+
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+}
+
+.chartCard h3 {
+  margin: 0 0 24px;
+
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 600;
+}
+
+/* 임시 선 그래프 */
+
+.fakeLineChart {
+  height: 220px;
+
+  position: relative;
+
+  overflow: hidden;
+
+  border-bottom: 1px solid var(--color-divider);
+
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 43px,
+    var(--color-divider) 44px
+  );
+}
+
+.chartLine {
+  width: 65%;
+  height: 3px;
+
+  position: absolute;
+  left: 17%;
+
+  background-color: var(--color-primary);
+
+  transform-origin: left center;
+}
+
+.lineOne {
+  top: 125px;
+  transform: rotate(-12deg);
+}
+
+.lineTwo {
+  top: 90px;
+
+  background-color: var(--color-secondary);
+
+  transform: rotate(10deg);
+}
+
+.chartLabels {
+  width: 100%;
+
+  position: absolute;
+  bottom: 8px;
+
+  display: flex;
+  justify-content: space-around;
+
+  color: var(--text-tertiary);
+
+  font-size: 12px;
+}
+
+/* 임시 막대 그래프 */
+
+.fakeBarChart {
+  height: 220px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+
+  padding: 20px 24px 0;
+
+  border-bottom: 1px solid var(--color-divider);
+
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 43px,
+    var(--color-divider) 44px
+  );
+}
+
+.barGroup {
+  height: 100%;
+
+  display: flex;
+  align-items: flex-end;
+
+  position: relative;
+
+  gap: 6px;
+
+  padding-bottom: 30px;
+}
+
+.bar {
+  width: 28px;
+
+  border-radius: 4px 4px 0 0;
+}
+
+.barPrevious {
+  background-color: var(--color-secondary);
+}
+
+.barCurrent {
+  background-color: var(--color-primary);
+}
+
+.bar1 {
+  height: 70px;
+}
+
+.bar2 {
+  height: 95px;
+}
+
+.bar3 {
+  height: 45px;
+}
+
+.bar4 {
+  height: 60px;
+}
+
+.bar5 {
+  height: 130px;
+}
+
+.bar6 {
+  height: 105px;
+}
+
+.barGroup span {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  color: var(--text-tertiary);
+
+  font-size: 12px;
+}
+
+/* =========================
+   비회원 Blur
+========================= */
+
+.dashboardBlurred {
+  filter: blur(6px);
+
+  pointer-events: none;
+  user-select: none;
+}
+
+.loginOverlay {
+  position: fixed;
+  top: 76px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 100;
+
+  color: var(--text-primary);
+
+  font-size: 20px;
+  line-height: 30px;
+
+  pointer-events: none;
+}
+
+.loginOverlay strong {
+  font-size: 24px;
+  line-height: 34px;
+}
+
+/* =========================
+   Modal 공통
+========================= */
+
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background-color: rgba(35, 51, 61, 0.3);
+
+  z-index: 2000;
+}
+
+.dateModal,
+.scheduleModal {
+  width: 440px;
+  max-width: 100%;
+
+  padding: 32px;
+
+  background-color: var(--color-surface);
+  border-radius: var(--radius-large);
+
+  box-shadow: 0 12px 40px rgba(35, 51, 61, 0.16);
+}
+
+.dateModal h3,
+.scheduleModal h3 {
+  margin: 0 0 24px;
+
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 700;
+}
+
+.dateModalRow {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+
+  gap: 16px;
+
+  margin-bottom: 20px;
+}
+
+.dateModalRow strong {
+  font-size: 16px;
+}
+
+.dateModalRow span {
+  color: var(--text-secondary);
+
+  font-size: 16px;
+}
+
+/* =========================
+   일정 설정 Modal
+========================= */
+
+.scheduleModal > p {
+  margin: -12px 0 24px;
+
+  color: var(--text-secondary);
+
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.scheduleFormRow {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  align-items: center;
+
+  gap: 16px;
+
+  margin-bottom: 16px;
+}
+
+.scheduleFormRow label {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.scheduleFormRow input,
+.scheduleFormRow select {
+  width: 100%;
+  height: 42px;
+
+  padding: 0 12px;
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+
+  background-color: var(--color-surface);
+  color: var(--text-primary);
+}
+
+.scheduleTimeContent {
+  min-width: 0;
+}
+
+.periodButtons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.periodButtons button {
+  min-width: 52px;
+  height: 40px;
+  padding: 0 12px;
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+
+  background-color: var(--color-surface);
+  color: var(--text-primary);
+
+  font-size: 15px;
+  white-space: nowrap;
+
+  cursor: pointer;
+}
+
+.hourGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+
+  margin-top: 10px;
+}
+
+.hourGrid button {
+  width: 40px;
+  height: 40px;
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+
+  background-color: var(--color-surface);
+  color: var(--text-primary);
+
+  cursor: pointer;
+}
+
+.periodButtons .selectedOption,
+.hourGrid .selectedOption {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--text-inverse);
+}
+
+.selectedTimeText {
+  display: block;
+
+  margin-top: 12px;
+
+  color: var(--text-secondary);
+
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.scheduleFormRow input:disabled {
+  background-color: var(--color-disabled);
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+/* =========================
+   Modal Buttons
+========================= */
+
+.modalButtons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 12px;
+
+  margin-top: 28px;
+}
+
+.modalButtons button {
+  height: 48px;
+
+  border-radius: var(--radius-full);
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.primaryModalButton {
+  border: none;
+
+  background-color: var(--color-primary);
+  color: var(--text-inverse);
+}
+
+.primaryModalButton:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.secondaryModalButton {
+  border: 1px solid var(--color-border);
+
+  background-color: var(--color-surface);
+  color: var(--text-secondary);
+}
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 1024px) {
+  .dashboardContainer {
+    width: calc(100% - 64px);
+  }
+
+  .todayRecordCard {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .todayStats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .recordVideoButton {
+    width: 100%;
+  }
+
+  .recentRecordRow {
+    grid-template-columns: 100px repeat(3, 1fr);
+
+    gap: 16px;
+  }
+
+  .detailButton {
+    grid-column: 1 / -1;
+
+    padding-bottom: 12px;
+
+    text-align: right;
+  }
+
+  .monthlySummaryCard {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboardCharts {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 600px) {
+  .dashboardPage {
+    min-height: calc(100vh - 60px);
+  }
+
+  .dashboardContainer {
+    width: calc(100% - 32px);
+
+    padding: 32px 0 56px;
+  }
+
+  .dashboardSection {
+    margin-bottom: 48px;
+  }
+
+  .dashboardSection h2 {
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  .dataPeriodMessage {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .todayRecordCard {
+    padding: 20px;
+  }
+
+  .todayStats {
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+  }
+
+  .todayStat {
+    min-height: 78px;
+  }
+
+  .recentRecordCard {
+    padding: 0 20px 20px;
+  }
+
+  .recentRecordRow {
+    grid-template-columns: repeat(2, 1fr);
+
+    padding: 20px 0;
+  }
+
+  .recordDate {
+    grid-column: 1 / -1;
+  }
+
+  .detailButton {
+    grid-column: 1 / -1;
+  }
+
+  .calendarCard {
+    padding: 24px 16px;
+  }
+
+  .calendarGrid {
+    gap: 4px;
+  }
+
+  .calendarDay {
+    font-size: 13px;
+  }
+
+  .monthlySummaryCard {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+
+    padding: 16px;
+  }
+
+  .summaryItem {
+    min-height: 90px;
+  }
+
+  .chartCard {
+    padding: 20px 16px;
+  }
+
+  .loginOverlay {
+    top: 60px;
+  }
+
+  .dateModal,
+  .scheduleModal {
+    padding: 24px 20px;
+  }
+
+  .scheduleFormRow {
+    grid-template-columns: 1fr;
+
+    gap: 8px;
+  }
+
+  .modalButtons {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chartEmptyState {
+  width: 100%;
+  height: 280px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--color-text-secondary);
+  font-size: 16px;
+}

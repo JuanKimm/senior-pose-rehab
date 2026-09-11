@@ -1,0 +1,408 @@
+/* =========================
+   Exercise Page
+========================= */
+
+.exercisePage {
+  width: 100%;
+  min-height: calc(100vh - 76px);
+
+  background-color: var(--color-background);
+  color: var(--text-primary);
+}
+
+.exerciseContainer {
+  width: calc(100% - 96px);
+  max-width: var(--content-max-width);
+  min-height: calc(100vh - 76px);
+
+  margin: 0 auto;
+  padding: 48px 0 64px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================
+   상단 정보
+========================= */
+
+.exerciseTop {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 16px;
+
+  margin-bottom: 12px;
+}
+
+.exerciseInfo {
+  display: flex;
+  align-items: stretch;
+
+  overflow: hidden;
+
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+}
+
+.infoItem {
+  min-width: 100px;
+  padding: 12px 16px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border-right: 1px solid var(--color-divider);
+}
+
+.infoItem:last-child {
+  border-right: none;
+}
+
+.infoLabel {
+  margin-bottom: 4px;
+
+  color: var(--text-tertiary);
+
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+.infoItem strong {
+  color: var(--text-primary);
+
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 700;
+}
+
+/* 진행률 */
+
+.progressItem {
+  min-width: 130px;
+}
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+
+  overflow: hidden;
+
+  background-color: var(--color-divider);
+  border-radius: var(--radius-full);
+}
+
+.progressValue {
+  height: 100%;
+
+  background-color: var(--color-primary);
+  border-radius: var(--radius-full);
+
+  transition: width 0.3s ease;
+}
+
+/* =========================
+   음성 안내 버튼
+========================= */
+
+.voiceButton {
+  height: 48px;
+  padding: 0 20px;
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+
+  background-color: var(--color-surface);
+  color: var(--text-secondary);
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.voiceButton.active {
+  background-color: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* =========================
+   영상 영역
+========================= */
+
+.exerciseVideoArea {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 7fr 3fr;
+  gap: 24px;
+}
+
+.referenceArea,
+.webcamArea {
+  min-width: 0;
+}
+
+.videoLabel {
+  margin-bottom: 8px;
+
+  color: var(--text-secondary);
+
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 600;
+}
+
+.referenceVideo,
+.webcamBox {
+  width: 100%;
+  height: 500px;
+
+  overflow: hidden;
+
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-large);
+}
+
+.referenceVideo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--text-secondary);
+
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* 웹캠 */
+
+.webcamBox {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.webcamVideo {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transform: scaleX(-1);
+}
+
+/* 카메라 오류 */
+
+.cameraError {
+  padding: 24px;
+
+  text-align: center;
+}
+
+.cameraError strong {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: var(--color-error);
+
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.cameraError p {
+  margin: 0;
+
+  color: var(--text-secondary);
+
+  font-size: 16px;
+  line-height: 26px;
+}
+
+/* =========================
+   자세 피드백
+========================= */
+
+.feedbackBox {
+  width: 100%;
+
+  margin-top: 24px;
+  padding: 20px 24px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+}
+
+.feedbackBox strong {
+  color: var(--color-primary);
+
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.feedbackBox span {
+  color: var(--text-secondary);
+
+  font-size: 16px;
+  line-height: 26px;
+}
+
+/* =========================
+   운동 종료 버튼
+========================= */
+
+.endExerciseButton {
+  width: 320px;
+  height: 56px;
+
+  margin: 32px auto 0;
+
+  border: none;
+  border-radius: var(--radius-medium);
+
+  background-color: var(--color-primary);
+  color: var(--text-inverse);
+
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: background-color 0.2s ease;
+}
+
+.endExerciseButton:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.endExerciseButton:active {
+  background-color: var(--color-primary-pressed);
+}
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 1024px) {
+  .exerciseContainer {
+    width: calc(100% - 64px);
+  }
+
+  .exerciseTop {
+    align-items: flex-end;
+    flex-direction: column;
+  }
+
+  .exerciseInfo {
+    width: 100%;
+  }
+
+  .infoItem {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .exerciseVideoArea {
+    grid-template-columns: 1fr;
+  }
+
+  .referenceVideo,
+  .webcamBox {
+    height: 420px;
+  }
+
+  .webcamBox {
+    height: 360px;
+  }
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 600px) {
+  .exercisePage {
+    min-height: calc(100vh - 60px);
+  }
+
+  .exerciseContainer {
+    width: calc(100% - 32px);
+    min-height: calc(100vh - 60px);
+
+    padding: 32px 0 48px;
+  }
+
+  .exerciseInfo {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    border-radius: var(--radius-medium);
+  }
+
+  .infoItem {
+    min-width: 0;
+
+    border-right: 1px solid var(--color-divider);
+    border-bottom: 1px solid var(--color-divider);
+  }
+
+  .infoItem:nth-child(2n) {
+    border-right: none;
+  }
+
+  .infoItem:nth-last-child(-n + 2) {
+    border-bottom: none;
+  }
+
+  .voiceButton {
+    width: 100%;
+  }
+
+  .exerciseVideoArea {
+    gap: 16px;
+  }
+
+  .referenceVideo {
+    height: 280px;
+  }
+
+  .webcamBox {
+    height: 280px;
+  }
+
+  .feedbackBox {
+    align-items: flex-start;
+    flex-direction: column;
+
+    padding: 16px;
+  }
+
+  .endExerciseButton {
+    width: 100%;
+    height: 52px;
+
+    margin-top: 24px;
+
+    font-size: 16px;
+  }
+}

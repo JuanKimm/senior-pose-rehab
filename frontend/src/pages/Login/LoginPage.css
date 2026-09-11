@@ -1,0 +1,217 @@
+.loginPage {
+  min-height: calc(100vh - 76px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding: 48px 24px 64px;
+
+  background-color: var(--color-background);
+}
+
+.loginCard {
+  width: 100%;
+  max-width: 420px;
+
+  padding: 32px;
+
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.loginTitleArea {
+  margin-bottom: 28px;
+}
+
+.loginTitleArea h1 {
+  margin: 0 0 8px;
+
+  color: var(--color-text-primary);
+  font-size: 24px;
+  line-height: 34px;
+  font-weight: 700;
+}
+
+.loginTitleArea p {
+  margin: 0;
+
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.loginField {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.loginField label {
+  color: var(--color-text-primary);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.loginField input {
+  width: 100%;
+  height: 48px;
+
+  padding: 0 14px;
+
+  color: var(--color-text-primary);
+  font-size: 14px;
+
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+
+  outline: none;
+}
+
+.loginField input::placeholder {
+  color: var(--color-text-disabled);
+}
+
+.loginField input:focus {
+  border-color: var(--color-primary);
+}
+
+.passwordInputWrap {
+  position: relative;
+}
+
+.passwordInputWrap input {
+  padding-right: 64px;
+}
+
+.passwordToggleButton {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+
+  padding: 4px;
+
+  color: var(--color-text-secondary);
+  font-size: 13px;
+
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.passwordToggleButton img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.loginErrorMessage {
+  margin: -8px 0 0;
+
+  color: var(--color-error);
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.loginSubmitButton {
+  width: 100%;
+  height: 48px;
+
+  color: var(--color-text-inverse);
+  font-size: 16px;
+  font-weight: 600;
+
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+.loginSubmitButton:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.signupGuide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 20px;
+
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
+.signupGuide button {
+  padding: 0;
+
+  color: var(--color-primary);
+  font-size: 14px;
+  font-weight: 600;
+
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.loginDivider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin: 28px 0;
+}
+
+.loginDivider span {
+  flex: 1;
+  height: 1px;
+
+  background-color: var(--color-divider);
+}
+
+.loginDivider p {
+  margin: 0;
+
+  color: var(--color-text-tertiary);
+  font-size: 13px;
+}
+
+.guestStartButton {
+  width: 100%;
+  height: 48px;
+
+  color: var(--color-primary);
+  font-size: 16px;
+  font-weight: 600;
+
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-primary);
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+.guestStartButton:hover {
+  background-color: var(--color-primary-light);
+}
+
+@media (max-width: 600px) {
+  .loginPage {
+    min-height: calc(100vh - 60px);
+    padding: 32px 16px;
+  }
+
+  .loginCard {
+    padding: 24px;
+  }
+}

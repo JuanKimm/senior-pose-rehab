@@ -1,7 +1,12 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import logo from "../assets/logo/logo.svg";
 
 function Header() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isAuthPage =
+    location.pathname === "/login" || location.pathname === "/signup";
 
   const goHome = () => {
     navigate("/");
@@ -15,10 +20,14 @@ function Header() {
   return (
     <header className="header">
       <div className="logoText" onClick={goHome}>
-        LOGO
+        <img src={logo} alt="Pose-ON" className="headerLogo" />
       </div>
 
-      <div className="authText">로그인 / 회원가입</div>
+      {!isAuthPage && (
+        <div className="authText" onClick={() => navigate("/login")}>
+          로그인 / 회원가입
+        </div>
+      )}
     </header>
   );
 }

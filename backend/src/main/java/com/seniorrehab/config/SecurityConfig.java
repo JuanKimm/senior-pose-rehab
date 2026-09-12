@@ -87,6 +87,8 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/api/exercise/result/share/*").permitAll()
                 // AI 연동 - 운동 점수 데이터 일괄 전송
                 .requestMatchers(HttpMethod.POST, "/api/exercise/session/*/score").permitAll()
+                // AI 연동 - 스켈레톤 오버레이 영상 저장
+                .requestMatchers(HttpMethod.POST, "/api/exercise/session/*/video-upload").permitAll()
                 // 그 외 모든 요청은 로그인 필요
                 .anyRequest().authenticated()
             )

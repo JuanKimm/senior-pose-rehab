@@ -44,4 +44,11 @@
         AND user_id IS NULL
     </update>
 
+    <!-- 스켈레톤 오버레이 영상 경로 저장 -->
+    <update id="updateVideoPath">
+        UPDATE EXERCISE_SESSION
+        SET video_path = #{videoPath}
+        WHERE session_id = #{sessionId}
+    </update>
+
 </mapper>

@@ -85,6 +85,8 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.PUT, "/api/exercise/session/*/end").permitAll()
                 // 보호자 공유 링크로 운동 결과 조회
                 .requestMatchers(HttpMethod.GET, "/api/exercise/result/share/*").permitAll()
+                // AI 연동 - 운동 점수 데이터 일괄 전송
+                .requestMatchers(HttpMethod.POST, "/api/exercise/session/*/score").permitAll()
                 // 그 외 모든 요청은 로그인 필요
                 .anyRequest().authenticated()
             )

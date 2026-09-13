@@ -1,8 +1,11 @@
 package com.seniorrehab.config;
 
+import com.seniorrehab.repository.UserMapper;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,6 +28,9 @@ import java.util.List;
 public class SecurityConfig {
 
     private final JwtTokenProvider jwtTokenProvider;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
+    private final UserMapper userMapper;
 
     // 1) 비밀번호 암호화 - BCrypt
     @Bean
@@ -57,16 +63,38 @@ public class SecurityConfig {
             .formLogin(AbstractHttpConfigurer::disable)
             .httpBasic(AbstractHttpConfigurer::disable)
 
+            // 인증/인가 실패 시 응답 형식 커스터마이징
+            .exceptionHandling(exceptions -> exceptions
+                .authenticationEntryPoint(customAuthenticationEntryPoint)
+                .accessDeniedHandler(customAccessDeniedHandler)
+            )
+
             // URL별 접근 권한 설정
             .authorizeHttpRequests(auth -> auth
                 // 인증 없이 접근 가능 (로그인, 회원가입 등)
                 .requestMatchers("/api/auth/**").permitAll()
+                // 운동 카테고리 목록 조회 - 비회원도 접근 가능
+                .requestMatchers(HttpMethod.GET, "/api/exercise/types").permitAll()
+                // 카테고리별 기준 운동 영상 목록 조회 - 비회원도 접근 가능
+                .requestMatchers(HttpMethod.GET, "/api/exercise/*/videos").permitAll()
+                // 기준 운동 영상 단건 조회 - 비회원도 접근 가능
+                .requestMatchers(HttpMethod.GET, "/api/exercise/video/*").permitAll()
+                // 운동 세션 시작 - 비회원도 접근 가능
+                .requestMatchers(HttpMethod.POST, "/api/exercise/session/start").permitAll()
+                // 운동 세션 종료
+                .requestMatchers(HttpMethod.PUT, "/api/exercise/session/*/end").permitAll()
+                // 보호자 공유 링크로 운동 결과 조회
+                .requestMatchers(HttpMethod.GET, "/api/exercise/result/share/*").permitAll()
+                // AI 연동 - 운동 점수 데이터 일괄 전송
+                .requestMatchers(HttpMethod.POST, "/api/exercise/session/*/score").permitAll()
+                // AI 연동 - 스켈레톤 오버레이 영상 저장
+                .requestMatchers(HttpMethod.POST, "/api/exercise/session/*/video-upload").permitAll()
                 // 그 외 모든 요청은 로그인 필요
                 .anyRequest().authenticated()
             )
 
             .addFilterBefore(
-                new JwtAuthenticationFilter(jwtTokenProvider),
+                new JwtAuthenticationFilter(jwtTokenProvider, userMapper),
                 UsernamePasswordAuthenticationFilter.class
             );
 

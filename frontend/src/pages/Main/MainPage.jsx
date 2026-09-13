@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import ExerciseCard from "../../components/ExerciseCard";
+import { useNavigate } from "react-router-dom";
 import "../../styles/MainPage.css";
 
 function MainPage() {
+  const navigate = useNavigate();
   const [showScrollArrow, setShowScrollArrow] = useState(true);
 
   useEffect(() => {
@@ -30,19 +31,8 @@ function MainPage() {
   }, []);
 
   const scrollDown = () => {
-    const headerHeight =
-      document.querySelector(".header")?.offsetHeight || 76;
-
-    window.scrollBy({
-      top: window.innerHeight - headerHeight,
-      behavior: "smooth",
-    });
-  };
-
-  const scrollToExercise = () => {
     const exerciseSection = document.getElementById("exercise-section");
-    const headerHeight =
-      document.querySelector(".header")?.offsetHeight || 76;
+    const headerHeight = document.querySelector(".header")?.offsetHeight || 76;
 
     if (exerciseSection) {
       const targetPosition =
@@ -57,76 +47,124 @@ function MainPage() {
     }
   };
 
+  const scrollToExercise = () => {
+    scrollDown();
+  };
+
+  const goToExercise = () => {
+    navigate("/exercise");
+  };
+
   return (
     <div className="home">
       <main>
+        {/* 메인 영역 */}
         <section className="heroSection">
-          <div className="imageBox">
-            큰 이미지 / <br />
-            운동 영상 소스
+          <div className="heroImagePlaceholder">
+            <span>메인 이미지 준비 중</span>
           </div>
 
           <div className="heroText">
-            <p className="smallTitle">재활 운동을 더 쉽고 정확하게</p>
+            <p className="smallTitle">카메라만 있으면 바로 시작할 수 있어요</p>
 
             <h1>
-              오늘도 건강하게
+              오늘도 편안하게
               <br />
-              재활 운동 시작해요
+              재활 운동을 시작해보세요.
             </h1>
 
             <p className="description">
-              척추관절과 근육을 센서값으로 측정하고, 피드백을 제공합니다.
+              카메라로 운동 자세를 확인하고,
               <br />
-              로그인 없이도 바로 운동을 시작해보세요!
+              자세 안내를 받으며 천천히 운동해보세요!
             </p>
 
-            <button className="startButton" onClick={scrollToExercise}>운동 바로 시작 →</button>
+            <button
+              type="button"
+              className="startButton"
+              onClick={scrollToExercise}
+            >
+              운동 선택하기 <span>→</span>
+            </button>
           </div>
         </section>
 
+        {/* 운동 선택 영역 */}
         <section id="exercise-section" className="exerciseSection">
-          <h2>오늘 운동하고 싶은 부위를 선택하세요</h2>
+          <div className="exerciseTitle">
+            <p>집중 운동 영역</p>
+            <h2>오늘 운동하고 싶은 부위를 선택하세요.</h2>
+          </div>
 
           <div className="cardWrap">
-            <ExerciseCard
-              title="상체 운동"
-              description={
-                <>
-                  어깨, 팔, 가슴 운동 등
-                  <br />
-                  상체 중심 운동을 진행합니다.
-                </>
-              }
-            />
+            <article className="exerciseCard">
+              <div className="cardImagePlaceholder">
+                <span>상체 운동 이미지</span>
+              </div>
 
-            <ExerciseCard
-              title="어깨 운동"
-              description={
-                <>
-                  어깨 관절과 팔 운동을 돕고
-                  <br />
-                  균형을 맞춰줍니다.
-                </>
-              }
-            />
+              <div className="cardContent">
+                <h3>상체 운동</h3>
+                <p>팔과 가슴을 천천히 움직이며 상체를 풀어보세요.</p>
 
-            <ExerciseCard
-              title="하체 운동"
-              description={
-                <>
-                  골반, 무릎과 발목 등
-                  <br />
-                  하체 근력을 관리합니다.
-                </>
-              }
-            />
+                <button
+                  type="button"
+                  className="cardButton"
+                  onClick={goToExercise}
+                >
+                  운동 보기 <span>→</span>
+                </button>
+              </div>
+            </article>
+
+            <article className="exerciseCard">
+              <div className="cardImagePlaceholder">
+                <span>어깨 운동 이미지</span>
+              </div>
+
+              <div className="cardContent">
+                <h3>어깨 운동</h3>
+                <p>어깨와 팔을 부드럽게 움직이며 따라해보세요.</p>
+
+                <button
+                  type="button"
+                  className="cardButton"
+                  onClick={goToExercise}
+                >
+                  운동 보기 <span>→</span>
+                </button>
+              </div>
+            </article>
+
+            <article className="exerciseCard">
+              <div className="cardImagePlaceholder">
+                <span>하체 운동 이미지</span>
+              </div>
+
+              <div className="cardContent">
+                <h3>하체 운동</h3>
+                <p>다리와 무릎을 천천히 움직이며 하체를 단련해보세요.</p>
+
+                <button
+                  type="button"
+                  className="cardButton"
+                  onClick={goToExercise}
+                >
+                  운동 보기 <span>→</span>
+                </button>
+              </div>
+            </article>
           </div>
         </section>
       </main>
+
       {showScrollArrow && (
-        <button className="scrollArrow" onClick={scrollDown}>
-            ˅
+        <button
+          type="button"
+          className="scrollArrow"
+          onClick={scrollDown}
+          aria-label="운동 영역으로 이동"
+        >
+          ˅
         </button>
       )}
     </div>

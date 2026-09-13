@@ -9,6 +9,7 @@ body {
 .home {
   width: 100%;
   min-height: 100vh;
+
   background-color: var(--color-background);
   color: var(--text-primary);
 }
@@ -37,22 +38,146 @@ body {
 .logoText {
   cursor: pointer;
   user-select: none;
+
   display: flex;
   align-items: center;
 }
 
 .headerLogo {
   display: block;
+
   width: 150px;
   height: auto;
 }
 
+/* 비로그인 */
+
 .authText {
+  height: 54px;
+  padding: 0 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #ffffff;
+  border: 1px solid var(--color-primary);
+  border-radius: 12px;
+
+  color: var(--text-primary);
+
   font-size: 16px;
-  font-weight: 400;
-  color: var(--text-secondary);
+  font-weight: 600;
 
   cursor: pointer;
+}
+
+.authText:hover {
+  background-color: var(--color-primary-light);
+}
+
+/* 로그인 */
+
+.userMenuWrap {
+  position: relative;
+}
+
+.userButton {
+  min-width: 144px;
+  height: 54px;
+  padding: 0 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  background-color: #ffffff;
+  border: 1px solid var(--color-primary);
+  border-radius: 12px;
+
+  color: var(--text-primary);
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.userButton:hover {
+  background-color: var(--color-primary-light);
+}
+
+.userButton.open {
+  background-color: #ffffff;
+
+  border-radius: 12px 12px 0 0;
+  border-bottom-color: transparent;
+}
+
+.userButton.open:hover {
+  background-color: #ffffff;
+}
+
+.userChevron {
+  display: block;
+
+  width: 20px;
+  height: 20px;
+}
+
+.userDropdown {
+  position: absolute;
+  top: 53px;
+  right: 0;
+
+  width: 144px;
+  padding: 0 0 8px;
+
+  background-color: #ffffff;
+
+  border: 1px solid var(--color-primary);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+
+  overflow: hidden;
+
+  z-index: 1100;
+}
+
+.userDropdown::before {
+  content: "";
+
+  display: block;
+
+  width: calc(100% - 48px);
+  height: 1px;
+
+  margin: 0 24px 8px;
+
+  background-color: var(--color-divider);
+}
+
+.dropdownItem {
+  display: block;
+
+  width: 100%;
+  padding: 13px 24px;
+
+  background-color: transparent;
+  border: none;
+
+  color: var(--text-primary);
+
+  font-size: 15px;
+  font-weight: 400;
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.dropdownItem:hover {
+  background-color: var(--color-background);
 }
 
 /* =========================
@@ -61,34 +186,34 @@ body {
 
 .heroSection {
   width: calc(100% - 96px);
-  max-width: var(--content-max-width);
-  min-height: calc(100vh - 76px);
+  max-width: 1200px;
 
   margin: 0 auto;
-  padding: 48px 0 64px;
+  padding: 72px 0 96px;
 
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1fr 0.95fr;
   align-items: center;
-  column-gap: var(--column-gap);
+
+  column-gap: 64px;
 }
 
-.imageBox {
+.heroImagePlaceholder {
   width: 100%;
-  min-height: 420px;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1.48 / 1;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   background-color: var(--color-primary-light);
-  border-radius: var(--radius-large);
+  border-radius: 20px;
 
   color: var(--text-tertiary);
-  font-size: 16px;
-  line-height: 26px;
-  text-align: center;
+
+  font-size: 15px;
+
+  overflow: hidden;
 }
 
 .heroText {
@@ -98,56 +223,57 @@ body {
 .smallTitle {
   margin: 0 0 16px;
 
-  color: var(--text-tertiary);
+  color: var(--color-primary);
 
-  font-size: 16px;
-  line-height: 26px;
-  font-weight: 400;
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 500;
 }
 
 .heroText h1 {
-  margin: 0 0 24px;
+  margin: 0 0 28px;
 
   color: var(--text-primary);
 
   font-size: 40px;
-  line-height: 52px;
+  line-height: 1.35;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 .description {
-  margin: 0 0 32px;
+  margin: 0 0 28px;
 
   color: var(--text-secondary);
 
-  font-size: 18px;
+  font-size: 17px;
   line-height: 30px;
   font-weight: 400;
 }
 
-/* 운동 시작 버튼 */
+/* 메인 운동 선택 버튼 */
 
 .startButton {
-  min-width: 220px;
   height: 56px;
-  padding: 0 24px;
+  padding: 0 28px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
 
   border: none;
-  border-radius: var(--radius-medium);
+  border-radius: 12px;
 
   background-color: var(--color-primary);
   color: var(--text-inverse);
 
-  font-size: 18px;
-  line-height: 26px;
+  font-size: 17px;
   font-weight: 600;
 
   cursor: pointer;
 
-  transition:
-    background-color 0.2s ease,
-    transform 0.1s ease;
+  transition: background-color 0.2s ease;
 }
 
 .startButton:hover {
@@ -156,7 +282,145 @@ body {
 
 .startButton:active {
   background-color: var(--color-primary-pressed);
-  transform: translateY(1px);
+}
+
+/* =========================
+   Exercise Section
+========================= */
+
+.exerciseSection {
+  width: calc(100% - 96px);
+  max-width: 1200px;
+
+  margin: 0 auto;
+  padding: 24px 0 96px;
+}
+
+.exerciseTitle {
+  margin-bottom: 44px;
+
+  text-align: center;
+}
+
+.exerciseTitle p {
+  margin: 0 0 14px;
+
+  color: var(--color-primary);
+
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+.exerciseTitle h2 {
+  margin: 0;
+
+  color: var(--text-primary);
+
+  font-size: 34px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.cardWrap {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 24px;
+}
+
+/* =========================
+   Exercise Card
+========================= */
+
+.exerciseCard {
+  width: 100%;
+
+  overflow: hidden;
+
+  background-color: var(--color-surface);
+
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+}
+
+.cardImagePlaceholder {
+  width: 100%;
+  height: 220px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--color-primary-light);
+
+  color: var(--text-tertiary);
+
+  font-size: 14px;
+}
+
+.cardContent {
+  padding: 24px;
+}
+
+.cardContent h3 {
+  margin: 0 0 10px;
+
+  color: var(--text-primary);
+
+  font-size: 19px;
+  line-height: 28px;
+  font-weight: 600;
+}
+
+.cardContent p {
+  min-height: 52px;
+
+  margin: 0 0 22px;
+
+  color: var(--text-secondary);
+
+  font-size: 15px;
+  line-height: 26px;
+  font-weight: 400;
+}
+
+.cardButton {
+  height: 48px;
+  padding: 0 20px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  background-color: #ffffff;
+
+  border: 1px solid var(--color-primary);
+  border-radius: 10px;
+
+  color: var(--color-primary);
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.cardButton:hover {
+  background-color: var(--color-primary-light);
+}
+
+.cardButton:active {
+  background-color: var(--color-primary);
+  color: #ffffff;
 }
 
 /* =========================
@@ -173,124 +437,22 @@ body {
   width: 48px;
   height: 48px;
 
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   background-color: var(--color-surface);
+
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+
   color: var(--color-primary);
 
-  font-size: 30px;
+  font-size: 28px;
 
   cursor: pointer;
+
   z-index: 999;
-}
-
-/* =========================
-   Exercise Section
-========================= */
-
-.exerciseSection {
-  width: calc(100% - 96px);
-  max-width: var(--content-max-width);
-  min-height: 100vh;
-
-  margin: 0 auto;
-  padding: 64px 0;
-}
-
-.exerciseSection h2 {
-  margin: 0 0 48px;
-
-  color: var(--text-primary);
-
-  font-size: 24px;
-  line-height: 34px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-
-  text-align: center;
-}
-
-.cardWrap {
-  width: 100%;
-
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--component-gap);
-}
-
-/* =========================
-   Exercise Card
-========================= */
-
-.exerciseCard {
-  width: 100%;
-
-  overflow: hidden;
-
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-large);
-
-  background-color: var(--color-surface);
-}
-
-.cardImage {
-  width: 100%;
-  height: 260px;
-
-  background-color: var(--color-primary-light);
-}
-
-.cardContent {
-  padding: 32px;
-}
-
-.cardContent h3 {
-  margin: 0 0 12px;
-
-  color: var(--text-primary);
-
-  font-size: 20px;
-  line-height: 30px;
-  font-weight: 600;
-}
-
-.cardContent p {
-  margin: 0 0 24px;
-
-  color: var(--text-secondary);
-
-  font-size: 16px;
-  line-height: 26px;
-  font-weight: 400;
-}
-
-.cardButton {
-  min-width: 120px;
-  height: 48px;
-  padding: 0 24px;
-
-  border: none;
-  border-radius: var(--radius-medium);
-
-  background-color: var(--color-primary);
-  color: var(--text-inverse);
-
-  font-size: 18px;
-  line-height: 26px;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition: background-color 0.2s ease;
-}
-
-.cardButton:hover {
-  background-color: var(--color-primary-hover);
-}
-
-.cardButton:active {
-  background-color: var(--color-primary-pressed);
 }
 
 /* =========================
@@ -306,14 +468,22 @@ body {
     width: calc(100% - 64px);
 
     grid-template-columns: 1fr;
-    row-gap: 32px;
 
-    padding: 48px 0 64px;
+    row-gap: 40px;
+
+    padding: 56px 0 72px;
   }
 
-  .imageBox {
-    min-height: 320px;
-    aspect-ratio: 16 / 9;
+  .heroImagePlaceholder {
+    max-width: 700px;
+
+    margin: 0 auto;
+  }
+
+  .heroText {
+    max-width: 700px;
+
+    margin: 0 auto;
   }
 
   .exerciseSection {
@@ -324,8 +494,14 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .cardImage {
-    height: 280px;
+  .exerciseCard {
+    max-width: 700px;
+
+    margin: 0 auto;
+  }
+
+  .cardImagePlaceholder {
+    height: 300px;
   }
 }
 
@@ -344,49 +520,75 @@ body {
   }
 
   .authText {
+    height: 44px;
+    padding: 0 16px;
+
     font-size: 14px;
+  }
+
+  .userButton {
+    min-width: 120px;
+    height: 44px;
+    padding: 0 16px;
+
+    font-size: 14px;
+  }
+
+  .userDropdown {
+    top: 43px;
+
+    width: 120px;
+  }
+
+  .dropdownItem {
+    padding: 12px 18px;
+
+    font-size: 14px;
+  }
+
+  .userDropdown::before {
+    width: calc(100% - 36px);
+
+    margin: 0 18px 8px;
+  }
+
+  .userChevron {
+    width: 18px;
+    height: 18px;
   }
 
   .heroSection {
     width: calc(100% - 32px);
-    min-height: calc(100vh - 60px);
 
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
+    padding: 32px 0 56px;
 
-    gap: 24px;
-
-    padding: 32px 0 64px;
+    row-gap: 32px;
   }
 
-  .imageBox {
-    min-height: 220px;
+  .heroImagePlaceholder {
     aspect-ratio: 4 / 3;
 
-    font-size: 14px;
+    border-radius: 16px;
   }
 
   .smallTitle {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 
     font-size: 14px;
-    line-height: 22px;
   }
 
   .heroText h1 {
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 
-    font-size: 32px;
-    line-height: 42px;
+    font-size: 31px;
+    line-height: 1.4;
   }
 
   .description {
     margin-bottom: 24px;
 
     font-size: 16px;
-    line-height: 26px;
+    line-height: 27px;
   }
 
   .description br {
@@ -395,9 +597,57 @@ body {
 
   .startButton {
     width: 100%;
+
     height: 52px;
 
     font-size: 16px;
+  }
+
+  .exerciseSection {
+    width: calc(100% - 32px);
+
+    padding: 32px 0 64px;
+  }
+
+  .exerciseTitle {
+    margin-bottom: 32px;
+  }
+
+  .exerciseTitle p {
+    margin-bottom: 8px;
+
+    font-size: 14px;
+  }
+
+  .exerciseTitle h2 {
+    font-size: 28px;
+    line-height: 1.4;
+  }
+
+  .cardWrap {
+    gap: 24px;
+  }
+
+  .cardImagePlaceholder {
+    height: 200px;
+  }
+
+  .cardContent {
+    padding: 22px;
+  }
+
+  .cardContent h3 {
+    font-size: 18px;
+  }
+
+  .cardContent p {
+    min-height: auto;
+
+    font-size: 15px;
+  }
+
+  .cardButton {
+    width: 100%;
   }
 
   .scrollArrow {
@@ -406,47 +656,6 @@ body {
 
     bottom: 16px;
 
-    font-size: 26px;
-  }
-
-  .exerciseSection {
-    width: calc(100% - 32px);
-    padding: 48px 0;
-  }
-
-  .exerciseSection h2 {
-    margin-bottom: 32px;
-
-    font-size: 24px;
-    line-height: 34px;
-  }
-
-  .cardWrap {
-    gap: 24px;
-  }
-
-  .cardImage {
-    height: 200px;
-  }
-
-  .cardContent {
-    padding: 24px;
-  }
-
-  .cardContent h3 {
-    font-size: 20px;
-    line-height: 30px;
-  }
-
-  .cardContent p {
-    font-size: 16px;
-    line-height: 26px;
-  }
-
-  .cardButton {
-    width: 100%;
-    height: 48px;
-
-    font-size: 16px;
+    font-size: 25px;
   }
 }

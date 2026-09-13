@@ -4,6 +4,7 @@ import "../../styles/ExercisePage.css";
 
 function ExercisePage() {
   const navigate = useNavigate();
+
   const videoRef = useRef(null);
   const streamRef = useRef(null);
 
@@ -11,11 +12,15 @@ function ExercisePage() {
   const [currentCount] = useState(4);
   const [targetCount] = useState(12);
 
+  const [cameraStatus, setCameraStatus] = useState("connecting");
   const [cameraError, setCameraError] = useState("");
+
   const [isVoiceOn, setIsVoiceOn] = useState(true);
+  const [showEndModal, setShowEndModal] = useState(false);
 
   const progress = Math.round((currentCount / targetCount) * 100);
 
+  /* 운동 시간 */
   useEffect(() => {
     const timer = setInterval(() => {
       setElapsedTime((prev) => prev + 1);
@@ -24,27 +29,41 @@ function ExercisePage() {
     return () => clearInterval(timer);
   }, []);
 
-  useEffect(() => {
-    const startCamera = async () => {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          video: true,
-          audio: false,
-        });
+  /* 카메라 연결 */
+  const startCamera = async () => {
+    setCameraStatus("connecting");
+    setCameraError("");
 
-        streamRef.current = stream;
-
-        if (videoRef.current) {
-          videoRef.current.srcObject = stream;
-        }
-      } catch (error) {
-        console.error("카메라 연결 실패:", error);
-        setCameraError(
-          "카메라 연결에 실패했습니다. 카메라 권한을 확인해주세요.",
-        );
+    try {
+      if (!navigator.mediaDevices?.getUserMedia) {
+        throw new Error("이 브라우저에서는 카메라를 사용할 수 없습니다.");
       }
-    };
 
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((track) => track.stop());
+      }
+
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: false,
+      });
+
+      streamRef.current = stream;
+
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+
+      setCameraStatus("connected");
+    } catch (error) {
+      console.error("카메라 연결 실패:", error);
+
+      setCameraStatus("error");
+      setCameraError("카메라를 확인하기 어려워요. 잠시 후 다시 시도해주세요.");
+    }
+  };
+
+  useEffect(() => {
     startCamera();
 
     return () => {
@@ -64,95 +83,159 @@ function ExercisePage() {
     )}`;
   };
 
+  const handleEndButtonClick = () => {
+    setShowEndModal(true);
+  };
+
+  const handleContinueExercise = () => {
+    setShowEndModal(false);
+  };
+
   const handleEndExercise = () => {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((track) => track.stop());
+    }
+
     navigate("/result");
   };
 
   return (
     <div className="exercisePage">
       <main className="exerciseContainer">
-        <div className="exerciseTop">
-          <div className="exerciseInfo">
-            <div className="infoItem">
-              <span className="infoLabel">운동 부위</span>
-              <strong>상체</strong>
-            </div>
-
-            <div className="infoItem">
-              <span className="infoLabel">진행 시간</span>
-              <strong>{formatTime(elapsedTime)}</strong>
-            </div>
-
-            <div className="infoItem">
-              <span className="infoLabel">진행 횟수</span>
-              <strong>
-                {currentCount}/{targetCount}
-              </strong>
-            </div>
-
-            <div className="infoItem progressItem">
-              <span className="infoLabel">진행률</span>
-
-              <div className="progressBar">
-                <div
-                  className="progressValue"
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
-            </div>
+        {/* 제목 + 음성 안내 */}
+        <div className="exerciseTitleRow">
+          <div className="exercisePageTitle">
+            <h1>어깨 운동</h1>
+            <p>화면의 동작을 천천히 따라 해보세요.</p>
           </div>
 
           <button
             type="button"
-            className={`voiceButton ${isVoiceOn ? "active" : ""}`}
+            className={`voiceGuideButton ${isVoiceOn ? "active" : ""}`}
             onClick={() => setIsVoiceOn((prev) => !prev)}
           >
-            음성 안내 {isVoiceOn ? "ON" : "OFF"}
+            {isVoiceOn ? "음성 안내 켜짐" : "음성 안내 켜기"}
           </button>
         </div>
 
-        <div className="exerciseVideoArea">
-          <section className="referenceArea">
-            <div className="videoLabel">기준 영상</div>
+        {/* 운동 화면 */}
+        <div className="exerciseMainGrid">
+          {/* 왼쪽 - 따라 할 동작 */}
+          <section className="referencePanel">
+            <h2>따라 할 동작</h2>
 
-            <div className="referenceVideo">기준 운동 영상</div>
+            <div className="referenceVideo">
+              <span>기준 영상</span>
+            </div>
           </section>
 
-          <section className="webcamArea">
-            <div className="videoLabel">실시간 웹캠</div>
+          {/* 오른쪽 */}
+          <div className="exerciseSideColumn">
+            {/* 운동 진행 */}
+            <section className="progressPanel">
+              <h2>운동 진행</h2>
 
-            <div className="webcamBox">
-              {cameraError ? (
-                <div className="cameraError">
-                  <strong>카메라를 사용할 수 없습니다.</strong>
-                  <p>{cameraError}</p>
-                </div>
-              ) : (
+              <div className="countText">
+                <strong>{currentCount}</strong>
+                <span> / {targetCount}회</span>
+              </div>
+
+              <div className="exerciseProgressBar">
+                <div
+                  className="exerciseProgressValue"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+
+              <p>운동 시간&nbsp; {formatTime(elapsedTime)}</p>
+            </section>
+
+            {/* 내 모습 */}
+            <section className="cameraPanel">
+              <h2>내 모습</h2>
+
+              <div className="cameraBox">
                 <video
                   ref={videoRef}
                   autoPlay
                   playsInline
                   muted
-                  className="webcamVideo"
+                  className={
+                    cameraStatus === "connected"
+                      ? "webcamVideo visible"
+                      : "webcamVideo"
+                  }
                 />
-              )}
-            </div>
-          </section>
+
+                {cameraStatus === "connecting" && (
+                  <div className="cameraState">
+                    <div className="cameraStateIcon">□</div>
+                    <strong>카메라를 연결하고 있어요.</strong>
+                  </div>
+                )}
+
+                {cameraStatus === "error" && (
+                  <div className="cameraState cameraErrorState">
+                    <div className="cameraStateIcon">△</div>
+
+                    <strong>{cameraError}</strong>
+
+                    <button
+                      type="button"
+                      className="cameraRetryButton"
+                      onClick={startCamera}
+                    >
+                      카메라 연결하기
+                    </button>
+                  </div>
+                )}
+              </div>
+            </section>
+          </div>
         </div>
 
-        <div className="feedbackBox">
-          <strong>자세를 확인하고 있어요.</strong>
-          <span>기준 영상을 따라 천천히 움직여주세요.</span>
+        {/* 자세 피드백 */}
+        <div className="exerciseFeedback">
+          <span className="feedbackIcon">○</span>
+          <strong>좋아요. 자세가 안정적입니다.</strong>
         </div>
 
+        {/* 운동 종료 */}
         <button
           type="button"
           className="endExerciseButton"
-          onClick={handleEndExercise}
+          onClick={handleEndButtonClick}
         >
           운동 종료하기
         </button>
       </main>
+
+      {/* 운동 종료 확인 팝업 */}
+      {showEndModal && (
+        <div className="exerciseModalBackdrop">
+          <div className="exerciseEndModal">
+            <strong>운동을 종료하시겠어요?</strong>
+
+            <div className="exerciseModalButtons">
+              <button
+                type="button"
+                className="continueExerciseButton"
+                onClick={handleContinueExercise}
+              >
+                계속 운동하기
+              </button>
+
+              <button
+                type="button"
+                className="confirmEndButton"
+                onClick={handleEndExercise}
+              >
+                종료하기
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

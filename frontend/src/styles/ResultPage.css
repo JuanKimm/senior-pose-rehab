@@ -1,10 +1,10 @@
+/* =========================
+   Result Page
+========================= */
+
 .resultPage {
   width: 100%;
   min-height: calc(100vh - 76px);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
   background-color: var(--color-background);
   color: var(--text-primary);
@@ -13,106 +13,169 @@
 .resultContainer {
   width: calc(100% - 96px);
   max-width: var(--content-max-width);
+  min-height: calc(100vh - 76px);
 
   margin: 0 auto;
-  padding: 64px 0;
+  padding: 48px 0 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.resultCard {
-  width: 100%;
+/* =========================
+   결과 카드
+========================= */
 
-  padding: 48px;
+.resultCard {
+  width: 680px;
+  max-width: 100%;
+
+  padding: 52px 48px 48px;
 
   background-color: var(--color-surface);
 
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-large);
+  border-radius: 20px;
 
   text-align: center;
 }
 
-.completeIcon {
-  width: 64px;
-  height: 64px;
+/* =========================
+   완료 아이콘
+========================= */
 
-  margin: 0 auto 20px;
+.completeIcon {
+  width: 44px;
+  height: 44px;
+
+  margin: 0 auto 18px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border-radius: var(--radius-full);
+  border: 2px solid var(--color-success);
+  border-radius: 999px;
 
-  background-color: var(--color-primary-light);
-  color: var(--color-primary);
-
-  font-size: 34px;
-  font-weight: 700;
-}
-
-.resultCard h1 {
-  margin: 0 0 8px;
+  color: var(--color-success);
 
   font-size: 24px;
-  line-height: 34px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
-.resultSubText {
-  margin: 0 0 32px;
+/* =========================
+   제목
+========================= */
 
+.resultCard h1 {
+  margin: 0 0 18px;
+
+  color: var(--text-primary);
+
+  font-size: 32px;
+  line-height: 44px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* =========================
+   운동 정보
+========================= */
+
+.resultExerciseInfo {
+  margin-bottom: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 18px;
+}
+
+.resultExerciseInfo strong {
+  color: var(--text-primary);
+
+  font-size: 17px;
+  line-height: 26px;
+  font-weight: 600;
+}
+
+.resultExerciseInfo span {
   color: var(--text-secondary);
 
   font-size: 16px;
   line-height: 26px;
+  font-weight: 400;
 }
+
+/* =========================
+   결과 수치
+========================= */
 
 .resultStats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-
-  gap: 16px;
+  width: 100%;
 
   margin-bottom: 32px;
+  padding: 28px 0;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  background-color: var(--color-surface);
+
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
 }
 
-.resultStatCard {
-  padding: 24px 16px;
+.resultStat {
+  position: relative;
 
-  background-color: var(--color-primary-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  border-radius: var(--radius-large);
+  gap: 8px;
 }
 
-.resultValue {
-  margin-bottom: 8px;
+.resultStat:not(:last-child)::after {
+  content: "";
 
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 1px;
+  height: 100%;
+
+  background-color: var(--color-divider);
+}
+
+.resultStat strong {
   color: var(--text-primary);
 
-  font-size: 36px;
+  font-size: 34px;
   line-height: 44px;
   font-weight: 700;
 }
 
-.resultValue span {
-  margin-left: 6px;
-
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.resultStatCard p {
-  margin: 0;
-
+.resultStat span {
   color: var(--text-secondary);
 
   font-size: 16px;
-  line-height: 26px;
+  line-height: 24px;
+  font-weight: 400;
 }
 
+/* =========================
+   버튼
+========================= */
+
 .resultButtons {
+  width: 100%;
+
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1fr;
 
   gap: 16px;
 }
@@ -120,13 +183,10 @@
 .resultButtons button {
   height: 56px;
 
-  border: none;
-  border-radius: var(--radius-medium);
+  border-radius: 10px;
 
-  background-color: var(--color-primary);
-  color: var(--text-inverse);
-
-  font-size: 18px;
+  font-size: 17px;
+  line-height: 26px;
   font-weight: 600;
 
   cursor: pointer;
@@ -134,23 +194,45 @@
   transition: background-color 0.2s ease;
 }
 
-.resultButtons button:hover {
+/* 운동 기록 보기 */
+
+.recordButton {
+  background-color: var(--color-primary);
+  color: var(--text-inverse);
+
+  border: 1px solid var(--color-primary);
+}
+
+.recordButton:hover {
   background-color: var(--color-primary-hover);
 }
 
-.resultButtons button:active {
-  background-color: var(--color-primary-pressed);
+/* 다시 운동하기 */
+
+.retryButton {
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+
+  border: 1px solid var(--color-primary);
 }
+
+.retryButton:hover {
+  background-color: var(--color-primary-light);
+}
+
+/* =========================
+   Tablet
+========================= */
 
 @media (max-width: 1024px) {
   .resultContainer {
     width: calc(100% - 64px);
   }
-
-  .resultStats {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
+
+/* =========================
+   Mobile
+========================= */
 
 @media (max-width: 600px) {
   .resultPage {
@@ -159,23 +241,63 @@
 
   .resultContainer {
     width: calc(100% - 32px);
-    padding: 32px 0;
+    min-height: calc(100vh - 60px);
+
+    padding: 32px 0 48px;
   }
 
   .resultCard {
-    padding: 32px 20px;
+    padding: 36px 20px 24px;
+
+    border-radius: 16px;
+  }
+
+  .completeIcon {
+    width: 40px;
+    height: 40px;
+
+    margin-bottom: 16px;
+
+    font-size: 21px;
+  }
+
+  .resultCard h1 {
+    margin-bottom: 14px;
+
+    font-size: 26px;
+    line-height: 36px;
+  }
+
+  .resultExerciseInfo {
+    margin-bottom: 28px;
+
+    flex-direction: column;
+    gap: 4px;
   }
 
   .resultStats {
-    grid-template-columns: 1fr;
+    margin-bottom: 24px;
+    padding: 20px 0;
+  }
+
+  .resultStat strong {
+    font-size: 26px;
+    line-height: 36px;
+  }
+
+  .resultStat span {
+    font-size: 13px;
+    line-height: 20px;
   }
 
   .resultButtons {
     grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   .resultButtons button {
     height: 52px;
+
     font-size: 16px;
   }
 }

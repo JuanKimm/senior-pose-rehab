@@ -6,91 +6,198 @@
   width: 100%;
   min-height: calc(100vh - 76px);
 
+  padding: 36px 48px 48px;
+
   background-color: var(--color-background);
   color: var(--text-primary);
 }
 
 .exerciseContainer {
-  width: calc(100% - 96px);
+  width: 100%;
   max-width: var(--content-max-width);
-  min-height: calc(100vh - 76px);
 
   margin: 0 auto;
-  padding: 48px 0 64px;
-
-  display: flex;
-  flex-direction: column;
 }
 
 /* =========================
-   상단 정보
+   제목 + 음성 안내
 ========================= */
 
-.exerciseTop {
+.exerciseTitleRow {
   width: 100%;
+  margin-bottom: 28px;
 
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 
-  gap: 16px;
-
-  margin-bottom: 12px;
+  gap: 20px;
 }
 
-.exerciseInfo {
-  display: flex;
-  align-items: stretch;
+.exercisePageTitle h1 {
+  margin: 0 0 8px;
 
-  overflow: hidden;
+  color: var(--text-primary);
 
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-large);
+  font-size: 28px;
+  line-height: 38px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
-.infoItem {
-  min-width: 100px;
-  padding: 12px 16px;
+.exercisePageTitle p {
+  margin: 0;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  color: var(--text-secondary);
 
-  border-right: 1px solid var(--color-divider);
-}
-
-.infoItem:last-child {
-  border-right: none;
-}
-
-.infoLabel {
-  margin-bottom: 4px;
-
-  color: var(--text-tertiary);
-
-  font-size: 12px;
-  line-height: 18px;
+  font-size: 15px;
+  line-height: 24px;
   font-weight: 400;
 }
 
-.infoItem strong {
+/* =========================
+   음성 안내 버튼
+========================= */
+
+.voiceGuideButton {
+  height: 44px;
+  padding: 0 20px;
+
+  flex-shrink: 0;
+
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-full);
+
+  color: var(--color-primary);
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: background-color 0.2s ease;
+}
+
+.voiceGuideButton:hover {
+  background-color: var(--color-primary-light);
+}
+
+.voiceGuideButton.active {
+  background-color: var(--color-primary-light);
+}
+
+/* =========================
+   운동 화면
+========================= */
+
+.exerciseMainGrid {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
+
+  gap: 20px;
+}
+
+.referencePanel,
+.progressPanel,
+.cameraPanel {
+  min-width: 0;
+
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+}
+
+.referencePanel {
+  padding: 20px;
+}
+
+.referencePanel h2,
+.progressPanel h2,
+.cameraPanel h2 {
+  margin: 0 0 14px;
+
   color: var(--text-primary);
 
-  font-size: 18px;
-  line-height: 26px;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+/* =========================
+   따라 할 동작
+========================= */
+
+.referenceVideo {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-medium);
+
+  color: var(--text-tertiary);
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* =========================
+   오른쪽 영역
+========================= */
+
+.exerciseSideColumn {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+/* =========================
+   운동 진행
+========================= */
+
+.progressPanel {
+  padding: 20px;
+}
+
+.countText {
+  margin-bottom: 10px;
+
+  display: flex;
+  align-items: baseline;
+}
+
+.countText strong {
+  color: var(--text-primary);
+
+  font-size: 30px;
+  line-height: 38px;
   font-weight: 700;
 }
 
-/* 진행률 */
+.countText span {
+  color: var(--text-primary);
 
-.progressItem {
-  min-width: 130px;
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 600;
 }
 
-.progressBar {
+.exerciseProgressBar {
   width: 100%;
-  height: 8px;
+  height: 7px;
+
+  margin-bottom: 10px;
 
   overflow: hidden;
 
@@ -98,7 +205,7 @@
   border-radius: var(--radius-full);
 }
 
-.progressValue {
+.exerciseProgressValue {
   height: 100%;
 
   background-color: var(--color-primary);
@@ -107,163 +214,151 @@
   transition: width 0.3s ease;
 }
 
-/* =========================
-   음성 안내 버튼
-========================= */
-
-.voiceButton {
-  height: 48px;
-  padding: 0 20px;
-
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-medium);
-
-  background-color: var(--color-surface);
-  color: var(--text-secondary);
-
-  font-size: 16px;
-  font-weight: 600;
-
-  cursor: pointer;
-}
-
-.voiceButton.active {
-  background-color: var(--color-primary-light);
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-}
-
-/* =========================
-   영상 영역
-========================= */
-
-.exerciseVideoArea {
-  width: 100%;
-
-  display: grid;
-  grid-template-columns: 7fr 3fr;
-  gap: 24px;
-}
-
-.referenceArea,
-.webcamArea {
-  min-width: 0;
-}
-
-.videoLabel {
-  margin-bottom: 8px;
+.progressPanel p {
+  margin: 0;
 
   color: var(--text-secondary);
 
-  font-size: 16px;
-  line-height: 26px;
-  font-weight: 600;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
 }
 
-.referenceVideo,
-.webcamBox {
+/* =========================
+   내 모습 / 카메라
+========================= */
+
+.cameraPanel {
+  padding: 20px;
+
+  flex: 1;
+}
+
+.cameraBox {
+  position: relative;
+
   width: 100%;
-  height: 500px;
+  min-height: 215px;
 
   overflow: hidden;
 
-  background-color: var(--color-primary-light);
-  border-radius: var(--radius-large);
-}
-
-.referenceVideo {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  color: var(--text-secondary);
-
-  font-size: 18px;
-  font-weight: 500;
-}
-
-/* 웹캠 */
-
-.webcamBox {
-  position: relative;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
+  background-color: #eef1f2;
+  border-radius: var(--radius-medium);
 }
 
 .webcamVideo {
+  display: none;
+
   width: 100%;
   height: 100%;
+  min-height: 215px;
 
   object-fit: cover;
 
   transform: scaleX(-1);
 }
 
-/* 카메라 오류 */
+.webcamVideo.visible {
+  display: block;
+}
 
-.cameraError {
+.cameraState {
+  width: 100%;
+  min-height: 215px;
   padding: 24px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  color: var(--text-secondary);
 
   text-align: center;
 }
 
-.cameraError strong {
-  display: block;
+.cameraStateIcon {
+  color: var(--text-tertiary);
 
-  margin-bottom: 8px;
-
-  color: var(--color-error);
-
-  font-size: 18px;
-  line-height: 26px;
+  font-size: 24px;
 }
 
-.cameraError p {
-  margin: 0;
-
+.cameraState strong {
   color: var(--text-secondary);
 
-  font-size: 16px;
-  line-height: 26px;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.cameraErrorState .cameraStateIcon {
+  color: var(--color-error);
+}
+
+.cameraRetryButton {
+  height: 36px;
+  padding: 0 16px;
+
+  margin-top: 4px;
+
+  background-color: var(--color-primary);
+  color: var(--text-inverse);
+
+  border: none;
+  border-radius: var(--radius-small);
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.cameraRetryButton:hover {
+  background-color: var(--color-primary-hover);
 }
 
 /* =========================
    자세 피드백
 ========================= */
 
-.feedbackBox {
+.exerciseFeedback {
   width: 100%;
+  min-height: 60px;
 
-  margin-top: 24px;
-  padding: 20px 24px;
+  margin-top: 20px;
+  padding: 0 20px;
 
   display: flex;
   align-items: center;
 
-  gap: 12px;
+  gap: 10px;
 
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-large);
+  border-radius: var(--radius-medium);
+
+  color: var(--text-primary);
 }
 
-.feedbackBox strong {
+.exerciseFeedback strong {
+  color: var(--text-primary);
+
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+.feedbackIcon {
   color: var(--color-primary);
 
-  font-size: 18px;
-  line-height: 26px;
-}
-
-.feedbackBox span {
-  color: var(--text-secondary);
-
-  font-size: 16px;
-  line-height: 26px;
+  font-size: 17px;
+  font-weight: 700;
 }
 
 /* =========================
@@ -271,19 +366,22 @@
 ========================= */
 
 .endExerciseButton {
-  width: 320px;
-  height: 56px;
+  display: block;
 
-  margin: 32px auto 0;
+  width: 460px;
+  max-width: 100%;
+  height: 50px;
 
-  border: none;
+  margin: 24px auto 0;
+
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+
+  border: 1px solid var(--color-primary);
   border-radius: var(--radius-medium);
 
-  background-color: var(--color-primary);
-  color: var(--text-inverse);
-
-  font-size: 18px;
-  line-height: 26px;
+  font-size: 15px;
+  line-height: 24px;
   font-weight: 600;
 
   cursor: pointer;
@@ -292,11 +390,97 @@
 }
 
 .endExerciseButton:hover {
-  background-color: var(--color-primary-hover);
+  background-color: var(--color-primary-light);
 }
 
 .endExerciseButton:active {
-  background-color: var(--color-primary-pressed);
+  background-color: var(--color-primary);
+  color: var(--text-inverse);
+}
+
+/* =========================
+   운동 종료 팝업
+========================= */
+
+.exerciseModalBackdrop {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background-color: rgba(0, 0, 0, 0.3);
+
+  z-index: 2000;
+}
+
+.exerciseEndModal {
+  width: 360px;
+  max-width: 100%;
+
+  padding: 32px 28px 24px;
+
+  background-color: var(--color-surface);
+  border-radius: var(--radius-medium);
+
+  text-align: center;
+
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+}
+
+.exerciseEndModal > strong {
+  display: block;
+
+  margin-bottom: 26px;
+
+  color: var(--text-primary);
+
+  font-size: 17px;
+  line-height: 26px;
+  font-weight: 600;
+}
+
+.exerciseModalButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 10px;
+}
+
+.exerciseModalButtons button {
+  height: 44px;
+
+  border-radius: var(--radius-small);
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.continueExerciseButton {
+  background-color: var(--color-primary);
+  color: var(--text-inverse);
+
+  border: 1px solid var(--color-primary);
+}
+
+.continueExerciseButton:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.confirmEndButton {
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+
+  border: 1px solid var(--color-primary);
+}
+
+.confirmEndButton:hover {
+  background-color: var(--color-primary-light);
 }
 
 /* =========================
@@ -304,35 +488,23 @@
 ========================= */
 
 @media (max-width: 1024px) {
-  .exerciseContainer {
-    width: calc(100% - 64px);
+  .exercisePage {
+    padding: 32px;
   }
 
-  .exerciseTop {
-    align-items: flex-end;
-    flex-direction: column;
-  }
-
-  .exerciseInfo {
-    width: 100%;
-  }
-
-  .infoItem {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .exerciseVideoArea {
+  .exerciseMainGrid {
     grid-template-columns: 1fr;
   }
 
-  .referenceVideo,
-  .webcamBox {
-    height: 420px;
+  .exerciseSideColumn {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 
-  .webcamBox {
-    height: 360px;
+  .cameraBox,
+  .webcamVideo,
+  .cameraState {
+    min-height: 240px;
   }
 }
 
@@ -343,66 +515,75 @@
 @media (max-width: 600px) {
   .exercisePage {
     min-height: calc(100vh - 60px);
+
+    padding: 24px 16px 40px;
   }
 
-  .exerciseContainer {
-    width: calc(100% - 32px);
-    min-height: calc(100vh - 60px);
+  .exerciseTitleRow {
+    margin-bottom: 24px;
 
-    padding: 32px 0 48px;
+    align-items: flex-start;
+
+    gap: 12px;
   }
 
-  .exerciseInfo {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-
-    border-radius: var(--radius-medium);
+  .exercisePageTitle h1 {
+    font-size: 24px;
+    line-height: 34px;
   }
 
-  .infoItem {
-    min-width: 0;
-
-    border-right: 1px solid var(--color-divider);
-    border-bottom: 1px solid var(--color-divider);
+  .exercisePageTitle p {
+    font-size: 14px;
+    line-height: 22px;
   }
 
-  .infoItem:nth-child(2n) {
-    border-right: none;
+  .voiceGuideButton {
+    height: 40px;
+    padding: 0 14px;
+
+    font-size: 12px;
   }
 
-  .infoItem:nth-last-child(-n + 2) {
-    border-bottom: none;
-  }
-
-  .voiceButton {
-    width: 100%;
-  }
-
-  .exerciseVideoArea {
+  .exerciseMainGrid {
     gap: 16px;
   }
 
-  .referenceVideo {
-    height: 280px;
-  }
-
-  .webcamBox {
-    height: 280px;
-  }
-
-  .feedbackBox {
-    align-items: flex-start;
-    flex-direction: column;
-
+  .referencePanel,
+  .progressPanel,
+  .cameraPanel {
     padding: 16px;
+  }
+
+  .exerciseSideColumn {
+    display: flex;
+  }
+
+  .countText strong {
+    font-size: 26px;
+  }
+
+  .countText span {
+    font-size: 18px;
+  }
+
+  .cameraBox,
+  .webcamVideo,
+  .cameraState {
+    min-height: 220px;
+  }
+
+  .exerciseFeedback {
+    padding: 12px 16px;
+
+    align-items: flex-start;
   }
 
   .endExerciseButton {
     width: 100%;
     height: 52px;
+  }
 
-    margin-top: 24px;
-
-    font-size: 16px;
+  .exerciseModalButtons {
+    grid-template-columns: 1fr;
   }
 }

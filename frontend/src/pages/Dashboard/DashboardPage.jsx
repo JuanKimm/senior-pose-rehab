@@ -18,7 +18,8 @@ function DashboardPage() {
   // 임시 로그인 상태
   // true: 대시보드 내용 확인
   // false: 비회원 blur 화면 확인
-  const isLoggedIn = true;
+  const accessToken = localStorage.getItem("accessToken");
+  const isLoggedIn = Boolean(accessToken);
 
   const [showMore, setShowMore] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);

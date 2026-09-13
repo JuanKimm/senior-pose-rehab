@@ -13,22 +13,126 @@ function SignupPage() {
 
   const [name, setName] = useState("");
   const [tel, setTel] = useState("");
+  const [verificationCode, setVerificationCode] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
 
+  const [verificationSent, setVerificationSent] = useState(false);
+  const [isPhoneVerified, setIsPhoneVerified] = useState(false);
+
   const [agreed, setAgreed] = useState(false);
   const [errors, setErrors] = useState({});
 
   const [signupComplete, setSignupComplete] = useState(false);
 
+  const cleanTel = tel.replaceAll("-", "");
+
+  // 전화번호가 바뀌면 인증 상태 초기화
+  const handleTelChange = (e) => {
+    setTel(e.target.value);
+    setVerificationSent(false);
+    setIsPhoneVerified(false);
+    setVerificationCode("");
+
+    setErrors((prev) => ({
+      ...prev,
+      tel: "",
+      verification: "",
+    }));
+  };
+
+  // 인증번호 발송
+  const handleSendCode = async () => {
+    if (!/^010\d{8}$/.test(cleanTel)) {
+      setErrors((prev) => ({
+        ...prev,
+        tel: "전화번호를 다시 확인해주세요.",
+      }));
+      return;
+    }
+
+    try {
+      // 전화번호 중복 확인
+      const checkResponse = await api.get(`/api/auth/check-phone/${cleanTel}`);
+
+      if (!checkResponse.data.avilable) {
+        setErrors((prev) => ({
+          ...prev,
+          tel: "이미 가입된 전화번호입니다.",
+        }));
+        return;
+      }
+
+      // 인증번호 발송
+      await api.post("/api/auth/sms/send", {
+        tel: cleanTel,
+      });
+
+      setVerificationSent(true);
+
+      setErrors((prev) => ({
+        ...prev,
+        tel: "",
+        verification: "",
+      }));
+
+      alert("인증번호를 발송했습니다.");
+    } catch (error) {
+      console.error("인증번호 발송 실패:", error);
+
+      setErrors((prev) => ({
+        ...prev,
+        verification:
+          error.response?.data?.error || "인증번호 발송에 실패했습니다.",
+      }));
+    }
+  };
+
+  // 인증번호 확인
+  const handleVerifyCode = async () => {
+    if (!/^\d{6}$/.test(verificationCode)) {
+      setErrors((prev) => ({
+        ...prev,
+        verification: "인증번호 6자리를 입력해주세요.",
+      }));
+      return;
+    }
+
+    try {
+      await api.post("/api/auth/sms/verify", {
+        tel: cleanTel,
+        code: verificationCode,
+      });
+
+      setIsPhoneVerified(true);
+
+      setErrors((prev) => ({
+        ...prev,
+        verification: "",
+      }));
+
+      alert("전화번호 인증이 완료되었습니다.");
+    } catch (error) {
+      console.error("인증번호 확인 실패:", error);
+
+      setIsPhoneVerified(false);
+
+      setErrors((prev) => ({
+        ...prev,
+        verification:
+          error.response?.data?.error || "인증번호가 올바르지 않습니다.",
+      }));
+    }
+  };
+
+  // 회원가입
   const handleSignup = async (e) => {
     e.preventDefault();
 
     const nextErrors = {};
-    const cleanTel = tel.replaceAll("-", "");
 
     if (!name.trim()) {
       nextErrors.name = "이름을 입력해주세요.";
@@ -38,6 +142,10 @@ function SignupPage() {
       nextErrors.tel = "전화번호를 입력해주세요.";
     } else if (!/^010\d{8}$/.test(cleanTel)) {
       nextErrors.tel = "전화번호를 다시 확인해주세요.";
+    }
+
+    if (!isPhoneVerified) {
+      nextErrors.verification = "전화번호 인증을 완료해주세요.";
     }
 
     if (!password) {
@@ -54,7 +162,7 @@ function SignupPage() {
     }
 
     if (!agreed) {
-      nextErrors.agreed = "이용약관과 개인정보 처리 방침에 동의해주세요.";
+      nextErrors.agreed = "이용약관과 개인정보 처리방침에 동의해주세요.";
     }
 
     setErrors(nextErrors);
@@ -75,12 +183,16 @@ function SignupPage() {
     } catch (error) {
       console.error("회원가입 실패:", error);
 
-      setErrors({
-        submit: "회원가입에 실패했습니다. 입력 정보를 다시 확인해주세요.",
-      });
+      setErrors((prev) => ({
+        ...prev,
+        submit:
+          error.response?.data?.error ||
+          "회원가입에 실패했습니다. 입력 정보를 다시 확인해주세요.",
+      }));
     }
   };
 
+  // 회원가입 성공 화면
   if (signupComplete) {
     return (
       <main className="signupPage">
@@ -116,6 +228,7 @@ function SignupPage() {
         </div>
 
         <form className="signupForm" onSubmit={handleSignup}>
+          {/* 이름 */}
           <div className="signupField">
             <label htmlFor="name">이름</label>
 
@@ -131,21 +244,74 @@ function SignupPage() {
             {errors.name && <p className="signupErrorMessage">{errors.name}</p>}
           </div>
 
+          {/* 전화번호 */}
           <div className="signupField">
             <label htmlFor="tel">전화번호</label>
 
-            <input
-              id="tel"
-              type="tel"
-              placeholder="010-1234-5678"
-              value={tel}
-              onChange={(e) => setTel(e.target.value)}
-              className={errors.tel ? "inputError" : ""}
-            />
+            <div className="phoneInputRow">
+              <input
+                id="tel"
+                type="tel"
+                placeholder="010-1234-5678"
+                value={tel}
+                onChange={handleTelChange}
+                className={errors.tel ? "inputError" : ""}
+                disabled={isPhoneVerified}
+              />
+
+              <button
+                type="button"
+                className="verificationButton"
+                onClick={handleSendCode}
+                disabled={isPhoneVerified}
+              >
+                {verificationSent ? "재발송" : "인증번호 받기"}
+              </button>
+            </div>
 
             {errors.tel && <p className="signupErrorMessage">{errors.tel}</p>}
           </div>
 
+          {/* 인증번호 */}
+          {verificationSent && (
+            <div className="signupField">
+              <label htmlFor="verificationCode">인증번호</label>
+
+              <div className="phoneInputRow">
+                <input
+                  id="verificationCode"
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={6}
+                  placeholder="6자리 인증번호"
+                  value={verificationCode}
+                  onChange={(e) => setVerificationCode(e.target.value)}
+                  disabled={isPhoneVerified}
+                />
+
+                <button
+                  type="button"
+                  className="verificationButton"
+                  onClick={handleVerifyCode}
+                  disabled={isPhoneVerified}
+                >
+                  {isPhoneVerified ? "인증 완료" : "인증 확인"}
+                </button>
+              </div>
+
+              {isPhoneVerified && (
+                <p className="verificationSuccess">
+                  전화번호 인증이 완료되었습니다.
+                </p>
+              )}
+
+              {errors.verification && (
+                <p className="signupErrorMessage">{errors.verification}</p>
+              )}
+            </div>
+          )}
+
+          {/* 비밀번호 */}
           <div className="signupField">
             <label htmlFor="signupPassword">비밀번호</label>
 
@@ -180,6 +346,7 @@ function SignupPage() {
             )}
           </div>
 
+          {/* 비밀번호 확인 */}
           <div className="signupField">
             <label htmlFor="passwordConfirm">비밀번호 확인</label>
 
@@ -214,6 +381,7 @@ function SignupPage() {
             )}
           </div>
 
+          {/* 약관 */}
           <label className="agreementRow">
             <input
               type="checkbox"

@@ -1,12 +1,10 @@
 /* =========================
-   Dashboard
+   Dashboard Page
 ========================= */
 
 .dashboardPage {
   width: 100%;
   min-height: calc(100vh - 76px);
-
-  position: relative;
 
   background-color: var(--color-background);
   color: var(--text-primary);
@@ -20,319 +18,606 @@
   padding: 48px 0 80px;
 }
 
-.dashboardSection {
-  margin-bottom: 64px;
-}
-
-.dashboardSection h2 {
-  margin: 0 0 20px;
-
-  font-size: 24px;
-  line-height: 34px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-
 /* =========================
-   데이터 기간 안내
+   제목
 ========================= */
 
-.dataPeriodMessage {
-  margin-bottom: 32px;
+.dashboardHeading {
+  margin-bottom: 36px;
+}
 
-  padding: 16px 20px;
+.dashboardHeading h1 {
+  margin: 0 0 8px;
 
-  background-color: var(--color-primary-light);
-  border-radius: var(--radius-medium);
+  color: var(--text-primary);
+
+  font-size: 30px;
+  line-height: 40px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.dashboardHeading p {
+  margin: 0;
 
   color: var(--text-secondary);
 
-  font-size: 16px;
-  line-height: 26px;
+  font-size: 15px;
+  line-height: 24px;
+}
+
+/* =========================
+   전체 레이아웃
+========================= */
+
+.dashboardLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(320px, 0.95fr);
+
+  align-items: start;
+
+  gap: 24px;
+}
+
+.dashboardLeft,
+.dashboardRight {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 24px;
+}
+
+/* =========================
+   공통 카드
+========================= */
+
+.dashboardCard {
+  width: 100%;
+
+  background-color: var(--color-surface);
+
+  border: 1px solid var(--color-divider);
+  border-radius: 20px;
+}
+
+.dashboardCardTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+}
+
+.dashboardCardTitleRow h2,
+.recentDashboardCard > h2 {
+  margin: 0;
+
+  color: var(--text-primary);
+
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 700;
+}
+
+.dashboardCardTitleRow > span {
+  color: var(--text-tertiary);
+
+  font-size: 13px;
+  line-height: 20px;
 }
 
 /* =========================
    오늘 운동 기록
 ========================= */
 
-.todayRecordCard {
-  width: 100%;
+.todayDashboardCard {
+  padding: 26px 28px;
+}
 
+.todayDashboardCard .dashboardCardTitleRow {
+  margin-bottom: 22px;
+}
+
+.todayRecordContent {
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  gap: 32px;
-
-  padding: 24px 32px;
-
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-large);
+  gap: 24px;
 }
 
-.todayRecordInfo {
+.todayRecordStats {
   flex: 1;
-}
 
-.recordGuide {
-  margin: 0 0 16px;
-
-  color: var(--text-secondary);
-
-  font-size: 16px;
-  line-height: 26px;
-}
-
-.todayStats {
   display: grid;
-  grid-template-columns: repeat(4, minmax(120px, 1fr));
-
-  gap: 16px;
+  grid-template-columns: repeat(4, 1fr);
 }
 
-.todayStat {
-  min-height: 86px;
+.todayRecordStat {
+  position: relative;
+
+  min-width: 0;
+
+  padding: 0 18px;
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
 
-  padding: 16px;
-
-  background-color: var(--color-primary-light);
-  border-radius: var(--radius-medium);
+  gap: 6px;
 }
 
-.todayStat span {
-  margin-bottom: 6px;
+.todayRecordStat:first-child {
+  padding-left: 0;
+}
 
+.todayRecordStat:not(:last-child)::after {
+  content: "";
+
+  position: absolute;
+  top: 2px;
+  right: 0;
+
+  width: 1px;
+  height: calc(100% - 4px);
+
+  background-color: var(--color-divider);
+}
+
+.todayRecordStat span {
   color: var(--text-tertiary);
 
-  font-size: 14px;
-  line-height: 22px;
+  font-size: 13px;
+  line-height: 20px;
 }
 
-.todayStat strong {
-  font-size: 20px;
-  line-height: 30px;
+.todayRecordStat strong {
+  overflow: hidden;
+
+  color: var(--text-primary);
+
+  font-size: 18px;
+  line-height: 28px;
   font-weight: 700;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.recordVideoButton {
-  min-width: 150px;
+.todayRecordButton {
+  min-width: 116px;
   height: 48px;
+  padding: 0 18px;
 
-  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
 
   border: none;
-  border-radius: var(--radius-full);
+  border-radius: 12px;
 
-  background-color: var(--color-primary);
-  color: var(--text-inverse);
-
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
 
   cursor: pointer;
 }
 
-.recordVideoButton:hover {
-  background-color: var(--color-primary-hover);
+.todayRecordButton span {
+  font-size: 22px;
+  line-height: 1;
 }
 
-.emptyRecord {
-  padding: 48px;
+.todayRecordButton:hover {
+  background-color: #dce9ef;
+}
 
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-large);
+/* 오늘 기록 없음 */
+
+.todayEmptyState {
+  min-height: 96px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.todayEmptyState strong {
+  display: block;
+
+  margin-bottom: 6px;
+
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.todayEmptyState p {
+  margin: 0;
 
   color: var(--text-secondary);
-  text-align: center;
+
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.todayEmptyState button,
+.allRecordsEmptyCard button,
+.dashboardLoginCard > button {
+  height: 44px;
+  padding: 0 20px;
+
+  flex-shrink: 0;
+
+  background-color: var(--color-primary);
+  color: var(--text-inverse);
+
+  border: none;
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.todayEmptyState button:hover,
+.allRecordsEmptyCard button:hover,
+.dashboardLoginCard > button:hover {
+  background-color: var(--color-primary-hover);
 }
 
 /* =========================
    최근 운동 기록
 ========================= */
 
-.recentRecordCard {
-  overflow: hidden;
-
-  padding: 0 32px 20px;
-
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-large);
+.recentDashboardCard {
+  padding: 28px;
 }
 
-.recentRecordRow {
-  min-height: 96px;
+.recentDashboardCard > h2 {
+  margin-bottom: 20px;
+}
 
+.recentTable {
+  width: 100%;
+}
+
+.recentTableHeader,
+.recentTableRow {
   display: grid;
-  grid-template-columns: 130px repeat(3, 1fr) 100px;
+  grid-template-columns: 1.35fr 1fr 0.9fr 1fr 1fr 44px;
+
   align-items: center;
 
-  gap: 24px;
-
-  border-bottom: 1px solid var(--color-divider);
+  column-gap: 12px;
 }
 
-.recordDate {
-  font-size: 18px;
-  font-weight: 700;
-}
+.recentTableHeader {
+  min-height: 42px;
+  padding: 0 12px;
 
-.recordItem {
-  display: flex;
-  flex-direction: column;
+  background-color: var(--color-primary-light);
 
-  gap: 4px;
-}
-
-.recordItem span {
-  color: var(--text-tertiary);
-
-  font-size: 14px;
-  line-height: 22px;
-}
-
-.recordItem strong {
-  font-size: 18px;
-  line-height: 26px;
-  font-weight: 500;
-}
-
-.detailButton {
-  border: none;
-  background: none;
+  border-radius: 10px;
 
   color: var(--text-secondary);
 
+  font-size: 13px;
+  font-weight: 500;
+
+  text-align: center;
+}
+
+.recentTableRow {
+  min-height: 66px;
+  padding: 0 12px;
+
+  border-bottom: 1px solid var(--color-divider);
+
+  color: var(--text-primary);
+
   font-size: 14px;
+  line-height: 22px;
+
+  text-align: center;
+}
+
+.recentTableRow > span:first-child {
+  text-align: left;
+}
+
+.recordArrowButton {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  justify-self: center;
+
+  background: transparent;
+  color: var(--text-secondary);
+
+  border: none;
+  border-radius: 999px;
+
+  font-size: 26px;
 
   cursor: pointer;
 }
 
-.detailButton:hover {
+.recordArrowButton:hover {
+  background-color: var(--color-primary-light);
   color: var(--color-primary);
 }
 
-.moreButton {
+.recentMoreButton {
   display: block;
 
-  margin: 20px auto 0;
-  padding: 10px 18px;
+  margin: 18px auto 0;
 
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-full);
-
-  background-color: var(--color-surface);
+  background: transparent;
   color: var(--text-secondary);
+
+  border: none;
+
+  font-size: 14px;
+  font-weight: 500;
 
   cursor: pointer;
 }
 
 /* =========================
-   Calendar
+   기록 전체 없음
 ========================= */
 
-.calendarCard {
-  width: 720px;
-  max-width: 100%;
+.allRecordsEmptyCard {
+  min-height: 480px;
+  padding: 40px;
 
-  margin: 0 auto;
-  padding: 32px 40px;
-
-  background-color: var(--color-surface);
-
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-large);
-}
-
-.calendarHeader {
-  display: grid;
-  grid-template-columns: 48px 1fr 48px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
 
-  margin-bottom: 24px;
-}
-
-.calendarHeader strong {
   text-align: center;
-
-  font-size: 20px;
-  line-height: 30px;
 }
 
-.calendarHeader button {
-  width: 40px;
-  height: 40px;
+.emptyRecordIcon {
+  margin-bottom: 18px;
 
-  border: none;
-  border-radius: var(--radius-full);
+  color: var(--color-primary);
 
-  background: none;
+  font-size: 30px;
+}
+
+.allRecordsEmptyCard strong {
+  margin-bottom: 8px;
+
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.allRecordsEmptyCard p {
+  margin: 0 0 24px;
 
   color: var(--text-secondary);
-
-  cursor: pointer;
-}
-
-.calendarHeader button:hover {
-  background-color: var(--color-primary-light);
-}
-
-.calendarWeek {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-
-  margin-bottom: 12px;
-}
-
-.calendarWeek span {
-  color: var(--text-tertiary);
 
   font-size: 14px;
-
-  text-align: center;
+  line-height: 22px;
 }
 
-.calendarGrid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
+/* =========================
+   캘린더
+========================= */
+
+.calendarDashboardCard {
+  padding: 26px;
+}
+
+.calendarTitleRow {
+  margin-bottom: 28px;
+}
+
+.addScheduleButton {
+  height: 40px;
+  padding: 0 14px;
+
+  display: flex;
+  align-items: center;
 
   gap: 8px;
-}
 
-.calendarDay {
-  aspect-ratio: 1 / 0.8;
-
-  border: none;
-  border-radius: var(--radius-small);
-
-  background: none;
-  color: var(--text-secondary);
-
-  font-size: 15px;
-
-  cursor: pointer;
-}
-
-.calendarDay:hover {
-  background-color: var(--color-primary-light);
-}
-
-.calendarDay.exerciseDay {
   background-color: var(--color-primary-light);
   color: var(--color-primary);
 
-  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
 }
 
-.calendarDay.exerciseDay:hover {
-  background-color: var(--color-secondary);
-  color: var(--text-inverse);
+.addScheduleButton span {
+  font-size: 19px;
+}
+
+.addScheduleButton:hover {
+  background-color: #dce9ef;
+}
+
+.calendarMonthHeader {
+  margin-bottom: 20px;
+
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+
+  align-items: center;
+
+  text-align: center;
+}
+
+.calendarMonthHeader strong {
+  color: var(--text-primary);
+
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+.calendarMonthHeader button {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  color: var(--text-primary);
+
+  border: none;
+  border-radius: 999px;
+
+  font-size: 24px;
+
+  cursor: pointer;
+}
+
+.calendarMonthHeader button:hover {
+  background-color: var(--color-primary-light);
+}
+
+.calendarWeekHeader,
+.dashboardCalendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendarWeekHeader {
+  margin-bottom: 6px;
+
+  color: var(--text-tertiary);
+
+  font-size: 12px;
+  text-align: center;
+}
+
+.calendarWeekHeader span {
+  padding: 8px 0;
+}
+
+.dashboardCalendarDay {
+  position: relative;
+
+  min-width: 0;
+  height: 52px;
+
+  padding: 5px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  color: var(--text-primary);
+
+  border: none;
+  border-radius: 999px;
+
+  font-size: 13px;
+
+  cursor: pointer;
+}
+
+.dashboardCalendarDay:hover:not(:disabled) {
+  background-color: var(--color-primary-light);
+}
+
+.dashboardCalendarDay.outsideMonth {
+  color: #b6bdc1;
+
+  cursor: default;
+}
+
+.dashboardCalendarDay.today > span,
+.dashboardCalendarDay.selected > span {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--color-primary);
+  color: #ffffff;
+
+  border-radius: 999px;
+}
+
+.calendarDots {
+  position: absolute;
+  bottom: 3px;
+
+  min-height: 7px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 3px;
+}
+
+.completedDot,
+.scheduledDot {
+  display: inline-block;
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 999px;
+}
+
+.completedDot {
+  background-color: var(--color-primary);
+}
+
+.scheduledDot {
+  background-color: #ffffff;
+
+  border: 1px solid var(--color-primary);
+}
+
+.calendarLegend {
+  margin-top: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 20px;
+
+  color: var(--text-tertiary);
+
+  font-size: 12px;
+}
+
+.calendarLegend span {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
 }
 
 /* =========================
@@ -340,474 +625,413 @@
 ========================= */
 
 .monthlySummaryCard {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-
-  gap: 24px;
-
-  padding: 24px;
-
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-large);
-
-  margin-bottom: 32px;
+  padding: 26px;
 }
 
-.summaryItem {
-  min-height: 110px;
+.monthlySummaryCard .dashboardCardTitleRow {
+  margin-bottom: 24px;
+}
+
+.monthlySummaryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.monthlySummaryItem {
+  position: relative;
+
+  min-height: 88px;
+
+  padding: 14px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  padding: 16px;
-
-  background-color: var(--color-primary-light);
-  border-radius: var(--radius-large);
+  gap: 7px;
 
   text-align: center;
 }
 
-.summaryItem span {
-  margin-bottom: 6px;
+.monthlySummaryItem:nth-child(odd)::after {
+  content: "";
 
-  color: var(--text-secondary);
+  position: absolute;
+  top: 14px;
+  right: 0;
 
-  font-size: 16px;
-  line-height: 26px;
+  width: 1px;
+  height: calc(100% - 28px);
+
+  background-color: var(--color-divider);
 }
 
-.summaryItem strong {
-  font-size: 24px;
-  line-height: 34px;
+.monthlySummaryItem:nth-child(-n + 2) {
+  border-bottom: 1px solid var(--color-divider);
+}
+
+.monthlySummaryItem span {
+  color: var(--text-tertiary);
+
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.monthlySummaryItem strong {
+  color: var(--text-primary);
+
+  font-size: 21px;
+  line-height: 30px;
   font-weight: 700;
 }
 
 /* =========================
-   그래프
+   비로그인
 ========================= */
 
-.dashboardCharts {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+.dashboardLoginCard {
+  min-height: 360px;
 
-  gap: 32px;
-}
-
-.chartCard {
-  min-height: 330px;
-
-  padding: 24px;
-
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-large);
-}
-
-.chartCard h3 {
-  margin: 0 0 24px;
-
-  font-size: 20px;
-  line-height: 30px;
-  font-weight: 600;
-}
-
-/* 임시 선 그래프 */
-
-.fakeLineChart {
-  height: 220px;
-
-  position: relative;
-
-  overflow: hidden;
-
-  border-bottom: 1px solid var(--color-divider);
-
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent,
-    transparent 43px,
-    var(--color-divider) 44px
-  );
-}
-
-.chartLine {
-  width: 65%;
-  height: 3px;
-
-  position: absolute;
-  left: 17%;
-
-  background-color: var(--color-primary);
-
-  transform-origin: left center;
-}
-
-.lineOne {
-  top: 125px;
-  transform: rotate(-12deg);
-}
-
-.lineTwo {
-  top: 90px;
-
-  background-color: var(--color-secondary);
-
-  transform: rotate(10deg);
-}
-
-.chartLabels {
-  width: 100%;
-
-  position: absolute;
-  bottom: 8px;
-
-  display: flex;
-  justify-content: space-around;
-
-  color: var(--text-tertiary);
-
-  font-size: 12px;
-}
-
-/* 임시 막대 그래프 */
-
-.fakeBarChart {
-  height: 220px;
-
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-around;
-
-  padding: 20px 24px 0;
-
-  border-bottom: 1px solid var(--color-divider);
-
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent,
-    transparent 43px,
-    var(--color-divider) 44px
-  );
-}
-
-.barGroup {
-  height: 100%;
-
-  display: flex;
-  align-items: flex-end;
-
-  position: relative;
-
-  gap: 6px;
-
-  padding-bottom: 30px;
-}
-
-.bar {
-  width: 28px;
-
-  border-radius: 4px 4px 0 0;
-}
-
-.barPrevious {
-  background-color: var(--color-secondary);
-}
-
-.barCurrent {
-  background-color: var(--color-primary);
-}
-
-.bar1 {
-  height: 70px;
-}
-
-.bar2 {
-  height: 95px;
-}
-
-.bar3 {
-  height: 45px;
-}
-
-.bar4 {
-  height: 60px;
-}
-
-.bar5 {
-  height: 130px;
-}
-
-.bar6 {
-  height: 105px;
-}
-
-.barGroup span {
-  position: absolute;
-  bottom: 4px;
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  color: var(--text-tertiary);
-
-  font-size: 12px;
-}
-
-/* =========================
-   비회원 Blur
-========================= */
-
-.dashboardBlurred {
-  filter: blur(6px);
-
-  pointer-events: none;
-  user-select: none;
-}
-
-.loginOverlay {
-  position: fixed;
-  top: 76px;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  padding: 40px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  z-index: 100;
+  background-color: var(--color-surface);
 
-  color: var(--text-primary);
+  border: 1px solid var(--color-divider);
+  border-radius: 20px;
 
-  font-size: 20px;
-  line-height: 30px;
-
-  pointer-events: none;
+  text-align: center;
 }
 
-.loginOverlay strong {
-  font-size: 24px;
-  line-height: 34px;
+.dashboardLoginIcon {
+  margin-bottom: 18px;
+
+  color: var(--color-primary);
+
+  font-size: 32px;
+}
+
+.dashboardLoginCard strong {
+  margin-bottom: 8px;
+
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.dashboardLoginCard p {
+  margin: 0 0 24px;
+
+  color: var(--text-secondary);
+
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.dashboardLoginCard > span {
+  margin-top: 18px;
+
+  color: var(--text-tertiary);
+
+  font-size: 13px;
+}
+
+.signupLinkButton {
+  padding: 0;
+
+  background: transparent;
+  color: var(--color-primary);
+
+  border: none;
+
+  font-size: inherit;
+  font-weight: 600;
+
+  cursor: pointer;
 }
 
 /* =========================
-   Modal 공통
+   공통 모달
 ========================= */
 
-.modalBackdrop {
+.dashboardModalBackdrop {
   position: fixed;
   inset: 0;
+
+  padding: 24px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  padding: 24px;
+  background-color: rgba(0, 0, 0, 0.28);
 
-  background-color: rgba(35, 51, 61, 0.3);
-
-  z-index: 2000;
+  z-index: 3000;
 }
 
-.dateModal,
-.scheduleModal {
-  width: 440px;
+.recordDetailModal,
+.scheduleAddModal {
+  width: 480px;
   max-width: 100%;
 
-  padding: 32px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+
+  padding: 28px;
 
   background-color: var(--color-surface);
-  border-radius: var(--radius-large);
 
-  box-shadow: 0 12px 40px rgba(35, 51, 61, 0.16);
+  border-radius: 16px;
+
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
 }
 
-.dateModal h3,
-.scheduleModal h3 {
-  margin: 0 0 24px;
+.dashboardModalHeader {
+  margin-bottom: 24px;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.dashboardModalHeader h2 {
+  margin: 0 0 6px;
+
+  color: var(--text-primary);
 
   font-size: 20px;
   line-height: 30px;
   font-weight: 700;
 }
 
-.dateModalRow {
-  display: grid;
-  grid-template-columns: 100px 1fr;
+.dashboardModalHeader p {
+  margin: 0;
 
-  gap: 16px;
-
-  margin-bottom: 20px;
-}
-
-.dateModalRow strong {
-  font-size: 16px;
-}
-
-.dateModalRow span {
   color: var(--text-secondary);
 
-  font-size: 16px;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.modalCloseButton {
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  background: transparent;
+  color: var(--text-primary);
+
+  border: none;
+  border-radius: 999px;
+
+  font-size: 24px;
+
+  cursor: pointer;
+}
+
+.modalCloseButton:hover {
+  background-color: var(--color-primary-light);
 }
 
 /* =========================
-   일정 설정 Modal
+   기록 상세 모달
 ========================= */
 
-.scheduleModal > p {
-  margin: -12px 0 24px;
+.recordDetailStats {
+  margin-bottom: 20px;
 
-  color: var(--text-secondary);
-
-  font-size: 14px;
-  line-height: 22px;
-}
-
-.scheduleFormRow {
   display: grid;
-  grid-template-columns: 100px 1fr;
-  align-items: center;
+  grid-template-columns: repeat(4, 1fr);
 
-  gap: 16px;
-
-  margin-bottom: 16px;
-}
-
-.scheduleFormRow label {
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.scheduleFormRow input,
-.scheduleFormRow select {
-  width: 100%;
-  height: 42px;
-
-  padding: 0 12px;
-
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-small);
-
-  background-color: var(--color-surface);
-  color: var(--text-primary);
-}
-
-.scheduleTimeContent {
-  min-width: 0;
-}
-
-.periodButtons {
-  display: flex;
-  align-items: center;
   gap: 8px;
 }
 
-.periodButtons button {
-  min-width: 52px;
-  height: 40px;
-  padding: 0 12px;
+.recordDetailStats > div {
+  min-width: 0;
 
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-small);
+  display: flex;
+  flex-direction: column;
 
-  background-color: var(--color-surface);
+  gap: 5px;
+}
+
+.recordDetailStats span {
+  color: var(--text-tertiary);
+
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.recordDetailStats strong {
+  overflow: hidden;
+
   color: var(--text-primary);
 
   font-size: 15px;
+  line-height: 22px;
+  font-weight: 700;
+
+  text-overflow: ellipsis;
   white-space: nowrap;
-
-  cursor: pointer;
 }
 
-.hourGrid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 8px;
+.recordVideoArea {
+  width: 100%;
+  aspect-ratio: 16 / 9;
 
-  margin-top: 10px;
+  margin-bottom: 20px;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #e9edef;
+
+  border-radius: 10px;
 }
 
-.hourGrid button {
-  width: 40px;
-  height: 40px;
+.recordDetailVideo {
+  width: 100%;
+  height: 100%;
 
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-full);
-
-  background-color: var(--color-surface);
-  color: var(--text-primary);
-
-  cursor: pointer;
+  object-fit: contain;
 }
 
-.periodButtons .selectedOption,
-.hourGrid .selectedOption {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  color: var(--text-inverse);
-}
-
-.selectedTimeText {
-  display: block;
-
-  margin-top: 12px;
-
-  color: var(--text-secondary);
+.recordVideoEmpty {
+  color: var(--text-tertiary);
 
   font-size: 14px;
-  line-height: 22px;
 }
 
-.scheduleFormRow input:disabled {
-  background-color: var(--color-disabled);
-  color: var(--text-disabled);
-  cursor: not-allowed;
-}
-
-/* =========================
-   Modal Buttons
-========================= */
-
-.modalButtons {
+.recordModalButtons,
+.scheduleModalButtons {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr;
 
   gap: 12px;
-
-  margin-top: 28px;
 }
 
-.modalButtons button {
-  height: 48px;
+.recordModalButtons button,
+.scheduleModalButtons button {
+  height: 46px;
 
-  border-radius: var(--radius-full);
+  border-radius: 9px;
 
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
 
   cursor: pointer;
 }
 
-.primaryModalButton {
-  border: none;
+.recordModalCloseButton,
+.scheduleCancelButton {
+  background-color: var(--color-surface);
+  color: var(--color-primary);
 
+  border: 1px solid var(--color-primary);
+}
+
+.recordDownloadButton,
+.scheduleSubmitButton {
   background-color: var(--color-primary);
   color: var(--text-inverse);
+
+  border: 1px solid var(--color-primary);
 }
 
-.primaryModalButton:hover {
-  background-color: var(--color-primary-hover);
+.recordDownloadButton:disabled,
+.scheduleSubmitButton:disabled {
+  background-color: #d9dddf;
+  color: #ffffff;
+
+  border-color: #d9dddf;
+
+  cursor: default;
 }
 
-.secondaryModalButton {
+/* =========================
+   일정 추가 모달
+========================= */
+
+.scheduleForm {
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+
+  margin-bottom: 28px;
+}
+
+.scheduleField {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.scheduleField > label {
+  color: var(--text-primary);
+
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 600;
+}
+
+.scheduleField input[type="date"],
+.scheduleTimeSelect select {
+  width: 100%;
+  height: 44px;
+
+  padding: 0 12px;
+
+  background-color: #ffffff;
+  color: var(--text-primary);
+
   border: 1px solid var(--color-border);
+  border-radius: 8px;
 
-  background-color: var(--color-surface);
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.scheduleTimeSelect {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 10px;
+}
+
+.scheduleRadioGroup {
+  display: flex;
+  align-items: center;
+
+  gap: 28px;
+}
+
+.scheduleRadioGroup label {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
   color: var(--text-secondary);
+
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+.scheduleRadioGroup input {
+  accent-color: var(--color-primary);
 }
 
 /* =========================
@@ -819,39 +1043,15 @@
     width: calc(100% - 64px);
   }
 
-  .todayRecordCard {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .todayStats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .recordVideoButton {
-    width: 100%;
-  }
-
-  .recentRecordRow {
-    grid-template-columns: 100px repeat(3, 1fr);
-
-    gap: 16px;
-  }
-
-  .detailButton {
-    grid-column: 1 / -1;
-
-    padding-bottom: 12px;
-
-    text-align: right;
-  }
-
-  .monthlySummaryCard {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .dashboardCharts {
+  .dashboardLayout {
     grid-template-columns: 1fr;
+  }
+
+  .dashboardRight {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    align-items: start;
   }
 }
 
@@ -859,7 +1059,7 @@
    Mobile
 ========================= */
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .dashboardPage {
     min-height: calc(100vh - 60px);
   }
@@ -870,108 +1070,125 @@
     padding: 32px 0 56px;
   }
 
-  .dashboardSection {
-    margin-bottom: 48px;
+  .dashboardHeading {
+    margin-bottom: 26px;
   }
 
-  .dashboardSection h2 {
-    font-size: 22px;
-    line-height: 32px;
+  .dashboardHeading h1 {
+    font-size: 26px;
+    line-height: 36px;
   }
 
-  .dataPeriodMessage {
-    font-size: 14px;
-    line-height: 22px;
-  }
-
-  .todayRecordCard {
+  .todayDashboardCard,
+  .recentDashboardCard,
+  .calendarDashboardCard,
+  .monthlySummaryCard {
     padding: 20px;
   }
 
-  .todayStats {
-    grid-template-columns: 1fr 1fr;
-
-    gap: 12px;
+  .todayRecordContent {
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .todayStat {
-    min-height: 78px;
-  }
-
-  .recentRecordCard {
-    padding: 0 20px 20px;
-  }
-
-  .recentRecordRow {
+  .todayRecordStats {
     grid-template-columns: repeat(2, 1fr);
 
-    padding: 20px 0;
+    row-gap: 18px;
   }
 
-  .recordDate {
+  .todayRecordStat:nth-child(2)::after {
+    display: none;
+  }
+
+  .todayRecordStat:nth-child(3) {
+    padding-left: 0;
+  }
+
+  .todayRecordButton {
+    width: 100%;
+  }
+
+  .todayEmptyState {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .todayEmptyState button {
+    width: 100%;
+  }
+
+  .recentTableHeader {
+    display: none;
+  }
+
+  .recentTableRow {
+    position: relative;
+
+    min-height: auto;
+
+    padding: 18px 44px 18px 0;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    row-gap: 8px;
+
+    text-align: left;
+  }
+
+  .recentTableRow > span:first-child {
     grid-column: 1 / -1;
+
+    font-weight: 600;
   }
 
-  .detailButton {
-    grid-column: 1 / -1;
+  .recordArrowButton {
+    position: absolute;
+    top: 50%;
+    right: 0;
+
+    transform: translateY(-50%);
   }
 
-  .calendarCard {
-    padding: 24px 16px;
+  .dashboardRight {
+    display: flex;
   }
 
-  .calendarGrid {
-    gap: 4px;
+  .calendarDashboardCard {
+    overflow-x: auto;
   }
 
-  .calendarDay {
-    font-size: 13px;
+  .dashboardCalendarGrid,
+  .calendarWeekHeader {
+    min-width: 330px;
   }
 
-  .monthlySummaryCard {
-    grid-template-columns: 1fr;
-
-    gap: 12px;
-
-    padding: 16px;
+  .dashboardCalendarDay {
+    height: 48px;
   }
 
-  .summaryItem {
-    min-height: 90px;
+  .monthlySummaryItem strong {
+    font-size: 18px;
   }
 
-  .chartCard {
-    padding: 20px 16px;
+  .recordDetailStats {
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 16px;
   }
 
-  .loginOverlay {
-    top: 60px;
-  }
-
-  .dateModal,
-  .scheduleModal {
-    padding: 24px 20px;
-  }
-
-  .scheduleFormRow {
-    grid-template-columns: 1fr;
-
-    gap: 8px;
-  }
-
-  .modalButtons {
+  .recordModalButtons,
+  .scheduleModalButtons {
     grid-template-columns: 1fr;
   }
-}
 
-.chartEmptyState {
-  width: 100%;
-  height: 280px;
+  .recordDetailModal,
+  .scheduleAddModal {
+    padding: 22px;
+  }
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  color: var(--color-text-secondary);
-  font-size: 16px;
+  .scheduleTimeSelect {
+    grid-template-columns: 1fr;
+  }
 }

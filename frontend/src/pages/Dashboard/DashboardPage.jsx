@@ -1,252 +1,290 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../../libs/api";
-import {
-  LineChart,
-  Line,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
 import "../../styles/DashboardPage.css";
 
 function DashboardPage() {
-  // 임시 로그인 상태
-  // true: 대시보드 내용 확인
-  // false: 비회원 blur 화면 확인
+  const navigate = useNavigate();
+
   const accessToken = localStorage.getItem("accessToken");
   const isLoggedIn = Boolean(accessToken);
 
-  const [showMore, setShowMore] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedDateRecord, setSelectedDateRecord] = useState(null);
-  const [showScheduleModal, setShowScheduleModal] = useState(false);
+  const now = new Date();
 
-  const [scheduleDate, setScheduleDate] = useState(null);
+  const [todayRecord, setTodayRecord] = useState(null);
+  const [recentRecords, setRecentRecords] = useState([]);
+  const [allRecords, setAllRecords] = useState([]);
+  const [showAllRecords, setShowAllRecords] = useState(false);
+
+  const [currentYear, setCurrentYear] = useState(now.getFullYear());
+  const [currentMonth, setCurrentMonth] = useState(now.getMonth());
+
+  const [exerciseDays, setExerciseDays] = useState([]);
   const [schedules, setSchedules] = useState([]);
+  const [monthlySummary, setMonthlySummary] = useState(null);
+
+  const [selectedCalendarDay, setSelectedCalendarDay] = useState(null);
+
+  const [showRecordModal, setShowRecordModal] = useState(false);
+  const [selectedRecord, setSelectedRecord] = useState(null);
+  const [videoPreviewUrl, setVideoPreviewUrl] = useState("");
+
+  const [showScheduleModal, setShowScheduleModal] = useState(false);
+  const [scheduleDate, setScheduleDate] = useState("");
   const [selectedPeriod, setSelectedPeriod] = useState("오전");
   const [selectedHour, setSelectedHour] = useState(9);
   const [alarmEnabled, setAlarmEnabled] = useState(true);
-  const [phoneNumber, setPhoneNumber] = useState("010-1234-5678");
-  const [currentYear, setCurrentYear] = useState(2026);
-  const [currentMonth, setCurrentMonth] = useState(2);
-  const [exerciseDays, setExerciseDays] = useState([]);
+  const [scheduleSubmitting, setScheduleSubmitting] = useState(false);
 
-  const [monthlySummary, setMonthlySummary] = useState(null);
-  const [accuracyGraph, setAccuracyGraph] = useState([]);
-  const [bodyPartStats, setBodyPartStats] = useState([]);
+  const formatDuration = (seconds) => {
+    if (seconds == null) {
+      return "-";
+    }
+
+    const minute = Math.floor(seconds / 60);
+    const second = seconds % 60;
+
+    return `${minute}분 ${String(second).padStart(2, "0")}초`;
+  };
+
+  const formatAccuracy = (accuracy) => {
+    if (accuracy == null) {
+      return "-";
+    }
+
+    return `${Math.round(accuracy)}%`;
+  };
+
+  const getWeekday = (dateString) => {
+    const date = new Date(`${dateString}T00:00:00`);
+    const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
+
+    return weekdays[date.getDay()];
+  };
+
+  const formatRecordDate = (dateString) => {
+    if (!dateString) {
+      return "-";
+    }
+
+    const [, month, day] = dateString.split("-");
+
+    return `${Number(month)}월 ${Number(day)}일 (${getWeekday(dateString)})`;
+  };
+
+  const formatToday = () => {
+    const date = new Date();
+    const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
+
+    return `${date.getMonth() + 1}월 ${date.getDate()}일 (${weekdays[date.getDay()]})`;
+  };
+
+  const toDateString = (year, month, day) => {
+    return `${year}-${String(month + 1).padStart(2, "0")}-${String(
+      day,
+    ).padStart(2, "0")}`;
+  };
+
+  /* =========================
+     일정 목록
+  ========================= */
+
+  const fetchSchedules = async () => {
+    try {
+      const response = await api.get("/api/notification/schedule");
+      setSchedules(response.data || []);
+    } catch (error) {
+      console.error("운동 일정 조회 실패:", error);
+      setSchedules([]);
+    }
+  };
+
+  /* =========================
+     오늘 / 최근 운동 기록
+  ========================= */
 
   useEffect(() => {
-    const fetchSchedules = async () => {
+    if (!isLoggedIn) {
+      return;
+    }
+
+    const fetchDashboardRecords = async () => {
       try {
-        const response = await api.get("/api/notification/schedule");
-        console.log("운동 일정:", response.data);
-        setSchedules(response.data || []);
-      } catch (error) {
-        console.error("운동 일정 조회 실패:", error);
-        setSchedules([]);
-      }
-    };
-
-    fetchSchedules();
-  }, []);
-
-  useEffect(() => {
-    const fetchBodyPartStats = async () => {
-      try {
-        const currentApiMonth = currentMonth + 1;
-
-        const previousMonth = currentApiMonth === 1 ? 12 : currentApiMonth - 1;
-        const previousYear =
-          currentApiMonth === 1 ? currentYear - 1 : currentYear;
-
-        const [currentResponse, previousResponse] = await Promise.all([
-          api.get("/api/dashboard/stats/body-parts", {
-            params: {
-              year: currentYear,
-              month: currentApiMonth,
-            },
-          }),
-          api.get("/api/dashboard/stats/body-parts", {
-            params: {
-              year: previousYear,
-              month: previousMonth,
-            },
-          }),
+        const [todayResponse, recentResponse] = await Promise.all([
+          api.get("/api/dashboard/today"),
+          api.get("/api/dashboard/recent-records"),
         ]);
 
-        const currentStats = currentResponse.data;
-        const previousStats = previousResponse.data;
-
-        const bodyParts = [
-          ...new Set([
-            ...currentStats.map((item) => item.bodyPart),
-            ...previousStats.map((item) => item.bodyPart),
-          ]),
-        ];
-
-        const mergedStats = bodyParts.map((bodyPart) => {
-          const current = currentStats.find(
-            (item) => item.bodyPart === bodyPart,
-          );
-
-          const previous = previousStats.find(
-            (item) => item.bodyPart === bodyPart,
-          );
-
-          return {
-            bodyPart,
-            currentCount: current?.totalCount ?? 0,
-            previousCount: previous?.totalCount ?? 0,
-          };
-        });
-
-        setBodyPartStats(mergedStats);
+        setTodayRecord(todayResponse.data || null);
+        setRecentRecords(recentResponse.data || []);
       } catch (error) {
-        console.error("운동 부위 통계 조회 실패:", error);
-        setBodyPartStats([]);
-      }
-    };
-
-    fetchBodyPartStats();
-  }, [currentYear, currentMonth]);
-
-  useEffect(() => {
-    const fetchAccuracyGraph = async () => {
-      try {
-        const response = await api.get("/api/dashboard/accuracy-graph");
-
-        setAccuracyGraph(response.data);
-      } catch (error) {
-        console.error("정확도 그래프 조회 실패:", error);
-        setAccuracyGraph([]);
-      }
-    };
-
-    fetchAccuracyGraph();
-  }, []);
-
-  useEffect(() => {
-    const fetchMonthlySummary = async () => {
-      try {
-        const response = await api.get("/api/dashboard/monthly-summary");
-
-        setMonthlySummary(response.data);
-      } catch (error) {
-        console.error("이번 달 요약 조회 실패:", error);
-        setMonthlySummary(null);
-      }
-    };
-
-    fetchMonthlySummary();
-  }, []);
-
-  useEffect(() => {
-    const fetchCalendar = async () => {
-      try {
-        const response = await api.get("/api/dashboard/calendar", {
-          params: {
-            year: currentYear,
-            month: currentMonth + 1,
-          },
-        });
-
-        const days = response.data.map((date) => {
-          return Number(date.split("-")[2]);
-        });
-
-        setExerciseDays(days);
-      } catch (error) {
-        console.error("운동 캘린더 조회 실패:", error);
-        setExerciseDays([]);
-      }
-    };
-
-    fetchCalendar();
-  }, [currentYear, currentMonth]);
-
-  useEffect(() => {
-    const fetchTodayRecord = async () => {
-      try {
-        const response = await api.get("/api/dashboard/today");
-
-        if (!response.data) {
-          setTodayRecord(null);
-          return;
-        }
-
-        const data = response.data;
-
-        const minutes = Math.floor(data.durationSec / 60);
-        const seconds = data.durationSec % 60;
-
-        setTodayRecord({
-          id: data.sessionId,
-          part: data.bodyPart,
-          count: data.totalCount,
-          duration: `${minutes}분 ${seconds}초`,
-          accuracy: data.accuracy,
-        });
-      } catch (error) {
-        console.error("오늘 운동 기록 조회 실패:", error);
+        console.error("운동 기록 조회 실패:", error);
         setTodayRecord(null);
-      }
-    };
-
-    fetchTodayRecord();
-  }, []);
-  useEffect(() => {
-    const fetchRecentRecords = async () => {
-      try {
-        const response = await api.get("/api/dashboard/recent-records");
-
-        const records = response.data.map((data) => {
-          const [, month, day] = data.exerciseDate.split("-");
-
-          const minutes = Math.floor(data.durationSec / 60);
-          const seconds = data.durationSec % 60;
-
-          return {
-            id: data.sessionId,
-            date: `${Number(month)}월 ${Number(day)}일`,
-            part: data.bodyPart,
-            count: data.totalCount,
-            duration: `${minutes}분 ${seconds}초`,
-            accuracy: data.accuracy,
-          };
-        });
-
-        setRecentRecords(records);
-      } catch (error) {
-        console.error("최근 운동 기록 조회 실패:", error);
         setRecentRecords([]);
       }
     };
 
-    fetchRecentRecords();
-  }, []);
+    fetchDashboardRecords();
+    fetchSchedules();
+  }, [isLoggedIn]);
 
-  const [todayRecord, setTodayRecord] = useState(null);
-  const [recentRecords, setRecentRecords] = useState([]);
-  const visibleRecords = showMore ? recentRecords : recentRecords.slice(0, 3);
-  const selectedSchedule = selectedDate
-    ? schedules.find((schedule) => {
-        const date = `${currentYear}-${String(currentMonth + 1).padStart(
-          2,
-          "0",
-        )}-${String(selectedDate).padStart(2, "0")}`;
+  /* =========================
+     캘린더 / 월간 요약
+  ========================= */
 
-        return schedule.exerciseDay === date;
-      })
-    : null;
+  useEffect(() => {
+    if (!isLoggedIn) {
+      return;
+    }
 
-  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const fetchMonthData = async () => {
+      try {
+        const [calendarResponse, summaryResponse] = await Promise.all([
+          api.get("/api/dashboard/calendar", {
+            params: {
+              year: currentYear,
+              month: currentMonth + 1,
+            },
+          }),
 
-  const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+          api.get(
+            `/api/dashboard/monthly-summary/${currentYear}/${currentMonth + 1}`,
+          ),
+        ]);
+
+        const days = (calendarResponse.data || []).map((date) => {
+          return Number(date.split("-")[2]);
+        });
+
+        setExerciseDays(days);
+        setMonthlySummary(summaryResponse.data || null);
+      } catch (error) {
+        console.error("월별 대시보드 조회 실패:", error);
+        setExerciseDays([]);
+        setMonthlySummary(null);
+      }
+    };
+
+    fetchMonthData();
+  }, [isLoggedIn, currentYear, currentMonth]);
+
+  /* =========================
+     영상 URL 정리
+  ========================= */
+
+  useEffect(() => {
+    return () => {
+      if (videoPreviewUrl) {
+        URL.revokeObjectURL(videoPreviewUrl);
+      }
+    };
+  }, [videoPreviewUrl]);
+
+  /* =========================
+     기록 상세
+  ========================= */
+
+  const openRecordModal = async (recordId) => {
+    try {
+      const response = await api.get(`/api/dashboard/records/${recordId}`);
+
+      const record = response.data;
+
+      setSelectedRecord(record);
+      setShowRecordModal(true);
+
+      if (videoPreviewUrl) {
+        URL.revokeObjectURL(videoPreviewUrl);
+        setVideoPreviewUrl("");
+      }
+
+      if (record?.videoPath) {
+        try {
+          const videoResponse = await api.get(
+            `/api/dashboard/records/${recordId}/video/stream`,
+            {
+              responseType: "blob",
+            },
+          );
+
+          const url = URL.createObjectURL(videoResponse.data);
+          setVideoPreviewUrl(url);
+        } catch (videoError) {
+          console.error("운동 영상 조회 실패:", videoError);
+        }
+      }
+    } catch (error) {
+      console.error("운동 기록 상세 조회 실패:", error);
+    }
+  };
+
+  const closeRecordModal = () => {
+    if (videoPreviewUrl) {
+      URL.revokeObjectURL(videoPreviewUrl);
+    }
+
+    setVideoPreviewUrl("");
+    setSelectedRecord(null);
+    setShowRecordModal(false);
+  };
+
+  const handleVideoDownload = async () => {
+    if (!selectedRecord?.sessionId) {
+      return;
+    }
+
+    try {
+      const response = await api.get(
+        `/api/dashboard/records/${selectedRecord.sessionId}/video/download`,
+        {
+          responseType: "blob",
+        },
+      );
+
+      const url = URL.createObjectURL(response.data);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `exercise-${selectedRecord.sessionId}.mp4`;
+
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("운동 영상 다운로드 실패:", error);
+      alert("운동 영상을 다운로드할 수 없습니다.");
+    }
+  };
+
+  /* =========================
+     최근 운동 기록 더보기
+  ========================= */
+
+  const handleToggleMore = async () => {
+    if (showAllRecords) {
+      setShowAllRecords(false);
+      return;
+    }
+
+    try {
+      const response = await api.get("/api/dashboard/recent-records/all");
+
+      setAllRecords(response.data || []);
+      setShowAllRecords(true);
+    } catch (error) {
+      console.error("전체 운동 기록 조회 실패:", error);
+    }
+  };
+
+  const visibleRecords = showAllRecords
+    ? allRecords
+    : recentRecords.slice(0, 5);
+
+  /* =========================
+     캘린더
+  ========================= */
 
   const handlePrevMonth = () => {
     if (currentMonth === 0) {
@@ -256,24 +294,7 @@ function DashboardPage() {
       setCurrentMonth((prev) => prev - 1);
     }
 
-    setSelectedDate(null);
-  };
-  const handleDateClick = async (day) => {
-    setSelectedDate(day);
-    setSelectedDateRecord(null);
-
-    const date = `${currentYear}-${String(currentMonth + 1).padStart(
-      2,
-      "0",
-    )}-${String(day).padStart(2, "0")}`;
-
-    try {
-      const response = await api.get(`/api/dashboard/calendar/${date}`);
-      setSelectedDateRecord(response.data || null);
-    } catch (error) {
-      console.error("선택 날짜 운동 기록 조회 실패:", error);
-      setSelectedDateRecord(null);
-    }
+    setSelectedCalendarDay(null);
   };
 
   const handleNextMonth = () => {
@@ -284,10 +305,121 @@ function DashboardPage() {
       setCurrentMonth((prev) => prev + 1);
     }
 
-    setSelectedDate(null);
+    setSelectedCalendarDay(null);
+  };
+
+  const handleCalendarDayClick = async (day) => {
+    setSelectedCalendarDay(day);
+
+    if (!exerciseDays.includes(day)) {
+      return;
+    }
+
+    const date = toDateString(currentYear, currentMonth, day);
+
+    try {
+      const response = await api.get(`/api/dashboard/calendar/${date}`);
+
+      if (response.data?.sessionId) {
+        openRecordModal(response.data.sessionId);
+      }
+    } catch (error) {
+      console.error("날짜별 운동 기록 조회 실패:", error);
+    }
+  };
+
+  const scheduleDays = useMemo(() => {
+    const prefix = `${currentYear}-${String(currentMonth + 1).padStart(
+      2,
+      "0",
+    )}-`;
+
+    return schedules
+      .filter(
+        (schedule) =>
+          typeof schedule.exerciseDay === "string" &&
+          schedule.exerciseDay.startsWith(prefix),
+      )
+      .map((schedule) => Number(schedule.exerciseDay.split("-")[2]));
+  }, [schedules, currentYear, currentMonth]);
+
+  const calendarCells = useMemo(() => {
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    const daysInCurrentMonth = new Date(
+      currentYear,
+      currentMonth + 1,
+      0,
+    ).getDate();
+
+    const daysInPrevMonth = new Date(currentYear, currentMonth, 0).getDate();
+
+    return Array.from({ length: 42 }, (_, index) => {
+      const dayNumber = index - firstDay + 1;
+
+      if (dayNumber <= 0) {
+        return {
+          day: daysInPrevMonth + dayNumber,
+          current: false,
+          type: "prev",
+        };
+      }
+
+      if (dayNumber > daysInCurrentMonth) {
+        return {
+          day: dayNumber - daysInCurrentMonth,
+          current: false,
+          type: "next",
+        };
+      }
+
+      return {
+        day: dayNumber,
+        current: true,
+        type: "current",
+      };
+    });
+  }, [currentYear, currentMonth]);
+
+  const isToday = (day) => {
+    const today = new Date();
+
+    return (
+      today.getFullYear() === currentYear &&
+      today.getMonth() === currentMonth &&
+      today.getDate() === day
+    );
+  };
+
+  /* =========================
+     일정 추가
+  ========================= */
+
+  const openScheduleModal = () => {
+    const today = new Date();
+
+    let defaultDay = 1;
+
+    if (
+      today.getFullYear() === currentYear &&
+      today.getMonth() === currentMonth
+    ) {
+      defaultDay = today.getDate();
+    }
+
+    setScheduleDate(toDateString(currentYear, currentMonth, defaultDay));
+
+    setSelectedPeriod("오전");
+    setSelectedHour(9);
+    setAlarmEnabled(true);
+    setShowScheduleModal(true);
   };
 
   const handleScheduleSubmit = async () => {
+    if (!scheduleDate) {
+      alert("날짜를 선택해주세요.");
+      return;
+    }
+
     let hour24 = selectedHour;
 
     if (selectedPeriod === "오전" && selectedHour === 12) {
@@ -298,482 +430,542 @@ function DashboardPage() {
       hour24 = selectedHour + 12;
     }
 
-    const exerciseDay = `${currentYear}-${String(currentMonth + 1).padStart(
-      2,
-      "0",
-    )}-${String(scheduleDate).padStart(2, "0")}`;
-
     const exerciseTime = `${String(hour24).padStart(2, "0")}:00:00`;
 
     try {
+      setScheduleSubmitting(true);
+
       await api.post("/api/notification/schedule", {
-        exerciseDay,
+        exerciseDay: scheduleDate,
         exerciseTime,
         useAlert: alarmEnabled,
       });
 
-      const scheduleResponse = await api.get("/api/notification/schedule");
-      setSchedules(scheduleResponse.data || []);
+      await fetchSchedules();
 
-      alert("일정이 등록되었습니다.");
       setShowScheduleModal(false);
+      alert("운동 일정이 등록되었습니다.");
     } catch (error) {
       console.error("일정 등록 실패:", error);
       alert("일정 등록에 실패했습니다.");
+    } finally {
+      setScheduleSubmitting(false);
     }
   };
 
+  /* =========================
+     비로그인
+  ========================= */
+
+  if (!isLoggedIn) {
+    return (
+      <div className="dashboardPage">
+        <main className="dashboardContainer">
+          <div className="dashboardHeading">
+            <h1>운동 기록</h1>
+            <p>최근 운동 기록과 이번 달 운동 현황을 한눈에 확인해보세요.</p>
+          </div>
+
+          <section className="dashboardLoginCard">
+            <div className="dashboardLoginIcon">♙</div>
+
+            <strong>운동 기록을 확인하려면 로그인이 필요해요.</strong>
+
+            <p>로그인하면 운동 기록과 운동 일정을 확인할 수 있어요.</p>
+
+            <button type="button" onClick={() => navigate("/login")}>
+              로그인하기
+            </button>
+
+            <span>
+              아직 회원이 아니신가요?{" "}
+              <button
+                type="button"
+                className="signupLinkButton"
+                onClick={() => navigate("/signup")}
+              >
+                회원가입하기
+              </button>
+            </span>
+          </section>
+        </main>
+      </div>
+    );
+  }
+
+  const hasAnyRecord = Boolean(todayRecord) || recentRecords.length > 0;
+
   return (
     <div className="dashboardPage">
-      {!isLoggedIn && (
-        <div className="loginOverlay">
-          <strong>서비스 이용을 위해</strong>
-          <span>로그인이 필요합니다.</span>
+      <main className="dashboardContainer">
+        {/* 제목 */}
+        <div className="dashboardHeading">
+          <h1>운동 기록</h1>
+          <p>최근 운동 기록과 이번 달 운동 현황을 한눈에 확인해보세요.</p>
         </div>
-      )}
 
-      <main
-        className={`dashboardContainer ${
-          !isLoggedIn ? "dashboardBlurred" : ""
-        }`}
-      >
-        {/* 오늘 운동 기록 */}
-        <section className="dashboardSection">
-          <h2>오늘 운동 기록</h2>
+        <div className="dashboardLayout">
+          {/* =========================
+              왼쪽
+          ========================= */}
 
-          {todayRecord ? (
-            <div className="todayRecordCard">
-              <div className="todayRecordInfo">
-                <p className="recordGuide">
-                  오늘의 운동 상태를 한눈에 확인하세요!
-                </p>
-
-                <div className="todayStats">
-                  <div className="todayStat">
-                    <span>운동 부위</span>
-                    <strong>{todayRecord.part}</strong>
+          <div className="dashboardLeft">
+            {hasAnyRecord ? (
+              <>
+                {/* 오늘 운동 기록 */}
+                <section className="dashboardCard todayDashboardCard">
+                  <div className="dashboardCardTitleRow">
+                    <h2>오늘 운동 기록</h2>
+                    <span>{formatToday()}</span>
                   </div>
 
-                  <div className="todayStat">
-                    <span>수행 횟수</span>
-                    <strong>{todayRecord.count}회</strong>
+                  {todayRecord ? (
+                    <div className="todayRecordContent">
+                      <div className="todayRecordStats">
+                        <div className="todayRecordStat">
+                          <span>운동 부위</span>
+                          <strong>{todayRecord.bodyPart}</strong>
+                        </div>
+
+                        <div className="todayRecordStat">
+                          <span>수행 횟수</span>
+                          <strong>{todayRecord.totalCount}회</strong>
+                        </div>
+
+                        <div className="todayRecordStat">
+                          <span>운동 시간</span>
+                          <strong>
+                            {formatDuration(todayRecord.durationSec)}
+                          </strong>
+                        </div>
+
+                        <div className="todayRecordStat">
+                          <span>평균 정확도</span>
+                          <strong>
+                            {formatAccuracy(todayRecord.accuracy)}
+                          </strong>
+                        </div>
+                      </div>
+
+                      <button
+                        type="button"
+                        className="todayRecordButton"
+                        onClick={() => openRecordModal(todayRecord.sessionId)}
+                      >
+                        기록보기
+                        <span>›</span>
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="todayEmptyState">
+                      <div>
+                        <strong>오늘 운동 기록이 아직 없어요.</strong>
+                        <p>오늘도 가볍게 운동을 시작해보세요.</p>
+                      </div>
+
+                      <button type="button" onClick={() => navigate("/")}>
+                        운동 시작하기
+                      </button>
+                    </div>
+                  )}
+                </section>
+
+                {/* 최근 운동 기록 */}
+                <section className="dashboardCard recentDashboardCard">
+                  <h2>최근 운동 기록</h2>
+
+                  <div className="recentTable">
+                    <div className="recentTableHeader">
+                      <span>날짜</span>
+                      <span>운동 부위</span>
+                      <span>수행 횟수</span>
+                      <span>운동 시간</span>
+                      <span>평균 정확도</span>
+                      <span>기록</span>
+                    </div>
+
+                    {visibleRecords.map((record) => (
+                      <div className="recentTableRow" key={record.sessionId}>
+                        <span>{formatRecordDate(record.exerciseDate)}</span>
+
+                        <span>{record.bodyPart}</span>
+
+                        <span>{record.totalCount}회</span>
+
+                        <span>{formatDuration(record.durationSec)}</span>
+
+                        <span>{formatAccuracy(record.accuracy)}</span>
+
+                        <button
+                          type="button"
+                          className="recordArrowButton"
+                          onClick={() => openRecordModal(record.sessionId)}
+                          aria-label="운동 기록 상세보기"
+                        >
+                          ›
+                        </button>
+                      </div>
+                    ))}
                   </div>
 
-                  <div className="todayStat">
-                    <span>실행 시간</span>
-                    <strong>{todayRecord.duration}</strong>
-                  </div>
+                  {(recentRecords.length >= 5 || showAllRecords) && (
+                    <button
+                      type="button"
+                      className="recentMoreButton"
+                      onClick={handleToggleMore}
+                    >
+                      {showAllRecords ? "접기 ︿" : "더보기 ﹀"}
+                    </button>
+                  )}
+                </section>
+              </>
+            ) : (
+              <section className="dashboardCard allRecordsEmptyCard">
+                <div className="emptyRecordIcon">▣</div>
 
-                  <div className="todayStat accuracyStat">
-                    <span>정확도</span>
-                    <strong>{todayRecord.accuracy}%</strong>
-                  </div>
-                </div>
-              </div>
+                <strong>아직 운동 기록이 없어요.</strong>
 
-              <button type="button" className="recordVideoButton">
-                기록 영상 보기
-              </button>
-            </div>
-          ) : (
-            <div className="emptyRecord">아직 오늘의 운동 기록이 없습니다.</div>
-          )}
-        </section>
+                <p>첫 운동을 시작하면 운동 기록을 여기에서 확인할 수 있어요.</p>
 
-        {/* 최근 운동 기록 */}
-        <section className="dashboardSection">
-          <h2>최근 운동 기록</h2>
+                <button type="button" onClick={() => navigate("/")}>
+                  운동 시작하기
+                </button>
+              </section>
+            )}
+          </div>
 
-          {recentRecords.length > 0 ? (
-            <div className="recentRecordCard">
-              {visibleRecords.map((record) => (
-                <div className="recentRecordRow" key={record.id}>
-                  <strong className="recordDate">{record.date}</strong>
+          {/* =========================
+              오른쪽
+          ========================= */}
 
-                  <div className="recordItem">
-                    <span>운동 부위</span>
-                    <strong>{record.part}</strong>
-                  </div>
+          <div className="dashboardRight">
+            {/* 운동 캘린더 */}
+            <section className="dashboardCard calendarDashboardCard">
+              <div className="dashboardCardTitleRow calendarTitleRow">
+                <h2>운동 캘린더</h2>
 
-                  <div className="recordItem">
-                    <span>실행 횟수</span>
-                    <strong>{record.count}회</strong>
-                  </div>
-
-                  <div className="recordItem">
-                    <span>실행 시간</span>
-                    <strong>{record.duration}</strong>
-                  </div>
-
-                  <button type="button" className="detailButton">
-                    상세보기
-                  </button>
-                </div>
-              ))}
-
-              {recentRecords.length > 3 && (
                 <button
                   type="button"
-                  className="moreButton"
-                  onClick={() => setShowMore((prev) => !prev)}
+                  className="addScheduleButton"
+                  onClick={openScheduleModal}
                 >
-                  {showMore ? "접기 ▲" : "더보기 ▼"}
+                  운동 일정 추가
+                  <span>＋</span>
                 </button>
-              )}
-            </div>
-          ) : (
-            <div className="emptyRecord">최근 운동 기록이 없습니다.</div>
-          )}
-        </section>
+              </div>
 
-        {/* 캘린더 */}
-        <section className="dashboardSection">
-          <h2>운동 캘린더</h2>
+              <div className="calendarMonthHeader">
+                <button
+                  type="button"
+                  onClick={handlePrevMonth}
+                  aria-label="이전 달"
+                >
+                  ‹
+                </button>
 
-          <div className="calendarCard">
-            <div className="calendarHeader">
-              <button type="button" onClick={handlePrevMonth}>
-                ◀
-              </button>
+                <strong>
+                  {currentYear}년 {currentMonth + 1}월
+                </strong>
 
-              <strong>
-                {currentYear}년 {currentMonth + 1}월
-              </strong>
+                <button
+                  type="button"
+                  onClick={handleNextMonth}
+                  aria-label="다음 달"
+                >
+                  ›
+                </button>
+              </div>
 
-              <button type="button" onClick={handleNextMonth}>
-                ▶
-              </button>
-            </div>
+              <div className="calendarWeekHeader">
+                <span>일</span>
+                <span>월</span>
+                <span>화</span>
+                <span>수</span>
+                <span>목</span>
+                <span>금</span>
+                <span>토</span>
+              </div>
 
-            <div className="calendarWeek">
-              <span>일</span>
-              <span>월</span>
-              <span>화</span>
-              <span>수</span>
-              <span>목</span>
-              <span>금</span>
-              <span>토</span>
-            </div>
+              <div className="dashboardCalendarGrid">
+                {calendarCells.map((cell, index) => {
+                  const completed =
+                    cell.current && exerciseDays.includes(cell.day);
 
-            <div className="calendarGrid">
-              {Array.from({ length: firstDayOfMonth }, (_, index) => (
-                <div key={`empty-${index}`} className="calendarEmpty" />
-              ))}
+                  const scheduled =
+                    cell.current && scheduleDays.includes(cell.day);
 
-              {Array.from({ length: daysInMonth }, (_, index) => {
-                const day = index + 1;
+                  const selected =
+                    cell.current && selectedCalendarDay === cell.day;
 
-                const isMarch2026 = currentYear === 2026 && currentMonth === 2;
+                  return (
+                    <button
+                      key={`${cell.type}-${cell.day}-${index}`}
+                      type="button"
+                      disabled={!cell.current}
+                      className={[
+                        "dashboardCalendarDay",
+                        !cell.current ? "outsideMonth" : "",
+                        isToday(cell.day) && cell.current ? "today" : "",
+                        selected ? "selected" : "",
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
+                      onClick={() =>
+                        cell.current && handleCalendarDayClick(cell.day)
+                      }
+                    >
+                      <span>{cell.day}</span>
 
-                const hasExercise = isMarch2026 && exerciseDays.includes(day);
+                      <div className="calendarDots">
+                        {completed && <i className="completedDot" />}
 
-                return (
-                  <button
-                    key={day}
-                    type="button"
-                    className={`calendarDay ${
-                      hasExercise ? "exerciseDay" : ""
-                    }`}
-                    onClick={() => handleDateClick(day)}
-                  >
-                    {day}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+                        {scheduled && <i className="scheduledDot" />}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
 
-        {/* 이번 달 요약 */}
-        <section className="dashboardSection">
-          <h2>이번 달 요약</h2>
+              <div className="calendarLegend">
+                <span>
+                  <i className="completedDot" />
+                  운동 완료
+                </span>
 
-          <div className="monthlySummaryCard">
-            <div className="summaryItem">
-              <span>총 운동 일수</span>
-              <strong>{monthlySummary?.totalDays ?? 0}일</strong>
-            </div>
+                <span>
+                  <i className="scheduledDot" />
+                  운동 예정
+                </span>
+              </div>
+            </section>
 
-            <div className="summaryItem">
-              <span>가장 많이 운동한 부위</span>
-              <strong>{monthlySummary?.mostFrequentPart ?? "-"}</strong>
-            </div>
+            {/* 이번 달 요약 */}
+            {(monthlySummary?.totalDays ?? 0) > 0 && (
+              <section className="dashboardCard monthlySummaryCard">
+                <div className="dashboardCardTitleRow">
+                  <h2>이번 달 요약</h2>
 
-            <div className="summaryItem">
-              <span>총 운동 횟수</span>
-              <strong>-</strong>
-            </div>
-
-            <div className="summaryItem">
-              <span>평균 운동 시간</span>
-              <strong>
-                {monthlySummary?.avgDurationSec != null
-                  ? `${Math.floor(monthlySummary.avgDurationSec / 60)}분 ${
-                      monthlySummary.avgDurationSec % 60
-                    }초`
-                  : "-"}
-              </strong>
-            </div>
-          </div>
-
-          <div className="dashboardCharts">
-            <div className="chartCard">
-              <h3>날짜 별 정확도 추이</h3>
-
-              {accuracyGraph.length > 0 ? (
-                <div style={{ width: "100%", height: 280 }}>
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={accuracyGraph}>
-                      <CartesianGrid strokeDasharray="3 3" />
-
-                      <XAxis
-                        dataKey="exerciseDate"
-                        tickFormatter={(value) => {
-                          const [, month, day] = value.split("-");
-                          return `${Number(month)}/${Number(day)}`;
-                        }}
-                      />
-
-                      <YAxis domain={[0, 100]} />
-
-                      <Tooltip
-                        labelFormatter={(value) => {
-                          const [, month, day] = value.split("-");
-                          return `${Number(month)}월 ${Number(day)}일`;
-                        }}
-                        formatter={(value) => [`${value}%`, "평균 정확도"]}
-                      />
-
-                      <Line
-                        type="monotone"
-                        dataKey="avgAccuracy"
-                        stroke="#3F6F8F"
-                        strokeWidth={3}
-                      />
-                    </LineChart>
-                  </ResponsiveContainer>
+                  <span>
+                    {currentYear}년 {currentMonth + 1}월 기준
+                  </span>
                 </div>
-              ) : (
-                <div className="chartEmptyState">정확도 기록이 없습니다.</div>
-              )}
-            </div>
 
-            <div className="chartCard">
-              <h3>월별 운동 부위 비교</h3>
+                <div className="monthlySummaryGrid">
+                  <div className="monthlySummaryItem">
+                    <span>총 운동 일수</span>
+                    <strong>{monthlySummary?.totalDays ?? 0}일</strong>
+                  </div>
 
-              {bodyPartStats.length > 0 ? (
-                <div style={{ width: "100%", height: 280 }}>
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={bodyPartStats}>
-                      <CartesianGrid strokeDasharray="3 3" />
+                  <div className="monthlySummaryItem">
+                    <span>가장 많이 운동한 부위</span>
+                    <strong>{monthlySummary?.mostFrequentPart ?? "-"}</strong>
+                  </div>
 
-                      <XAxis dataKey="bodyPart" />
+                  <div className="monthlySummaryItem">
+                    <span>평균 운동 시간</span>
+                    <strong>
+                      {formatDuration(monthlySummary?.avgDurationSec)}
+                    </strong>
+                  </div>
 
-                      <YAxis allowDecimals={false} />
-
-                      <Tooltip
-                        formatter={(value) => [`${value}회`, "운동 횟수"]}
-                      />
-
-                      <Legend />
-
-                      <Bar
-                        dataKey="previousCount"
-                        name={`${currentMonth === 0 ? 12 : currentMonth}월`}
-                      />
-
-                      <Bar
-                        dataKey="currentCount"
-                        name={`${currentMonth + 1}월`}
-                      />
-                    </BarChart>
-                  </ResponsiveContainer>
+                  <div className="monthlySummaryItem">
+                    <span>평균 정확도</span>
+                    <strong>
+                      {formatAccuracy(monthlySummary?.avgAccuracy)}
+                    </strong>
+                  </div>
                 </div>
-              ) : (
-                <div className="chartEmptyState">
-                  운동 부위 기록이 없습니다.
-                </div>
-              )}
-            </div>
+              </section>
+            )}
           </div>
-        </section>
+        </div>
       </main>
 
-      {/* 날짜 상세 팝업 */}
-      {selectedDate && (
-        <div className="modalBackdrop">
-          <div className="dateModal">
-            <h3>
-              {currentMonth + 1}월 {selectedDate}일 운동 기록
-            </h3>
+      {/* =========================
+          운동 기록 상세
+      ========================= */}
 
-            <div className="dateModalRow">
-              <strong>운동 일정</strong>
+      {showRecordModal && selectedRecord && (
+        <div className="dashboardModalBackdrop" onMouseDown={closeRecordModal}>
+          <div
+            className="recordDetailModal"
+            onMouseDown={(event) => event.stopPropagation()}
+          >
+            <div className="dashboardModalHeader">
+              <div>
+                <h2>운동 기록 상세</h2>
+                <p>{formatRecordDate(selectedRecord.exerciseDate)}</p>
+              </div>
 
-              {selectedSchedule ? (
-                <span>
-                  {selectedSchedule.exerciseTime?.slice(0, 5)} ·{" "}
-                  {selectedSchedule.useAlert ? "알림 ON" : "알림 OFF"}
-                </span>
-              ) : (
-                <span>등록된 일정이 없습니다.</span>
-              )}
-            </div>
-
-            <div className="dateModalRow">
-              <strong>운동 기록</strong>
-
-              {selectedDateRecord ? (
-                <span>
-                  {selectedDateRecord.bodyPart} 운동 ·{" "}
-                  {selectedDateRecord.totalCount}회 ·{" "}
-                  {Math.floor(selectedDateRecord.durationSec / 60)}분{" "}
-                  {selectedDateRecord.durationSec % 60}초
-                </span>
-              ) : (
-                <span>운동 기록이 없습니다.</span>
-              )}
-            </div>
-
-            <div className="modalButtons">
               <button
                 type="button"
-                className="primaryModalButton"
-                onClick={() => {
-                  setScheduleDate(selectedDate);
-                  setSelectedDate(null);
-                  setShowScheduleModal(true);
-                }}
+                className="modalCloseButton"
+                onClick={closeRecordModal}
               >
-                일정 설정
+                ×
               </button>
+            </div>
 
+            <div className="recordDetailStats">
+              <div>
+                <span>운동 부위</span>
+                <strong>{selectedRecord.bodyPart}</strong>
+              </div>
+
+              <div>
+                <span>수행 횟수</span>
+                <strong>{selectedRecord.totalCount}회</strong>
+              </div>
+
+              <div>
+                <span>운동 시간</span>
+                <strong>{formatDuration(selectedRecord.durationSec)}</strong>
+              </div>
+
+              <div>
+                <span>평균 정확도</span>
+                <strong>{formatAccuracy(selectedRecord.accuracy)}</strong>
+              </div>
+            </div>
+
+            <div className="recordVideoArea">
+              {videoPreviewUrl ? (
+                <video
+                  src={videoPreviewUrl}
+                  controls
+                  className="recordDetailVideo"
+                />
+              ) : (
+                <div className="recordVideoEmpty">
+                  저장된 운동 영상이 없습니다.
+                </div>
+              )}
+            </div>
+
+            <div className="recordModalButtons">
               <button
                 type="button"
-                className="secondaryModalButton"
-                onClick={() => setSelectedDate(null)}
+                className="recordModalCloseButton"
+                onClick={closeRecordModal}
               >
                 닫기
               </button>
+
+              <button
+                type="button"
+                className="recordDownloadButton"
+                disabled={!selectedRecord.videoPath}
+                onClick={handleVideoDownload}
+              >
+                영상 다운로드
+              </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* 운동 일정 설정 팝업 */}
+      {/* =========================
+          운동 일정 추가
+      ========================= */}
+
       {showScheduleModal && (
-        <div className="modalBackdrop">
-          <div className="scheduleModal">
-            <h3>운동 일정 설정</h3>
-            <p>날짜를 선택하고 운동 시간을 설정해주세요.</p>
-
-            <div className="scheduleFormRow">
-              <label>날짜</label>
-              <input
-                type="text"
-                value={`${currentYear}년 ${currentMonth + 1}월 ${scheduleDate}일`}
-                readOnly
-              />
-            </div>
-
-            <div className="scheduleFormRow">
-              <label>운동 부위</label>
-
-              <select defaultValue="어깨">
-                <option value="상체">상체 운동</option>
-                <option value="어깨">어깨 운동</option>
-                <option value="하체">하체 운동</option>
-              </select>
-            </div>
-
-            <div className="scheduleFormRow scheduleTimeRow">
-              <label>시간 선택</label>
-
-              <div className="scheduleTimeContent">
-                <div className="periodButtons">
-                  <button
-                    type="button"
-                    className={
-                      selectedPeriod === "오전" ? "selectedOption" : ""
-                    }
-                    onClick={() => setSelectedPeriod("오전")}
-                  >
-                    오전
-                  </button>
-
-                  <button
-                    type="button"
-                    className={
-                      selectedPeriod === "오후" ? "selectedOption" : ""
-                    }
-                    onClick={() => setSelectedPeriod("오후")}
-                  >
-                    오후
-                  </button>
-                </div>
-
-                <div className="hourGrid">
-                  {Array.from({ length: 12 }, (_, index) => {
-                    const hour = index + 1;
-
-                    return (
-                      <button
-                        key={hour}
-                        type="button"
-                        className={
-                          selectedHour === hour ? "selectedOption" : ""
-                        }
-                        onClick={() => setSelectedHour(hour)}
-                      >
-                        {hour}
-                      </button>
-                    );
-                  })}
-                </div>
-
-                <span className="selectedTimeText">
-                  선택 시간 : {selectedPeriod} {selectedHour}시
-                </span>
+        <div
+          className="dashboardModalBackdrop"
+          onMouseDown={() => setShowScheduleModal(false)}
+        >
+          <div
+            className="scheduleAddModal"
+            onMouseDown={(event) => event.stopPropagation()}
+          >
+            <div className="dashboardModalHeader">
+              <div>
+                <h2>운동 일정 추가</h2>
+                <p>운동 날짜와 시간을 설정해주세요.</p>
               </div>
-            </div>
 
-            <div className="scheduleFormRow">
-              <label>알림 받기</label>
-
-              <div className="periodButtons">
-                <button
-                  type="button"
-                  className={alarmEnabled ? "selectedOption" : ""}
-                  onClick={() => setAlarmEnabled(true)}
-                >
-                  예
-                </button>
-
-                <button
-                  type="button"
-                  className={!alarmEnabled ? "selectedOption" : ""}
-                  onClick={() => setAlarmEnabled(false)}
-                >
-                  아니오
-                </button>
-              </div>
-            </div>
-
-            <div className="scheduleFormRow">
-              <label>알림 연락처</label>
-
-              <input
-                type="text"
-                value={phoneNumber}
-                disabled={!alarmEnabled}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-              />
-            </div>
-
-            <div className="modalButtons">
               <button
                 type="button"
-                className="secondaryModalButton"
+                className="modalCloseButton"
+                onClick={() => setShowScheduleModal(false)}
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="scheduleForm">
+              <div className="scheduleField">
+                <label htmlFor="scheduleDate">날짜</label>
+
+                <input
+                  id="scheduleDate"
+                  type="date"
+                  value={scheduleDate}
+                  onChange={(event) => setScheduleDate(event.target.value)}
+                />
+              </div>
+
+              <div className="scheduleField">
+                <label>운동 시간</label>
+
+                <div className="scheduleTimeSelect">
+                  <select
+                    value={selectedPeriod}
+                    onChange={(event) => setSelectedPeriod(event.target.value)}
+                  >
+                    <option value="오전">오전</option>
+                    <option value="오후">오후</option>
+                  </select>
+
+                  <select
+                    value={selectedHour}
+                    onChange={(event) =>
+                      setSelectedHour(Number(event.target.value))
+                    }
+                  >
+                    {Array.from({ length: 12 }, (_, index) => {
+                      const hour = index + 1;
+
+                      return (
+                        <option key={hour} value={hour}>
+                          {String(hour).padStart(2, "0")}:00
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+              </div>
+
+              <div className="scheduleField">
+                <label>알림 받기</label>
+
+                <div className="scheduleRadioGroup">
+                  <label>
+                    <input
+                      type="radio"
+                      name="alarm"
+                      checked={alarmEnabled}
+                      onChange={() => setAlarmEnabled(true)}
+                    />
+                    예
+                  </label>
+
+                  <label>
+                    <input
+                      type="radio"
+                      name="alarm"
+                      checked={!alarmEnabled}
+                      onChange={() => setAlarmEnabled(false)}
+                    />
+                    아니오
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className="scheduleModalButtons">
+              <button
+                type="button"
+                className="scheduleCancelButton"
                 onClick={() => setShowScheduleModal(false)}
               >
                 취소
@@ -781,10 +973,11 @@ function DashboardPage() {
 
               <button
                 type="button"
-                className="primaryModalButton"
+                className="scheduleSubmitButton"
+                disabled={scheduleSubmitting}
                 onClick={handleScheduleSubmit}
               >
-                확인
+                {scheduleSubmitting ? "등록 중..." : "일정 추가"}
               </button>
             </div>
           </div>

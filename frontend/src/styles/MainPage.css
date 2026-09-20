@@ -1,0 +1,334 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.home {
+  width: 100%;
+  min-height: 100vh;
+  background-color: white;
+  color: #333;
+}
+
+/* 헤더 */
+.header {
+  width: 100%;
+  height: 76px;
+  border-bottom: 1px solid #ddd;
+  padding: 0 4vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logoText {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  cursor: pointer;
+  user-select: none;
+}
+
+.authText {
+  font-size: 17px;
+  color: #999;
+  cursor: pointer;
+}
+
+/* 첫 화면 */
+.heroSection {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 76px);
+
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  column-gap: 4vw;
+
+  padding: 3vh 3.5vw 7vh;
+}
+
+.imageBox {
+  width: 100%;
+  height: min(68vh, 40vw);
+  min-height: 420px;
+
+  background-color: #e5e5e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #999;
+  font-size: clamp(16px, 1.1vw, 28px);
+  text-align: center;
+}
+
+.heroText {
+  width: 100%;
+}
+
+.smallTitle {
+  font-size: clamp(14px, 1vw, 24px);
+  color: #999;
+  margin: 0 0 18px;
+}
+
+.heroText h1 {
+  font-size: clamp(48px, 4.2vw, 104px);
+  line-height: 1.18;
+  margin: 0 0 34px;
+  letter-spacing: 1px;
+}
+
+.description {
+  font-size: clamp(16px, 1.25vw, 30px);
+  line-height: 1.75;
+  color: #777;
+  margin: 0 0 42px;
+}
+
+.startButton {
+  width: clamp(220px, 15vw, 360px);
+  height: clamp(56px, 4vw, 86px);
+
+  border: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: white;
+
+  font-size: clamp(15px, 1.1vw, 24px);
+  cursor: pointer;
+}
+
+.scrollArrow {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 52px;
+  height: 52px;
+
+  border: none;
+  border-radius: 50%;
+  background: none;
+
+  font-size: 42px;
+  color: #777;
+  cursor: pointer;
+
+  z-index: 999;
+}
+
+/* 운동 선택 화면 */
+.exerciseSection {
+  min-height: 100vh;
+  padding: 8vh 4vw;
+}
+
+.exerciseSection h2 {
+  text-align: center;
+  font-size: clamp(28px, 2.3vw, 56px);
+  margin: 0 0 6vh;
+  letter-spacing: 2px;
+}
+
+.cardWrap {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1vw;
+}
+
+.exerciseCard {
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  background-color: white;
+}
+
+.cardImage {
+  height: 28vh;
+  min-height: 230px;
+  background-color: #ddd;
+}
+
+.cardContent {
+  padding: 28px;
+}
+
+.cardContent h3 {
+  font-size: clamp(20px, 1.4vw, 34px);
+  margin: 0 0 18px;
+}
+
+.cardContent p {
+  font-size: clamp(15px, 1vw, 24px);
+  color: #777;
+  line-height: 1.7;
+  margin: 0 0 26px;
+}
+
+.cardContent button {
+  width: clamp(120px, 9vw, 220px);
+  height: clamp(38px, 3vw, 64px);
+
+  border: none;
+  border-radius: 4px;
+  background-color: #333;
+  color: white;
+
+  font-size: clamp(13px, 0.9vw, 20px);
+  cursor: pointer;
+}
+
+/* 태블릿 */
+@media (max-width: 1024px) {
+  .heroSection {
+    grid-template-columns: 1fr;
+    row-gap: 32px;
+    padding: 40px 32px 80px;
+  }
+
+  .imageBox {
+    height: 42vh;
+    min-height: 320px;
+  }
+
+  .heroText {
+    width: 100%;
+  }
+
+  .heroText h1 {
+    font-size: 48px;
+  }
+
+  .description {
+    font-size: 18px;
+  }
+
+  .cardWrap {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .cardImage {
+    height: 260px;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 600px) {
+  .header {
+    height: 60px;
+    padding: 0 20px;
+  }
+
+  .logoText {
+    font-size: 18px;
+  }
+
+  .authText {
+    font-size: 14px;
+  }
+
+  .heroSection {
+    min-height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+
+    gap: 24px;
+    padding: 20px 16px 72px;
+  }
+
+  .imageBox {
+    width: 100%;
+    height: 38vh;
+    min-height: 240px;
+    font-size: 14px;
+  }
+
+  .smallTitle {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+
+  .heroText h1 {
+    font-size: 34px;
+    line-height: 1.25;
+    margin-bottom: 20px;
+  }
+
+  .description {
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .startButton {
+    width: 100%;
+    height: 52px;
+    font-size: 15px;
+  }
+
+  .scrollArrow {
+    bottom: 16px;
+    font-size: 34px;
+  }
+
+  .exerciseSection {
+    padding: 56px 16px;
+  }
+
+  .exerciseSection h2 {
+    font-size: 24px;
+    line-height: 1.4;
+    margin-bottom: 32px;
+  }
+
+  .cardWrap {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .cardImage {
+    height: 180px;
+    min-height: 180px;
+  }
+
+  .cardContent {
+    padding: 20px;
+  }
+
+  .cardContent h3 {
+    font-size: 18px;
+  }
+
+  .cardContent p {
+    font-size: 14px;
+  }
+
+  .cardContent button {
+    width: 120px;
+    height: 38px;
+    font-size: 13px;
+  }
+}

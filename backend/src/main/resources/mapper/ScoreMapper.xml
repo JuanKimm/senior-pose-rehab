@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- AI 연동 - 운동 점수 데이터 일괄 저장 -->
+<mapper namespace="com.seniorrehab.repository.ScoreMapper">
+
+    <insert id="insertScores">
+        INSERT INTO EXERCISE_SCORE (session_id, action_no, angle_diff, action_score)
+        VALUES
+        <foreach collection="scores" item="score" separator=",">
+            (#{sessionId}, #{score.actionNo}, #{score.angleDiff}, #{score.actionScore})
+        </foreach>
+    </insert>
+
+</mapper>

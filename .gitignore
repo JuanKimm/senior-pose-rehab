@@ -199,3 +199,8 @@ build/
 # Keep required AI reference videos
 !ai/storage/reference_videos/
 !ai/storage/reference_videos/*.mp4
+# Mac
+.DS_Store
+
+# VSCode
+.vscode/

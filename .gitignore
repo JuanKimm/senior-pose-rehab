@@ -154,6 +154,31 @@ __pycache__/
 *.pyo
 *.pyd
 
+# Python test / lint / type-check cache
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.pyright/
+.coverage
+coverage.xml
+htmlcov/
+.ipynb_checkpoints/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# AI runtime output
+ai/storage/recordings/
+ai/trash/
+ai/demo/*.mp4
+
+# Downloadable AI model
+ai/weights/*.task
+ai/weights/*.download
+
 # Spring Boot local config
 backend/src/main/resources/application.properties
 backend/src/main/resources/application-local.properties
@@ -171,6 +196,9 @@ build/
 *.avi
 *.mov
 
+# Keep required AI reference videos
+!ai/storage/reference_videos/
+!ai/storage/reference_videos/*.mp4
 # Mac
 .DS_Store
 

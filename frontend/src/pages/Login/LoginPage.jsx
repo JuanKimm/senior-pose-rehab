@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 import api from "../../libs/api";
 
-import eyeIcon from "../../assets/icons/24/icon=eye, size=24, color=default.svg";
-import eyeOffIcon from "../../assets/icons/24/icon=eyeOff, size=24, color=default.svg";
+import eyeIcon from "../../assets/icons/icon=eye.svg";
+import eyeOffIcon from "../../assets/icons/icon=eyeOff.svg";
+import circleXIcon from "../../assets/icons/icon=CircleX.svg";
 
 import "./LoginPage.css";
 
@@ -97,7 +98,12 @@ function LoginPage() {
             </div>
           </div>
 
-          {errorMessage && <p className="loginErrorMessage">{errorMessage}</p>}
+          {errorMessage && (
+            <div className="loginErrorMessage">
+              <img src={circleXIcon} alt="" aria-hidden="true" />
+              <span>{errorMessage}</span>
+            </div>
+          )}
 
           <button type="submit" className="loginSubmitButton">
             로그인하기

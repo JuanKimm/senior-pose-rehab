@@ -1,36 +1,18 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import homeMainImage from "../../assets/image/home main image.png";
+import upperBodyImage from "../../assets/image/image_상체.png";
+import shoulderImage from "../../assets/image/image_어깨.png";
+import lowerBodyImage from "../../assets/image/image_하체.png";
+import arrowRightIcon from "../../assets/icons/icon=ArrowRight.svg";
+import arrowRightWhiteIcon from "../../assets/icons/icon=ArrowRightWhite.svg";
+
 import "../../styles/MainPage.css";
 
 function MainPage() {
   const navigate = useNavigate();
-  const [showScrollArrow, setShowScrollArrow] = useState(true);
 
-  useEffect(() => {
-    const checkScroll = () => {
-      const scrollTop = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const fullHeight = document.documentElement.scrollHeight;
-
-      if (scrollTop + windowHeight >= fullHeight - 10) {
-        setShowScrollArrow(false);
-      } else {
-        setShowScrollArrow(true);
-      }
-    };
-
-    checkScroll();
-
-    window.addEventListener("scroll", checkScroll);
-    window.addEventListener("resize", checkScroll);
-
-    return () => {
-      window.removeEventListener("scroll", checkScroll);
-      window.removeEventListener("resize", checkScroll);
-    };
-  }, []);
-
-  const scrollDown = () => {
+  const scrollToExercise = () => {
     const exerciseSection = document.getElementById("exercise-section");
     const headerHeight = document.querySelector(".header")?.offsetHeight || 76;
 
@@ -47,10 +29,6 @@ function MainPage() {
     }
   };
 
-  const scrollToExercise = () => {
-    scrollDown();
-  };
-
   const goToExercise = () => {
     navigate("/exercise");
   };
@@ -61,7 +39,7 @@ function MainPage() {
         {/* 메인 영역 */}
         <section className="heroSection">
           <div className="heroImagePlaceholder">
-            <span>메인 이미지 준비 중</span>
+            <img src={homeMainImage} alt="재활 운동 메인" />
           </div>
 
           <div className="heroText">
@@ -84,7 +62,8 @@ function MainPage() {
               className="startButton"
               onClick={scrollToExercise}
             >
-              운동 선택하기 <span>→</span>
+              운동 선택하기
+              <img src={arrowRightWhiteIcon} alt="" aria-hidden="true" />
             </button>
           </div>
         </section>
@@ -99,7 +78,7 @@ function MainPage() {
           <div className="cardWrap">
             <article className="exerciseCard">
               <div className="cardImagePlaceholder">
-                <span>상체 운동 이미지</span>
+                <img src={upperBodyImage} alt="상체 운동" />
               </div>
 
               <div className="cardContent">
@@ -111,14 +90,15 @@ function MainPage() {
                   className="cardButton"
                   onClick={goToExercise}
                 >
-                  운동 보기 <span>→</span>
+                  운동 보기
+                  <img src={arrowRightIcon} alt="" aria-hidden="true" />
                 </button>
               </div>
             </article>
 
             <article className="exerciseCard">
               <div className="cardImagePlaceholder">
-                <span>어깨 운동 이미지</span>
+                <img src={shoulderImage} alt="어깨 운동" />
               </div>
 
               <div className="cardContent">
@@ -130,14 +110,15 @@ function MainPage() {
                   className="cardButton"
                   onClick={goToExercise}
                 >
-                  운동 보기 <span>→</span>
+                  운동 보기
+                  <img src={arrowRightIcon} alt="" aria-hidden="true" />
                 </button>
               </div>
             </article>
 
             <article className="exerciseCard">
               <div className="cardImagePlaceholder">
-                <span>하체 운동 이미지</span>
+                <img src={lowerBodyImage} alt="하체 운동" />
               </div>
 
               <div className="cardContent">
@@ -149,24 +130,14 @@ function MainPage() {
                   className="cardButton"
                   onClick={goToExercise}
                 >
-                  운동 보기 <span>→</span>
+                  운동 보기
+                  <img src={arrowRightIcon} alt="" aria-hidden="true" />
                 </button>
               </div>
             </article>
           </div>
         </section>
       </main>
-
-      {showScrollArrow && (
-        <button
-          type="button"
-          className="scrollArrow"
-          onClick={scrollDown}
-          aria-label="운동 영역으로 이동"
-        >
-          ˅
-        </button>
-      )}
     </div>
   );
 }

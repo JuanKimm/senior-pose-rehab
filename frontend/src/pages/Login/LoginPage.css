@@ -114,11 +114,23 @@
 }
 
 .loginErrorMessage {
-  margin: -8px 0 0;
+  margin: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
 
   color: var(--color-error);
-  font-size: 13px;
+
+  font-size: 14px;
   line-height: 20px;
+  font-weight: 400;
+}
+
+.loginErrorMessage img {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 }
 
 .loginSubmitButton {

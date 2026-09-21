@@ -59,13 +59,23 @@
    음성 안내 버튼
 ========================= */
 
+/* =========================
+   음성 안내 버튼
+========================= */
+
 .voiceGuideButton {
   height: 44px;
   padding: 0 20px;
 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
   flex-shrink: 0;
 
   background-color: var(--color-surface);
+
   border: 1px solid var(--color-primary);
   border-radius: var(--radius-full);
 
@@ -77,6 +87,13 @@
   cursor: pointer;
 
   transition: background-color 0.2s ease;
+}
+
+.voiceGuideButton img {
+  width: 18px;
+  height: 18px;
+  display: block;
+  flex-shrink: 0;
 }
 
 .voiceGuideButton:hover {

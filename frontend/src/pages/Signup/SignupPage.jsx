@@ -3,10 +3,22 @@ import { useNavigate } from "react-router-dom";
 
 import api from "../../libs/api";
 
-import eyeIcon from "../../assets/icons/24/icon=eye, size=24, color=default.svg";
-import eyeOffIcon from "../../assets/icons/24/icon=eyeOff, size=24, color=default.svg";
+import eyeIcon from "../../assets/icons/icon=eye.svg";
+import eyeOffIcon from "../../assets/icons/icon=eyeOff.svg";
+import circleXIcon from "../../assets/icons/icon=CircleX.svg";
 
 import "./SignupPage.css";
+
+function SignupErrorMessage({ message }) {
+  if (!message) return null;
+
+  return (
+    <div className="signupErrorMessage">
+      <img src={circleXIcon} alt="" aria-hidden="true" />
+      <span>{message}</span>
+    </div>
+  );
+}
 
 function SignupPage() {
   const navigate = useNavigate();
@@ -241,7 +253,7 @@ function SignupPage() {
               className={errors.name ? "inputError" : ""}
             />
 
-            {errors.name && <p className="signupErrorMessage">{errors.name}</p>}
+            <SignupErrorMessage message={errors.name} />
           </div>
 
           {/* 전화번호 */}
@@ -269,7 +281,7 @@ function SignupPage() {
               </button>
             </div>
 
-            {errors.tel && <p className="signupErrorMessage">{errors.tel}</p>}
+            <SignupErrorMessage message={errors.tel} />
           </div>
 
           {/* 인증번호 */}
@@ -305,9 +317,7 @@ function SignupPage() {
                 </p>
               )}
 
-              {errors.verification && (
-                <p className="signupErrorMessage">{errors.verification}</p>
-              )}
+              <SignupErrorMessage message={errors.verification} />
             </div>
           )}
 
@@ -341,9 +351,7 @@ function SignupPage() {
 
             <p className="signupHelperText">숫자 6자리 입력해주세요.</p>
 
-            {errors.password && (
-              <p className="signupErrorMessage">{errors.password}</p>
-            )}
+            <SignupErrorMessage message={errors.password} />
           </div>
 
           {/* 비밀번호 확인 */}
@@ -376,9 +384,7 @@ function SignupPage() {
               </button>
             </div>
 
-            {errors.passwordConfirm && (
-              <p className="signupErrorMessage">{errors.passwordConfirm}</p>
-            )}
+            <SignupErrorMessage message={errors.passwordConfirm} />
           </div>
 
           {/* 약관 */}
@@ -389,16 +395,16 @@ function SignupPage() {
               onChange={(e) => setAgreed(e.target.checked)}
             />
 
-            <span>[필수] 이용약관 및 개인정보 처리방침에 동의합니다.</span>
+            <span>
+              [필수] <span className="agreementLink">이용약관</span> 및{" "}
+              <span className="agreementLink">개인정보 처리방침</span>에
+              동의합니다.
+            </span>
           </label>
 
-          {errors.agreed && (
-            <p className="signupErrorMessage">{errors.agreed}</p>
-          )}
+          <SignupErrorMessage message={errors.agreed} />
 
-          {errors.submit && (
-            <p className="signupErrorMessage">{errors.submit}</p>
-          )}
+          <SignupErrorMessage message={errors.submit} />
 
           <button type="submit" className="signupSubmitButton">
             회원가입하기

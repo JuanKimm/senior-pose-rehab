@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import logo from "../assets/logo/logo.svg";
-import chevronDown from "../assets/icons/24/icon=ChevronDown, size=24, color=default.svg";
-import chevronUp from "../assets/icons/24/icon=ChevronUp, size=24, color=default.svg";
+import chevronDown from "../assets/icons/icon=ChevronDown.svg";
+import chevronUp from "../assets/icons/icon=ChevronUp.svg";
 
 function Header() {
   const navigate = useNavigate();

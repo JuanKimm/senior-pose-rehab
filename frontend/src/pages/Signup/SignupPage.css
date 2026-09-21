@@ -144,10 +144,20 @@
 
 .signupErrorMessage {
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 
   color: var(--color-error);
-  font-size: 12px;
+  font-size: 14px;
   line-height: 20px;
+  font-weight: 400;
+}
+
+.signupErrorMessage img {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 }
 
 /* =========================
@@ -173,6 +183,10 @@
   margin: 2px 0 0;
 
   accent-color: var(--color-primary);
+}
+
+.agreementLink {
+  color: var(--color-primary);
 }
 
 /* =========================

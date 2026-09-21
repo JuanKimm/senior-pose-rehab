@@ -15,6 +15,7 @@ function ExercisePage() {
 
   const videoRef = useRef(null);
   const streamRef = useRef(null);
+  const socketRef = useRef(null);
 
   const [elapsedTime, setElapsedTime] = useState(0);
   const [currentCount] = useState(4);
@@ -38,6 +39,48 @@ function ExercisePage() {
     }, 1000);
 
     return () => clearInterval(timer);
+  }, []);
+  /* =========================
+   AI WebSocket 연결 테스트
+========================= */
+
+  useEffect(() => {
+    const testSessionId = `frontend-test-${Date.now()}`;
+
+    const socket = new WebSocket(
+      `ws://127.0.0.1:8000/ws/exercise/${testSessionId}?exercise_code=shoulder_open_close`,
+    );
+
+    socketRef.current = socket;
+
+    socket.onopen = () => {
+      console.log("AI WebSocket 연결 성공");
+    };
+
+    socket.onmessage = (event) => {
+      if (typeof event.data === "string") {
+        console.log("AI 메시지:", event.data);
+      }
+    };
+
+    socket.onerror = (error) => {
+      console.error("AI WebSocket 오류:", error);
+    };
+
+    socket.onclose = () => {
+      console.log("AI WebSocket 연결 종료");
+    };
+
+    return () => {
+      if (
+        socket.readyState === WebSocket.OPEN ||
+        socket.readyState === WebSocket.CONNECTING
+      ) {
+        socket.close();
+      }
+
+      socketRef.current = null;
+    };
   }, []);
 
   /* =========================

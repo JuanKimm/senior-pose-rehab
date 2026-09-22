@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import api from "../../libs/api";
+
 import volumeIcon from "../../assets/icons/icon=Volume2.svg";
 import volumeOffIcon from "../../assets/icons/icon=VolumeX.svg";
 import circleCheckIcon from "../../assets/icons/icon=CircleCheck.svg";
@@ -10,15 +12,52 @@ import cameraOffIcon from "../../assets/icons/icon=cameraOff.svg";
 
 import "../../styles/ExercisePage.css";
 
+let exerciseSessionPromise = null;
+
+const createExerciseSession = () => {
+  const savedSessionId = sessionStorage.getItem("exerciseSessionId");
+
+  if (savedSessionId) {
+    return Promise.resolve(Number(savedSessionId));
+  }
+
+  if (!exerciseSessionPromise) {
+    exerciseSessionPromise = api
+      .post("/api/exercise/session/start", {
+        exerciseTypeId: 1,
+      })
+      .then((response) => {
+        const sessionId = response.data.sessionId;
+
+        sessionStorage.setItem("exerciseSessionId", String(sessionId));
+
+        return sessionId;
+      })
+      .catch((error) => {
+        exerciseSessionPromise = null;
+        throw error;
+      });
+  }
+
+  return exerciseSessionPromise;
+};
+
 function ExercisePage() {
   const navigate = useNavigate();
 
   const videoRef = useRef(null);
   const streamRef = useRef(null);
   const socketRef = useRef(null);
+  const sessionIdRef = useRef(null);
 
   const [elapsedTime, setElapsedTime] = useState(0);
-  const [currentCount] = useState(4);
+  const [currentCount, setCurrentCount] = useState(0);
+  const [aiStatus, setAiStatus] = useState("connecting");
+  const [aiFeedback, setAiFeedback] =
+    useState("카메라 연결을 기다리고 있어요.");
+  const [aiAccuracy, setAiAccuracy] = useState(0);
+  const [aiFrameUrl, setAiFrameUrl] = useState(null);
+  const aiFrameUrlRef = useRef(null);
   const [targetCount] = useState(12);
 
   const [cameraStatus, setCameraStatus] = useState("connecting");
@@ -40,48 +79,224 @@ function ExercisePage() {
 
     return () => clearInterval(timer);
   }, []);
+
   /* =========================
-   AI WebSocket 연결 테스트
-========================= */
+   AI WebSocket 연결
+  ========================= */
 
   useEffect(() => {
-    const testSessionId = `frontend-test-${Date.now()}`;
+    let isActive = true;
+    let socket = null;
 
-    const socket = new WebSocket(
-      `ws://127.0.0.1:8000/ws/exercise/${testSessionId}?exercise_code=shoulder_open_close`,
-    );
+    const connectAi = async () => {
+      try {
+        // 1. 백엔드에서 실제 운동 세션 생성
+        const sessionId = await createExerciseSession();
 
-    socketRef.current = socket;
+        if (!isActive) {
+          return;
+        }
 
-    socket.onopen = () => {
-      console.log("AI WebSocket 연결 성공");
-    };
+        sessionIdRef.current = sessionId;
 
-    socket.onmessage = (event) => {
-      if (typeof event.data === "string") {
-        console.log("AI 메시지:", event.data);
+        console.log("운동 세션 준비 완료:", sessionId);
+
+        // 2. 백엔드에서 받은 sessionId로 AI WebSocket 연결
+        socket = new WebSocket(
+          `ws://127.0.0.1:8000/ws/exercise/${sessionId}?exercise_code=shoulder_open_close`,
+        );
+
+        socketRef.current = socket;
+
+        socket.onopen = () => {
+          if (!isActive) {
+            socket.close();
+            return;
+          }
+
+          console.log("AI WebSocket 연결 성공");
+        };
+
+        socket.onmessage = (event) => {
+          if (!isActive) {
+            return;
+          }
+
+          // AI가 보내는 스켈레톤 JPEG 처리
+          if (typeof event.data !== "string") {
+            if (event.data instanceof Blob) {
+              const nextFrameUrl = URL.createObjectURL(event.data);
+
+              if (aiFrameUrlRef.current) {
+                URL.revokeObjectURL(aiFrameUrlRef.current);
+              }
+
+              aiFrameUrlRef.current = nextFrameUrl;
+              setAiFrameUrl(nextFrameUrl);
+            }
+
+            return;
+          }
+
+          try {
+            const data = JSON.parse(event.data);
+
+            switch (data.type) {
+              case "ready":
+                console.log("AI 준비 완료:", data);
+                setAiStatus("ready");
+                break;
+
+              case "analysis":
+                console.log("AI 분석 결과:", data);
+
+                setAiStatus("analysis");
+                setCurrentCount(data.rep_count ?? 0);
+                setAiAccuracy(data.accuracy ?? 0);
+                setAiFeedback(data.feedback || "자세를 확인하고 있어요.");
+                break;
+
+              case "summary":
+                console.log("AI 운동 종료 요약:", data);
+
+                setAiStatus("summary");
+
+                sessionStorage.setItem("exerciseSummary", JSON.stringify(data));
+
+                if (streamRef.current) {
+                  streamRef.current
+                    .getTracks()
+                    .forEach((track) => track.stop());
+                }
+
+                // 다음 운동에서는 새 백엔드 세션을 만들도록 초기화
+                sessionStorage.removeItem("exerciseSessionId");
+                exerciseSessionPromise = null;
+                sessionIdRef.current = null;
+
+                if (aiFrameUrlRef.current) {
+                  URL.revokeObjectURL(aiFrameUrlRef.current);
+                  aiFrameUrlRef.current = null;
+                }
+
+                navigate("/result");
+                break;
+
+              case "error":
+                console.error("AI 서버 오류:", data);
+                setAiStatus("error");
+                setAiFeedback(
+                  data.message || "AI 분석 중 오류가 발생했습니다.",
+                );
+                break;
+
+              default:
+                console.log("알 수 없는 AI 메시지:", data);
+            }
+          } catch (error) {
+            console.error("AI 메시지 처리 실패:", error);
+          }
+        };
+
+        socket.onerror = (error) => {
+          if (!isActive) {
+            return;
+          }
+
+          console.error("AI WebSocket 오류:", error);
+        };
+
+        socket.onclose = () => {
+          if (!isActive) {
+            return;
+          }
+
+          console.log("AI WebSocket 연결 종료");
+        };
+      } catch (error) {
+        if (!isActive) {
+          return;
+        }
+
+        console.error("운동 세션 생성 또는 AI 연결 실패:", error);
+
+        setAiStatus("error");
+        setAiFeedback("운동을 시작하지 못했어요.");
       }
     };
 
-    socket.onerror = (error) => {
-      console.error("AI WebSocket 오류:", error);
-    };
-
-    socket.onclose = () => {
-      console.log("AI WebSocket 연결 종료");
-    };
+    connectAi();
 
     return () => {
-      if (
-        socket.readyState === WebSocket.OPEN ||
-        socket.readyState === WebSocket.CONNECTING
-      ) {
+      isActive = false;
+
+      if (socket && socket.readyState === WebSocket.OPEN) {
         socket.close();
       }
 
-      socketRef.current = null;
+      if (socketRef.current === socket) {
+        socketRef.current = null;
+      }
     };
-  }, []);
+  }, [navigate]);
+
+  /* =========================
+   웹캠 프레임 → AI 전송
+  ========================= */
+
+  useEffect(() => {
+    if (cameraStatus !== "connected") {
+      return;
+    }
+
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+
+    if (!context) {
+      return;
+    }
+
+    const frameTimer = setInterval(() => {
+      const video = videoRef.current;
+      const socket = socketRef.current;
+
+      if (
+        !video ||
+        !socket ||
+        socket.readyState !== WebSocket.OPEN ||
+        video.readyState < 2
+      ) {
+        return;
+      }
+
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+
+      if (!canvas.width || !canvas.height) {
+        return;
+      }
+
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) {
+            return;
+          }
+
+          if (socket.readyState === WebSocket.OPEN) {
+            socket.send(blob);
+          }
+        },
+        "image/jpeg",
+        0.8,
+      );
+    }, 200);
+
+    return () => {
+      clearInterval(frameTimer);
+    };
+  }, [cameraStatus]);
 
   /* =========================
      카메라 연결
@@ -167,10 +382,16 @@ function ExercisePage() {
   };
 
   const handleEndExercise = () => {
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach((track) => track.stop());
+    const socket = socketRef.current;
+
+    if (socket && socket.readyState === WebSocket.OPEN) {
+      console.log("AI에 운동 종료 요청 전송");
+      socket.send(JSON.stringify({ type: "stop" }));
+      setShowEndModal(false);
+      return;
     }
 
+    console.log("AI 연결이 없어 결과 화면으로 바로 이동");
     navigate("/result");
   };
 
@@ -213,7 +434,14 @@ function ExercisePage() {
             <h2>따라 할 동작</h2>
 
             <div className="referenceVideo">
-              <span>기준 영상</span>
+              <video
+                src="/videos/shoulder_open_close.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="referenceVideoPlayer"
+              />
             </div>
           </section>
 
@@ -259,6 +487,14 @@ function ExercisePage() {
                       : "webcamVideo"
                   }
                 />
+
+                {aiFrameUrl && (
+                  <img
+                    src={aiFrameUrl}
+                    className="aiFrameImage"
+                    alt="AI 자세 분석 화면"
+                  />
+                )}
 
                 {/* 카메라 연결 중 */}
 
@@ -337,7 +573,7 @@ function ExercisePage() {
             aria-hidden="true"
           />
 
-          <strong>좋아요. 자세가 안정적입니다.</strong>
+          <strong>{aiFeedback}</strong>
         </div>
 
         {/* =========================

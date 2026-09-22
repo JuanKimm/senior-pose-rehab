@@ -166,6 +166,13 @@
   font-weight: 500;
 }
 
+.referenceVideoPlayer {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 /* =========================
    오른쪽 영역
 ========================= */
@@ -281,6 +288,19 @@
 
 .webcamVideo.visible {
   display: block;
+}
+
+.aiFrameImage {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  transform: scaleX(-1);
+
+  z-index: 2;
 }
 
 .cameraState {

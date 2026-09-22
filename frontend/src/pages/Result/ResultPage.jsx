@@ -4,13 +4,56 @@ import "../../styles/ResultPage.css";
 function ResultPage() {
   const navigate = useNavigate();
 
-  // 현재는 화면 확인용 임시 데이터
+  /* =========================
+     AI 운동 결과 불러오기
+  ========================= */
+
+  const savedSummary = sessionStorage.getItem("exerciseSummary");
+
+  let summary = null;
+
+  if (savedSummary) {
+    try {
+      summary = JSON.parse(savedSummary);
+    } catch (error) {
+      console.error("운동 결과 불러오기 실패:", error);
+    }
+  }
+
+  /* =========================
+     운동 시간 변환
+  ========================= */
+
+  const formatDuration = (seconds = 0) => {
+    const minute = Math.floor(seconds / 60);
+    const second = seconds % 60;
+
+    return `${String(minute).padStart(2, "0")}:${String(second).padStart(
+      2,
+      "0",
+    )}`;
+  };
+
+  /* =========================
+     오늘 날짜
+  ========================= */
+
+  const today = new Intl.DateTimeFormat("ko-KR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(new Date());
+
+  /* =========================
+     결과 데이터
+  ========================= */
+
   const resultData = {
     exerciseName: "어깨 운동",
-    date: "2026년 9월 13일",
-    totalCount: 12,
-    duration: "02:16",
-    accuracy: 82,
+    date: today,
+    totalCount: summary?.rep_count ?? 0,
+    duration: formatDuration(summary?.duration_sec ?? 0),
+    accuracy: Math.round(summary?.accuracy ?? 0),
   };
 
   const handleRetry = () => {

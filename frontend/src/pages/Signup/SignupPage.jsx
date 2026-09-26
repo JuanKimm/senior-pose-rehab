@@ -25,6 +25,10 @@ function SignupPage() {
 
   const [name, setName] = useState("");
   const [tel, setTel] = useState("");
+
+  // 보호자 연락처 - 선택 입력
+  const [guardianTel, setGuardianTel] = useState("");
+
   const [verificationCode, setVerificationCode] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -41,6 +45,7 @@ function SignupPage() {
   const [signupComplete, setSignupComplete] = useState(false);
 
   const cleanTel = tel.replaceAll("-", "");
+  const cleanGuardianTel = guardianTel.replaceAll("-", "");
 
   // 전화번호가 바뀌면 인증 상태 초기화
   const handleTelChange = (e) => {
@@ -63,18 +68,22 @@ function SignupPage() {
         ...prev,
         tel: "전화번호를 다시 확인해주세요.",
       }));
+
       return;
     }
 
     try {
       // 전화번호 중복 확인
-      const checkResponse = await api.get(`/api/auth/check-phone/${cleanTel}`);
+      const checkResponse = await api.get(
+        `/api/auth/check-phone/${cleanTel}`,
+      );
 
       if (!checkResponse.data.avilable) {
         setErrors((prev) => ({
           ...prev,
           tel: "이미 가입된 전화번호입니다.",
         }));
+
         return;
       }
 
@@ -110,6 +119,7 @@ function SignupPage() {
         ...prev,
         verification: "인증번호 6자리를 입력해주세요.",
       }));
+
       return;
     }
 
@@ -160,21 +170,34 @@ function SignupPage() {
       nextErrors.verification = "전화번호 인증을 완료해주세요.";
     }
 
+    // 보호자 연락처는 선택 입력
+    // 입력했을 때만 형식 검사
+    if (
+      cleanGuardianTel &&
+      !/^010\d{8}$/.test(cleanGuardianTel)
+    ) {
+      nextErrors.guardianTel =
+        "보호자 연락처를 다시 확인해주세요.";
+    }
+
     if (!password) {
       nextErrors.password = "비밀번호를 입력해주세요.";
     } else if (!/^\d{6}$/.test(password)) {
-      nextErrors.password = "비밀번호는 숫자 6자리로 입력해주세요.";
+      nextErrors.password =
+        "비밀번호는 숫자 6자리로 입력해주세요.";
     }
 
     if (!passwordConfirm) {
-      nextErrors.passwordConfirm = "비밀번호를 다시 입력해주세요.";
+      nextErrors.passwordConfirm =
+        "비밀번호를 다시 입력해주세요.";
     } else if (password !== passwordConfirm) {
       nextErrors.passwordConfirm =
         "비밀번호가 서로 같지 않아요. 다시 확인해주세요.";
     }
 
     if (!agreed) {
-      nextErrors.agreed = "이용약관과 개인정보 처리방침에 동의해주세요.";
+      nextErrors.agreed =
+        "이용약관과 개인정보 처리방침에 동의해주세요.";
     }
 
     setErrors(nextErrors);
@@ -188,7 +211,10 @@ function SignupPage() {
         name: name.trim(),
         tel: cleanTel,
         password,
-        guardianTel: "",
+
+        // 입력하지 않으면 ""
+        // 입력하면 하이픈을 제거한 11자리 번호 전송
+        guardianTel: cleanGuardianTel,
       });
 
       setSignupComplete(true);
@@ -297,7 +323,9 @@ function SignupPage() {
                   maxLength={6}
                   placeholder="6자리 인증번호"
                   value={verificationCode}
-                  onChange={(e) => setVerificationCode(e.target.value)}
+                  onChange={(e) =>
+                    setVerificationCode(e.target.value)
+                  }
                   disabled={isPhoneVerified}
                 />
 
@@ -317,9 +345,45 @@ function SignupPage() {
                 </p>
               )}
 
-              <SignupErrorMessage message={errors.verification} />
+              <SignupErrorMessage
+                message={errors.verification}
+              />
             </div>
           )}
+
+          {/* 보호자 연락처 */}
+          <div className="signupField">
+            <label htmlFor="guardianTel">
+              보호자 연락처 (선택)
+            </label>
+
+            <input
+              id="guardianTel"
+              type="tel"
+              placeholder="010-1234-5678"
+              value={guardianTel}
+              onChange={(e) => {
+                setGuardianTel(e.target.value);
+
+                setErrors((prev) => ({
+                  ...prev,
+                  guardianTel: "",
+                }));
+              }}
+              className={
+                errors.guardianTel ? "inputError" : ""
+              }
+            />
+
+            <p className="signupHelperText">
+              입력하면 운동 일정 및 결과 알림을 보호자도 받을 수
+              있어요.
+            </p>
+
+            <SignupErrorMessage
+              message={errors.guardianTel}
+            />
+          </div>
 
           {/* 비밀번호 */}
           <div className="signupField">
@@ -338,53 +402,81 @@ function SignupPage() {
               <button
                 type="button"
                 className="signupPasswordToggle"
-                onClick={() => setShowPassword((prev) => !prev)}
-                aria-label={showPassword ? "비밀번호 숨기기" : "비밀번호 보기"}
+                onClick={() =>
+                  setShowPassword((prev) => !prev)
+                }
+                aria-label={
+                  showPassword
+                    ? "비밀번호 숨기기"
+                    : "비밀번호 보기"
+                }
               >
                 <img
-                  src={showPassword ? eyeOffIcon : eyeIcon}
+                  src={
+                    showPassword ? eyeOffIcon : eyeIcon
+                  }
                   alt=""
                   aria-hidden="true"
                 />
               </button>
             </div>
 
-            <p className="signupHelperText">숫자 6자리 입력해주세요.</p>
+            <p className="signupHelperText">
+              숫자 6자리 입력해주세요.
+            </p>
 
             <SignupErrorMessage message={errors.password} />
           </div>
 
           {/* 비밀번호 확인 */}
           <div className="signupField">
-            <label htmlFor="passwordConfirm">비밀번호 확인</label>
+            <label htmlFor="passwordConfirm">
+              비밀번호 확인
+            </label>
 
             <div className="signupPasswordWrap">
               <input
                 id="passwordConfirm"
-                type={showPasswordConfirm ? "text" : "password"}
+                type={
+                  showPasswordConfirm ? "text" : "password"
+                }
                 placeholder="비밀번호를 한번 더 입력해주세요."
                 value={passwordConfirm}
-                onChange={(e) => setPasswordConfirm(e.target.value)}
-                className={errors.passwordConfirm ? "inputError" : ""}
+                onChange={(e) =>
+                  setPasswordConfirm(e.target.value)
+                }
+                className={
+                  errors.passwordConfirm ? "inputError" : ""
+                }
               />
 
               <button
                 type="button"
                 className="signupPasswordToggle"
-                onClick={() => setShowPasswordConfirm((prev) => !prev)}
+                onClick={() =>
+                  setShowPasswordConfirm((prev) => !prev)
+                }
                 aria-label={
-                  showPasswordConfirm ? "비밀번호 숨기기" : "비밀번호 보기"
+                  showPasswordConfirm
+                    ? "비밀번호 숨기기"
+                    : "비밀번호 보기"
                 }
               >
                 <img
-                  src={showPasswordConfirm ? eyeOffIcon : eyeIcon}
+                  src={
+                    showPasswordConfirm
+                      ? eyeOffIcon
+                      : eyeIcon
+                  }
                   alt=""
                   aria-hidden="true"
                 />
               </button>
             </div>
 
-            <SignupErrorMessage message={errors.passwordConfirm} />
+            <SignupErrorMessage
+              message={errors.passwordConfirm}
+            />
           </div>
 
           {/* 약관 */}
@@ -396,9 +488,15 @@ function SignupPage() {
             />
 
             <span>
-              [필수] <span className="agreementLink">이용약관</span> 및{" "}
-              <span className="agreementLink">개인정보 처리방침</span>에
-              동의합니다.
+              [필수]{" "}
+              <span className="agreementLink">
+                이용약관
+              </span>{" "}
+              및{" "}
+              <span className="agreementLink">
+                개인정보 처리방침
+              </span>
+              에 동의합니다.
             </span>
           </label>
 
@@ -406,7 +504,10 @@ function SignupPage() {
 
           <SignupErrorMessage message={errors.submit} />
 
-          <button type="submit" className="signupSubmitButton">
+          <button
+            type="submit"
+            className="signupSubmitButton"
+          >
             회원가입하기
           </button>
         </form>
@@ -414,7 +515,10 @@ function SignupPage() {
         <div className="loginGuide">
           <span>이미 가입하셨나요?</span>
 
-          <button type="button" onClick={() => navigate("/login")}>
+          <button
+            type="button"
+            onClick={() => navigate("/login")}
+          >
             로그인하기
           </button>
         </div>

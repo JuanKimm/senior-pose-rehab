@@ -29,8 +29,14 @@ function MainPage() {
     }
   };
 
-  const goToExercise = () => {
-    navigate("/exercise");
+  // 운동 종류에 따라 운동 페이지로 이동
+  const goToExercise = (type) => {
+    navigate(`/exercise?type=${type}`);
+  };
+
+  // 아직 연결되지 않은 하체 운동
+  const handleLowerBodyClick = () => {
+    alert("하체 운동은 준비 중입니다.");
   };
 
   return (
@@ -43,7 +49,9 @@ function MainPage() {
           </div>
 
           <div className="heroText">
-            <p className="smallTitle">카메라만 있으면 바로 시작할 수 있어요</p>
+            <p className="smallTitle">
+              카메라만 있으면 바로 시작할 수 있어요
+            </p>
 
             <h1>
               오늘도 편안하게
@@ -76,6 +84,7 @@ function MainPage() {
           </div>
 
           <div className="cardWrap">
+            {/* 상체 운동 */}
             <article className="exerciseCard">
               <div className="cardImagePlaceholder">
                 <img src={upperBodyImage} alt="상체 운동" />
@@ -88,7 +97,7 @@ function MainPage() {
                 <button
                   type="button"
                   className="cardButton"
-                  onClick={goToExercise}
+                  onClick={() => goToExercise("upper")}
                 >
                   운동 보기
                   <img src={arrowRightIcon} alt="" aria-hidden="true" />
@@ -96,6 +105,7 @@ function MainPage() {
               </div>
             </article>
 
+            {/* 어깨 운동 */}
             <article className="exerciseCard">
               <div className="cardImagePlaceholder">
                 <img src={shoulderImage} alt="어깨 운동" />
@@ -108,7 +118,7 @@ function MainPage() {
                 <button
                   type="button"
                   className="cardButton"
-                  onClick={goToExercise}
+                  onClick={() => goToExercise("shoulder")}
                 >
                   운동 보기
                   <img src={arrowRightIcon} alt="" aria-hidden="true" />
@@ -116,6 +126,7 @@ function MainPage() {
               </div>
             </article>
 
+            {/* 하체 운동 */}
             <article className="exerciseCard">
               <div className="cardImagePlaceholder">
                 <img src={lowerBodyImage} alt="하체 운동" />
@@ -128,7 +139,7 @@ function MainPage() {
                 <button
                   type="button"
                   className="cardButton"
-                  onClick={goToExercise}
+                  onClick={handleLowerBodyClick}
                 >
                   운동 보기
                   <img src={arrowRightIcon} alt="" aria-hidden="true" />

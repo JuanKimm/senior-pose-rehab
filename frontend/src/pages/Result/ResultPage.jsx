@@ -1,8 +1,15 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import "../../styles/ResultPage.css";
 
 function ResultPage() {
   const navigate = useNavigate();
+
+  const [searchParams] = useSearchParams();
+
+  const exerciseType = searchParams.get("type") || "shoulder";
+
+  const exerciseName =
+    exerciseType === "upper" ? "상체 운동" : "어깨 운동";
 
   /* =========================
      AI 운동 결과 불러오기
@@ -49,16 +56,24 @@ function ResultPage() {
   ========================= */
 
   const resultData = {
-    exerciseName: "어깨 운동",
+    exerciseName: exerciseName,
     date: today,
     totalCount: summary?.rep_count ?? 0,
     duration: formatDuration(summary?.duration_sec ?? 0),
     accuracy: Math.round(summary?.accuracy ?? 0),
   };
 
+  /* =========================
+     다시 운동하기
+  ========================= */
+
   const handleRetry = () => {
-    navigate("/exercise");
+    navigate(`/exercise?type=${exerciseType}`);
   };
+
+  /* =========================
+     운동 기록 보기
+  ========================= */
 
   const handleGoDashboard = () => {
     navigate("/dashboard");
@@ -108,7 +123,11 @@ function ResultPage() {
               운동 기록 보기
             </button>
 
-            <button type="button" className="retryButton" onClick={handleRetry}>
+            <button
+              type="button"
+              className="retryButton"
+              onClick={handleRetry}
+            >
               다시 운동하기
             </button>
           </div>

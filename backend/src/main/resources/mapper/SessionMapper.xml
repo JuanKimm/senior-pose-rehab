@@ -12,12 +12,9 @@
 
     <!-- 운동 세션 종료 -->
     <update id="endSession">
-        UPDATE EXERCISE_SESSION es
-        SET
-            es.total_count = (SELECT COUNT(*) FROM EXERCISE_SCORE WHERE session_id = #{sessionId}),
-            es.duration_sec = TIMESTAMPDIFF(SECOND, es.created_at, NOW()),
-            es.accuracy = (SELECT AVG(action_score) FROM EXERCISE_SCORE WHERE session_id = #{sessionId})
-        WHERE es.session_id = #{sessionId}
+        UPDATE EXERCISE_SESSION
+        SET accuracy = (SELECT AVG(action_score) FROM EXERCISE_SCORE WHERE session_id = #{sessionId})
+        WHERE session_id = #{sessionId}
     </update>
 
     <!-- 세션 결과 조회 -->

@@ -1,6 +1,5 @@
 package com.seniorrehab.controller;
 
-import com.seniorrehab.model.dto.ScoreSubmitRequestDto;
 import com.seniorrehab.model.dto.VideoUploadRequestDto;
 import com.seniorrehab.service.ScoreService;
 import jakarta.validation.Valid;
@@ -18,20 +17,6 @@ import java.util.Map;
 public class ScoreController {
 
     private final ScoreService scoreService;
-
-    // 운동 점수 데이터 일괄 전송
-    @PostMapping("/session/{sessionId}/score")
-    public ResponseEntity<?> submitScores(
-            @PathVariable Long sessionId,
-            @Valid @RequestBody ScoreSubmitRequestDto request) {
-
-        boolean success = scoreService.submitScores(sessionId, request.getScores());
-        if (!success) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(Map.of("error", "존재하지 않는 세션입니다"));
-        }
-        return ResponseEntity.ok().build();
-    }
 
     // 스켈레톤 오버레이 영상 저장
     @PostMapping("/session/{sessionId}/video-upload")

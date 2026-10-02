@@ -33,7 +33,7 @@ public class SessionService {
                 .build();
     }
 
-    // 운동 세션 종료 - 존재하지 않으면 null 반환
+    // 운동 세션 종료 - 점수 평균으로 정확도만 계산 후 결과 반환, 존재하지 않으면 null 반환
     public ExerciseRecordDto endSession(Long sessionId) {
         int updated = sessionMapper.endSession(sessionId);
         if (updated == 0) {

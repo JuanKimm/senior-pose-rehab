@@ -1,5 +1,4 @@
-# WebSocket으로 주고받는 실시간 분석 결과와 운동 종료 요약을 정의합니다.
-# 프론트엔드가 안정적으로 필드를 해석할 수 있도록 출력 형식을 고정합니다.
+# WebSocket 응답 형식
 from typing import Literal
 
 from pydantic import BaseModel, Field
@@ -42,6 +41,11 @@ class SessionSummaryResponse(BaseModel):
     )
     rep_scores: list[float]
     recording_path: str | None
+    # 결과 전송 상태
+    backend_sent: bool = False
+    backend_error: str | None = None
+    # 운동 종료 사유
+    end_reason: Literal["target_reached", "manual_stop", "disconnected"] = "manual_stop"
 
 
 class ErrorResponse(BaseModel):

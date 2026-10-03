@@ -1,5 +1,4 @@
-# AI 서버에서 사용하는 모든 파일 경로와 실행 설정을 한곳에서 관리합니다.
-# 코드 내부에 절대경로를 흩어 쓰지 않도록 다른 모듈은 이 값을 가져다 씁니다.
+# AI 경로 및 실행 설정
 import os
 from pathlib import Path
 
@@ -39,20 +38,22 @@ FRONTEND_ORIGINS = [
 
 
 def _get_env_bool(name: str, default: bool = False) -> bool:
-    """환경변수의 일반적인 참/거짓 문자열을 bool로 변환합니다."""
+    # 환경변수의 참·거짓 문자열을 bool 값으로 변환
     value = os.getenv(name)
     if value is None:
         return default
     return value.strip().lower() in {"1", "true", "yes", "on"}
 
 
-# 백엔드 연동은 기본적으로 비활성화합니다.
-# 활성화할 때는 실행 환경에서 BACKEND_ENABLED와 BACKEND_BASE_URL을 설정합니다.
+# 백엔드 연동은 기본 비활성화 / 실행 전 환경변수로 활성화
 BACKEND_ENABLED = _get_env_bool("BACKEND_ENABLED", False)
 BACKEND_BASE_URL = os.getenv(
     "BACKEND_BASE_URL",
     "http://localhost:8080",
 ).strip()
+
+# 고정 목표
+TARGET_REP_COUNT = 12
 
 RECORDING_FPS = float(os.getenv("RECORDING_FPS", "24"))
 VIDEO_CODEC = os.getenv("VIDEO_CODEC", "mp4v")
@@ -66,7 +67,7 @@ REFERENCE_END_SEC = float(os.getenv("REFERENCE_END_SEC", "0.0"))
 
 
 def ensure_directories() -> None:
-    """실행에 필요한 로컬 폴더를 생성합니다."""
+    # 실행에 필요한 로컬 저장 폴더 생성
     for directory in (
         REFERENCE_VIDEO_DIR,
         REFERENCE_CACHE_DIR,

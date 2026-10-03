@@ -1,14 +1,4 @@
-"""AI 분석 결과와 녹화 영상 경로를 백엔드에 전달합니다.
-
-- BACKEND_ENABLED=False이면 요청을 보내지 않습니다.
-- 회차별 점수는 actionNo와 actionScore로 변환합니다.
-- angleDiff는 협의 전까지 전송하지 않습니다.
-- 영상 파일 자체가 아니라 videoPath 문자열만 전달합니다.
-
-주의:
-현재 백엔드는 angleDiff를 필수값으로 검사합니다.
-백엔드에서 해당 조건을 변경하기 전에는 점수 요청이 거절됩니다.
-"""
+# 운동 결과 및 녹화 경로 전송
 
 from collections.abc import Sequence
 from math import isfinite
@@ -25,7 +15,7 @@ class BackendClient:
         self.base_url = BACKEND_BASE_URL.strip().rstrip("/")
 
     def _validate_request(self, session_id: int) -> None:
-        """백엔드 요청에 필요한 기본값을 검증합니다."""
+        # 세션 번호 및 백엔드 주소 검증
         if (
             isinstance(session_id, bool)
             or not isinstance(session_id, int)
@@ -38,39 +28,31 @@ class BackendClient:
         if not self.base_url:
             raise RuntimeError("BACKEND_BASE_URL이 설정되지 않았습니다.")
 
-    async def send_scores(
+    async def end_session(
         self,
         session_id: int,
+        rep_count: int,
+        duration_sec: int,
         rep_scores: Sequence[float],
     ) -> bool:
-        """완료된 세션의 회차별 점수를 한 번에 전송합니다.
-
-        actionNo:
-            rep_scores의 순서대로 1부터 부여하는 완료 동작 번호.
-
-        actionScore:
-            AI의 회차별 자세 유사도(0~100).
-            백엔드 Integer 타입에 맞춰 정수로 반올림합니다.
-            Python round()는 정확히 .5일 때 가까운 짝수로 반올림합니다.
-
-        반환값:
-            연동 비활성화 시 False, 전송 성공 시 True.
-
-        오류:
-            잘못된 입력은 ValueError,
-            HTTP 오류와 통신 오류는 httpx 예외로 호출자에게 전달합니다.
-
-        주의:
-            현재 백엔드는 점수를 추가 저장하므로 같은 전체 목록을 반복 전송하면
-            중복 저장될 수 있습니다. 자동 재시도는 수행하지 않습니다.
-        """
+        # 운동 횟수/시간/점수 전송
         if not self.enabled:
             return False
 
         self._validate_request(session_id)
 
-        if len(rep_scores) == 0:
-            raise ValueError("전송할 회차별 점수가 없습니다.")
+        if isinstance(rep_count, bool) or not isinstance(rep_count, int) or rep_count < 0:
+            raise ValueError("운동 횟수는 0 이상의 정수여야 합니다.")
+
+        if (
+            isinstance(duration_sec, bool)
+            or not isinstance(duration_sec, int)
+            or duration_sec < 0
+        ):
+            raise ValueError("운동 시간은 0 이상의 정수(초)여야 합니다.")
+
+        if rep_count != len(rep_scores):
+            raise ValueError("운동 횟수와 회차별 점수 개수가 일치해야 합니다.")
 
         scores: list[dict[str, int]] = []
 
@@ -93,9 +75,13 @@ class BackendClient:
             )
 
         async with httpx.AsyncClient(timeout=20.0) as client:
-            response = await client.post(
-                f"{self.base_url}/api/exercise/session/{session_id}/score",
-                json={"scores": scores},
+            response = await client.put(
+                f"{self.base_url}/api/exercise/session/{session_id}/end",
+                json={
+                    "totalCount": rep_count,
+                    "durationSec": duration_sec,
+                    "scores": scores,
+                },
             )
             response.raise_for_status()
 
@@ -106,16 +92,7 @@ class BackendClient:
         session_id: int,
         video_path: str | Path,
     ) -> bool:
-        """영상 경로 또는 URL을 JSON으로 전달합니다.
-
-        실제 MP4 파일을 업로드하거나 복사하지 않습니다.
-        전달한 경로의 파일에 다른 서버가 접근할 수 있는지는 별도 문제입니다.
-
-        반환값:
-            연동 비활성화 시 False, 전송 성공 시 True.
-
-        HTTP 오류와 통신 오류는 httpx 예외로 호출자에게 전달합니다.
-        """
+        # 영상 경로 전송
         if not self.enabled:
             return False
 

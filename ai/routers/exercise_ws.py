@@ -1,17 +1,19 @@
-# 브라우저에서 JPEG 프레임을 받아 실시간 분석 JSON과 오버레이 프레임을 반환합니다.
-# stop 요청에는 요약을 반환합니다. 일반 연결 해제 시에는 녹화를 닫고 자원을 정리합니다.
 import json
+import logging
 from pathlib import Path
 from time import monotonic
 
 import cv2
+import httpx
 import numpy as np
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 
+from clients.backend_client import BackendClient
 from core.config import (
     FRONTEND_ORIGINS,
     JPEG_QUALITY,
     POSE_MODEL_PATH,
+    TARGET_REP_COUNT,
 )
 from core.exercise_catalog import get_exercise
 from models.schemas import AnalysisResponse, ErrorResponse, SessionSummaryResponse
@@ -23,6 +25,8 @@ from services.session.session_manager import SessionAlreadyActiveError, SessionM
 
 router = APIRouter(tags=["exercise"])
 session_manager = SessionManager()
+backend_client = BackendClient()
+logger = logging.getLogger(__name__)
 
 
 def _summary(
@@ -45,6 +49,40 @@ def _summary(
     )
 
 
+async def _finish_session(session_id: str) -> SessionSummaryResponse | None:
+    # 녹화를 닫고 전송 대기 시간에 영향받지 않도록 운동 요약을 먼저 확정
+    summary = _summary(session_id, session_manager.end(session_id))
+    if summary is None:
+        return None
+
+    if not backend_client.enabled:
+        summary.backend_error = "BACKEND_DISABLED"
+        return summary
+
+    try:
+        summary.backend_sent = await backend_client.end_session(
+            session_id=int(session_id),
+            rep_count=summary.rep_count,
+            duration_sec=summary.duration_sec,
+            rep_scores=summary.rep_scores,
+        )
+    except httpx.HTTPStatusError as exc:
+        summary.backend_error = f"BACKEND_HTTP_{exc.response.status_code}"
+        logger.error(
+            "백엔드 종료 요청 실패: session_id=%s, status=%s",
+            session_id,
+            exc.response.status_code,
+        )
+    except httpx.RequestError:
+        summary.backend_error = "BACKEND_CONNECTION_FAILED"
+        logger.exception("백엔드 연결 실패: session_id=%s", session_id)
+    except (ValueError, RuntimeError):
+        summary.backend_error = "BACKEND_INVALID_RESULT_OR_CONFIG"
+        logger.exception("백엔드 전송 값 또는 설정 오류: session_id=%s", session_id)
+
+    return summary
+
+
 @router.websocket("/ws/exercise/{session_id}")
 async def exercise_websocket(
     websocket: WebSocket, session_id: str, exercise_code: str = "shoulder_open_close"
@@ -55,6 +93,21 @@ async def exercise_websocket(
         return
 
     await websocket.accept()
+    # 연동을 켠 경우 백엔드가 발급한 양의 정수 세션 번호만 허용
+    if backend_client.enabled and (
+        not session_id.isascii()
+        or not session_id.isdecimal()
+        or int(session_id) <= 0
+    ):
+        await websocket.send_json(
+            ErrorResponse(
+                code="INVALID_SESSION_ID",
+                message="백엔드에서 발급한 1 이상의 정수 세션 번호를 사용하세요.",
+            ).model_dump()
+        )
+        await websocket.close(code=1008)
+        return
+
     try:
         spec = get_exercise(exercise_code)
     except ValueError as exc:
@@ -103,8 +156,9 @@ async def exercise_websocket(
                     )
                     continue
                 if command.get("type") == "stop":
-                    summary = _summary(session_id, session_manager.end(session_id))
+                    # 프론트 응답이 실패해도 종료 요청을 다시 보내지 않도록 표시
                     session_started = False
+                    summary = await _finish_session(session_id)
                     if summary is not None:
                         await websocket.send_json(summary.model_dump())
                     await websocket.close(code=1000)
@@ -172,6 +226,17 @@ async def exercise_websocket(
             if ok:
                 await websocket.send_bytes(annotated_jpeg.tobytes())
 
+            # 목표 달성 시 자동 종료
+            if session.state.rep_count >= TARGET_REP_COUNT:
+                session_started = False
+                summary = await _finish_session(session_id)
+                if summary is not None:
+                    if hasattr(summary, "end_reason"):
+                        summary.end_reason = "target_reached"
+                    await websocket.send_json(summary.model_dump())
+                await websocket.close(code=1000)
+                return
+
     except FileNotFoundError as exc:
         await websocket.send_json(
             ErrorResponse(code="REFERENCE_NOT_READY", message=str(exc)).model_dump()
@@ -190,7 +255,10 @@ async def exercise_websocket(
     except WebSocketDisconnect:
         pass
     finally:
-        if session_started:
-            session_manager.end(session_id)
-        if estimator is not None:
-            estimator.close()
+        # 연결 해제 시에도 결과를 한 번 전송하고 자세 추정기 자원을 정리
+        try:
+            if session_started:
+                await _finish_session(session_id)
+        finally:
+            if estimator is not None:
+                estimator.close()

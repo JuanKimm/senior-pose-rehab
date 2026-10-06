@@ -1,5 +1,6 @@
 import json
 import logging
+from asyncio import TimeoutError, wait_for
 from pathlib import Path
 from time import monotonic
 
@@ -79,6 +80,27 @@ async def _finish_session(session_id: str) -> SessionSummaryResponse | None:
     except (ValueError, RuntimeError):
         summary.backend_error = "BACKEND_INVALID_RESULT_OR_CONFIG"
         logger.exception("백엔드 전송 값 또는 설정 오류: session_id=%s", session_id)
+
+    # 결과 전송과 영상 업로드의 실패를 독립적으로 처리
+    if summary.recording_path:
+        try:
+            await wait_for(
+                backend_client.upload_video(
+                    session_id=int(session_id),
+                    video_path=summary.recording_path,
+                ),
+                timeout=60.0,
+            )
+        except httpx.HTTPStatusError as exc:
+            logger.error(
+                "영상 업로드 실패: session_id=%s, status=%s",
+                session_id,
+                exc.response.status_code,
+            )
+        except (httpx.RequestError, TimeoutError):
+            logger.exception("영상 업로드 연결 실패 또는 시간 초과: session_id=%s", session_id)
+        except (OSError, ValueError, RuntimeError):
+            logger.exception("영상 파일 또는 업로드 설정 오류: session_id=%s", session_id)
 
     return summary
 

@@ -1,4 +1,4 @@
-# 운동 결과 및 녹화 경로 전송
+# 운동 결과 및 녹화 파일 전송
 
 from collections.abc import Sequence
 from math import isfinite
@@ -84,6 +84,39 @@ class BackendClient:
                 },
             )
             response.raise_for_status()
+
+        return True
+
+    async def upload_video(
+        self,
+        session_id: int,
+        video_path: str | Path,
+    ) -> bool:
+        # 완성된 MP4 파일을 multipart의 file 항목으로 전송
+        if not self.enabled:
+            return False
+
+        self._validate_request(session_id)
+
+        if not isinstance(video_path, (str, Path)) or not str(video_path).strip():
+            raise ValueError("영상 경로는 비어 있지 않은 문자열 또는 Path여야 합니다.")
+
+        path = Path(video_path)
+        if path.suffix.lower() != ".mp4":
+            raise ValueError("업로드할 영상은 MP4 파일이어야 합니다.")
+        if not path.is_file():
+            raise FileNotFoundError(f"녹화 파일이 없습니다: {path}")
+        if path.stat().st_size == 0:
+            raise ValueError("녹화 파일이 비어 있습니다.")
+
+        # 파일 전체를 메모리에 올리지 않고 전송 후 닫기
+        with path.open("rb") as video_file:
+            async with httpx.AsyncClient(timeout=30.0) as client:
+                response = await client.post(
+                    f"{self.base_url}/api/exercise/session/{session_id}/video-upload",
+                    files={"file": (path.name, video_file, "video/mp4")},
+                )
+                response.raise_for_status()
 
         return True
 

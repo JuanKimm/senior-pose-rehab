@@ -1,0 +1,644 @@
+body {
+  overflow-x: hidden;
+}
+
+/* =========================
+   Home
+========================= */
+
+.home {
+  width: 100%;
+  min-height: 100vh;
+
+  background-color: var(--color-background);
+  color: var(--text-primary);
+}
+
+/* =========================
+   Header
+========================= */
+
+.header {
+  width: 100%;
+  height: 76px;
+  padding: 0 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-divider);
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logoText {
+  cursor: pointer;
+  user-select: none;
+
+  display: flex;
+  align-items: center;
+}
+
+.headerLogo {
+  display: block;
+
+  width: 150px;
+  height: auto;
+}
+
+/* 비로그인 */
+
+.authText {
+  height: 54px;
+  padding: 0 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #ffffff;
+  border: 1px solid var(--color-primary);
+  border-radius: 12px;
+
+  color: var(--text-primary);
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.authText:hover {
+  background-color: var(--color-primary-light);
+}
+
+/* 로그인 */
+
+.userMenuWrap {
+  position: relative;
+}
+
+.userButton {
+  min-width: 144px;
+  height: 54px;
+  padding: 0 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  background-color: #ffffff;
+  border: 1px solid var(--color-primary);
+  border-radius: 12px;
+
+  color: var(--text-primary);
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.userButton:hover {
+  background-color: var(--color-primary-light);
+}
+
+.userButton.open {
+  background-color: #ffffff;
+
+  border-radius: 12px 12px 0 0;
+  border-bottom-color: transparent;
+}
+
+.userButton.open:hover {
+  background-color: #ffffff;
+}
+
+.userChevron {
+  display: block;
+
+  width: 20px;
+  height: 20px;
+}
+
+.userDropdown {
+  position: absolute;
+  top: 53px;
+  right: 0;
+
+  width: 144px;
+  padding: 0 0 8px;
+
+  background-color: #ffffff;
+
+  border: 1px solid var(--color-primary);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+
+  overflow: hidden;
+
+  z-index: 1100;
+}
+
+.userDropdown::before {
+  content: "";
+
+  display: block;
+
+  width: calc(100% - 48px);
+  height: 1px;
+
+  margin: 0 24px 8px;
+
+  background-color: var(--color-divider);
+}
+
+.dropdownItem {
+  display: block;
+
+  width: 100%;
+  padding: 13px 24px;
+
+  background-color: transparent;
+  border: none;
+
+  color: var(--text-primary);
+
+  font-size: 15px;
+  font-weight: 400;
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.dropdownItem:hover {
+  background-color: var(--color-background);
+}
+
+/* =========================
+   Hero Section
+========================= */
+
+.heroSection {
+  width: calc(100% - 96px);
+  max-width: 1200px;
+
+  margin: 0 auto;
+  padding: 72px 0 96px;
+
+  display: grid;
+  grid-template-columns: 1fr 0.95fr;
+  align-items: center;
+
+  column-gap: 64px;
+}
+
+.heroImagePlaceholder {
+  width: 100%;
+  aspect-ratio: 1.48 / 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--color-primary-light);
+  border-radius: 20px;
+
+  color: var(--text-tertiary);
+
+  font-size: 15px;
+
+  overflow: hidden;
+}
+
+.heroText {
+  width: 100%;
+}
+
+.smallTitle {
+  margin: 0 0 16px;
+
+  color: var(--color-primary);
+
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+.heroText h1 {
+  margin: 0 0 28px;
+
+  color: var(--text-primary);
+
+  font-size: 40px;
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.description {
+  margin: 0 0 28px;
+
+  color: var(--text-secondary);
+
+  font-size: 17px;
+  line-height: 30px;
+  font-weight: 400;
+}
+
+/* 메인 운동 선택 버튼 */
+
+.startButton {
+  height: 56px;
+  padding: 0 28px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  border: none;
+  border-radius: 12px;
+
+  background-color: var(--color-primary);
+  color: var(--text-inverse);
+
+  font-size: 17px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: background-color 0.2s ease;
+}
+
+.startButton:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.startButton:active {
+  background-color: var(--color-primary-pressed);
+}
+
+.startButton img {
+  width: 18px;
+  height: 18px;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* =========================
+   Exercise Section
+========================= */
+
+.exerciseSection {
+  width: calc(100% - 96px);
+  max-width: 1200px;
+
+  margin: 0 auto;
+  padding: 24px 0 96px;
+}
+
+.exerciseTitle {
+  margin-bottom: 44px;
+
+  text-align: center;
+}
+
+.exerciseTitle p {
+  margin: 0 0 14px;
+
+  color: var(--color-primary);
+
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+.exerciseTitle h2 {
+  margin: 0;
+
+  color: var(--text-primary);
+
+  font-size: 34px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.cardWrap {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 24px;
+}
+
+/* =========================
+   Exercise Card
+========================= */
+
+.exerciseCard {
+  width: 100%;
+
+  overflow: hidden;
+
+  background-color: var(--color-surface);
+
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+}
+
+.cardImagePlaceholder {
+  width: 100%;
+  height: 220px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--color-primary-light);
+
+  color: var(--text-tertiary);
+
+  font-size: 14px;
+}
+
+.cardContent {
+  padding: 24px;
+}
+
+.cardContent h3 {
+  margin: 0 0 10px;
+
+  color: var(--text-primary);
+
+  font-size: 19px;
+  line-height: 28px;
+  font-weight: 600;
+}
+
+.cardContent p {
+  min-height: 52px;
+
+  margin: 0 0 22px;
+
+  color: var(--text-secondary);
+
+  font-size: 15px;
+  line-height: 26px;
+  font-weight: 400;
+}
+
+.cardButton {
+  height: 48px;
+  padding: 0 20px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  background-color: #ffffff;
+
+  border: 1px solid var(--color-primary);
+  border-radius: 10px;
+
+  color: var(--color-primary);
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.cardButton:hover {
+  background-color: var(--color-primary-light);
+}
+
+.cardButton:active {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.cardButton img {
+  width: 18px;
+  height: 18px;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* 이미지 */
+.heroImagePlaceholder img,
+.cardImagePlaceholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 1024px) {
+  .header {
+    padding: 0 32px;
+  }
+
+  .heroSection {
+    width: calc(100% - 64px);
+
+    grid-template-columns: 1fr;
+
+    row-gap: 40px;
+
+    padding: 56px 0 72px;
+  }
+
+  .heroImagePlaceholder {
+    max-width: 700px;
+
+    margin: 0 auto;
+  }
+
+  .heroText {
+    max-width: 700px;
+
+    margin: 0 auto;
+  }
+
+  .exerciseSection {
+    width: calc(100% - 64px);
+  }
+
+  .cardWrap {
+    grid-template-columns: 1fr;
+  }
+
+  .exerciseCard {
+    max-width: 700px;
+
+    margin: 0 auto;
+  }
+
+  .cardImagePlaceholder {
+    height: 300px;
+  }
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 600px) {
+  .header {
+    height: 60px;
+    padding: 0 16px;
+  }
+
+  .headerLogo {
+    width: 120px;
+  }
+
+  .authText {
+    height: 44px;
+    padding: 0 16px;
+
+    font-size: 14px;
+  }
+
+  .userButton {
+    min-width: 120px;
+    height: 44px;
+    padding: 0 16px;
+
+    font-size: 14px;
+  }
+
+  .userDropdown {
+    top: 43px;
+
+    width: 120px;
+  }
+
+  .dropdownItem {
+    padding: 12px 18px;
+
+    font-size: 14px;
+  }
+
+  .userDropdown::before {
+    width: calc(100% - 36px);
+
+    margin: 0 18px 8px;
+  }
+
+  .userChevron {
+    width: 18px;
+    height: 18px;
+  }
+
+  .heroSection {
+    width: calc(100% - 32px);
+
+    padding: 32px 0 56px;
+
+    row-gap: 32px;
+  }
+
+  .heroImagePlaceholder {
+    aspect-ratio: 4 / 3;
+
+    border-radius: 16px;
+  }
+
+  .smallTitle {
+    margin-bottom: 10px;
+
+    font-size: 14px;
+  }
+
+  .heroText h1 {
+    margin-bottom: 20px;
+
+    font-size: 31px;
+    line-height: 1.4;
+  }
+
+  .description {
+    margin-bottom: 24px;
+
+    font-size: 16px;
+    line-height: 27px;
+  }
+
+  .description br {
+    display: none;
+  }
+
+  .startButton {
+    width: 100%;
+
+    height: 52px;
+
+    font-size: 16px;
+  }
+
+  .exerciseSection {
+    width: calc(100% - 32px);
+
+    padding: 32px 0 64px;
+  }
+
+  .exerciseTitle {
+    margin-bottom: 32px;
+  }
+
+  .exerciseTitle p {
+    margin-bottom: 8px;
+
+    font-size: 14px;
+  }
+
+  .exerciseTitle h2 {
+    font-size: 28px;
+    line-height: 1.4;
+  }
+
+  .cardWrap {
+    gap: 24px;
+  }
+
+  .cardImagePlaceholder {
+    height: 200px;
+  }
+
+  .cardContent {
+    padding: 22px;
+  }
+
+  .cardContent h3 {
+    font-size: 18px;
+  }
+
+  .cardContent p {
+    min-height: auto;
+
+    font-size: 15px;
+  }
+
+  .cardButton {
+    width: 100%;
+  }
+
+}

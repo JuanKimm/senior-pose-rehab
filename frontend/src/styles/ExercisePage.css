@@ -1,0 +1,626 @@
+/* =========================
+   Exercise Page
+========================= */
+
+.exercisePage {
+  width: 100%;
+  min-height: calc(100vh - 76px);
+
+  padding: 36px 48px 48px;
+
+  background-color: var(--color-background);
+  color: var(--text-primary);
+}
+
+.exerciseContainer {
+  width: 100%;
+  max-width: var(--content-max-width);
+
+  margin: 0 auto;
+}
+
+/* =========================
+   제목 + 음성 안내
+========================= */
+
+.exerciseTitleRow {
+  width: 100%;
+  margin-bottom: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.exercisePageTitle h1 {
+  margin: 0 0 8px;
+
+  color: var(--text-primary);
+
+  font-size: 28px;
+  line-height: 38px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.exercisePageTitle p {
+  margin: 0;
+
+  color: var(--text-secondary);
+
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+/* =========================
+   음성 안내 버튼
+========================= */
+
+/* =========================
+   음성 안내 버튼
+========================= */
+
+.voiceGuideButton {
+  height: 44px;
+  padding: 0 20px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  flex-shrink: 0;
+
+  background-color: var(--color-surface);
+
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-full);
+
+  color: var(--color-primary);
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: background-color 0.2s ease;
+}
+
+.voiceGuideButton img {
+  width: 18px;
+  height: 18px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.voiceGuideButton:hover {
+  background-color: var(--color-primary-light);
+}
+
+.voiceGuideButton.active {
+  background-color: var(--color-primary-light);
+}
+
+/* =========================
+   운동 화면
+========================= */
+
+.exerciseMainGrid {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
+
+  gap: 20px;
+}
+
+.referencePanel,
+.progressPanel,
+.cameraPanel {
+  min-width: 0;
+
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+}
+
+.referencePanel {
+  padding: 20px;
+}
+
+.referencePanel h2,
+.progressPanel h2,
+.cameraPanel h2 {
+  margin: 0 0 14px;
+
+  color: var(--text-primary);
+
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+/* =========================
+   따라 할 동작
+========================= */
+
+.referenceVideo {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-medium);
+
+  color: var(--text-tertiary);
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.referenceVideoPlayer {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* =========================
+   오른쪽 영역
+========================= */
+
+.exerciseSideColumn {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+/* =========================
+   운동 진행
+========================= */
+
+.progressPanel {
+  padding: 20px;
+}
+
+.countText {
+  margin-bottom: 10px;
+
+  display: flex;
+  align-items: baseline;
+}
+
+.countText strong {
+  color: var(--text-primary);
+
+  font-size: 30px;
+  line-height: 38px;
+  font-weight: 700;
+}
+
+.countText span {
+  color: var(--text-primary);
+
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 600;
+}
+
+.exerciseProgressBar {
+  width: 100%;
+  height: 7px;
+
+  margin-bottom: 10px;
+
+  overflow: hidden;
+
+  background-color: var(--color-divider);
+  border-radius: var(--radius-full);
+}
+
+.exerciseProgressValue {
+  height: 100%;
+
+  background-color: var(--color-primary);
+  border-radius: var(--radius-full);
+
+  transition: width 0.3s ease;
+}
+
+.progressPanel p {
+  margin: 0;
+
+  color: var(--text-secondary);
+
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+/* =========================
+   내 모습 / 카메라
+========================= */
+
+.cameraPanel {
+  padding: 20px;
+
+  flex: 1;
+}
+
+.cameraBox {
+  position: relative;
+
+  width: 100%;
+  min-height: 215px;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #eef1f2;
+  border-radius: var(--radius-medium);
+}
+
+.webcamVideo {
+  display: none;
+
+  width: 100%;
+  height: 100%;
+  min-height: 215px;
+
+  object-fit: cover;
+
+  transform: scaleX(-1);
+}
+
+.webcamVideo.visible {
+  display: block;
+}
+
+.aiFrameImage {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  transform: scaleX(-1);
+
+  z-index: 2;
+}
+
+.cameraState {
+  width: 100%;
+  min-height: 215px;
+  padding: 24px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  color: var(--text-secondary);
+
+  text-align: center;
+}
+
+.cameraStateIcon {
+  color: var(--text-tertiary);
+
+  font-size: 24px;
+}
+
+.cameraState strong {
+  color: var(--text-secondary);
+
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.cameraErrorState .cameraStateIcon {
+  color: var(--color-error);
+}
+
+.cameraRetryButton {
+  height: 36px;
+  padding: 0 16px;
+
+  margin-top: 4px;
+
+  background-color: var(--color-primary);
+  color: var(--text-inverse);
+
+  border: none;
+  border-radius: var(--radius-small);
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.cameraRetryButton:hover {
+  background-color: var(--color-primary-hover);
+}
+
+/* =========================
+   자세 피드백
+========================= */
+
+.exerciseFeedback {
+  width: 100%;
+  min-height: 60px;
+
+  margin-top: 20px;
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+
+  color: var(--text-primary);
+}
+
+.exerciseFeedback strong {
+  color: var(--text-primary);
+
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+.feedbackIcon {
+  color: var(--color-primary);
+
+  font-size: 17px;
+  font-weight: 700;
+}
+
+/* =========================
+   운동 종료 버튼
+========================= */
+
+.endExerciseButton {
+  display: block;
+
+  width: 460px;
+  max-width: 100%;
+  height: 50px;
+
+  margin: 24px auto 0;
+
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-medium);
+
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: background-color 0.2s ease;
+}
+
+.endExerciseButton:hover {
+  background-color: var(--color-primary-light);
+}
+
+.endExerciseButton:active {
+  background-color: var(--color-primary);
+  color: var(--text-inverse);
+}
+
+/* =========================
+   운동 종료 팝업
+========================= */
+
+.exerciseModalBackdrop {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background-color: rgba(0, 0, 0, 0.3);
+
+  z-index: 2000;
+}
+
+.exerciseEndModal {
+  width: 360px;
+  max-width: 100%;
+
+  padding: 32px 28px 24px;
+
+  background-color: var(--color-surface);
+  border-radius: var(--radius-medium);
+
+  text-align: center;
+
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+}
+
+.exerciseEndModal > strong {
+  display: block;
+
+  margin-bottom: 26px;
+
+  color: var(--text-primary);
+
+  font-size: 17px;
+  line-height: 26px;
+  font-weight: 600;
+}
+
+.exerciseModalButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 10px;
+}
+
+.exerciseModalButtons button {
+  height: 44px;
+
+  border-radius: var(--radius-small);
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.continueExerciseButton {
+  background-color: var(--color-primary);
+  color: var(--text-inverse);
+
+  border: 1px solid var(--color-primary);
+}
+
+.continueExerciseButton:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.confirmEndButton {
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+
+  border: 1px solid var(--color-primary);
+}
+
+.confirmEndButton:hover {
+  background-color: var(--color-primary-light);
+}
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 1024px) {
+  .exercisePage {
+    padding: 32px;
+  }
+
+  .exerciseMainGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .exerciseSideColumn {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cameraBox,
+  .webcamVideo,
+  .cameraState {
+    min-height: 240px;
+  }
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 600px) {
+  .exercisePage {
+    min-height: calc(100vh - 60px);
+
+    padding: 24px 16px 40px;
+  }
+
+  .exerciseTitleRow {
+    margin-bottom: 24px;
+
+    align-items: flex-start;
+
+    gap: 12px;
+  }
+
+  .exercisePageTitle h1 {
+    font-size: 24px;
+    line-height: 34px;
+  }
+
+  .exercisePageTitle p {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .voiceGuideButton {
+    height: 40px;
+    padding: 0 14px;
+
+    font-size: 12px;
+  }
+
+  .exerciseMainGrid {
+    gap: 16px;
+  }
+
+  .referencePanel,
+  .progressPanel,
+  .cameraPanel {
+    padding: 16px;
+  }
+
+  .exerciseSideColumn {
+    display: flex;
+  }
+
+  .countText strong {
+    font-size: 26px;
+  }
+
+  .countText span {
+    font-size: 18px;
+  }
+
+  .cameraBox,
+  .webcamVideo,
+  .cameraState {
+    min-height: 220px;
+  }
+
+  .exerciseFeedback {
+    padding: 12px 16px;
+
+    align-items: flex-start;
+  }
+
+  .endExerciseButton {
+    width: 100%;
+    height: 52px;
+  }
+
+  .exerciseModalButtons {
+    grid-template-columns: 1fr;
+  }
+}

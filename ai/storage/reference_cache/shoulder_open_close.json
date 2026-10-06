@@ -1,0 +1,4770 @@
+{
+  "_description": "귀를 잡고 팔꿈치와 고개를 함께 펼치고 오므리는 기준 동작입니다.",
+  "version": "1.0",
+  "exercise_code": "shoulder_open_close",
+  "source_video": "shoulder_open_close.mp4",
+  "source_sha256": "ab8daca141a8f1524ad44050f30491d4242ce086077ea9dd7dda67a2fe0e20cf",
+  "model_variant": "lite",
+  "source_fps": 24.0,
+  "valid_frame_count": 364,
+  "reference_rep_count": 10,
+  "closed_target": {
+    "elbow_spread_ratio": 1.26726469998388,
+    "head_lift_ratio": 0.6591461567182375,
+    "wrist_ear_ratio": 0.6010408943597289,
+    "elbow_angle_deg": 106.17779777841207,
+    "symmetry_ratio": 0.054907984968772194
+  },
+  "open_target": {
+    "elbow_spread_ratio": 2.446931913616248,
+    "head_lift_ratio": 1.107901041845312,
+    "wrist_ear_ratio": 0.4272706602136414,
+    "elbow_angle_deg": 79.18762291380443,
+    "symmetry_ratio": 0.020007309594599034
+  },
+  "thresholds": {
+    "closed_elbow_ratio": 1.4442147820287352,
+    "open_elbow_ratio": 2.2699818315713927
+  },
+  "tolerances": {
+    "elbow_spread_ratio": 0.1415600656358842,
+    "head_lift_ratio": 0.1121887212817686,
+    "wrist_ear_ratio": 0.18504942094598123,
+    "elbow_angle_deg": 28.210206388272393,
+    "symmetry_ratio": 0.08
+  },
+  "sequence": [
+    {
+      "timestamp_ms": 10000,
+      "features": {
+        "elbow_spread_ratio": 1.2355894877399698,
+        "head_lift_ratio": 0.7347141008201923,
+        "wrist_ear_ratio": 0.5981906550434741,
+        "elbow_angle_deg": 109.44797496455831,
+        "symmetry_ratio": 0.08750263417177548,
+        "shoulder_level_ratio": 0.0479677383331909,
+        "confidence": 0.9998379283481174,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 10167,
+      "features": {
+        "elbow_spread_ratio": 1.2593287503738686,
+        "head_lift_ratio": 0.7145882107526177,
+        "wrist_ear_ratio": 0.5992467837502488,
+        "elbow_angle_deg": 110.93673370520993,
+        "symmetry_ratio": 0.07504923546565492,
+        "shoulder_level_ratio": 0.024359362692681817,
+        "confidence": 0.999701182047526,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 10333,
+      "features": {
+        "elbow_spread_ratio": 1.2719496835640225,
+        "head_lift_ratio": 0.6916528059863201,
+        "wrist_ear_ratio": 0.6183857598545258,
+        "elbow_angle_deg": 110.22445016437007,
+        "symmetry_ratio": 0.07652344034178121,
+        "shoulder_level_ratio": 0.024692273115242906,
+        "confidence": 0.9996264179547628,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 10500,
+      "features": {
+        "elbow_spread_ratio": 1.2749456137387485,
+        "head_lift_ratio": 0.6742330767396677,
+        "wrist_ear_ratio": 0.6235232127754793,
+        "elbow_angle_deg": 106.56424301879431,
+        "symmetry_ratio": 0.07684742921042056,
+        "shoulder_level_ratio": 0.026164983005474277,
+        "confidence": 0.9996093644036187,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 10667,
+      "features": {
+        "elbow_spread_ratio": 1.2757566305269359,
+        "head_lift_ratio": 0.6764227188320173,
+        "wrist_ear_ratio": 0.6267069817944321,
+        "elbow_angle_deg": 105.64925882065852,
+        "symmetry_ratio": 0.08016282988258425,
+        "shoulder_level_ratio": 0.01966108442949032,
+        "confidence": 0.9996007018619113,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 10833,
+      "features": {
+        "elbow_spread_ratio": 1.294932204924205,
+        "head_lift_ratio": 0.719110954773772,
+        "wrist_ear_ratio": 0.6495305560546407,
+        "elbow_angle_deg": 107.62965921290373,
+        "symmetry_ratio": 0.0810015362585366,
+        "shoulder_level_ratio": 0.024734805062898407,
+        "confidence": 0.9995948738522,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 11000,
+      "features": {
+        "elbow_spread_ratio": 1.328633593577719,
+        "head_lift_ratio": 0.8164235472970732,
+        "wrist_ear_ratio": 0.6873818533163732,
+        "elbow_angle_deg": 113.800664183424,
+        "symmetry_ratio": 0.07836583969427005,
+        "shoulder_level_ratio": 0.01923446388548731,
+        "confidence": 0.9995547731717428,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 11167,
+      "features": {
+        "elbow_spread_ratio": 1.3727611575864618,
+        "head_lift_ratio": 0.9031941306857356,
+        "wrist_ear_ratio": 0.6864068983285327,
+        "elbow_angle_deg": 120.08457350428722,
+        "symmetry_ratio": 0.08284682096774014,
+        "shoulder_level_ratio": 0.01095678474947024,
+        "confidence": 0.9995738002989027,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 11333,
+      "features": {
+        "elbow_spread_ratio": 1.4462685973191274,
+        "head_lift_ratio": 0.9820589233156395,
+        "wrist_ear_ratio": 0.7182442448985706,
+        "elbow_angle_deg": 121.50415915446573,
+        "symmetry_ratio": 0.11337342817095249,
+        "shoulder_level_ratio": 0.013737080949851824,
+        "confidence": 0.9996381335788302,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 11500,
+      "features": {
+        "elbow_spread_ratio": 1.5217384778452465,
+        "head_lift_ratio": 1.0299463328592564,
+        "wrist_ear_ratio": 0.759197018702501,
+        "elbow_angle_deg": 118.77214874615404,
+        "symmetry_ratio": 0.16464059633334832,
+        "shoulder_level_ratio": 0.0435254616696905,
+        "confidence": 0.9997205336888632,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 11667,
+      "features": {
+        "elbow_spread_ratio": 1.6802389541103606,
+        "head_lift_ratio": 1.0855611933411662,
+        "wrist_ear_ratio": 0.7113845419709197,
+        "elbow_angle_deg": 118.40257491976485,
+        "symmetry_ratio": 0.16604027900564441,
+        "shoulder_level_ratio": 0.03920890677179551,
+        "confidence": 0.9997763302591112,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 11833,
+      "features": {
+        "elbow_spread_ratio": 1.815046359927698,
+        "head_lift_ratio": 1.1161075395450961,
+        "wrist_ear_ratio": 0.6617666805861098,
+        "elbow_angle_deg": 110.5098004498172,
+        "symmetry_ratio": 0.16117338880950466,
+        "shoulder_level_ratio": 0.009647903796792208,
+        "confidence": 0.9998216231664022,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 12000,
+      "features": {
+        "elbow_spread_ratio": 1.919361912679603,
+        "head_lift_ratio": 1.1710075656024035,
+        "wrist_ear_ratio": 0.6456408860418845,
+        "elbow_angle_deg": 102.20337370104465,
+        "symmetry_ratio": 0.16078038316385174,
+        "shoulder_level_ratio": 0.012281227785135032,
+        "confidence": 0.9998419947094388,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 12167,
+      "features": {
+        "elbow_spread_ratio": 1.9482371477480036,
+        "head_lift_ratio": 1.172102529559126,
+        "wrist_ear_ratio": 0.6320236452334216,
+        "elbow_angle_deg": 101.76257660739816,
+        "symmetry_ratio": 0.1750834224485609,
+        "shoulder_level_ratio": 0.012355975808790168,
+        "confidence": 0.9998342990875244,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 12333,
+      "features": {
+        "elbow_spread_ratio": 2.034351171603631,
+        "head_lift_ratio": 1.1910031980911513,
+        "wrist_ear_ratio": 0.6316618583349123,
+        "elbow_angle_deg": 98.3656102290392,
+        "symmetry_ratio": 0.1633605366413,
+        "shoulder_level_ratio": 0.008264802383964442,
+        "confidence": 0.9998339745733473,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 12500,
+      "features": {
+        "elbow_spread_ratio": 2.1164730538566188,
+        "head_lift_ratio": 1.2487977344421812,
+        "wrist_ear_ratio": 0.5836919288480756,
+        "elbow_angle_deg": 96.38091645955204,
+        "symmetry_ratio": 0.15942075397167943,
+        "shoulder_level_ratio": 0.004955616472150096,
+        "confidence": 0.9998279942406548,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 12667,
+      "features": {
+        "elbow_spread_ratio": 2.195913059236032,
+        "head_lift_ratio": 1.2856932790575997,
+        "wrist_ear_ratio": 0.5345957014224136,
+        "elbow_angle_deg": 95.65520829848342,
+        "symmetry_ratio": 0.1538136595358024,
+        "shoulder_level_ratio": 0.0024236178526842993,
+        "confidence": 0.9997812708218893,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 12833,
+      "features": {
+        "elbow_spread_ratio": 2.3114900445023756,
+        "head_lift_ratio": 1.2540769348874745,
+        "wrist_ear_ratio": 0.48951449670475683,
+        "elbow_angle_deg": 93.36130026225462,
+        "symmetry_ratio": 0.09694502676908329,
+        "shoulder_level_ratio": 0.010782052749714399,
+        "confidence": 0.9996887644131979,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 13000,
+      "features": {
+        "elbow_spread_ratio": 2.346495755828061,
+        "head_lift_ratio": 1.2334029694477737,
+        "wrist_ear_ratio": 0.4541332437185645,
+        "elbow_angle_deg": 91.57528204025374,
+        "symmetry_ratio": 0.062370374868352355,
+        "shoulder_level_ratio": 0.012884889208720666,
+        "confidence": 0.9996701147821214,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 13167,
+      "features": {
+        "elbow_spread_ratio": 2.401193127100357,
+        "head_lift_ratio": 1.1664559523295328,
+        "wrist_ear_ratio": 0.39515090310210643,
+        "elbow_angle_deg": 84.70627131878265,
+        "symmetry_ratio": 0.012879561360103826,
+        "shoulder_level_ratio": 0.011381760031675707,
+        "confidence": 0.9995768997404311,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 13333,
+      "features": {
+        "elbow_spread_ratio": 2.4112978812869903,
+        "head_lift_ratio": 1.144092912137004,
+        "wrist_ear_ratio": 0.36929338547321455,
+        "elbow_angle_deg": 83.49321620681985,
+        "symmetry_ratio": 0.005164180639851788,
+        "shoulder_level_ratio": 0.033556480728440044,
+        "confidence": 0.9995255801412795,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 13500,
+      "features": {
+        "elbow_spread_ratio": 2.4117993089783463,
+        "head_lift_ratio": 1.1099680606685127,
+        "wrist_ear_ratio": 0.3816111247913012,
+        "elbow_angle_deg": 80.96256300830524,
+        "symmetry_ratio": 0.0016338972916142738,
+        "shoulder_level_ratio": 0.055257445063521565,
+        "confidence": 0.9994962480333116,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 13667,
+      "features": {
+        "elbow_spread_ratio": 2.4229054126965517,
+        "head_lift_ratio": 1.0961377305375728,
+        "wrist_ear_ratio": 0.3986759350116388,
+        "elbow_angle_deg": 80.34970402075386,
+        "symmetry_ratio": 0.004501277971002417,
+        "shoulder_level_ratio": 0.06013362604413738,
+        "confidence": 0.9994536439577738,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 13833,
+      "features": {
+        "elbow_spread_ratio": 2.4250585639123092,
+        "head_lift_ratio": 1.1139748831338394,
+        "wrist_ear_ratio": 0.3971265134400699,
+        "elbow_angle_deg": 80.49595060628904,
+        "symmetry_ratio": 0.005327634101695654,
+        "shoulder_level_ratio": 0.058556595521464846,
+        "confidence": 0.9994480080074735,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 14000,
+      "features": {
+        "elbow_spread_ratio": 2.4296098779242055,
+        "head_lift_ratio": 1.1695770289913936,
+        "wrist_ear_ratio": 0.40827369609354247,
+        "elbow_angle_deg": 84.32428947209618,
+        "symmetry_ratio": 0.00795872624443951,
+        "shoulder_level_ratio": 0.03686003104381483,
+        "confidence": 0.9994523988829719,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 14167,
+      "features": {
+        "elbow_spread_ratio": 2.3643632797888277,
+        "head_lift_ratio": 1.1854362773192118,
+        "wrist_ear_ratio": 0.4571648943781458,
+        "elbow_angle_deg": 86.62510030204834,
+        "symmetry_ratio": 0.05155561605362936,
+        "shoulder_level_ratio": 0.038418665693470855,
+        "confidence": 0.9994609819518195,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 14333,
+      "features": {
+        "elbow_spread_ratio": 2.309416472480337,
+        "head_lift_ratio": 1.1852170360010166,
+        "wrist_ear_ratio": 0.5070188963686647,
+        "elbow_angle_deg": 85.45281285935262,
+        "symmetry_ratio": 0.07400224202705308,
+        "shoulder_level_ratio": 0.05370298333772086,
+        "confidence": 0.9995157917340597,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 14500,
+      "features": {
+        "elbow_spread_ratio": 2.259718040387389,
+        "head_lift_ratio": 1.1945236568360729,
+        "wrist_ear_ratio": 0.5694444231923668,
+        "elbow_angle_deg": 83.04473510119794,
+        "symmetry_ratio": 0.08625044040381571,
+        "shoulder_level_ratio": 0.04486018098215912,
+        "confidence": 0.9996126492818197,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 14667,
+      "features": {
+        "elbow_spread_ratio": 2.1729611302527023,
+        "head_lift_ratio": 1.1288737823734072,
+        "wrist_ear_ratio": 0.6250975317320597,
+        "elbow_angle_deg": 84.61226359827205,
+        "symmetry_ratio": 0.09373623075104223,
+        "shoulder_level_ratio": 0.04087306343189501,
+        "confidence": 0.9997025926907858,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 14833,
+      "features": {
+        "elbow_spread_ratio": 2.0617249059595384,
+        "head_lift_ratio": 1.0529875785255638,
+        "wrist_ear_ratio": 0.6652706908627064,
+        "elbow_angle_deg": 93.92139589029615,
+        "symmetry_ratio": 0.1318279752890954,
+        "shoulder_level_ratio": 0.037721500854348014,
+        "confidence": 0.9997683299912347,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 15000,
+      "features": {
+        "elbow_spread_ratio": 1.9618320907618236,
+        "head_lift_ratio": 1.0024948190935636,
+        "wrist_ear_ratio": 0.6592117252798457,
+        "elbow_angle_deg": 104.45276620950654,
+        "symmetry_ratio": 0.13515065544350546,
+        "shoulder_level_ratio": 0.03484573544111684,
+        "confidence": 0.9998117486635844,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 15167,
+      "features": {
+        "elbow_spread_ratio": 1.9212903565599122,
+        "head_lift_ratio": 0.9714689830352464,
+        "wrist_ear_ratio": 0.605799058226141,
+        "elbow_angle_deg": 107.55788458585221,
+        "symmetry_ratio": 0.0741923818540505,
+        "shoulder_level_ratio": 0.019923352130343942,
+        "confidence": 0.9998075299792819,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 15333,
+      "features": {
+        "elbow_spread_ratio": 1.8884288517117271,
+        "head_lift_ratio": 0.912446760129187,
+        "wrist_ear_ratio": 0.5867430058661645,
+        "elbow_angle_deg": 102.35691920200753,
+        "symmetry_ratio": 0.03977671486883784,
+        "shoulder_level_ratio": 0.01778971498267236,
+        "confidence": 0.9998411138852438,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 15500,
+      "features": {
+        "elbow_spread_ratio": 1.7561066390242193,
+        "head_lift_ratio": 0.8349666911303965,
+        "wrist_ear_ratio": 0.5791060812988547,
+        "elbow_angle_deg": 108.64030540851348,
+        "symmetry_ratio": 0.09704809703440685,
+        "shoulder_level_ratio": 0.008296460125551337,
+        "confidence": 0.9998590482605828,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 15667,
+      "features": {
+        "elbow_spread_ratio": 1.5645028955366072,
+        "head_lift_ratio": 0.8009591029983925,
+        "wrist_ear_ratio": 0.6528896739443987,
+        "elbow_angle_deg": 108.4190988360903,
+        "symmetry_ratio": 0.11737379654249588,
+        "shoulder_level_ratio": 0.011325048899347344,
+        "confidence": 0.9998593860202365,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 15833,
+      "features": {
+        "elbow_spread_ratio": 1.4256387993599362,
+        "head_lift_ratio": 0.7106838531438127,
+        "wrist_ear_ratio": 0.6633087021061739,
+        "elbow_angle_deg": 106.6437613244331,
+        "symmetry_ratio": 0.10335918000291075,
+        "shoulder_level_ratio": 0.033870201952053855,
+        "confidence": 0.9998136228985257,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 16000,
+      "features": {
+        "elbow_spread_ratio": 1.3326101236204075,
+        "head_lift_ratio": 0.6668881665037805,
+        "wrist_ear_ratio": 0.636848514067456,
+        "elbow_angle_deg": 105.18761926830709,
+        "symmetry_ratio": 0.0717469096901539,
+        "shoulder_level_ratio": 0.045460254151976055,
+        "confidence": 0.9997635020150079,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 16167,
+      "features": {
+        "elbow_spread_ratio": 1.2934569578381396,
+        "head_lift_ratio": 0.6424854114026646,
+        "wrist_ear_ratio": 0.6132007878581907,
+        "elbow_angle_deg": 105.48048189879913,
+        "symmetry_ratio": 0.043217532764923586,
+        "shoulder_level_ratio": 0.020542324722506937,
+        "confidence": 0.9996640880902609,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 16333,
+      "features": {
+        "elbow_spread_ratio": 1.2551730882163061,
+        "head_lift_ratio": 0.6263075360521554,
+        "wrist_ear_ratio": 0.5835525960733292,
+        "elbow_angle_deg": 107.27898234156231,
+        "symmetry_ratio": 0.038015697208848856,
+        "shoulder_level_ratio": 0.019197445096249433,
+        "confidence": 0.9995703763431973,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 16500,
+      "features": {
+        "elbow_spread_ratio": 1.2444453057045703,
+        "head_lift_ratio": 0.6104503313961493,
+        "wrist_ear_ratio": 0.562508281537405,
+        "elbow_angle_deg": 108.80704589280055,
+        "symmetry_ratio": 0.04269948594684783,
+        "shoulder_level_ratio": 0.02258823759638519,
+        "confidence": 0.9995398587650723,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 16667,
+      "features": {
+        "elbow_spread_ratio": 1.2393768519211874,
+        "head_lift_ratio": 0.6230484401309915,
+        "wrist_ear_ratio": 0.5686178113617116,
+        "elbow_angle_deg": 109.44219163614022,
+        "symmetry_ratio": 0.0490639910210281,
+        "shoulder_level_ratio": 0.04485927248285412,
+        "confidence": 0.9995279643270705,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 16833,
+      "features": {
+        "elbow_spread_ratio": 1.2479310413840226,
+        "head_lift_ratio": 0.6893565649397146,
+        "wrist_ear_ratio": 0.5693443682931965,
+        "elbow_angle_deg": 113.19061369479066,
+        "symmetry_ratio": 0.059428300998276035,
+        "shoulder_level_ratio": 0.057410825613911136,
+        "confidence": 0.9995144406954447,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 17000,
+      "features": {
+        "elbow_spread_ratio": 1.28585391332705,
+        "head_lift_ratio": 0.8582353626914832,
+        "wrist_ear_ratio": 0.6073303624991893,
+        "elbow_angle_deg": 117.03781929251855,
+        "symmetry_ratio": 0.04555470335649734,
+        "shoulder_level_ratio": 0.04105885515658729,
+        "confidence": 0.9992755783928765,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 17167,
+      "features": {
+        "elbow_spread_ratio": 1.3456772939403332,
+        "head_lift_ratio": 0.9623726934040857,
+        "wrist_ear_ratio": 0.6315441110802567,
+        "elbow_angle_deg": 119.49237054195929,
+        "symmetry_ratio": 0.07185228333378332,
+        "shoulder_level_ratio": 0.017131613850789318,
+        "confidence": 0.9993254939715067,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 17333,
+      "features": {
+        "elbow_spread_ratio": 1.4552211008223672,
+        "head_lift_ratio": 1.0217416749642596,
+        "wrist_ear_ratio": 0.6446711110103241,
+        "elbow_angle_deg": 121.67500549596261,
+        "symmetry_ratio": 0.08693693371896793,
+        "shoulder_level_ratio": 0.007634673898851299,
+        "confidence": 0.999442544248369,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 17500,
+      "features": {
+        "elbow_spread_ratio": 1.7248323350888044,
+        "head_lift_ratio": 1.1428712256696567,
+        "wrist_ear_ratio": 0.6424119597293347,
+        "elbow_angle_deg": 117.730071725726,
+        "symmetry_ratio": 0.10301681168415933,
+        "shoulder_level_ratio": 0.006501495783858455,
+        "confidence": 0.9995873040623136,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 17667,
+      "features": {
+        "elbow_spread_ratio": 1.8861996986692713,
+        "head_lift_ratio": 1.2180701411241155,
+        "wrist_ear_ratio": 0.6731892177429099,
+        "elbow_angle_deg": 114.17809230598871,
+        "symmetry_ratio": 0.12208894325003822,
+        "shoulder_level_ratio": 0.0036943665366866055,
+        "confidence": 0.9996765189700656,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 17833,
+      "features": {
+        "elbow_spread_ratio": 1.971092262668708,
+        "head_lift_ratio": 1.2147326160415037,
+        "wrist_ear_ratio": 0.6776425791654508,
+        "elbow_angle_deg": 105.83931024260102,
+        "symmetry_ratio": 0.1351789630637839,
+        "shoulder_level_ratio": 0.029514582441984124,
+        "confidence": 0.9997380309634738,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 18000,
+      "features": {
+        "elbow_spread_ratio": 2.074324588188129,
+        "head_lift_ratio": 1.2193565525561856,
+        "wrist_ear_ratio": 0.6405300687814295,
+        "elbow_angle_deg": 98.19545026898001,
+        "symmetry_ratio": 0.13126058189252743,
+        "shoulder_level_ratio": 0.04356234768797402,
+        "confidence": 0.9997786482175192,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 18167,
+      "features": {
+        "elbow_spread_ratio": 2.1286200921521288,
+        "head_lift_ratio": 1.2554242192765455,
+        "wrist_ear_ratio": 0.5787323509935671,
+        "elbow_angle_deg": 102.37490674858844,
+        "symmetry_ratio": 0.15692188091614764,
+        "shoulder_level_ratio": 0.021750723210299805,
+        "confidence": 0.9998046623335944,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 18333,
+      "features": {
+        "elbow_spread_ratio": 2.1954004579585322,
+        "head_lift_ratio": 1.2638152447053497,
+        "wrist_ear_ratio": 0.5167518658272172,
+        "elbow_angle_deg": 101.45747032012633,
+        "symmetry_ratio": 0.14317463769808064,
+        "shoulder_level_ratio": 0.0055027982238882445,
+        "confidence": 0.9997386866145663,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 18500,
+      "features": {
+        "elbow_spread_ratio": 2.315618286420671,
+        "head_lift_ratio": 1.2120339376386942,
+        "wrist_ear_ratio": 0.4620965359886807,
+        "elbow_angle_deg": 92.85981457284808,
+        "symmetry_ratio": 0.10233349470165443,
+        "shoulder_level_ratio": 0.012966046867940256,
+        "confidence": 0.9996831218401591,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 18667,
+      "features": {
+        "elbow_spread_ratio": 2.35017596145001,
+        "head_lift_ratio": 1.188629832127535,
+        "wrist_ear_ratio": 0.4299262643134256,
+        "elbow_angle_deg": 91.40109208442078,
+        "symmetry_ratio": 0.07785959533761548,
+        "shoulder_level_ratio": 0.011102253026841775,
+        "confidence": 0.9996426900227865,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 18833,
+      "features": {
+        "elbow_spread_ratio": 2.377562012979545,
+        "head_lift_ratio": 1.1165030116528318,
+        "wrist_ear_ratio": 0.3938384098190065,
+        "elbow_angle_deg": 84.21322445449987,
+        "symmetry_ratio": 0.05142987478751257,
+        "shoulder_level_ratio": 0.007353144391152286,
+        "confidence": 0.9995949533250597,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 19000,
+      "features": {
+        "elbow_spread_ratio": 2.435724709691527,
+        "head_lift_ratio": 1.1377394877084506,
+        "wrist_ear_ratio": 0.3916259365195047,
+        "elbow_angle_deg": 83.15231013835319,
+        "symmetry_ratio": 0.011706441843305247,
+        "shoulder_level_ratio": 0.017154614629824434,
+        "confidence": 0.9996337956852384,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 19167,
+      "features": {
+        "elbow_spread_ratio": 2.4435966275272243,
+        "head_lift_ratio": 1.1348838800271128,
+        "wrist_ear_ratio": 0.3848468923904519,
+        "elbow_angle_deg": 81.31259055569785,
+        "symmetry_ratio": 0.0015649011737887577,
+        "shoulder_level_ratio": 0.026418963670448388,
+        "confidence": 0.999578853448232,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 19333,
+      "features": {
+        "elbow_spread_ratio": 2.441506182128019,
+        "head_lift_ratio": 1.132225842009847,
+        "wrist_ear_ratio": 0.3847835771082846,
+        "elbow_angle_deg": 80.02887243562671,
+        "symmetry_ratio": 0.0016728531648210077,
+        "shoulder_level_ratio": 0.0288841717438659,
+        "confidence": 0.9996287226676941,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 19500,
+      "features": {
+        "elbow_spread_ratio": 2.4353147505180432,
+        "head_lift_ratio": 1.1078017226838381,
+        "wrist_ear_ratio": 0.4028469899156732,
+        "elbow_angle_deg": 81.1563241869668,
+        "symmetry_ratio": 0.006365694962946288,
+        "shoulder_level_ratio": 0.03339890859295742,
+        "confidence": 0.9996032582388984,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 19667,
+      "features": {
+        "elbow_spread_ratio": 2.432855458184833,
+        "head_lift_ratio": 1.111221098549714,
+        "wrist_ear_ratio": 0.4022487392514664,
+        "elbow_angle_deg": 78.26841143855856,
+        "symmetry_ratio": 0.01329580080477136,
+        "shoulder_level_ratio": 0.04051072149690181,
+        "confidence": 0.9996227025985718,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 19833,
+      "features": {
+        "elbow_spread_ratio": 2.445116492709087,
+        "head_lift_ratio": 1.1387036189638595,
+        "wrist_ear_ratio": 0.4110042538472433,
+        "elbow_angle_deg": 80.54634958569557,
+        "symmetry_ratio": 0.0127842448851705,
+        "shoulder_level_ratio": 0.03632223525809567,
+        "confidence": 0.999551448557112,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 20000,
+      "features": {
+        "elbow_spread_ratio": 2.4354698891047817,
+        "head_lift_ratio": 1.139600055764783,
+        "wrist_ear_ratio": 0.3997994917876182,
+        "elbow_angle_deg": 80.78553334199927,
+        "symmetry_ratio": 0.032908554240871815,
+        "shoulder_level_ratio": 0.019205215345574567,
+        "confidence": 0.9995693696869744,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 20167,
+      "features": {
+        "elbow_spread_ratio": 2.3707150579361835,
+        "head_lift_ratio": 1.1780979536208303,
+        "wrist_ear_ratio": 0.4228522515538724,
+        "elbow_angle_deg": 86.23996596615447,
+        "symmetry_ratio": 0.039007495254998734,
+        "shoulder_level_ratio": 0.04950811943098139,
+        "confidence": 0.9995662569999695,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 20333,
+      "features": {
+        "elbow_spread_ratio": 2.307934534089804,
+        "head_lift_ratio": 1.2019289997678628,
+        "wrist_ear_ratio": 0.46404831386673584,
+        "elbow_angle_deg": 87.27351580912784,
+        "symmetry_ratio": 0.052304075395720316,
+        "shoulder_level_ratio": 0.07477103648467212,
+        "confidence": 0.9995371235741509,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 20500,
+      "features": {
+        "elbow_spread_ratio": 2.2328521230688976,
+        "head_lift_ratio": 1.1945653453880374,
+        "wrist_ear_ratio": 0.5260619579358761,
+        "elbow_angle_deg": 82.72827590904936,
+        "symmetry_ratio": 0.0806287879910712,
+        "shoulder_level_ratio": 0.05832500218092543,
+        "confidence": 0.9996102982097201,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 20667,
+      "features": {
+        "elbow_spread_ratio": 2.10169971253329,
+        "head_lift_ratio": 1.1967977964893244,
+        "wrist_ear_ratio": 0.6027985864628438,
+        "elbow_angle_deg": 87.91943755788628,
+        "symmetry_ratio": 0.12678350273030697,
+        "shoulder_level_ratio": 0.03422216570001867,
+        "confidence": 0.999690956539578,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 20833,
+      "features": {
+        "elbow_spread_ratio": 1.9131389558564265,
+        "head_lift_ratio": 1.1431264484033916,
+        "wrist_ear_ratio": 0.6484919271447853,
+        "elbow_angle_deg": 105.65567356805852,
+        "symmetry_ratio": 0.12757848556125717,
+        "shoulder_level_ratio": 0.03423210307752752,
+        "confidence": 0.9997607535786099,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 21000,
+      "features": {
+        "elbow_spread_ratio": 1.8118149116052695,
+        "head_lift_ratio": 1.0780636921411297,
+        "wrist_ear_ratio": 0.6247561629468537,
+        "elbow_angle_deg": 106.80313987821653,
+        "symmetry_ratio": 0.12279854750957479,
+        "shoulder_level_ratio": 0.05439821245330745,
+        "confidence": 0.9998096823692322,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 21167,
+      "features": {
+        "elbow_spread_ratio": 1.7232531522784056,
+        "head_lift_ratio": 0.9448795286673685,
+        "wrist_ear_ratio": 0.591404258515861,
+        "elbow_angle_deg": 107.27176606125285,
+        "symmetry_ratio": 0.08928007012689294,
+        "shoulder_level_ratio": 0.04678964273533334,
+        "confidence": 0.9998109936714172,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 21333,
+      "features": {
+        "elbow_spread_ratio": 1.6263438816859561,
+        "head_lift_ratio": 0.9017549784581856,
+        "wrist_ear_ratio": 0.6049123997955503,
+        "elbow_angle_deg": 111.87183251722021,
+        "symmetry_ratio": 0.12687960638052492,
+        "shoulder_level_ratio": 0.03357699616012075,
+        "confidence": 0.9998160070843167,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 21500,
+      "features": {
+        "elbow_spread_ratio": 1.5115645773479767,
+        "head_lift_ratio": 0.8582278638174289,
+        "wrist_ear_ratio": 0.6080457778333836,
+        "elbow_angle_deg": 114.32105284331229,
+        "symmetry_ratio": 0.12948386930341627,
+        "shoulder_level_ratio": 0.031042553099120185,
+        "confidence": 0.9998063378863864,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 21667,
+      "features": {
+        "elbow_spread_ratio": 1.4654611431259847,
+        "head_lift_ratio": 0.8530871299628248,
+        "wrist_ear_ratio": 0.672132369360509,
+        "elbow_angle_deg": 114.12900339950397,
+        "symmetry_ratio": 0.12335545075132237,
+        "shoulder_level_ratio": 0.01912591126486881,
+        "confidence": 0.9997734559906853,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 21833,
+      "features": {
+        "elbow_spread_ratio": 1.4000645812269026,
+        "head_lift_ratio": 0.8162570600464352,
+        "wrist_ear_ratio": 0.7153473597692075,
+        "elbow_angle_deg": 108.04218088375298,
+        "symmetry_ratio": 0.09308147087452628,
+        "shoulder_level_ratio": 0.049981641428897744,
+        "confidence": 0.999726288848453,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 22000,
+      "features": {
+        "elbow_spread_ratio": 1.3386451483461212,
+        "head_lift_ratio": 0.7354454580403514,
+        "wrist_ear_ratio": 0.6947889913866259,
+        "elbow_angle_deg": 105.53479884877547,
+        "symmetry_ratio": 0.0778168158645979,
+        "shoulder_level_ratio": 0.04523559777086013,
+        "confidence": 0.9996178017722236,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 22167,
+      "features": {
+        "elbow_spread_ratio": 1.2776868960872791,
+        "head_lift_ratio": 0.693922857318515,
+        "wrist_ear_ratio": 0.6247947877021253,
+        "elbow_angle_deg": 104.643468709623,
+        "symmetry_ratio": 0.046134392491210194,
+        "shoulder_level_ratio": 0.03225246410912794,
+        "confidence": 0.9995575878355238,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 22333,
+      "features": {
+        "elbow_spread_ratio": 1.2592024713520218,
+        "head_lift_ratio": 0.6904689341335524,
+        "wrist_ear_ratio": 0.6052404506657005,
+        "elbow_angle_deg": 105.04778936147312,
+        "symmetry_ratio": 0.03476989812233333,
+        "shoulder_level_ratio": 0.027752494087377184,
+        "confidence": 0.9995173282093472,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 22500,
+      "features": {
+        "elbow_spread_ratio": 1.2489375395739213,
+        "head_lift_ratio": 0.6520006803917058,
+        "wrist_ear_ratio": 0.6016127028235163,
+        "elbow_angle_deg": 105.4160749261631,
+        "symmetry_ratio": 0.0319477306727364,
+        "shoulder_level_ratio": 0.028435009659764927,
+        "confidence": 0.9994610216882494,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 22667,
+      "features": {
+        "elbow_spread_ratio": 1.2398772118498331,
+        "head_lift_ratio": 0.6501740381780875,
+        "wrist_ear_ratio": 0.6018904303249061,
+        "elbow_angle_deg": 104.799881396427,
+        "symmetry_ratio": 0.04041830835258832,
+        "shoulder_level_ratio": 0.023025138704574205,
+        "confidence": 0.9994424316618178,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 22833,
+      "features": {
+        "elbow_spread_ratio": 1.2336784911878032,
+        "head_lift_ratio": 0.7406429348813359,
+        "wrist_ear_ratio": 0.6333579823729196,
+        "elbow_angle_deg": 104.80180693245241,
+        "symmetry_ratio": 0.04948743934974124,
+        "shoulder_level_ratio": 0.03572430529318418,
+        "confidence": 0.9993939134809706,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 23000,
+      "features": {
+        "elbow_spread_ratio": 1.2779320751025054,
+        "head_lift_ratio": 0.8729826006689627,
+        "wrist_ear_ratio": 0.645897699068863,
+        "elbow_angle_deg": 111.76229632020687,
+        "symmetry_ratio": 0.048585925765282326,
+        "shoulder_level_ratio": 0.04964025893926487,
+        "confidence": 0.9994100266032748,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 23167,
+      "features": {
+        "elbow_spread_ratio": 1.3666216310250272,
+        "head_lift_ratio": 0.9390395618140821,
+        "wrist_ear_ratio": 0.6715951922119647,
+        "elbow_angle_deg": 117.44171101948606,
+        "symmetry_ratio": 0.07144204136465321,
+        "shoulder_level_ratio": 0.04665278084017259,
+        "confidence": 0.9994936651653714,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 23333,
+      "features": {
+        "elbow_spread_ratio": 1.5280885065764553,
+        "head_lift_ratio": 0.9647479553451613,
+        "wrist_ear_ratio": 0.6182810696100056,
+        "elbow_angle_deg": 119.71459171996973,
+        "symmetry_ratio": 0.15088166376844048,
+        "shoulder_level_ratio": 0.03285111988135052,
+        "confidence": 0.9995646079381307,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 23500,
+      "features": {
+        "elbow_spread_ratio": 1.7272627356638022,
+        "head_lift_ratio": 1.1219708180662415,
+        "wrist_ear_ratio": 0.5734912137778665,
+        "elbow_angle_deg": 120.22978373258893,
+        "symmetry_ratio": 0.17391157009557112,
+        "shoulder_level_ratio": 0.02082699091558963,
+        "confidence": 0.9996431138780382,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 23667,
+      "features": {
+        "elbow_spread_ratio": 1.8759544637788799,
+        "head_lift_ratio": 1.1807007035231336,
+        "wrist_ear_ratio": 0.5391487373702799,
+        "elbow_angle_deg": 111.93938168556251,
+        "symmetry_ratio": 0.18357352700112967,
+        "shoulder_level_ratio": 0.013517382429136771,
+        "confidence": 0.9997186859448751,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 23833,
+      "features": {
+        "elbow_spread_ratio": 1.9642628462641933,
+        "head_lift_ratio": 1.1817630297258475,
+        "wrist_ear_ratio": 0.5491415132225954,
+        "elbow_angle_deg": 106.35258042905218,
+        "symmetry_ratio": 0.19971247425500105,
+        "shoulder_level_ratio": 0.011935990128270756,
+        "confidence": 0.9997581177287631,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 24000,
+      "features": {
+        "elbow_spread_ratio": 2.047844059307465,
+        "head_lift_ratio": 1.1846681747381549,
+        "wrist_ear_ratio": 0.5457591428035491,
+        "elbow_angle_deg": 99.5837012126149,
+        "symmetry_ratio": 0.20580576959858615,
+        "shoulder_level_ratio": 0.009522689802337501,
+        "confidence": 0.9997919400533041,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 24167,
+      "features": {
+        "elbow_spread_ratio": 2.1224852829319447,
+        "head_lift_ratio": 1.2366356272397065,
+        "wrist_ear_ratio": 0.5153014737513135,
+        "elbow_angle_deg": 98.57480879865305,
+        "symmetry_ratio": 0.18157457877938166,
+        "shoulder_level_ratio": 0.007499909224478291,
+        "confidence": 0.999790734714932,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 24333,
+      "features": {
+        "elbow_spread_ratio": 2.2457353417877126,
+        "head_lift_ratio": 1.2260444446224927,
+        "wrist_ear_ratio": 0.47087004476613037,
+        "elbow_angle_deg": 98.62868913430475,
+        "symmetry_ratio": 0.14270669282400802,
+        "shoulder_level_ratio": 0.011526461479161913,
+        "confidence": 0.9997111426459419,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 24500,
+      "features": {
+        "elbow_spread_ratio": 2.360209033484148,
+        "head_lift_ratio": 1.197355677445505,
+        "wrist_ear_ratio": 0.4459890524356016,
+        "elbow_angle_deg": 93.00193861861773,
+        "symmetry_ratio": 0.1136048566741207,
+        "shoulder_level_ratio": 0.015581612421178528,
+        "confidence": 0.9996754063500298,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 24667,
+      "features": {
+        "elbow_spread_ratio": 2.390030413147776,
+        "head_lift_ratio": 1.1328513491265055,
+        "wrist_ear_ratio": 0.4364960211229205,
+        "elbow_angle_deg": 90.40900441632914,
+        "symmetry_ratio": 0.06786486590317216,
+        "shoulder_level_ratio": 0.011432724185584896,
+        "confidence": 0.9996553659439087,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 24833,
+      "features": {
+        "elbow_spread_ratio": 2.3997394047135447,
+        "head_lift_ratio": 1.137211571523593,
+        "wrist_ear_ratio": 0.42603876765343446,
+        "elbow_angle_deg": 88.0557700822593,
+        "symmetry_ratio": 0.047218860299863274,
+        "shoulder_level_ratio": 0.041223991398916374,
+        "confidence": 0.9996497432390848,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 25000,
+      "features": {
+        "elbow_spread_ratio": 2.397597077949796,
+        "head_lift_ratio": 1.1281316384823463,
+        "wrist_ear_ratio": 0.421581804231887,
+        "elbow_angle_deg": 87.67754905280731,
+        "symmetry_ratio": 0.03068198446593868,
+        "shoulder_level_ratio": 0.06334788420255011,
+        "confidence": 0.9996053907606337,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 25167,
+      "features": {
+        "elbow_spread_ratio": 2.4547083747134533,
+        "head_lift_ratio": 1.1130618041251172,
+        "wrist_ear_ratio": 0.428936880713202,
+        "elbow_angle_deg": 81.4536206264062,
+        "symmetry_ratio": 0.014182268898787516,
+        "shoulder_level_ratio": 0.044130350117282,
+        "confidence": 0.9996116293801202,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 25333,
+      "features": {
+        "elbow_spread_ratio": 2.4697705848732894,
+        "head_lift_ratio": 1.0687051312522922,
+        "wrist_ear_ratio": 0.41908922318905467,
+        "elbow_angle_deg": 82.59053379394196,
+        "symmetry_ratio": 0.015953135342432277,
+        "shoulder_level_ratio": 0.04342488663593681,
+        "confidence": 0.9996331201659309,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 25500,
+      "features": {
+        "elbow_spread_ratio": 2.4832471414818675,
+        "head_lift_ratio": 1.0788102597631863,
+        "wrist_ear_ratio": 0.423160205461017,
+        "elbow_angle_deg": 82.78640037202271,
+        "symmetry_ratio": 0.026323115194404667,
+        "shoulder_level_ratio": 0.04367819931369013,
+        "confidence": 0.999654491742452,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 25667,
+      "features": {
+        "elbow_spread_ratio": 2.481706020914121,
+        "head_lift_ratio": 1.1059547981744329,
+        "wrist_ear_ratio": 0.425165252189626,
+        "elbow_angle_deg": 83.39081439497733,
+        "symmetry_ratio": 0.03244416279378931,
+        "shoulder_level_ratio": 0.03586057616033432,
+        "confidence": 0.9996821218066745,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 25833,
+      "features": {
+        "elbow_spread_ratio": 2.4697210418848803,
+        "head_lift_ratio": 1.1451131393698573,
+        "wrist_ear_ratio": 0.42188797446342463,
+        "elbow_angle_deg": 84.11134978537254,
+        "symmetry_ratio": 0.01663107630506202,
+        "shoulder_level_ratio": 0.023249137135094536,
+        "confidence": 0.9997388654285007,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 26000,
+      "features": {
+        "elbow_spread_ratio": 2.428605383507871,
+        "head_lift_ratio": 1.2290580432754237,
+        "wrist_ear_ratio": 0.44194065410751804,
+        "elbow_angle_deg": 86.00273703592175,
+        "symmetry_ratio": 0.0316753383657445,
+        "shoulder_level_ratio": 0.015609669171664993,
+        "confidence": 0.9997458656628927,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 26167,
+      "features": {
+        "elbow_spread_ratio": 2.3466536236649183,
+        "head_lift_ratio": 1.2135597015291233,
+        "wrist_ear_ratio": 0.47351030637261315,
+        "elbow_angle_deg": 90.58915755890948,
+        "symmetry_ratio": 0.059274401665810494,
+        "shoulder_level_ratio": 0.044702330628677955,
+        "confidence": 0.9997192952367995,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 26333,
+      "features": {
+        "elbow_spread_ratio": 2.2488603662780475,
+        "head_lift_ratio": 1.2056049950164707,
+        "wrist_ear_ratio": 0.5210591222279437,
+        "elbow_angle_deg": 91.36446197160548,
+        "symmetry_ratio": 0.08480620993506426,
+        "shoulder_level_ratio": 0.0410981542228216,
+        "confidence": 0.9997343487209744,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 26500,
+      "features": {
+        "elbow_spread_ratio": 2.150699844827973,
+        "head_lift_ratio": 1.1873787556594904,
+        "wrist_ear_ratio": 0.5562049072835561,
+        "elbow_angle_deg": 92.19705735037077,
+        "symmetry_ratio": 0.12289210016269789,
+        "shoulder_level_ratio": 0.021157681652093863,
+        "confidence": 0.9997750719388326,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 26667,
+      "features": {
+        "elbow_spread_ratio": 2.0032268794230355,
+        "head_lift_ratio": 1.1390020591518026,
+        "wrist_ear_ratio": 0.6164194229544494,
+        "elbow_angle_deg": 97.12222449389341,
+        "symmetry_ratio": 0.10792150295940836,
+        "shoulder_level_ratio": 0.02534136725430866,
+        "confidence": 0.999815457397037,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 26833,
+      "features": {
+        "elbow_spread_ratio": 1.919903429101532,
+        "head_lift_ratio": 1.0860742360354425,
+        "wrist_ear_ratio": 0.6441101878248767,
+        "elbow_angle_deg": 104.43780554323966,
+        "symmetry_ratio": 0.10769047899899614,
+        "shoulder_level_ratio": 0.04469234866313253,
+        "confidence": 0.9998396899965074,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 27000,
+      "features": {
+        "elbow_spread_ratio": 1.7660202795580107,
+        "head_lift_ratio": 1.0065467095423066,
+        "wrist_ear_ratio": 0.6229589702066034,
+        "elbow_angle_deg": 107.49095169853895,
+        "symmetry_ratio": 0.05563459488769383,
+        "shoulder_level_ratio": 0.050615229552257515,
+        "confidence": 0.9997754759258695,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 27167,
+      "features": {
+        "elbow_spread_ratio": 1.6753811941971524,
+        "head_lift_ratio": 0.9730415777757364,
+        "wrist_ear_ratio": 0.6221430973157889,
+        "elbow_angle_deg": 108.47911717112521,
+        "symmetry_ratio": 0.09249709228917928,
+        "shoulder_level_ratio": 0.06255319885221214,
+        "confidence": 0.999752057923211,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 27333,
+      "features": {
+        "elbow_spread_ratio": 1.6001017885421431,
+        "head_lift_ratio": 0.8730034918652673,
+        "wrist_ear_ratio": 0.5995263585640282,
+        "elbow_angle_deg": 110.09313948746461,
+        "symmetry_ratio": 0.1550690213592435,
+        "shoulder_level_ratio": 0.05758899043730452,
+        "confidence": 0.9997237986988492,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 27500,
+      "features": {
+        "elbow_spread_ratio": 1.5335322518070171,
+        "head_lift_ratio": 0.8355184350243774,
+        "wrist_ear_ratio": 0.6513821205205926,
+        "elbow_angle_deg": 109.62475751954996,
+        "symmetry_ratio": 0.18741807178123598,
+        "shoulder_level_ratio": 0.053350683030155194,
+        "confidence": 0.9996852543618944,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 27667,
+      "features": {
+        "elbow_spread_ratio": 1.4560003832828021,
+        "head_lift_ratio": 0.8087195813604884,
+        "wrist_ear_ratio": 0.7020308204369403,
+        "elbow_angle_deg": 104.98657481714116,
+        "symmetry_ratio": 0.1762277683468096,
+        "shoulder_level_ratio": 0.02726348619899939,
+        "confidence": 0.9996289544635348,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 27833,
+      "features": {
+        "elbow_spread_ratio": 1.3802293151292395,
+        "head_lift_ratio": 0.7555385933085867,
+        "wrist_ear_ratio": 0.691753521310678,
+        "elbow_angle_deg": 101.299166864622,
+        "symmetry_ratio": 0.12104626517449893,
+        "shoulder_level_ratio": 0.018705520751457066,
+        "confidence": 0.9996011190944247,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 28000,
+      "features": {
+        "elbow_spread_ratio": 1.3615202915375568,
+        "head_lift_ratio": 0.7332084598414388,
+        "wrist_ear_ratio": 0.6506341858760407,
+        "elbow_angle_deg": 101.86197627652862,
+        "symmetry_ratio": 0.09022146122468541,
+        "shoulder_level_ratio": 0.022415980740723825,
+        "confidence": 0.9995906816588508,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 28167,
+      "features": {
+        "elbow_spread_ratio": 1.3115901797960468,
+        "head_lift_ratio": 0.7311932502485845,
+        "wrist_ear_ratio": 0.5873607315948621,
+        "elbow_angle_deg": 107.33373979730493,
+        "symmetry_ratio": 0.05418784577828341,
+        "shoulder_level_ratio": 0.03391654069844312,
+        "confidence": 0.9995571507347955,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 28333,
+      "features": {
+        "elbow_spread_ratio": 1.2936164222597717,
+        "head_lift_ratio": 0.7132046744589761,
+        "wrist_ear_ratio": 0.5660420851597353,
+        "elbow_angle_deg": 108.85557589790628,
+        "symmetry_ratio": 0.05035306505398425,
+        "shoulder_level_ratio": 0.03780805092175586,
+        "confidence": 0.9995426734288534,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 28500,
+      "features": {
+        "elbow_spread_ratio": 1.3026851168767257,
+        "head_lift_ratio": 0.7338005604644355,
+        "wrist_ear_ratio": 0.5656634123374231,
+        "elbow_angle_deg": 108.33056131603408,
+        "symmetry_ratio": 0.047786451933572685,
+        "shoulder_level_ratio": 0.03738305793516577,
+        "confidence": 0.9995001090897454,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 28667,
+      "features": {
+        "elbow_spread_ratio": 1.3095683590983083,
+        "head_lift_ratio": 0.7728155763791724,
+        "wrist_ear_ratio": 0.5503608266108194,
+        "elbow_angle_deg": 112.40027641540925,
+        "symmetry_ratio": 0.044122047705806855,
+        "shoulder_level_ratio": 0.03509498911002056,
+        "confidence": 0.9993778003586663,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 28833,
+      "features": {
+        "elbow_spread_ratio": 1.3172043657392845,
+        "head_lift_ratio": 0.8476886093154733,
+        "wrist_ear_ratio": 0.6076658098506753,
+        "elbow_angle_deg": 115.44950160010151,
+        "symmetry_ratio": 0.04146726397432938,
+        "shoulder_level_ratio": 0.03531609939989216,
+        "confidence": 0.9992456701066759,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 29000,
+      "features": {
+        "elbow_spread_ratio": 1.404171820482909,
+        "head_lift_ratio": 0.9180184227669359,
+        "wrist_ear_ratio": 0.6258131773022699,
+        "elbow_angle_deg": 118.65801781376521,
+        "symmetry_ratio": 0.0988690903377116,
+        "shoulder_level_ratio": 0.047140124272506835,
+        "confidence": 0.9992708166440328,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 29167,
+      "features": {
+        "elbow_spread_ratio": 1.5565820183508179,
+        "head_lift_ratio": 1.0101450529002791,
+        "wrist_ear_ratio": 0.6596677490424636,
+        "elbow_angle_deg": 116.9619795376612,
+        "symmetry_ratio": 0.13748207024978265,
+        "shoulder_level_ratio": 0.059368898635104014,
+        "confidence": 0.9994551142056783,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 29333,
+      "features": {
+        "elbow_spread_ratio": 1.7397191444402686,
+        "head_lift_ratio": 1.0614933338487402,
+        "wrist_ear_ratio": 0.6879213034823182,
+        "elbow_angle_deg": 112.29660708731829,
+        "symmetry_ratio": 0.12422682855046349,
+        "shoulder_level_ratio": 0.06264519686688472,
+        "confidence": 0.999599556128184,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 29500,
+      "features": {
+        "elbow_spread_ratio": 1.8482379088737104,
+        "head_lift_ratio": 1.1715809932039272,
+        "wrist_ear_ratio": 0.6966207659451727,
+        "elbow_angle_deg": 108.83458243449654,
+        "symmetry_ratio": 0.14612385498576075,
+        "shoulder_level_ratio": 0.056664343113425324,
+        "confidence": 0.9996976852416992,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 29667,
+      "features": {
+        "elbow_spread_ratio": 1.9275953379142103,
+        "head_lift_ratio": 1.2141884575367579,
+        "wrist_ear_ratio": 0.7004620107354226,
+        "elbow_angle_deg": 105.75386985255747,
+        "symmetry_ratio": 0.14590661749512984,
+        "shoulder_level_ratio": 0.05216104123269216,
+        "confidence": 0.9997407065497504,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 29833,
+      "features": {
+        "elbow_spread_ratio": 2.0057786438472838,
+        "head_lift_ratio": 1.1990695895611254,
+        "wrist_ear_ratio": 0.6643991182031262,
+        "elbow_angle_deg": 98.3426331894685,
+        "symmetry_ratio": 0.1370393595055156,
+        "shoulder_level_ratio": 0.04685954003987932,
+        "confidence": 0.9997701976034377,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 30000,
+      "features": {
+        "elbow_spread_ratio": 2.086162138946362,
+        "head_lift_ratio": 1.21336295908298,
+        "wrist_ear_ratio": 0.61211302882819,
+        "elbow_angle_deg": 94.74209848795164,
+        "symmetry_ratio": 0.14524589354033654,
+        "shoulder_level_ratio": 0.04536959710665096,
+        "confidence": 0.9998021788067288,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 30167,
+      "features": {
+        "elbow_spread_ratio": 2.116447852354594,
+        "head_lift_ratio": 1.2393356627610257,
+        "wrist_ear_ratio": 0.5267415989030091,
+        "elbow_angle_deg": 96.26021855321645,
+        "symmetry_ratio": 0.1578051608790334,
+        "shoulder_level_ratio": 0.032745402994822495,
+        "confidence": 0.9998382263713412,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 30333,
+      "features": {
+        "elbow_spread_ratio": 2.1927605180804823,
+        "head_lift_ratio": 1.2330386525337969,
+        "wrist_ear_ratio": 0.4732681364797593,
+        "elbow_angle_deg": 95.36142456292251,
+        "symmetry_ratio": 0.14316724789303253,
+        "shoulder_level_ratio": 0.034962120084114826,
+        "confidence": 0.9998518758349948,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 30500,
+      "features": {
+        "elbow_spread_ratio": 2.290871886287974,
+        "head_lift_ratio": 1.2061384217476412,
+        "wrist_ear_ratio": 0.43279675629472975,
+        "elbow_angle_deg": 86.7741996869854,
+        "symmetry_ratio": 0.10900842838513,
+        "shoulder_level_ratio": 0.04666525944766295,
+        "confidence": 0.9998548693127103,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 30667,
+      "features": {
+        "elbow_spread_ratio": 2.3465826886089536,
+        "head_lift_ratio": 1.134685168385417,
+        "wrist_ear_ratio": 0.39384958027108463,
+        "elbow_angle_deg": 85.95616302731077,
+        "symmetry_ratio": 0.09231190105272756,
+        "shoulder_level_ratio": 0.025578069894618367,
+        "confidence": 0.9998566640747918,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 30833,
+      "features": {
+        "elbow_spread_ratio": 2.383237731889239,
+        "head_lift_ratio": 1.134295877849121,
+        "wrist_ear_ratio": 0.3945100201475713,
+        "elbow_angle_deg": 84.500155229119,
+        "symmetry_ratio": 0.05181451001233142,
+        "shoulder_level_ratio": 0.011401096352134717,
+        "confidence": 0.9998419086138407,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 31000,
+      "features": {
+        "elbow_spread_ratio": 2.4166994915205744,
+        "head_lift_ratio": 1.1375070496569126,
+        "wrist_ear_ratio": 0.4119621045577626,
+        "elbow_angle_deg": 80.5772342785342,
+        "symmetry_ratio": 0.030885233281694548,
+        "shoulder_level_ratio": 0.027509937289307444,
+        "confidence": 0.9998053378529019,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 31167,
+      "features": {
+        "elbow_spread_ratio": 2.410344401780251,
+        "head_lift_ratio": 1.1149371009383695,
+        "wrist_ear_ratio": 0.4311106510437699,
+        "elbow_angle_deg": 75.05215485935264,
+        "symmetry_ratio": 0.011568993036829196,
+        "shoulder_level_ratio": 0.041266261056805364,
+        "confidence": 0.9997765554322137,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 31333,
+      "features": {
+        "elbow_spread_ratio": 2.4085754444095446,
+        "head_lift_ratio": 1.0923465065892453,
+        "wrist_ear_ratio": 0.4477654042940382,
+        "elbow_angle_deg": 75.3312581347133,
+        "symmetry_ratio": 0.025802932421285344,
+        "shoulder_level_ratio": 0.0426883333791523,
+        "confidence": 0.9997977349493239,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 31500,
+      "features": {
+        "elbow_spread_ratio": 2.4116235419121517,
+        "head_lift_ratio": 1.1031477392112803,
+        "wrist_ear_ratio": 0.45143501361476795,
+        "elbow_angle_deg": 76.50963541585716,
+        "symmetry_ratio": 0.03441446052882358,
+        "shoulder_level_ratio": 0.03888523146739153,
+        "confidence": 0.999794602394104,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 31667,
+      "features": {
+        "elbow_spread_ratio": 2.409280041309449,
+        "head_lift_ratio": 1.1183347923950389,
+        "wrist_ear_ratio": 0.4508777372644377,
+        "elbow_angle_deg": 76.01851670451254,
+        "symmetry_ratio": 0.029829840482467167,
+        "shoulder_level_ratio": 0.03126745219983942,
+        "confidence": 0.9998090730773078,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 31833,
+      "features": {
+        "elbow_spread_ratio": 2.414964020647844,
+        "head_lift_ratio": 1.1394272369570042,
+        "wrist_ear_ratio": 0.46281845773440566,
+        "elbow_angle_deg": 76.79734041696001,
+        "symmetry_ratio": 0.015432261982501996,
+        "shoulder_level_ratio": 0.030519128830495637,
+        "confidence": 0.9998026026619805,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 32000,
+      "features": {
+        "elbow_spread_ratio": 2.408486655720068,
+        "head_lift_ratio": 1.1414998943074683,
+        "wrist_ear_ratio": 0.4791385545357725,
+        "elbow_angle_deg": 79.3085403630543,
+        "symmetry_ratio": 0.02141237819118547,
+        "shoulder_level_ratio": 0.028065179594661416,
+        "confidence": 0.9998371998469034,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 32167,
+      "features": {
+        "elbow_spread_ratio": 2.359474095406657,
+        "head_lift_ratio": 1.1629383687342745,
+        "wrist_ear_ratio": 0.48717655060146964,
+        "elbow_angle_deg": 84.99723967060625,
+        "symmetry_ratio": 0.06451701767676112,
+        "shoulder_level_ratio": 0.05842907727347645,
+        "confidence": 0.9998412397172716,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 32333,
+      "features": {
+        "elbow_spread_ratio": 2.313872046682783,
+        "head_lift_ratio": 1.1836665600110912,
+        "wrist_ear_ratio": 0.5273216760587742,
+        "elbow_angle_deg": 85.3174912647659,
+        "symmetry_ratio": 0.11215349826935596,
+        "shoulder_level_ratio": 0.06819364269907607,
+        "confidence": 0.9998326301574707,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 32500,
+      "features": {
+        "elbow_spread_ratio": 2.269386864147934,
+        "head_lift_ratio": 1.1959440439200022,
+        "wrist_ear_ratio": 0.5998958974223427,
+        "elbow_angle_deg": 83.38933349535313,
+        "symmetry_ratio": 0.12941473361461492,
+        "shoulder_level_ratio": 0.07118114600910427,
+        "confidence": 0.9998246298895942,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 32667,
+      "features": {
+        "elbow_spread_ratio": 2.1691355895804656,
+        "head_lift_ratio": 1.1983853196704164,
+        "wrist_ear_ratio": 0.6383619270616733,
+        "elbow_angle_deg": 86.44630446749665,
+        "symmetry_ratio": 0.15385262708120545,
+        "shoulder_level_ratio": 0.06525623779792454,
+        "confidence": 0.9998387694358826,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 32833,
+      "features": {
+        "elbow_spread_ratio": 2.030263235112153,
+        "head_lift_ratio": 1.1766869136905704,
+        "wrist_ear_ratio": 0.6760260043733057,
+        "elbow_angle_deg": 95.69627665457264,
+        "symmetry_ratio": 0.1609163171446309,
+        "shoulder_level_ratio": 0.06522148080301415,
+        "confidence": 0.9998700353834364,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 33000,
+      "features": {
+        "elbow_spread_ratio": 1.8978780374032143,
+        "head_lift_ratio": 1.0980822654555285,
+        "wrist_ear_ratio": 0.688474264746274,
+        "elbow_angle_deg": 103.52963436447371,
+        "symmetry_ratio": 0.1213809643231739,
+        "shoulder_level_ratio": 0.06863178804578153,
+        "confidence": 0.999887658490075,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 33167,
+      "features": {
+        "elbow_spread_ratio": 1.8189165274785073,
+        "head_lift_ratio": 0.940372303683541,
+        "wrist_ear_ratio": 0.5963243641244665,
+        "elbow_angle_deg": 99.66431374156208,
+        "symmetry_ratio": 0.07009535105024996,
+        "shoulder_level_ratio": 0.058907781356423036,
+        "confidence": 0.999869876437717,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 33333,
+      "features": {
+        "elbow_spread_ratio": 1.7799426172303932,
+        "head_lift_ratio": 0.8691237836218901,
+        "wrist_ear_ratio": 0.5750968830174539,
+        "elbow_angle_deg": 102.07140599050888,
+        "symmetry_ratio": 0.08543606508552662,
+        "shoulder_level_ratio": 0.04554600978455266,
+        "confidence": 0.9998305572403802,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 33500,
+      "features": {
+        "elbow_spread_ratio": 1.6230753067192527,
+        "head_lift_ratio": 0.7893932780161126,
+        "wrist_ear_ratio": 0.5822809371845725,
+        "elbow_angle_deg": 106.40930684842779,
+        "symmetry_ratio": 0.15702677635284396,
+        "shoulder_level_ratio": 0.04975874452159993,
+        "confidence": 0.9998426304923164,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 33667,
+      "features": {
+        "elbow_spread_ratio": 1.5223261992867245,
+        "head_lift_ratio": 0.7600757980575037,
+        "wrist_ear_ratio": 0.6086172058364115,
+        "elbow_angle_deg": 110.53652844282462,
+        "symmetry_ratio": 0.16334955279707666,
+        "shoulder_level_ratio": 0.05232521620332034,
+        "confidence": 0.9998421602778964,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 33833,
+      "features": {
+        "elbow_spread_ratio": 1.4505207792726145,
+        "head_lift_ratio": 0.7284089672062215,
+        "wrist_ear_ratio": 0.6208931552287074,
+        "elbow_angle_deg": 110.6070424047659,
+        "symmetry_ratio": 0.13767421849476083,
+        "shoulder_level_ratio": 0.03574030891595836,
+        "confidence": 0.9997812244627211,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 34000,
+      "features": {
+        "elbow_spread_ratio": 1.3311026697539723,
+        "head_lift_ratio": 0.6999256270218339,
+        "wrist_ear_ratio": 0.6491195120925368,
+        "elbow_angle_deg": 111.95591950991667,
+        "symmetry_ratio": 0.07231884052826068,
+        "shoulder_level_ratio": 0.04120729360930289,
+        "confidence": 0.999702963564131,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 34167,
+      "features": {
+        "elbow_spread_ratio": 1.3237329985186799,
+        "head_lift_ratio": 0.6205968031230258,
+        "wrist_ear_ratio": 0.5807971180043151,
+        "elbow_angle_deg": 110.97576483548464,
+        "symmetry_ratio": 0.047006470935137934,
+        "shoulder_level_ratio": 0.05482207310680473,
+        "confidence": 0.9997361765967475,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 34333,
+      "features": {
+        "elbow_spread_ratio": 1.3421735704553148,
+        "head_lift_ratio": 0.6050596523350227,
+        "wrist_ear_ratio": 0.5626756559758113,
+        "elbow_angle_deg": 111.3281539468473,
+        "symmetry_ratio": 0.048828054188625944,
+        "shoulder_level_ratio": 0.07227440872214731,
+        "confidence": 0.9997617602348328,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 34500,
+      "features": {
+        "elbow_spread_ratio": 1.3492855938342756,
+        "head_lift_ratio": 0.5996315970165311,
+        "wrist_ear_ratio": 0.5566267156799335,
+        "elbow_angle_deg": 112.2892908857302,
+        "symmetry_ratio": 0.05101067032346692,
+        "shoulder_level_ratio": 0.07379433938308055,
+        "confidence": 0.9997424748208787,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 34667,
+      "features": {
+        "elbow_spread_ratio": 1.3507447619192101,
+        "head_lift_ratio": 0.6356571360102212,
+        "wrist_ear_ratio": 0.567321722395626,
+        "elbow_angle_deg": 111.84288409734788,
+        "symmetry_ratio": 0.05280107458229809,
+        "shoulder_level_ratio": 0.0658679989444359,
+        "confidence": 0.999729229344262,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 34833,
+      "features": {
+        "elbow_spread_ratio": 1.375627335605257,
+        "head_lift_ratio": 0.8364705948447565,
+        "wrist_ear_ratio": 0.6320668328216632,
+        "elbow_angle_deg": 112.40861447641763,
+        "symmetry_ratio": 0.04373652729993582,
+        "shoulder_level_ratio": 0.055584147513804485,
+        "confidence": 0.9996576176749336,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 35000,
+      "features": {
+        "elbow_spread_ratio": 1.4042929540309252,
+        "head_lift_ratio": 0.8974139921109677,
+        "wrist_ear_ratio": 0.6518895161252973,
+        "elbow_angle_deg": 114.49660554853232,
+        "symmetry_ratio": 0.028594690300076445,
+        "shoulder_level_ratio": 0.03700284845322267,
+        "confidence": 0.9996212124824524,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 35167,
+      "features": {
+        "elbow_spread_ratio": 1.5175446007820996,
+        "head_lift_ratio": 0.9384544973570139,
+        "wrist_ear_ratio": 0.655994188110113,
+        "elbow_angle_deg": 115.56889418388008,
+        "symmetry_ratio": 0.1266520973858022,
+        "shoulder_level_ratio": 0.03998049072632084,
+        "confidence": 0.9996816449695163,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 35333,
+      "features": {
+        "elbow_spread_ratio": 1.6272333587375738,
+        "head_lift_ratio": 0.9664704668534818,
+        "wrist_ear_ratio": 0.6323872921756089,
+        "elbow_angle_deg": 115.83328726882621,
+        "symmetry_ratio": 0.14837842574724552,
+        "shoulder_level_ratio": 0.021868222838389788,
+        "confidence": 0.9997275140550401,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 35500,
+      "features": {
+        "elbow_spread_ratio": 1.7995598683948681,
+        "head_lift_ratio": 1.073629931651709,
+        "wrist_ear_ratio": 0.6376544311173011,
+        "elbow_angle_deg": 109.13834427394207,
+        "symmetry_ratio": 0.12816447259354552,
+        "shoulder_level_ratio": 0.03004115095152124,
+        "confidence": 0.9997573230001662,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 35667,
+      "features": {
+        "elbow_spread_ratio": 1.9232049324279057,
+        "head_lift_ratio": 1.1565329612991198,
+        "wrist_ear_ratio": 0.6426971206728007,
+        "elbow_angle_deg": 104.8564782466466,
+        "symmetry_ratio": 0.10339622747195706,
+        "shoulder_level_ratio": 0.03408924041633684,
+        "confidence": 0.9997638066609701,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 35833,
+      "features": {
+        "elbow_spread_ratio": 2.064975445724172,
+        "head_lift_ratio": 1.157344313835131,
+        "wrist_ear_ratio": 0.6119677713709434,
+        "elbow_angle_deg": 96.87213765099823,
+        "symmetry_ratio": 0.15225385527721164,
+        "shoulder_level_ratio": 0.036158344208100435,
+        "confidence": 0.9997635218832228,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 36000,
+      "features": {
+        "elbow_spread_ratio": 2.1778871080943327,
+        "head_lift_ratio": 1.233263139815839,
+        "wrist_ear_ratio": 0.6191951751302223,
+        "elbow_angle_deg": 91.47592951628548,
+        "symmetry_ratio": 0.13280749075080373,
+        "shoulder_level_ratio": 0.0266447238376478,
+        "confidence": 0.9997636212242974,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 36167,
+      "features": {
+        "elbow_spread_ratio": 2.213634796337239,
+        "head_lift_ratio": 1.2524266595835227,
+        "wrist_ear_ratio": 0.5962117656416608,
+        "elbow_angle_deg": 90.92239699879443,
+        "symmetry_ratio": 0.13080211176588272,
+        "shoulder_level_ratio": 0.027142513043712298,
+        "confidence": 0.9997535546620687,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 36333,
+      "features": {
+        "elbow_spread_ratio": 2.2547208430642156,
+        "head_lift_ratio": 1.2410108081456905,
+        "wrist_ear_ratio": 0.5633322578883744,
+        "elbow_angle_deg": 91.05931468397903,
+        "symmetry_ratio": 0.12388620206175177,
+        "shoulder_level_ratio": 0.03825391479957056,
+        "confidence": 0.9996954268879361,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 36500,
+      "features": {
+        "elbow_spread_ratio": 2.32722781811331,
+        "head_lift_ratio": 1.230066616785224,
+        "wrist_ear_ratio": 0.5195210182964742,
+        "elbow_angle_deg": 91.69525860620304,
+        "symmetry_ratio": 0.061693596374893696,
+        "shoulder_level_ratio": 0.0616901840886928,
+        "confidence": 0.9996499816576639,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 36667,
+      "features": {
+        "elbow_spread_ratio": 2.37143312276391,
+        "head_lift_ratio": 1.2088827823013253,
+        "wrist_ear_ratio": 0.47241620590329736,
+        "elbow_angle_deg": 89.2631912781244,
+        "symmetry_ratio": 0.04321004236943661,
+        "shoulder_level_ratio": 0.050056202028816846,
+        "confidence": 0.9996284312672086,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 36833,
+      "features": {
+        "elbow_spread_ratio": 2.4307810613652885,
+        "head_lift_ratio": 1.1578560906157374,
+        "wrist_ear_ratio": 0.4122657992195294,
+        "elbow_angle_deg": 83.61319286158565,
+        "symmetry_ratio": 0.006760584154359732,
+        "shoulder_level_ratio": 0.018303368436185997,
+        "confidence": 0.9996223052342733,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 37000,
+      "features": {
+        "elbow_spread_ratio": 2.438917531659082,
+        "head_lift_ratio": 1.1434721436823603,
+        "wrist_ear_ratio": 0.39374282946754213,
+        "elbow_angle_deg": 81.63922140536921,
+        "symmetry_ratio": 0.0017568832796771112,
+        "shoulder_level_ratio": 0.026192510015523363,
+        "confidence": 0.9996203515264723,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 37167,
+      "features": {
+        "elbow_spread_ratio": 2.4245016056762037,
+        "head_lift_ratio": 1.0803867075423483,
+        "wrist_ear_ratio": 0.4037122558876823,
+        "elbow_angle_deg": 78.22290435353493,
+        "symmetry_ratio": 0.008749704386431493,
+        "shoulder_level_ratio": 0.06276988966087926,
+        "confidence": 0.9996117552121481,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 37333,
+      "features": {
+        "elbow_spread_ratio": 2.426935919009094,
+        "head_lift_ratio": 1.0751451606036329,
+        "wrist_ear_ratio": 0.4038914314152806,
+        "elbow_angle_deg": 79.01736132947121,
+        "symmetry_ratio": 0.025160041956774876,
+        "shoulder_level_ratio": 0.058474931557004346,
+        "confidence": 0.9996262788772583,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 37500,
+      "features": {
+        "elbow_spread_ratio": 2.42298452543673,
+        "head_lift_ratio": 1.0942250094591255,
+        "wrist_ear_ratio": 0.40604508998287947,
+        "elbow_angle_deg": 79.15472106728613,
+        "symmetry_ratio": 0.025937621669618178,
+        "shoulder_level_ratio": 0.05707172117854842,
+        "confidence": 0.9996431668599447,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 37667,
+      "features": {
+        "elbow_spread_ratio": 2.418820535657526,
+        "head_lift_ratio": 1.095608241274612,
+        "wrist_ear_ratio": 0.4053001698145792,
+        "elbow_angle_deg": 77.48069550504465,
+        "symmetry_ratio": 0.025638202870932283,
+        "shoulder_level_ratio": 0.05006537176206121,
+        "confidence": 0.9996192786428664,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 37833,
+      "features": {
+        "elbow_spread_ratio": 2.4138411413784917,
+        "head_lift_ratio": 1.0971602509683656,
+        "wrist_ear_ratio": 0.39291883908525327,
+        "elbow_angle_deg": 78.22600801547927,
+        "symmetry_ratio": 0.017893054337301803,
+        "shoulder_level_ratio": 0.033938555144732326,
+        "confidence": 0.9995900988578796,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 38000,
+      "features": {
+        "elbow_spread_ratio": 2.4058902359441268,
+        "head_lift_ratio": 1.1454847777434018,
+        "wrist_ear_ratio": 0.416520637023857,
+        "elbow_angle_deg": 82.31382714147892,
+        "symmetry_ratio": 0.041321884520464924,
+        "shoulder_level_ratio": 0.02641982957452177,
+        "confidence": 0.9995665881368849,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 38167,
+      "features": {
+        "elbow_spread_ratio": 2.339741103674517,
+        "head_lift_ratio": 1.1479712237473914,
+        "wrist_ear_ratio": 0.4823165286392299,
+        "elbow_angle_deg": 87.06908655104418,
+        "symmetry_ratio": 0.08575490230008607,
+        "shoulder_level_ratio": 0.055575942331273866,
+        "confidence": 0.999555144045088,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 38333,
+      "features": {
+        "elbow_spread_ratio": 2.272447877897031,
+        "head_lift_ratio": 1.1336049779425408,
+        "wrist_ear_ratio": 0.5345136240420622,
+        "elbow_angle_deg": 85.97560326479612,
+        "symmetry_ratio": 0.12091664634603518,
+        "shoulder_level_ratio": 0.04405841329243195,
+        "confidence": 0.9996140069431729,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 38500,
+      "features": {
+        "elbow_spread_ratio": 2.1748602672917574,
+        "head_lift_ratio": 1.1460520355315436,
+        "wrist_ear_ratio": 0.5606022048644959,
+        "elbow_angle_deg": 88.94608828789997,
+        "symmetry_ratio": 0.13023081788193736,
+        "shoulder_level_ratio": 0.03133865472242523,
+        "confidence": 0.999686254395379,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 38667,
+      "features": {
+        "elbow_spread_ratio": 2.07959998504988,
+        "head_lift_ratio": 1.1372217442674253,
+        "wrist_ear_ratio": 0.6085511347838908,
+        "elbow_angle_deg": 91.42799274411534,
+        "symmetry_ratio": 0.14566001411810764,
+        "shoulder_level_ratio": 0.025399951098067225,
+        "confidence": 0.999750468466017,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 38833,
+      "features": {
+        "elbow_spread_ratio": 1.9242201559913095,
+        "head_lift_ratio": 1.068007656513713,
+        "wrist_ear_ratio": 0.6392745227569467,
+        "elbow_angle_deg": 104.5083011790017,
+        "symmetry_ratio": 0.09865431359381815,
+        "shoulder_level_ratio": 0.021737801607234514,
+        "confidence": 0.9997795157962375,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 39000,
+      "features": {
+        "elbow_spread_ratio": 1.7472980426656517,
+        "head_lift_ratio": 1.0055809155894513,
+        "wrist_ear_ratio": 0.6360642430123694,
+        "elbow_angle_deg": 110.11226096210294,
+        "symmetry_ratio": 0.03402178286909887,
+        "shoulder_level_ratio": 0.017025030266117572,
+        "confidence": 0.9997880657513937,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 39167,
+      "features": {
+        "elbow_spread_ratio": 1.7480276120016436,
+        "head_lift_ratio": 0.9839013081638596,
+        "wrist_ear_ratio": 0.6629965440352917,
+        "elbow_angle_deg": 100.214141619604,
+        "symmetry_ratio": 0.04852914317467456,
+        "shoulder_level_ratio": 0.016469964449772605,
+        "confidence": 0.9997776283158196,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 39333,
+      "features": {
+        "elbow_spread_ratio": 1.6665544414149733,
+        "head_lift_ratio": 0.9210767534181161,
+        "wrist_ear_ratio": 0.6277563852404949,
+        "elbow_angle_deg": 102.74895196436101,
+        "symmetry_ratio": 0.1094565394288107,
+        "shoulder_level_ratio": 0.05354154567021621,
+        "confidence": 0.9997630053096347,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 39500,
+      "features": {
+        "elbow_spread_ratio": 1.5702887444236153,
+        "head_lift_ratio": 0.8214461574219589,
+        "wrist_ear_ratio": 0.6099268049087714,
+        "elbow_angle_deg": 107.80053900315917,
+        "symmetry_ratio": 0.1506746328811534,
+        "shoulder_level_ratio": 0.057809804485371194,
+        "confidence": 0.9997526937060885,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 39667,
+      "features": {
+        "elbow_spread_ratio": 1.5016933812074131,
+        "head_lift_ratio": 0.7538995057849183,
+        "wrist_ear_ratio": 0.6382877631662109,
+        "elbow_angle_deg": 108.97619713486998,
+        "symmetry_ratio": 0.16736273682694447,
+        "shoulder_level_ratio": 0.047017041353886305,
+        "confidence": 0.9997079173723856,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 39833,
+      "features": {
+        "elbow_spread_ratio": 1.340589129833214,
+        "head_lift_ratio": 0.7107536804170689,
+        "wrist_ear_ratio": 0.6435680185435129,
+        "elbow_angle_deg": 106.52652297278104,
+        "symmetry_ratio": 0.07633300769398291,
+        "shoulder_level_ratio": 0.03911246260512947,
+        "confidence": 0.9996035363939073,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 40000,
+      "features": {
+        "elbow_spread_ratio": 1.313800726811721,
+        "head_lift_ratio": 0.662323457012524,
+        "wrist_ear_ratio": 0.6246510456177716,
+        "elbow_angle_deg": 107.0983466811257,
+        "symmetry_ratio": 0.06256862284429823,
+        "shoulder_level_ratio": 0.06041900180683227,
+        "confidence": 0.9995254278182983,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 40167,
+      "features": {
+        "elbow_spread_ratio": 1.2901094563483984,
+        "head_lift_ratio": 0.6492410648825724,
+        "wrist_ear_ratio": 0.6354862673734182,
+        "elbow_angle_deg": 103.78697004376153,
+        "symmetry_ratio": 0.08186115382979761,
+        "shoulder_level_ratio": 0.05744318095392409,
+        "confidence": 0.9995168977313571,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 40333,
+      "features": {
+        "elbow_spread_ratio": 1.272769219293039,
+        "head_lift_ratio": 0.6402169998319052,
+        "wrist_ear_ratio": 0.6548289835066259,
+        "elbow_angle_deg": 102.14444576379917,
+        "symmetry_ratio": 0.10198247996559934,
+        "shoulder_level_ratio": 0.03676509781325826,
+        "confidence": 0.9995084736082289,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 40500,
+      "features": {
+        "elbow_spread_ratio": 1.2669951056728994,
+        "head_lift_ratio": 0.6446336345261463,
+        "wrist_ear_ratio": 0.6689792844563784,
+        "elbow_angle_deg": 102.51265715298355,
+        "symmetry_ratio": 0.09629973266567946,
+        "shoulder_level_ratio": 0.04127929934519887,
+        "confidence": 0.9994794130325317,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 40667,
+      "features": {
+        "elbow_spread_ratio": 1.2550015712265319,
+        "head_lift_ratio": 0.7404755231288649,
+        "wrist_ear_ratio": 0.60933995674387,
+        "elbow_angle_deg": 103.81586912778556,
+        "symmetry_ratio": 0.07833568228574853,
+        "shoulder_level_ratio": 0.05108886008014059,
+        "confidence": 0.9994657635688782,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 40833,
+      "features": {
+        "elbow_spread_ratio": 1.3559559481403096,
+        "head_lift_ratio": 0.8215171169045903,
+        "wrist_ear_ratio": 0.5921104691376685,
+        "elbow_angle_deg": 113.58734147157386,
+        "symmetry_ratio": 0.06295236131083723,
+        "shoulder_level_ratio": 0.03805029296184443,
+        "confidence": 0.9995174474186368,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 41000,
+      "features": {
+        "elbow_spread_ratio": 1.5573466198542238,
+        "head_lift_ratio": 0.8748671121092616,
+        "wrist_ear_ratio": 0.6777342270475211,
+        "elbow_angle_deg": 112.17286077092123,
+        "symmetry_ratio": 0.07613821536242302,
+        "shoulder_level_ratio": 0.03209828501670821,
+        "confidence": 0.9996333784527249,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 41167,
+      "features": {
+        "elbow_spread_ratio": 1.810193978857035,
+        "head_lift_ratio": 1.0145304709366967,
+        "wrist_ear_ratio": 0.7417864608953005,
+        "elbow_angle_deg": 107.69936523353351,
+        "symmetry_ratio": 0.08423058359171556,
+        "shoulder_level_ratio": 0.01418038585859248,
+        "confidence": 0.9997300571865506,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 41333,
+      "features": {
+        "elbow_spread_ratio": 1.9392120508944788,
+        "head_lift_ratio": 1.1564824424200433,
+        "wrist_ear_ratio": 0.6828177596406604,
+        "elbow_angle_deg": 98.56544409826056,
+        "symmetry_ratio": 0.13731095128772713,
+        "shoulder_level_ratio": 0.012223995543143414,
+        "confidence": 0.999781694677141,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 41500,
+      "features": {
+        "elbow_spread_ratio": 2.0567731284098802,
+        "head_lift_ratio": 1.2490379058220473,
+        "wrist_ear_ratio": 0.6849766383675489,
+        "elbow_angle_deg": 89.25491996838039,
+        "symmetry_ratio": 0.14808436268907643,
+        "shoulder_level_ratio": 0.008207327874541624,
+        "confidence": 0.9998087220721774,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 41667,
+      "features": {
+        "elbow_spread_ratio": 2.1528308767903215,
+        "head_lift_ratio": 1.3108963532482723,
+        "wrist_ear_ratio": 0.6648379668111728,
+        "elbow_angle_deg": 83.15603820925628,
+        "symmetry_ratio": 0.15805813172382596,
+        "shoulder_level_ratio": 0.005190766429888776,
+        "confidence": 0.9998025761710273,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 41833,
+      "features": {
+        "elbow_spread_ratio": 2.2157241449490224,
+        "head_lift_ratio": 1.3024932872334953,
+        "wrist_ear_ratio": 0.6147893875905587,
+        "elbow_angle_deg": 88.7430689479774,
+        "symmetry_ratio": 0.14582680258381342,
+        "shoulder_level_ratio": 0.006402105243310508,
+        "confidence": 0.9997826682196723,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 42000,
+      "features": {
+        "elbow_spread_ratio": 2.2618754563379055,
+        "head_lift_ratio": 1.260767016781322,
+        "wrist_ear_ratio": 0.5724978193920576,
+        "elbow_angle_deg": 93.58334891310943,
+        "symmetry_ratio": 0.11812434815247054,
+        "shoulder_level_ratio": 0.007379853328428375,
+        "confidence": 0.9997445742289225,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 42167,
+      "features": {
+        "elbow_spread_ratio": 2.3005333394975125,
+        "head_lift_ratio": 1.2226982433230118,
+        "wrist_ear_ratio": 0.5187365694717974,
+        "elbow_angle_deg": 92.6655532182694,
+        "symmetry_ratio": 0.08574053110338534,
+        "shoulder_level_ratio": 0.023561510695686863,
+        "confidence": 0.9997775223520067,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 42333,
+      "features": {
+        "elbow_spread_ratio": 2.318725366470486,
+        "head_lift_ratio": 1.1717905241791735,
+        "wrist_ear_ratio": 0.457995432274935,
+        "elbow_angle_deg": 90.24073238848683,
+        "symmetry_ratio": 0.059529684147480055,
+        "shoulder_level_ratio": 0.04167090926952517,
+        "confidence": 0.9998011456595527,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 42500,
+      "features": {
+        "elbow_spread_ratio": 2.366832219777186,
+        "head_lift_ratio": 1.1569732146789842,
+        "wrist_ear_ratio": 0.42397296243231375,
+        "elbow_angle_deg": 85.38046721634217,
+        "symmetry_ratio": 0.03595200776222274,
+        "shoulder_level_ratio": 0.029225148529890554,
+        "confidence": 0.9997925360997518,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 42667,
+      "features": {
+        "elbow_spread_ratio": 2.4025667887789695,
+        "head_lift_ratio": 1.1522733612675746,
+        "wrist_ear_ratio": 0.4088041291818705,
+        "elbow_angle_deg": 81.71289526975184,
+        "symmetry_ratio": 0.0316838949984771,
+        "shoulder_level_ratio": 0.011787978120595928,
+        "confidence": 0.9997900989320543,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 42833,
+      "features": {
+        "elbow_spread_ratio": 2.441028533320684,
+        "head_lift_ratio": 1.1590090701924955,
+        "wrist_ear_ratio": 0.42262381478706956,
+        "elbow_angle_deg": 81.02545484028175,
+        "symmetry_ratio": 0.01332512446498121,
+        "shoulder_level_ratio": 0.011740969457979658,
+        "confidence": 0.99981380171246,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 43000,
+      "features": {
+        "elbow_spread_ratio": 2.4402345783541532,
+        "head_lift_ratio": 1.1498168304059875,
+        "wrist_ear_ratio": 0.4577389993786457,
+        "elbow_angle_deg": 80.42098142979796,
+        "symmetry_ratio": 0.009270118957846357,
+        "shoulder_level_ratio": 0.01928325754230212,
+        "confidence": 0.9997999336984422,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 43167,
+      "features": {
+        "elbow_spread_ratio": 2.452193638533587,
+        "head_lift_ratio": 1.1104932738474906,
+        "wrist_ear_ratio": 0.5294518237572806,
+        "elbow_angle_deg": 71.76612274338144,
+        "symmetry_ratio": 0.00982426517843875,
+        "shoulder_level_ratio": 0.014194732938285033,
+        "confidence": 0.9997432563039992,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 43333,
+      "features": {
+        "elbow_spread_ratio": 2.4440818920575564,
+        "head_lift_ratio": 1.06788064574519,
+        "wrist_ear_ratio": 0.5296558803706983,
+        "elbow_angle_deg": 75.46205694726865,
+        "symmetry_ratio": 0.01771532623911712,
+        "shoulder_level_ratio": 0.006253371952014888,
+        "confidence": 0.999762753645579,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 43500,
+      "features": {
+        "elbow_spread_ratio": 2.4268310598439893,
+        "head_lift_ratio": 1.0838659602037342,
+        "wrist_ear_ratio": 0.4708400838201514,
+        "elbow_angle_deg": 82.02647384202285,
+        "symmetry_ratio": 0.03377869472265929,
+        "shoulder_level_ratio": 0.0055736582896222416,
+        "confidence": 0.9997798734241061,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 43667,
+      "features": {
+        "elbow_spread_ratio": 2.4031676378723867,
+        "head_lift_ratio": 1.084014072764349,
+        "wrist_ear_ratio": 0.4452807050687206,
+        "elbow_angle_deg": 83.18978622876028,
+        "symmetry_ratio": 0.03244645501900427,
+        "shoulder_level_ratio": 0.019460068941605402,
+        "confidence": 0.9997969600889418,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 43833,
+      "features": {
+        "elbow_spread_ratio": 2.332534116895994,
+        "head_lift_ratio": 1.1590030126210416,
+        "wrist_ear_ratio": 0.45167818987702785,
+        "elbow_angle_deg": 86.8889839425363,
+        "symmetry_ratio": 0.06675711429805518,
+        "shoulder_level_ratio": 0.06334572385766102,
+        "confidence": 0.9997860193252563,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 44000,
+      "features": {
+        "elbow_spread_ratio": 2.306514198472562,
+        "head_lift_ratio": 1.1803748347997,
+        "wrist_ear_ratio": 0.486887652378284,
+        "elbow_angle_deg": 89.37814305607557,
+        "symmetry_ratio": 0.10644181530913371,
+        "shoulder_level_ratio": 0.05451051734654989,
+        "confidence": 0.9997768269644843,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 44167,
+      "features": {
+        "elbow_spread_ratio": 2.252516233529054,
+        "head_lift_ratio": 1.199718334486993,
+        "wrist_ear_ratio": 0.5833179257713963,
+        "elbow_angle_deg": 88.78777131485538,
+        "symmetry_ratio": 0.10533283098059346,
+        "shoulder_level_ratio": 0.03520250011436526,
+        "confidence": 0.9997937348153856,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 44333,
+      "features": {
+        "elbow_spread_ratio": 2.1368480331961326,
+        "head_lift_ratio": 1.186196225461178,
+        "wrist_ear_ratio": 0.6160226727023177,
+        "elbow_angle_deg": 92.80478650707197,
+        "symmetry_ratio": 0.142851213421872,
+        "shoulder_level_ratio": 0.016367567416414163,
+        "confidence": 0.9998379018571641,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 44500,
+      "features": {
+        "elbow_spread_ratio": 1.9441223855003984,
+        "head_lift_ratio": 1.1640205844064797,
+        "wrist_ear_ratio": 0.648984579142416,
+        "elbow_angle_deg": 106.79197550328206,
+        "symmetry_ratio": 0.10166677956578243,
+        "shoulder_level_ratio": 0.002889825341497533,
+        "confidence": 0.9998748832278781,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 44667,
+      "features": {
+        "elbow_spread_ratio": 1.8312338577792509,
+        "head_lift_ratio": 1.087948346415554,
+        "wrist_ear_ratio": 0.6625506159386938,
+        "elbow_angle_deg": 112.17013838335323,
+        "symmetry_ratio": 0.12477359502585395,
+        "shoulder_level_ratio": 0.014506001612069268,
+        "confidence": 0.9998771879408095,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 44833,
+      "features": {
+        "elbow_spread_ratio": 1.674335416251791,
+        "head_lift_ratio": 1.04340765155359,
+        "wrist_ear_ratio": 0.6267018081926627,
+        "elbow_angle_deg": 116.46613602598822,
+        "symmetry_ratio": 0.1367285251780888,
+        "shoulder_level_ratio": 0.033569560042226505,
+        "confidence": 0.9998034040133158,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 45000,
+      "features": {
+        "elbow_spread_ratio": 1.5769211948698976,
+        "head_lift_ratio": 0.914634296299205,
+        "wrist_ear_ratio": 0.5829838762340118,
+        "elbow_angle_deg": 117.37134084002088,
+        "symmetry_ratio": 0.1726737721054274,
+        "shoulder_level_ratio": 0.06552180390967359,
+        "confidence": 0.9996669822269015,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 45167,
+      "features": {
+        "elbow_spread_ratio": 1.5763676701922926,
+        "head_lift_ratio": 0.8646769078704628,
+        "wrist_ear_ratio": 0.5782994298046359,
+        "elbow_angle_deg": 108.84168624083325,
+        "symmetry_ratio": 0.16403312878011267,
+        "shoulder_level_ratio": 0.06144193662770757,
+        "confidence": 0.9996044900682237,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 45333,
+      "features": {
+        "elbow_spread_ratio": 1.5454688575870212,
+        "head_lift_ratio": 0.8566559827137472,
+        "wrist_ear_ratio": 0.564880271672026,
+        "elbow_angle_deg": 108.89173699745223,
+        "symmetry_ratio": 0.13370272374314043,
+        "shoulder_level_ratio": 0.06549488731867156,
+        "confidence": 0.9995182355244955,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 45500,
+      "features": {
+        "elbow_spread_ratio": 1.483162291424876,
+        "head_lift_ratio": 0.8270852716171229,
+        "wrist_ear_ratio": 0.614865932797368,
+        "elbow_angle_deg": 108.77351363489241,
+        "symmetry_ratio": 0.1075865450870767,
+        "shoulder_level_ratio": 0.053651884965528265,
+        "confidence": 0.9995414018630981,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 45667,
+      "features": {
+        "elbow_spread_ratio": 1.3962093010245233,
+        "head_lift_ratio": 0.6760264279153769,
+        "wrist_ear_ratio": 0.6350089190781361,
+        "elbow_angle_deg": 106.96749650684009,
+        "symmetry_ratio": 0.06906832226744279,
+        "shoulder_level_ratio": 0.0402316960101618,
+        "confidence": 0.9995603760083517,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 45833,
+      "features": {
+        "elbow_spread_ratio": 1.3385493989336652,
+        "head_lift_ratio": 0.6217607243048773,
+        "wrist_ear_ratio": 0.6055575026821374,
+        "elbow_angle_deg": 110.31129491241896,
+        "symmetry_ratio": 0.03228279549080509,
+        "shoulder_level_ratio": 0.04418727980526365,
+        "confidence": 0.9995520843399895,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 46000,
+      "features": {
+        "elbow_spread_ratio": 1.310084762813212,
+        "head_lift_ratio": 0.6164426485044694,
+        "wrist_ear_ratio": 0.6179422169473656,
+        "elbow_angle_deg": 104.35401277659156,
+        "symmetry_ratio": 0.04338088406387266,
+        "shoulder_level_ratio": 0.051280381673812006,
+        "confidence": 0.9996091657214694,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 46167,
+      "features": {
+        "elbow_spread_ratio": 1.3025554731188498,
+        "head_lift_ratio": 0.5568010536569208,
+        "wrist_ear_ratio": 0.5807161171227637,
+        "elbow_angle_deg": 104.8765263073195,
+        "symmetry_ratio": 0.08693805568338153,
+        "shoulder_level_ratio": 0.05572142426993295,
+        "confidence": 0.9996649622917175,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 46333,
+      "features": {
+        "elbow_spread_ratio": 1.2731521199847733,
+        "head_lift_ratio": 0.5441878570560801,
+        "wrist_ear_ratio": 0.5666846872949906,
+        "elbow_angle_deg": 104.39754861440946,
+        "symmetry_ratio": 0.10221138908499963,
+        "shoulder_level_ratio": 0.061470547728434494,
+        "confidence": 0.9997161361906264,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 46500,
+      "features": {
+        "elbow_spread_ratio": 1.2709059138137553,
+        "head_lift_ratio": 0.5799515710331884,
+        "wrist_ear_ratio": 0.5670082818819302,
+        "elbow_angle_deg": 104.12813792925735,
+        "symmetry_ratio": 0.09629492149084364,
+        "shoulder_level_ratio": 0.06153437339274752,
+        "confidence": 0.9996916651725769,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 46667,
+      "features": {
+        "elbow_spread_ratio": 1.33091109188749,
+        "head_lift_ratio": 0.699798049128493,
+        "wrist_ear_ratio": 0.6154307485928379,
+        "elbow_angle_deg": 103.7716060833055,
+        "symmetry_ratio": 0.09074684314690913,
+        "shoulder_level_ratio": 0.06025587241641553,
+        "confidence": 0.999605311287774,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 46833,
+      "features": {
+        "elbow_spread_ratio": 1.3766711245304792,
+        "head_lift_ratio": 0.8310864629052446,
+        "wrist_ear_ratio": 0.6249278485114489,
+        "elbow_angle_deg": 109.31235468276533,
+        "symmetry_ratio": 0.0914871469505473,
+        "shoulder_level_ratio": 0.05495946541312613,
+        "confidence": 0.999543653594123,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 47000,
+      "features": {
+        "elbow_spread_ratio": 1.487964341558098,
+        "head_lift_ratio": 0.8678947260758443,
+        "wrist_ear_ratio": 0.6239220375389725,
+        "elbow_angle_deg": 111.05836088276239,
+        "symmetry_ratio": 0.12924292092763107,
+        "shoulder_level_ratio": 0.08294588081902095,
+        "confidence": 0.9996164772245619,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 47167,
+      "features": {
+        "elbow_spread_ratio": 1.7052112696497466,
+        "head_lift_ratio": 0.9762413100277986,
+        "wrist_ear_ratio": 0.6435740202202058,
+        "elbow_angle_deg": 103.92034324140369,
+        "symmetry_ratio": 0.16188707994451731,
+        "shoulder_level_ratio": 0.047236091195750195,
+        "confidence": 0.9996918042500814,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 47333,
+      "features": {
+        "elbow_spread_ratio": 1.805254143155139,
+        "head_lift_ratio": 1.0252732744172708,
+        "wrist_ear_ratio": 0.5742356051734963,
+        "elbow_angle_deg": 104.49890165090868,
+        "symmetry_ratio": 0.17523476268286364,
+        "shoulder_level_ratio": 0.0077514750344729365,
+        "confidence": 0.9997644093301561,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 47500,
+      "features": {
+        "elbow_spread_ratio": 1.8804645022883961,
+        "head_lift_ratio": 1.1340147549484998,
+        "wrist_ear_ratio": 0.5912179485510185,
+        "elbow_angle_deg": 108.35111099320994,
+        "symmetry_ratio": 0.1704318411916473,
+        "shoulder_level_ratio": 0.009324401466013299,
+        "confidence": 0.9998180270195007,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 47667,
+      "features": {
+        "elbow_spread_ratio": 1.9975795832977372,
+        "head_lift_ratio": 1.1932620778609762,
+        "wrist_ear_ratio": 0.6168335161206379,
+        "elbow_angle_deg": 103.63360704615062,
+        "symmetry_ratio": 0.1387981090746362,
+        "shoulder_level_ratio": 0.025838942871201594,
+        "confidence": 0.9998459021250407,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 47833,
+      "features": {
+        "elbow_spread_ratio": 2.100143599100075,
+        "head_lift_ratio": 1.2284466002305607,
+        "wrist_ear_ratio": 0.6000329431388176,
+        "elbow_angle_deg": 95.30385906567844,
+        "symmetry_ratio": 0.14395365083041545,
+        "shoulder_level_ratio": 0.03379919136749293,
+        "confidence": 0.999860597981347,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 48000,
+      "features": {
+        "elbow_spread_ratio": 2.1668990952542497,
+        "head_lift_ratio": 1.244529809817573,
+        "wrist_ear_ratio": 0.5744729667297995,
+        "elbow_angle_deg": 92.70750049467142,
+        "symmetry_ratio": 0.12202069885832827,
+        "shoulder_level_ratio": 0.02258407603782666,
+        "confidence": 0.9998731878068712,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 48167,
+      "features": {
+        "elbow_spread_ratio": 2.2210744907300684,
+        "head_lift_ratio": 1.2345699196869746,
+        "wrist_ear_ratio": 0.5164932268760181,
+        "elbow_angle_deg": 95.13008177830201,
+        "symmetry_ratio": 0.07485651463049278,
+        "shoulder_level_ratio": 0.02711203967097218,
+        "confidence": 0.9998566773202684,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 48333,
+      "features": {
+        "elbow_spread_ratio": 2.290531478943958,
+        "head_lift_ratio": 1.2300356837625939,
+        "wrist_ear_ratio": 0.4958617146022062,
+        "elbow_angle_deg": 93.83555333840326,
+        "symmetry_ratio": 0.018550283984064737,
+        "shoulder_level_ratio": 0.04235291440493452,
+        "confidence": 0.9998513261477152,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 48500,
+      "features": {
+        "elbow_spread_ratio": 2.3508456316697037,
+        "head_lift_ratio": 1.1769594474943337,
+        "wrist_ear_ratio": 0.43552704753782534,
+        "elbow_angle_deg": 87.69475437735272,
+        "symmetry_ratio": 0.018256326124239906,
+        "shoulder_level_ratio": 0.04665112129127805,
+        "confidence": 0.9998458358976576,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 48667,
+      "features": {
+        "elbow_spread_ratio": 2.408295581862591,
+        "head_lift_ratio": 1.171221724931632,
+        "wrist_ear_ratio": 0.4208666489024401,
+        "elbow_angle_deg": 80.2758132877754,
+        "symmetry_ratio": 0.016863230342099148,
+        "shoulder_level_ratio": 0.006892638744129887,
+        "confidence": 0.9998248087035285,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 48833,
+      "features": {
+        "elbow_spread_ratio": 2.4332095806396614,
+        "head_lift_ratio": 1.160047199007805,
+        "wrist_ear_ratio": 0.4234492313163699,
+        "elbow_angle_deg": 77.95252182444622,
+        "symmetry_ratio": 0.0192150129603863,
+        "shoulder_level_ratio": 0.006756128637572701,
+        "confidence": 0.9997638463973999,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 49000,
+      "features": {
+        "elbow_spread_ratio": 2.4596448351906055,
+        "head_lift_ratio": 1.0554220876433544,
+        "wrist_ear_ratio": 0.45831321231802424,
+        "elbow_angle_deg": 70.71618769579015,
+        "symmetry_ratio": 0.03107999747173266,
+        "shoulder_level_ratio": 0.014198012908435685,
+        "confidence": 0.999746647146013,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 49167,
+      "features": {
+        "elbow_spread_ratio": 2.4776133822185105,
+        "head_lift_ratio": 1.0502063806351774,
+        "wrist_ear_ratio": 0.47826584763305513,
+        "elbow_angle_deg": 70.90641814987988,
+        "symmetry_ratio": 0.04366941529539299,
+        "shoulder_level_ratio": 0.011299369526639676,
+        "confidence": 0.9996848238839043,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 49333,
+      "features": {
+        "elbow_spread_ratio": 2.5203065413047483,
+        "head_lift_ratio": 1.0633829871958842,
+        "wrist_ear_ratio": 0.47443534445614166,
+        "elbow_angle_deg": 71.39562208278065,
+        "symmetry_ratio": 0.050662235031929556,
+        "shoulder_level_ratio": 0.012180093353239163,
+        "confidence": 0.9996634589301215,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 49500,
+      "features": {
+        "elbow_spread_ratio": 2.4817496468114317,
+        "head_lift_ratio": 1.055984055369701,
+        "wrist_ear_ratio": 0.4570186876638871,
+        "elbow_angle_deg": 74.71370601620937,
+        "symmetry_ratio": 0.043732767752590614,
+        "shoulder_level_ratio": 0.01484227283744164,
+        "confidence": 0.9996915260950724,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 49667,
+      "features": {
+        "elbow_spread_ratio": 2.4537999792835614,
+        "head_lift_ratio": 1.061909827211651,
+        "wrist_ear_ratio": 0.43064416950904416,
+        "elbow_angle_deg": 77.25286813271117,
+        "symmetry_ratio": 0.022672217395285205,
+        "shoulder_level_ratio": 0.018661778241199852,
+        "confidence": 0.9997183879216512,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 49833,
+      "features": {
+        "elbow_spread_ratio": 2.4282213524803744,
+        "head_lift_ratio": 1.1233308553120014,
+        "wrist_ear_ratio": 0.4165482637357135,
+        "elbow_angle_deg": 79.36018446764758,
+        "symmetry_ratio": 0.008325558684931197,
+        "shoulder_level_ratio": 0.019169500856914302,
+        "confidence": 0.999676439497206,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 50000,
+      "features": {
+        "elbow_spread_ratio": 2.364757293949662,
+        "head_lift_ratio": 1.1408328280473132,
+        "wrist_ear_ratio": 0.4404028940587337,
+        "elbow_angle_deg": 82.54261349752883,
+        "symmetry_ratio": 0.03698567270153609,
+        "shoulder_level_ratio": 0.08008533856377228,
+        "confidence": 0.9996685319476657,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 50167,
+      "features": {
+        "elbow_spread_ratio": 2.276667855937239,
+        "head_lift_ratio": 1.180444674901607,
+        "wrist_ear_ratio": 0.5234040889704514,
+        "elbow_angle_deg": 86.43375028933833,
+        "symmetry_ratio": 0.08895012261076893,
+        "shoulder_level_ratio": 0.09513314098854042,
+        "confidence": 0.9997124142116971,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 50333,
+      "features": {
+        "elbow_spread_ratio": 2.210104716672367,
+        "head_lift_ratio": 1.2190393324987001,
+        "wrist_ear_ratio": 0.573886280170347,
+        "elbow_angle_deg": 87.346549868332,
+        "symmetry_ratio": 0.10384382773701917,
+        "shoulder_level_ratio": 0.0679222034992098,
+        "confidence": 0.9997514022721185,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 50500,
+      "features": {
+        "elbow_spread_ratio": 2.1184095857480534,
+        "head_lift_ratio": 1.2032263015671467,
+        "wrist_ear_ratio": 0.622649238254402,
+        "elbow_angle_deg": 86.76161337225795,
+        "symmetry_ratio": 0.11140711253674657,
+        "shoulder_level_ratio": 0.05063150992887213,
+        "confidence": 0.9997929202185737,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 50667,
+      "features": {
+        "elbow_spread_ratio": 1.9803503443280062,
+        "head_lift_ratio": 1.1300830161915965,
+        "wrist_ear_ratio": 0.6528014225377106,
+        "elbow_angle_deg": 100.78596391648787,
+        "symmetry_ratio": 0.10674692287322451,
+        "shoulder_level_ratio": 0.048726837796194404,
+        "confidence": 0.9998138480716281,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 50833,
+      "features": {
+        "elbow_spread_ratio": 1.8660227240319742,
+        "head_lift_ratio": 1.0423875592565492,
+        "wrist_ear_ratio": 0.6128541854387134,
+        "elbow_angle_deg": 110.30475030599447,
+        "symmetry_ratio": 0.05656006162300149,
+        "shoulder_level_ratio": 0.03660924288040775,
+        "confidence": 0.9998281068272061,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 51000,
+      "features": {
+        "elbow_spread_ratio": 1.8621851971882724,
+        "head_lift_ratio": 0.9685367351558619,
+        "wrist_ear_ratio": 0.5953703057988919,
+        "elbow_angle_deg": 104.25660122793633,
+        "symmetry_ratio": 0.0489558024710359,
+        "shoulder_level_ratio": 0.028488055069702,
+        "confidence": 0.9998120996687148,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 51167,
+      "features": {
+        "elbow_spread_ratio": 1.7542592337104614,
+        "head_lift_ratio": 0.88901369824592,
+        "wrist_ear_ratio": 0.5253672256666484,
+        "elbow_angle_deg": 103.97431438048281,
+        "symmetry_ratio": 0.021872364887123408,
+        "shoulder_level_ratio": 0.014117297471292953,
+        "confidence": 0.9997104207674662,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 51333,
+      "features": {
+        "elbow_spread_ratio": 1.6743183563601778,
+        "head_lift_ratio": 0.8538671780940321,
+        "wrist_ear_ratio": 0.5364000473559295,
+        "elbow_angle_deg": 106.02907094229941,
+        "symmetry_ratio": 0.04650436806335459,
+        "shoulder_level_ratio": 0.03691280381601525,
+        "confidence": 0.9996645185682509,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 51500,
+      "features": {
+        "elbow_spread_ratio": 1.5364033278313056,
+        "head_lift_ratio": 0.7646446696021268,
+        "wrist_ear_ratio": 0.5741997456075811,
+        "elbow_angle_deg": 107.55079038851997,
+        "symmetry_ratio": 0.03140077294348256,
+        "shoulder_level_ratio": 0.047015072000387556,
+        "confidence": 0.9996905790434943,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 51667,
+      "features": {
+        "elbow_spread_ratio": 1.4624968205012385,
+        "head_lift_ratio": 0.6615210699353713,
+        "wrist_ear_ratio": 0.5763880466498117,
+        "elbow_angle_deg": 104.89820620269009,
+        "symmetry_ratio": 0.05751438107051628,
+        "shoulder_level_ratio": 0.03099851661237932,
+        "confidence": 0.9997174342473348,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 51833,
+      "features": {
+        "elbow_spread_ratio": 1.3896751147074862,
+        "head_lift_ratio": 0.6481278546746225,
+        "wrist_ear_ratio": 0.5906207585616775,
+        "elbow_angle_deg": 106.25476925263042,
+        "symmetry_ratio": 0.024073940150777823,
+        "shoulder_level_ratio": 0.022949128748999157,
+        "confidence": 0.9996879696846008,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 52000,
+      "features": {
+        "elbow_spread_ratio": 1.311044404664968,
+        "head_lift_ratio": 0.6401250964921572,
+        "wrist_ear_ratio": 0.5988051312181017,
+        "elbow_angle_deg": 106.93255252326166,
+        "symmetry_ratio": 0.012218928806910565,
+        "shoulder_level_ratio": 0.021119145949004114,
+        "confidence": 0.9996432330873277,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 52167,
+      "features": {
+        "elbow_spread_ratio": 1.2782635269878906,
+        "head_lift_ratio": 0.6096482902457606,
+        "wrist_ear_ratio": 0.5808264097939078,
+        "elbow_angle_deg": 98.99790285156183,
+        "symmetry_ratio": 0.012820515293137508,
+        "shoulder_level_ratio": 0.014775871462931613,
+        "confidence": 0.9995503028233846,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 52333,
+      "features": {
+        "elbow_spread_ratio": 1.2771947590478425,
+        "head_lift_ratio": 0.6184351981132308,
+        "wrist_ear_ratio": 0.5772054041585849,
+        "elbow_angle_deg": 98.71501302757866,
+        "symmetry_ratio": 0.015347304080650489,
+        "shoulder_level_ratio": 0.008810840591288133,
+        "confidence": 0.999502095911238,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 52500,
+      "features": {
+        "elbow_spread_ratio": 1.2809669597273685,
+        "head_lift_ratio": 0.6611794393765551,
+        "wrist_ear_ratio": 0.5698032727010309,
+        "elbow_angle_deg": 100.37133534729115,
+        "symmetry_ratio": 0.01909241239069067,
+        "shoulder_level_ratio": 0.005556613835237277,
+        "confidence": 0.9994010859065585,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 52667,
+      "features": {
+        "elbow_spread_ratio": 1.2900913307334023,
+        "head_lift_ratio": 0.836354470078131,
+        "wrist_ear_ratio": 0.5594505599717805,
+        "elbow_angle_deg": 112.76742159534997,
+        "symmetry_ratio": 0.028451984524337618,
+        "shoulder_level_ratio": 0.009014930641988255,
+        "confidence": 0.9992733531528049,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 52833,
+      "features": {
+        "elbow_spread_ratio": 1.3384554321009996,
+        "head_lift_ratio": 0.9017450705827912,
+        "wrist_ear_ratio": 0.5867299245527949,
+        "elbow_angle_deg": 114.66769977698033,
+        "symmetry_ratio": 0.03302300846674167,
+        "shoulder_level_ratio": 0.03861862342630114,
+        "confidence": 0.999177356561025,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 53000,
+      "features": {
+        "elbow_spread_ratio": 1.4665006598099715,
+        "head_lift_ratio": 0.9045918974699247,
+        "wrist_ear_ratio": 0.6206697248814653,
+        "elbow_angle_deg": 115.0192095056772,
+        "symmetry_ratio": 0.06964291479896759,
+        "shoulder_level_ratio": 0.06203465199037048,
+        "confidence": 0.9993384016884698,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 53167,
+      "features": {
+        "elbow_spread_ratio": 1.7545105199443833,
+        "head_lift_ratio": 0.9834227830311904,
+        "wrist_ear_ratio": 0.6483370768463921,
+        "elbow_angle_deg": 105.66485787342532,
+        "symmetry_ratio": 0.07812743238882096,
+        "shoulder_level_ratio": 0.010188112537048124,
+        "confidence": 0.9995286729600694,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 53333,
+      "features": {
+        "elbow_spread_ratio": 1.9060713790378838,
+        "head_lift_ratio": 1.0131870784500607,
+        "wrist_ear_ratio": 0.6132526413577566,
+        "elbow_angle_deg": 101.2685111099172,
+        "symmetry_ratio": 0.13618330463941425,
+        "shoulder_level_ratio": 0.006804874925559853,
+        "confidence": 0.9996563726001315,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 53500,
+      "features": {
+        "elbow_spread_ratio": 1.9422158531049556,
+        "head_lift_ratio": 1.1145274500734805,
+        "wrist_ear_ratio": 0.6005119735941211,
+        "elbow_angle_deg": 108.44943779051238,
+        "symmetry_ratio": 0.13632185226101073,
+        "shoulder_level_ratio": 0.010827869326740978,
+        "confidence": 0.9997391369607713,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 53667,
+      "features": {
+        "elbow_spread_ratio": 2.0760768889769463,
+        "head_lift_ratio": 1.205124315902988,
+        "wrist_ear_ratio": 0.5846063952225795,
+        "elbow_angle_deg": 101.75115234084419,
+        "symmetry_ratio": 0.15140294480672584,
+        "shoulder_level_ratio": 0.01684760881163664,
+        "confidence": 0.9997702572080824,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 53833,
+      "features": {
+        "elbow_spread_ratio": 2.183222619900933,
+        "head_lift_ratio": 1.2176770571499995,
+        "wrist_ear_ratio": 0.554381675865225,
+        "elbow_angle_deg": 97.86087752199097,
+        "symmetry_ratio": 0.15241384344371017,
+        "shoulder_level_ratio": 0.006959299299717666,
+        "confidence": 0.9997768534554375,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 54000,
+      "features": {
+        "elbow_spread_ratio": 2.2215678278917825,
+        "head_lift_ratio": 1.214638488402639,
+        "wrist_ear_ratio": 0.5159148805825666,
+        "elbow_angle_deg": 94.66165636126193,
+        "symmetry_ratio": 0.13377145398165655,
+        "shoulder_level_ratio": 0.011477521369479146,
+        "confidence": 0.9997461570633782,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 54167,
+      "features": {
+        "elbow_spread_ratio": 2.291358975309149,
+        "head_lift_ratio": 1.2015222576274398,
+        "wrist_ear_ratio": 0.4642202695748815,
+        "elbow_angle_deg": 94.43646966240935,
+        "symmetry_ratio": 0.0956557013753449,
+        "shoulder_level_ratio": 0.02192308695832321,
+        "confidence": 0.99970100985633,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 54333,
+      "features": {
+        "elbow_spread_ratio": 2.350357715843674,
+        "head_lift_ratio": 1.1560095081545483,
+        "wrist_ear_ratio": 0.42240285565102254,
+        "elbow_angle_deg": 94.79349922307486,
+        "symmetry_ratio": 0.08411609240411055,
+        "shoulder_level_ratio": 0.03054377441829688,
+        "confidence": 0.999554905626509,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 54500,
+      "features": {
+        "elbow_spread_ratio": 2.4059857679943697,
+        "head_lift_ratio": 1.1249434929407127,
+        "wrist_ear_ratio": 0.40484895248987407,
+        "elbow_angle_deg": 89.59466114795632,
+        "symmetry_ratio": 0.053998135448925476,
+        "shoulder_level_ratio": 0.010903446663277427,
+        "confidence": 0.9995935360590616,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 54667,
+      "features": {
+        "elbow_spread_ratio": 2.417569674954037,
+        "head_lift_ratio": 1.0955057312796204,
+        "wrist_ear_ratio": 0.40287498643938824,
+        "elbow_angle_deg": 86.49921769243674,
+        "symmetry_ratio": 0.017189655978852306,
+        "shoulder_level_ratio": 0.01749941674454782,
+        "confidence": 0.9996358619795905,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 54833,
+      "features": {
+        "elbow_spread_ratio": 2.42625316621595,
+        "head_lift_ratio": 1.0858463983546622,
+        "wrist_ear_ratio": 0.41038431870981373,
+        "elbow_angle_deg": 84.81977754933041,
+        "symmetry_ratio": 0.004344759478861928,
+        "shoulder_level_ratio": 0.03265822728192044,
+        "confidence": 0.9996404184235467,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 55000,
+      "features": {
+        "elbow_spread_ratio": 2.435125498736191,
+        "head_lift_ratio": 1.0765749011373273,
+        "wrist_ear_ratio": 0.45290129665033707,
+        "elbow_angle_deg": 83.37010320548336,
+        "symmetry_ratio": 0.008245498263413505,
+        "shoulder_level_ratio": 0.031143991239028244,
+        "confidence": 0.9996644324726529,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 55167,
+      "features": {
+        "elbow_spread_ratio": 2.433307229947629,
+        "head_lift_ratio": 1.091190627921575,
+        "wrist_ear_ratio": 0.41407905550992347,
+        "elbow_angle_deg": 79.15374632501451,
+        "symmetry_ratio": 0.01997751287779573,
+        "shoulder_level_ratio": 0.02515452808204869,
+        "confidence": 0.9997336003515456,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 55333,
+      "features": {
+        "elbow_spread_ratio": 2.4311594352270647,
+        "head_lift_ratio": 1.0937590510456432,
+        "wrist_ear_ratio": 0.39712977287314544,
+        "elbow_angle_deg": 79.44947102109509,
+        "symmetry_ratio": 0.02789880610511673,
+        "shoulder_level_ratio": 0.020639617960353775,
+        "confidence": 0.9997749725977579,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 55500,
+      "features": {
+        "elbow_spread_ratio": 2.423107134346268,
+        "head_lift_ratio": 1.1005566910302689,
+        "wrist_ear_ratio": 0.39502582280106535,
+        "elbow_angle_deg": 79.86930385268889,
+        "symmetry_ratio": 0.035168761308784866,
+        "shoulder_level_ratio": 0.012289686961023023,
+        "confidence": 0.9998063908682929,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 55667,
+      "features": {
+        "elbow_spread_ratio": 2.418378465437521,
+        "head_lift_ratio": 1.1839567394730857,
+        "wrist_ear_ratio": 0.39350917437968047,
+        "elbow_angle_deg": 79.05842757542086,
+        "symmetry_ratio": 0.0265077416977455,
+        "shoulder_level_ratio": 0.0104560496765744,
+        "confidence": 0.9998238616519504,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 55833,
+      "features": {
+        "elbow_spread_ratio": 2.392207614916453,
+        "head_lift_ratio": 1.1881980804958205,
+        "wrist_ear_ratio": 0.4274267893548082,
+        "elbow_angle_deg": 83.99141326587022,
+        "symmetry_ratio": 0.014210696076059893,
+        "shoulder_level_ratio": 0.05189380376938502,
+        "confidence": 0.9997905823919508,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 56000,
+      "features": {
+        "elbow_spread_ratio": 2.354564430590143,
+        "head_lift_ratio": 1.1807920934729834,
+        "wrist_ear_ratio": 0.49610513487627705,
+        "elbow_angle_deg": 85.77682751609453,
+        "symmetry_ratio": 0.04550183621570867,
+        "shoulder_level_ratio": 0.06653996039367291,
+        "confidence": 0.9997647338443332,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 56167,
+      "features": {
+        "elbow_spread_ratio": 2.2954660218049403,
+        "head_lift_ratio": 1.1973648580972354,
+        "wrist_ear_ratio": 0.5678684473071732,
+        "elbow_angle_deg": 87.64526968765506,
+        "symmetry_ratio": 0.06405761660424453,
+        "shoulder_level_ratio": 0.062233432255615964,
+        "confidence": 0.99978992011812,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 56333,
+      "features": {
+        "elbow_spread_ratio": 2.2113949960649126,
+        "head_lift_ratio": 1.2059942661123904,
+        "wrist_ear_ratio": 0.6092554491319103,
+        "elbow_angle_deg": 91.04686115300177,
+        "symmetry_ratio": 0.06920092130552065,
+        "shoulder_level_ratio": 0.06145685731929619,
+        "confidence": 0.9998256034321256,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 56500,
+      "features": {
+        "elbow_spread_ratio": 2.135012905450822,
+        "head_lift_ratio": 1.1496997722574451,
+        "wrist_ear_ratio": 0.6504181390818335,
+        "elbow_angle_deg": 87.25741008138199,
+        "symmetry_ratio": 0.07655253439420234,
+        "shoulder_level_ratio": 0.06065464538299338,
+        "confidence": 0.9998448954688178,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 56667,
+      "features": {
+        "elbow_spread_ratio": 2.008805534608143,
+        "head_lift_ratio": 1.1190729569194455,
+        "wrist_ear_ratio": 0.6938965533035572,
+        "elbow_angle_deg": 91.68018632754809,
+        "symmetry_ratio": 0.0846444446381441,
+        "shoulder_level_ratio": 0.0628565425115612,
+        "confidence": 0.9998588562011719,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 56833,
+      "features": {
+        "elbow_spread_ratio": 1.918641907874525,
+        "head_lift_ratio": 1.0226268231201976,
+        "wrist_ear_ratio": 0.6842140367252556,
+        "elbow_angle_deg": 100.8189600466323,
+        "symmetry_ratio": 0.07622202204843398,
+        "shoulder_level_ratio": 0.052119827955969734,
+        "confidence": 0.9998629291852316,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 57000,
+      "features": {
+        "elbow_spread_ratio": 1.8839252637360444,
+        "head_lift_ratio": 0.8774441215824449,
+        "wrist_ear_ratio": 0.6677874692383734,
+        "elbow_angle_deg": 102.66350234558189,
+        "symmetry_ratio": 0.05964404788130717,
+        "shoulder_level_ratio": 0.01811607339167446,
+        "confidence": 0.9998677372932434,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 57167,
+      "features": {
+        "elbow_spread_ratio": 1.8221045909966787,
+        "head_lift_ratio": 0.8237230116893762,
+        "wrist_ear_ratio": 0.6145611771192379,
+        "elbow_angle_deg": 104.59538868854735,
+        "symmetry_ratio": 0.05472617163639448,
+        "shoulder_level_ratio": 0.010933894490582418,
+        "confidence": 0.9998759163750542,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 57333,
+      "features": {
+        "elbow_spread_ratio": 1.6856220442322702,
+        "head_lift_ratio": 0.786692702945962,
+        "wrist_ear_ratio": 0.6602193940655012,
+        "elbow_angle_deg": 105.51905217723723,
+        "symmetry_ratio": 0.06589306485521741,
+        "shoulder_level_ratio": 0.006109082793316272,
+        "confidence": 0.9998852941724989,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 57500,
+      "features": {
+        "elbow_spread_ratio": 1.586316137059748,
+        "head_lift_ratio": 0.6900714781012751,
+        "wrist_ear_ratio": 0.7068633336871455,
+        "elbow_angle_deg": 102.94397431595013,
+        "symmetry_ratio": 0.08323817014122534,
+        "shoulder_level_ratio": 0.006305296577450886,
+        "confidence": 0.999875803788503,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 57667,
+      "features": {
+        "elbow_spread_ratio": 1.4226222677369014,
+        "head_lift_ratio": 0.6075845033212603,
+        "wrist_ear_ratio": 0.648670296417589,
+        "elbow_angle_deg": 104.27004673982407,
+        "symmetry_ratio": 0.04140287662738286,
+        "shoulder_level_ratio": 0.017250302147687073,
+        "confidence": 0.9997425476710001,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 57833,
+      "features": {
+        "elbow_spread_ratio": 1.2929983719468705,
+        "head_lift_ratio": 0.6208056254662931,
+        "wrist_ear_ratio": 0.6048868774747351,
+        "elbow_angle_deg": 109.24266789127648,
+        "symmetry_ratio": 0.005090076225119044,
+        "shoulder_level_ratio": 0.02423857343921649,
+        "confidence": 0.9996554387940301,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 58000,
+      "features": {
+        "elbow_spread_ratio": 1.2465846129379843,
+        "head_lift_ratio": 0.6321354055147916,
+        "wrist_ear_ratio": 0.6466917816214124,
+        "elbow_angle_deg": 105.93426398763637,
+        "symmetry_ratio": 0.023630876174734382,
+        "shoulder_level_ratio": 0.022060445955736217,
+        "confidence": 0.9996487498283386,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 58167,
+      "features": {
+        "elbow_spread_ratio": 1.206211343618074,
+        "head_lift_ratio": 0.5732477890199364,
+        "wrist_ear_ratio": 0.6203987989676731,
+        "elbow_angle_deg": 100.26524177191033,
+        "symmetry_ratio": 0.034245341042524,
+        "shoulder_level_ratio": 0.022552421094911936,
+        "confidence": 0.999511010117001,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 58333,
+      "features": {
+        "elbow_spread_ratio": 1.1806275986766332,
+        "head_lift_ratio": 0.5012555709160988,
+        "wrist_ear_ratio": 0.5709544729184741,
+        "elbow_angle_deg": 99.21565826376596,
+        "symmetry_ratio": 0.03178643756679048,
+        "shoulder_level_ratio": 0.039220993034908405,
+        "confidence": 0.9993260900179545,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 58500,
+      "features": {
+        "elbow_spread_ratio": 1.2012606355996736,
+        "head_lift_ratio": 0.5788917447292574,
+        "wrist_ear_ratio": 0.5744748374562578,
+        "elbow_angle_deg": 101.16708956024065,
+        "symmetry_ratio": 0.018956628708326376,
+        "shoulder_level_ratio": 0.05668182894787025,
+        "confidence": 0.9992678761482239,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 58667,
+      "features": {
+        "elbow_spread_ratio": 1.3177120630320862,
+        "head_lift_ratio": 0.7530104426472579,
+        "wrist_ear_ratio": 0.5966800572565163,
+        "elbow_angle_deg": 108.61682046933046,
+        "symmetry_ratio": 0.043913590992955887,
+        "shoulder_level_ratio": 0.03395133136212271,
+        "confidence": 0.9993552962938944,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 58833,
+      "features": {
+        "elbow_spread_ratio": 1.3891060832576279,
+        "head_lift_ratio": 0.8537123206711983,
+        "wrist_ear_ratio": 0.6379089558124971,
+        "elbow_angle_deg": 114.86762339242773,
+        "symmetry_ratio": 0.028308121595125725,
+        "shoulder_level_ratio": 0.014992086720816937,
+        "confidence": 0.9993937081760831,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 59000,
+      "features": {
+        "elbow_spread_ratio": 1.4968418818308853,
+        "head_lift_ratio": 0.9012206756663047,
+        "wrist_ear_ratio": 0.6927939823532538,
+        "elbow_angle_deg": 115.76637183209898,
+        "symmetry_ratio": 0.05874058196170865,
+        "shoulder_level_ratio": 0.01916022284044972,
+        "confidence": 0.9994736777411567,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 59167,
+      "features": {
+        "elbow_spread_ratio": 1.6588824673392297,
+        "head_lift_ratio": 0.9556822739410308,
+        "wrist_ear_ratio": 0.6810582891149233,
+        "elbow_angle_deg": 110.82811681622974,
+        "symmetry_ratio": 0.08557464042331704,
+        "shoulder_level_ratio": 0.01107948873491921,
+        "confidence": 0.9995486736297607,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 59333,
+      "features": {
+        "elbow_spread_ratio": 1.8334514665815669,
+        "head_lift_ratio": 1.038200500006265,
+        "wrist_ear_ratio": 0.668690816701108,
+        "elbow_angle_deg": 104.85041835499322,
+        "symmetry_ratio": 0.1188572243318374,
+        "shoulder_level_ratio": 0.004831027171572702,
+        "confidence": 0.9996601872973971,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 59500,
+      "features": {
+        "elbow_spread_ratio": 1.961386011512793,
+        "head_lift_ratio": 1.0743417910127353,
+        "wrist_ear_ratio": 0.635583350253409,
+        "elbow_angle_deg": 104.67717167673563,
+        "symmetry_ratio": 0.13399757330504225,
+        "shoulder_level_ratio": 0.00338459157239893,
+        "confidence": 0.9997312426567078,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 59667,
+      "features": {
+        "elbow_spread_ratio": 2.1198621322835383,
+        "head_lift_ratio": 1.1917389108693714,
+        "wrist_ear_ratio": 0.6818229608370514,
+        "elbow_angle_deg": 98.40425870543464,
+        "symmetry_ratio": 0.10069932511533607,
+        "shoulder_level_ratio": 0.004638534254876009,
+        "confidence": 0.9997718731562296,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 59833,
+      "features": {
+        "elbow_spread_ratio": 2.1679656947286254,
+        "head_lift_ratio": 1.2301963852166655,
+        "wrist_ear_ratio": 0.6239117941162644,
+        "elbow_angle_deg": 91.8259291977838,
+        "symmetry_ratio": 0.12080896912796016,
+        "shoulder_level_ratio": 0.01410417549453596,
+        "confidence": 0.9997804628478156,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 60000,
+      "features": {
+        "elbow_spread_ratio": 2.2287375270651677,
+        "head_lift_ratio": 1.2203479471571375,
+        "wrist_ear_ratio": 0.5936870461585155,
+        "elbow_angle_deg": 86.99604827160175,
+        "symmetry_ratio": 0.11394795416528915,
+        "shoulder_level_ratio": 0.034148117207192435,
+        "confidence": 0.9997571772999234,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 60167,
+      "features": {
+        "elbow_spread_ratio": 2.2493532709300554,
+        "head_lift_ratio": 1.221729519785638,
+        "wrist_ear_ratio": 0.5456228035869624,
+        "elbow_angle_deg": 90.52550256491523,
+        "symmetry_ratio": 0.08777393368341949,
+        "shoulder_level_ratio": 0.04296298862872291,
+        "confidence": 0.9997459120220609,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 60333,
+      "features": {
+        "elbow_spread_ratio": 2.2773084211242427,
+        "head_lift_ratio": 1.198716389758864,
+        "wrist_ear_ratio": 0.4903179603277762,
+        "elbow_angle_deg": 91.68035568952861,
+        "symmetry_ratio": 0.04983320257638642,
+        "shoulder_level_ratio": 0.05698388584615587,
+        "confidence": 0.9997629125912985,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 60500,
+      "features": {
+        "elbow_spread_ratio": 2.3229493031477264,
+        "head_lift_ratio": 1.1210918054002796,
+        "wrist_ear_ratio": 0.43740207023844724,
+        "elbow_angle_deg": 89.64172750356525,
+        "symmetry_ratio": 0.04252863154382657,
+        "shoulder_level_ratio": 0.05313473443761532,
+        "confidence": 0.9997717671924167,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 60667,
+      "features": {
+        "elbow_spread_ratio": 2.3625058063985014,
+        "head_lift_ratio": 1.126660654757805,
+        "wrist_ear_ratio": 0.4200759634206922,
+        "elbow_angle_deg": 88.53365283118542,
+        "symmetry_ratio": 0.010236978489221732,
+        "shoulder_level_ratio": 0.025518659617669907,
+        "confidence": 0.9997977481948005,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 60833,
+      "features": {
+        "elbow_spread_ratio": 2.3776131866893726,
+        "head_lift_ratio": 1.121571474734028,
+        "wrist_ear_ratio": 0.4254110745719694,
+        "elbow_angle_deg": 85.3267270158983,
+        "symmetry_ratio": 0.0034303985615043936,
+        "shoulder_level_ratio": 0.006634155846129352,
+        "confidence": 0.9998234974013435,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 61000,
+      "features": {
+        "elbow_spread_ratio": 2.3886048992826696,
+        "head_lift_ratio": 1.1334197453556651,
+        "wrist_ear_ratio": 0.4295717532832856,
+        "elbow_angle_deg": 84.30776271466539,
+        "symmetry_ratio": 0.013497255992450476,
+        "shoulder_level_ratio": 0.010826863854061715,
+        "confidence": 0.9998223251766629,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 61167,
+      "features": {
+        "elbow_spread_ratio": 2.4015878527881127,
+        "head_lift_ratio": 1.0663906929137719,
+        "wrist_ear_ratio": 0.4328250064859068,
+        "elbow_angle_deg": 71.79068881104067,
+        "symmetry_ratio": 0.020533082564350325,
+        "shoulder_level_ratio": 0.003972777240221777,
+        "confidence": 0.9998000860214233,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 61333,
+      "features": {
+        "elbow_spread_ratio": 2.436873588115103,
+        "head_lift_ratio": 1.0594307379568806,
+        "wrist_ear_ratio": 0.456592770844045,
+        "elbow_angle_deg": 68.45621313380435,
+        "symmetry_ratio": 0.008178385441094367,
+        "shoulder_level_ratio": 0.011338296019124403,
+        "confidence": 0.9997050364812216,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 61500,
+      "features": {
+        "elbow_spread_ratio": 2.448480198962293,
+        "head_lift_ratio": 1.0562815133985684,
+        "wrist_ear_ratio": 0.44076653386788,
+        "elbow_angle_deg": 71.0574754400568,
+        "symmetry_ratio": 0.007723137523263111,
+        "shoulder_level_ratio": 0.011254118551424414,
+        "confidence": 0.9997013939751519,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 61667,
+      "features": {
+        "elbow_spread_ratio": 2.408494575565207,
+        "head_lift_ratio": 1.078636006865584,
+        "wrist_ear_ratio": 0.4219451049680762,
+        "elbow_angle_deg": 79.61609837786925,
+        "symmetry_ratio": 0.01333832363967554,
+        "shoulder_level_ratio": 0.009455522415002662,
+        "confidence": 0.9997324811087714,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 61833,
+      "features": {
+        "elbow_spread_ratio": 2.341448385964018,
+        "head_lift_ratio": 1.1197040811154888,
+        "wrist_ear_ratio": 0.4289460963864985,
+        "elbow_angle_deg": 81.94294171509526,
+        "symmetry_ratio": 0.035329558739672765,
+        "shoulder_level_ratio": 0.045628508698367015,
+        "confidence": 0.9997466935051812,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 62000,
+      "features": {
+        "elbow_spread_ratio": 2.2714218284611993,
+        "head_lift_ratio": 1.1687941714931533,
+        "wrist_ear_ratio": 0.4729254807147205,
+        "elbow_angle_deg": 85.21866607169592,
+        "symmetry_ratio": 0.07526143501338867,
+        "shoulder_level_ratio": 0.06367381478195536,
+        "confidence": 0.9997331698735555,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 62167,
+      "features": {
+        "elbow_spread_ratio": 2.201056699926076,
+        "head_lift_ratio": 1.1844263412860885,
+        "wrist_ear_ratio": 0.538056083916653,
+        "elbow_angle_deg": 87.53609947878746,
+        "symmetry_ratio": 0.0983336924452757,
+        "shoulder_level_ratio": 0.03823136938763977,
+        "confidence": 0.9997783170806037,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 62333,
+      "features": {
+        "elbow_spread_ratio": 2.12753232703971,
+        "head_lift_ratio": 1.1671253320115778,
+        "wrist_ear_ratio": 0.620322597305299,
+        "elbow_angle_deg": 88.28971410615719,
+        "symmetry_ratio": 0.10465794455408725,
+        "shoulder_level_ratio": 0.02916230325781393,
+        "confidence": 0.9998325374391344,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 62500,
+      "features": {
+        "elbow_spread_ratio": 2.0016732270660733,
+        "head_lift_ratio": 1.109250847617456,
+        "wrist_ear_ratio": 0.7064771501521812,
+        "elbow_angle_deg": 98.83544337370944,
+        "symmetry_ratio": 0.09030206941474507,
+        "shoulder_level_ratio": 0.03858788039875016,
+        "confidence": 0.9998640020688375,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 62667,
+      "features": {
+        "elbow_spread_ratio": 1.8572035676575058,
+        "head_lift_ratio": 1.056489333345066,
+        "wrist_ear_ratio": 0.6996004367895587,
+        "elbow_angle_deg": 106.00086840758654,
+        "symmetry_ratio": 0.13492381843127774,
+        "shoulder_level_ratio": 0.05384671512506911,
+        "confidence": 0.9998771548271179,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 62833,
+      "features": {
+        "elbow_spread_ratio": 1.829643975961496,
+        "head_lift_ratio": 0.9869749242454676,
+        "wrist_ear_ratio": 0.6809837503399129,
+        "elbow_angle_deg": 102.16367739196511,
+        "symmetry_ratio": 0.094305845526432,
+        "shoulder_level_ratio": 0.07179411025570129,
+        "confidence": 0.999888194931878,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 63000,
+      "features": {
+        "elbow_spread_ratio": 1.8125302853037661,
+        "head_lift_ratio": 0.9238814966956614,
+        "wrist_ear_ratio": 0.6444676528705862,
+        "elbow_angle_deg": 99.77968408669261,
+        "symmetry_ratio": 0.1008390388020092,
+        "shoulder_level_ratio": 0.10183925185229258,
+        "confidence": 0.999877048863305,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 63167,
+      "features": {
+        "elbow_spread_ratio": 1.8122756663192559,
+        "head_lift_ratio": 0.8562743604887832,
+        "wrist_ear_ratio": 0.6206080510572604,
+        "elbow_angle_deg": 95.52037940721488,
+        "symmetry_ratio": 0.10879616993627118,
+        "shoulder_level_ratio": 0.033766303943053244,
+        "confidence": 0.9998622602886624,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 63333,
+      "features": {
+        "elbow_spread_ratio": 1.7223208603000493,
+        "head_lift_ratio": 0.7758193259296129,
+        "wrist_ear_ratio": 0.609058393027845,
+        "elbow_angle_deg": 105.52622040604946,
+        "symmetry_ratio": 0.18375276436065052,
+        "shoulder_level_ratio": 0.01513583089671525,
+        "confidence": 0.9998614655600654,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 63500,
+      "features": {
+        "elbow_spread_ratio": 1.6184148838541985,
+        "head_lift_ratio": 0.7033880166083827,
+        "wrist_ear_ratio": 0.6276702826940723,
+        "elbow_angle_deg": 108.10622128340475,
+        "symmetry_ratio": 0.1677925766686606,
+        "shoulder_level_ratio": 0.0046248664311848865,
+        "confidence": 0.9998282723956637,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 63667,
+      "features": {
+        "elbow_spread_ratio": 1.5044991966570462,
+        "head_lift_ratio": 0.6865002828013367,
+        "wrist_ear_ratio": 0.5971913629211071,
+        "elbow_angle_deg": 109.25532857277636,
+        "symmetry_ratio": 0.12604173529727364,
+        "shoulder_level_ratio": 0.0034882783601300977,
+        "confidence": 0.9997952514224582,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 63833,
+      "features": {
+        "elbow_spread_ratio": 1.4021751856979674,
+        "head_lift_ratio": 0.6666554516400842,
+        "wrist_ear_ratio": 0.6054640722791917,
+        "elbow_angle_deg": 110.59083572603532,
+        "symmetry_ratio": 0.06420636362592429,
+        "shoulder_level_ratio": 0.023956552682563054,
+        "confidence": 0.999770012166765,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 64000,
+      "features": {
+        "elbow_spread_ratio": 1.3311822775238957,
+        "head_lift_ratio": 0.5901247741872457,
+        "wrist_ear_ratio": 0.637145271955952,
+        "elbow_angle_deg": 108.16233120144929,
+        "symmetry_ratio": 0.04613008351509179,
+        "shoulder_level_ratio": 0.027532772286813726,
+        "confidence": 0.9997338056564331,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 64167,
+      "features": {
+        "elbow_spread_ratio": 1.2623846134635948,
+        "head_lift_ratio": 0.5182490650124317,
+        "wrist_ear_ratio": 0.5983599239972524,
+        "elbow_angle_deg": 107.68678757097136,
+        "symmetry_ratio": 0.055116233823943823,
+        "shoulder_level_ratio": 0.03189328701159954,
+        "confidence": 0.9996949632962545,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 64333,
+      "features": {
+        "elbow_spread_ratio": 1.2462909272878615,
+        "head_lift_ratio": 0.5044815736675451,
+        "wrist_ear_ratio": 0.5857890211358145,
+        "elbow_angle_deg": 108.46364100286223,
+        "symmetry_ratio": 0.05048052961412617,
+        "shoulder_level_ratio": 0.03305826711467694,
+        "confidence": 0.9996640218628777,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 64500,
+      "features": {
+        "elbow_spread_ratio": 1.2559400490475494,
+        "head_lift_ratio": 0.5245677170652174,
+        "wrist_ear_ratio": 0.5741173733764859,
+        "elbow_angle_deg": 103.71396772928055,
+        "symmetry_ratio": 0.06462591229875232,
+        "shoulder_level_ratio": 0.042385808653451304,
+        "confidence": 0.9995800389183892,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 64667,
+      "features": {
+        "elbow_spread_ratio": 1.3113592662545386,
+        "head_lift_ratio": 0.7010616740029288,
+        "wrist_ear_ratio": 0.5687671047717329,
+        "elbow_angle_deg": 111.81772080822796,
+        "symmetry_ratio": 0.07905638313190433,
+        "shoulder_level_ratio": 0.05912947454867275,
+        "confidence": 0.9995362493726943,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 64833,
+      "features": {
+        "elbow_spread_ratio": 1.4666336376603286,
+        "head_lift_ratio": 0.8328750825893434,
+        "wrist_ear_ratio": 0.6046384336285122,
+        "elbow_angle_deg": 115.27874757363143,
+        "symmetry_ratio": 0.08546769693112907,
+        "shoulder_level_ratio": 0.06883338688029397,
+        "confidence": 0.9994773666063944,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 65000,
+      "features": {
+        "elbow_spread_ratio": 1.529383194273782,
+        "head_lift_ratio": 0.8700057497459599,
+        "wrist_ear_ratio": 0.6106834267921937,
+        "elbow_angle_deg": 113.20804240031015,
+        "symmetry_ratio": 0.09431378730780568,
+        "shoulder_level_ratio": 0.03679335866995157,
+        "confidence": 0.9993782043457031,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 65167,
+      "features": {
+        "elbow_spread_ratio": 1.666220380631631,
+        "head_lift_ratio": 0.9925846412627004,
+        "wrist_ear_ratio": 0.6134836493423665,
+        "elbow_angle_deg": 105.1172724195614,
+        "symmetry_ratio": 0.10030003050921327,
+        "shoulder_level_ratio": 0.01887997301626889,
+        "confidence": 0.9994322922494676,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 65333,
+      "features": {
+        "elbow_spread_ratio": 1.8267355862566679,
+        "head_lift_ratio": 1.0628031376782479,
+        "wrist_ear_ratio": 0.6164684042616209,
+        "elbow_angle_deg": 107.32836233448305,
+        "symmetry_ratio": 0.1087493310915803,
+        "shoulder_level_ratio": 0.00696897886950149,
+        "confidence": 0.9995690451727973,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 65500,
+      "features": {
+        "elbow_spread_ratio": 1.9907324578040941,
+        "head_lift_ratio": 1.1203019723963565,
+        "wrist_ear_ratio": 0.6181849796025498,
+        "elbow_angle_deg": 99.7043430068386,
+        "symmetry_ratio": 0.12276784261590612,
+        "shoulder_level_ratio": 0.006134386451666075,
+        "confidence": 0.9996603793568082,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 65667,
+      "features": {
+        "elbow_spread_ratio": 2.0886660856763077,
+        "head_lift_ratio": 1.1876953983201661,
+        "wrist_ear_ratio": 0.6159049017631216,
+        "elbow_angle_deg": 94.1464553873073,
+        "symmetry_ratio": 0.12415404077062255,
+        "shoulder_level_ratio": 0.00791682649033433,
+        "confidence": 0.999703844388326,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 65833,
+      "features": {
+        "elbow_spread_ratio": 2.185758868921992,
+        "head_lift_ratio": 1.2023384177188317,
+        "wrist_ear_ratio": 0.5914254136416106,
+        "elbow_angle_deg": 95.72792767417774,
+        "symmetry_ratio": 0.10225980231804904,
+        "shoulder_level_ratio": 0.02298814516871992,
+        "confidence": 0.9996846516927084,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 66000,
+      "features": {
+        "elbow_spread_ratio": 2.2370046512966075,
+        "head_lift_ratio": 1.1881392096592842,
+        "wrist_ear_ratio": 0.5288221063225815,
+        "elbow_angle_deg": 97.51743965056383,
+        "symmetry_ratio": 0.07234977631630626,
+        "shoulder_level_ratio": 0.06167350354587589,
+        "confidence": 0.9996206164360046,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 66167,
+      "features": {
+        "elbow_spread_ratio": 2.3143359468221867,
+        "head_lift_ratio": 1.1571244488541697,
+        "wrist_ear_ratio": 0.4596647957716459,
+        "elbow_angle_deg": 91.7320585610014,
+        "symmetry_ratio": 0.04093454188647382,
+        "shoulder_level_ratio": 0.06740202210958074,
+        "confidence": 0.9996363984213935,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 66333,
+      "features": {
+        "elbow_spread_ratio": 2.3815943375552564,
+        "head_lift_ratio": 1.1377831761875412,
+        "wrist_ear_ratio": 0.41206662707477193,
+        "elbow_angle_deg": 86.05511258541384,
+        "symmetry_ratio": 0.010863039217869293,
+        "shoulder_level_ratio": 0.04482233771317089,
+        "confidence": 0.9996263980865479,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 66500,
+      "features": {
+        "elbow_spread_ratio": 2.4405877586892837,
+        "head_lift_ratio": 1.0963497281620436,
+        "wrist_ear_ratio": 0.3985358007362828,
+        "elbow_angle_deg": 80.90692767284693,
+        "symmetry_ratio": 0.005573994246320107,
+        "shoulder_level_ratio": 0.014049945833643229,
+        "confidence": 0.9996833006540934,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 66667,
+      "features": {
+        "elbow_spread_ratio": 2.451184975191561,
+        "head_lift_ratio": 1.0744399431351523,
+        "wrist_ear_ratio": 0.3992628578754632,
+        "elbow_angle_deg": 77.1073173020957,
+        "symmetry_ratio": 0.014474602993787968,
+        "shoulder_level_ratio": 0.01278192396622357,
+        "confidence": 0.9997137851185269,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 66833,
+      "features": {
+        "elbow_spread_ratio": 2.4569953265013815,
+        "head_lift_ratio": 1.0980641357056502,
+        "wrist_ear_ratio": 0.4319261349928947,
+        "elbow_angle_deg": 78.83950332576526,
+        "symmetry_ratio": 0.03576746099158168,
+        "shoulder_level_ratio": 0.014044057015303103,
+        "confidence": 0.9997558461295234,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 67000,
+      "features": {
+        "elbow_spread_ratio": 2.4593285063178607,
+        "head_lift_ratio": 1.1108205490107568,
+        "wrist_ear_ratio": 0.4439709905779061,
+        "elbow_angle_deg": 78.62112091856919,
+        "symmetry_ratio": 0.039170297384184954,
+        "shoulder_level_ratio": 0.013410972976398702,
+        "confidence": 0.999758157465193,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 67167,
+      "features": {
+        "elbow_spread_ratio": 2.445384073308559,
+        "head_lift_ratio": 1.1111813931889625,
+        "wrist_ear_ratio": 0.4181331838929769,
+        "elbow_angle_deg": 78.51499644262637,
+        "symmetry_ratio": 0.04289255828445869,
+        "shoulder_level_ratio": 0.022337867016343774,
+        "confidence": 0.9997849199506972,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 67333,
+      "features": {
+        "elbow_spread_ratio": 2.4432299557527286,
+        "head_lift_ratio": 1.1000419801199715,
+        "wrist_ear_ratio": 0.4056282963839954,
+        "elbow_angle_deg": 78.46508300336171,
+        "symmetry_ratio": 0.042354300441762006,
+        "shoulder_level_ratio": 0.023051449607567012,
+        "confidence": 0.9997915294435289,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 67500,
+      "features": {
+        "elbow_spread_ratio": 2.44260194138522,
+        "head_lift_ratio": 1.141510478745868,
+        "wrist_ear_ratio": 0.4017056769457851,
+        "elbow_angle_deg": 78.63158841497139,
+        "symmetry_ratio": 0.03597080666798423,
+        "shoulder_level_ratio": 0.013797994729053551,
+        "confidence": 0.9998139672809176,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 67667,
+      "features": {
+        "elbow_spread_ratio": 2.4135653499636818,
+        "head_lift_ratio": 1.1672434358412436,
+        "wrist_ear_ratio": 0.41131007637855366,
+        "elbow_angle_deg": 79.7623462319541,
+        "symmetry_ratio": 0.019220690837638374,
+        "shoulder_level_ratio": 0.017250866649558563,
+        "confidence": 0.9998059868812561,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 67833,
+      "features": {
+        "elbow_spread_ratio": 2.3488659333421715,
+        "head_lift_ratio": 1.1610575610288651,
+        "wrist_ear_ratio": 0.43382738929769804,
+        "elbow_angle_deg": 82.65480229174307,
+        "symmetry_ratio": 0.06701798055562214,
+        "shoulder_level_ratio": 0.042788523732726305,
+        "confidence": 0.9997896883222792,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 68000,
+      "features": {
+        "elbow_spread_ratio": 2.3115130644598074,
+        "head_lift_ratio": 1.1596544444196764,
+        "wrist_ear_ratio": 0.4773467892998033,
+        "elbow_angle_deg": 84.77339825666215,
+        "symmetry_ratio": 0.09384507791594847,
+        "shoulder_level_ratio": 0.08274978417558904,
+        "confidence": 0.9997690717379252,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 68167,
+      "features": {
+        "elbow_spread_ratio": 2.2590918215149856,
+        "head_lift_ratio": 1.1703966684863376,
+        "wrist_ear_ratio": 0.5061062903596117,
+        "elbow_angle_deg": 85.32073500228266,
+        "symmetry_ratio": 0.09936995886774677,
+        "shoulder_level_ratio": 0.09831545497159055,
+        "confidence": 0.9997608794106377,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 68333,
+      "features": {
+        "elbow_spread_ratio": 2.18893957915782,
+        "head_lift_ratio": 1.1784531240992377,
+        "wrist_ear_ratio": 0.5457948287449149,
+        "elbow_angle_deg": 85.85268181809772,
+        "symmetry_ratio": 0.11172719985202056,
+        "shoulder_level_ratio": 0.08655121203477174,
+        "confidence": 0.9997946619987488,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 68500,
+      "features": {
+        "elbow_spread_ratio": 2.096374279388014,
+        "head_lift_ratio": 1.1594429709231209,
+        "wrist_ear_ratio": 0.5788381016742246,
+        "elbow_angle_deg": 92.09537699390583,
+        "symmetry_ratio": 0.11472271494020483,
+        "shoulder_level_ratio": 0.05338582594880296,
+        "confidence": 0.9998182521926032,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 68667,
+      "features": {
+        "elbow_spread_ratio": 2.01192322512514,
+        "head_lift_ratio": 1.0969602595949186,
+        "wrist_ear_ratio": 0.616487609216029,
+        "elbow_angle_deg": 97.47425546529601,
+        "symmetry_ratio": 0.09439779146884925,
+        "shoulder_level_ratio": 0.039745908086166626,
+        "confidence": 0.9998467299673293,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 68833,
+      "features": {
+        "elbow_spread_ratio": 1.918271376764181,
+        "head_lift_ratio": 1.0404266870335583,
+        "wrist_ear_ratio": 0.6265288790928483,
+        "elbow_angle_deg": 103.23746855534921,
+        "symmetry_ratio": 0.08047164271875873,
+        "shoulder_level_ratio": 0.0441268522341975,
+        "confidence": 0.9998467763264974,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 69000,
+      "features": {
+        "elbow_spread_ratio": 1.8124796737705342,
+        "head_lift_ratio": 0.9068810699612875,
+        "wrist_ear_ratio": 0.6135496950262898,
+        "elbow_angle_deg": 102.28311312446621,
+        "symmetry_ratio": 0.038530047141238345,
+        "shoulder_level_ratio": 0.048827997832540965,
+        "confidence": 0.999828557173411,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 69167,
+      "features": {
+        "elbow_spread_ratio": 1.7204186624157394,
+        "head_lift_ratio": 0.8869885460560013,
+        "wrist_ear_ratio": 0.6329733127655228,
+        "elbow_angle_deg": 109.17388411293442,
+        "symmetry_ratio": 0.11122167428532748,
+        "shoulder_level_ratio": 0.04413945975025231,
+        "confidence": 0.9998390608363681,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 69333,
+      "features": {
+        "elbow_spread_ratio": 1.5935732808864176,
+        "head_lift_ratio": 0.8472263253220285,
+        "wrist_ear_ratio": 0.657571721992802,
+        "elbow_angle_deg": 110.7700048661537,
+        "symmetry_ratio": 0.15254082699330823,
+        "shoulder_level_ratio": 0.05031746477105446,
+        "confidence": 0.999848120742374,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 69500,
+      "features": {
+        "elbow_spread_ratio": 1.467059487759089,
+        "head_lift_ratio": 0.7719430732782824,
+        "wrist_ear_ratio": 0.6458157542245324,
+        "elbow_angle_deg": 109.00928147073729,
+        "symmetry_ratio": 0.1326031773236172,
+        "shoulder_level_ratio": 0.0505573040795268,
+        "confidence": 0.9998284180959066,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 69667,
+      "features": {
+        "elbow_spread_ratio": 1.3904341136963996,
+        "head_lift_ratio": 0.69973040581472,
+        "wrist_ear_ratio": 0.6305274423791403,
+        "elbow_angle_deg": 108.73174058449382,
+        "symmetry_ratio": 0.10736988213726759,
+        "shoulder_level_ratio": 0.02409038659083899,
+        "confidence": 0.9997740652826097,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 69833,
+      "features": {
+        "elbow_spread_ratio": 1.34583316589446,
+        "head_lift_ratio": 0.6723377299652745,
+        "wrist_ear_ratio": 0.6240327531019446,
+        "elbow_angle_deg": 107.06917672411899,
+        "symmetry_ratio": 0.09621860376645733,
+        "shoulder_level_ratio": 0.04854970769688721,
+        "confidence": 0.9997227920426263,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 70000,
+      "features": {
+        "elbow_spread_ratio": 1.3305250636462735,
+        "head_lift_ratio": 0.6571080416845416,
+        "wrist_ear_ratio": 0.619911280690183,
+        "elbow_angle_deg": 104.41352943440845,
+        "symmetry_ratio": 0.10982804403560413,
+        "shoulder_level_ratio": 0.059128563286415595,
+        "confidence": 0.99969791703754,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 70167,
+      "features": {
+        "elbow_spread_ratio": 1.3014333014225388,
+        "head_lift_ratio": 0.6599978533112252,
+        "wrist_ear_ratio": 0.6168195668712013,
+        "elbow_angle_deg": 105.4561535946701,
+        "symmetry_ratio": 0.09447891050141541,
+        "shoulder_level_ratio": 0.06048852216454182,
+        "confidence": 0.9996726049317254,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 70333,
+      "features": {
+        "elbow_spread_ratio": 1.3086363338909,
+        "head_lift_ratio": 0.7514662723551001,
+        "wrist_ear_ratio": 0.6489958277345556,
+        "elbow_angle_deg": 105.8848066426141,
+        "symmetry_ratio": 0.07094381626830326,
+        "shoulder_level_ratio": 0.05570703234693146,
+        "confidence": 0.9996459749009874,
+        "hands_near_ears": true
+      }
+    },
+    {
+      "timestamp_ms": 70500,
+      "features": {
+        "elbow_spread_ratio": 1.317741338839817,
+        "head_lift_ratio": 0.798568842004795,
+        "wrist_ear_ratio": 0.6808792455016435,
+        "elbow_angle_deg": 106.99834206348547,
+        "symmetry_ratio": 0.05258069741785641,
+        "shoulder_level_ratio": 0.013514799343379815,
+        "confidence": 0.9995747473504808,
+        "hands_near_ears": true
+      }
+    }
+  ]
+}

@@ -44,6 +44,25 @@ function LoginPage() {
       localStorage.setItem("name", name);
       localStorage.setItem("role", role);
 
+      /* 비회원 운동 기록 연결 */
+      const pendingSessionId = sessionStorage.getItem(
+        "pendingExerciseSessionId",
+      );
+
+      if (pendingSessionId) {
+        try {
+          await api.post("/api/exercise/result", {
+            sessionId: Number(pendingSessionId),
+          });
+
+          sessionStorage.removeItem("pendingExerciseSessionId");
+
+          console.log("비회원 운동 기록 연결 완료:", pendingSessionId);
+        } catch (error) {
+          console.error("비회원 운동 기록 연결 실패:", error);
+        }
+      }
+
       navigate("/");
     } catch (error) {
       console.error("로그인 실패:", error);

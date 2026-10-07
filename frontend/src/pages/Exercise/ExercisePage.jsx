@@ -412,6 +412,19 @@ function ExercisePage() {
 
                 sessionStorage.setItem("exerciseSummary", JSON.stringify(data));
 
+                /* 비회원 운동 세션 임시 보관 */
+                const finishedSessionId = sessionIdRef.current;
+                const accessToken = localStorage.getItem("accessToken");
+
+                if (!accessToken && finishedSessionId) {
+                  sessionStorage.setItem(
+                    "pendingExerciseSessionId",
+                    String(finishedSessionId),
+                  );
+
+                  console.log("비회원 운동 세션 임시 보관:", finishedSessionId);
+                }
+
                 /* 카메라 종료 */
 
                 if (streamRef.current) {

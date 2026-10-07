@@ -38,7 +38,7 @@ FRONTEND_ORIGINS = [
 
 
 def _get_env_bool(name: str, default: bool = False) -> bool:
-    # 환경변수의 참·거짓 문자열을 bool 값으로 변환
+    # 환경변수의 참/거짓 문자열을 bool 값으로 변환
     value = os.getenv(name)
     if value is None:
         return default
@@ -46,7 +46,7 @@ def _get_env_bool(name: str, default: bool = False) -> bool:
 
 
 # 백엔드 연동은 기본 비활성화 / 실행 전 환경변수로 활성화
-BACKEND_ENABLED = _get_env_bool("BACKEND_ENABLED", False)
+BACKEND_ENABLED = _get_env_bool("BACKEND_ENABLED", True)
 BACKEND_BASE_URL = os.getenv(
     "BACKEND_BASE_URL",
     "http://localhost:8080",

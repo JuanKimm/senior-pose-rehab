@@ -1,5 +1,3 @@
-# 선택한 영상 구간에서 특징을 추출하여 운동별 끝 자세와 판정 임계값을 계산합니다.
-# 어깨는 손-귀 거리로 준비 자세를 거르고, 시선당기기는 얼굴과 양팔 추적을 확인합니다.
 from pathlib import Path
 from statistics import mean, pstdev
 
@@ -111,8 +109,8 @@ class ReferenceAnalyzer:
             )
 
         thresholds = PhaseThresholds(
-            closed_elbow_ratio=closed_target.elbow_spread_ratio + 0.15 * span,
-            open_elbow_ratio=closed_target.elbow_spread_ratio + 0.85 * span,
+            closed_elbow_ratio=closed_target.elbow_spread_ratio + 0.25 * span,
+            open_elbow_ratio=closed_target.elbow_spread_ratio + 0.75 * span,
         )
         all_extremes = closed_samples + open_samples
         tolerances = FeatureTolerances(

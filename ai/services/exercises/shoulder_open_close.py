@@ -1,5 +1,3 @@
-# 귀에 손을 댄 채 팔꿈치와 고개를 함께 펼치고 오므리는 운동을 판정합니다.
-# 팔꿈치 간격, 고개 높이, 손-귀 거리, 팔 굽힘과 좌우 대칭을 함께 사용합니다.
 from math import isfinite
 from statistics import mean
 
@@ -135,7 +133,8 @@ class ShoulderOpenCloseAnalyzer(ExerciseAnalyzer):
     @staticmethod
     def _closeness(value: float, target: float, tolerance: float) -> float:
         scale = max(tolerance * 3.5, 1e-5)
-        return max(0.0, 100.0 * (1.0 - abs(value - target) / scale))
+        excess = max(0.0, abs(value - target) - tolerance)
+        return max(0.0, 100.0 * (1.0 - excess / scale))
 
     def _rep_score(
         self,
@@ -146,13 +145,19 @@ class ShoulderOpenCloseAnalyzer(ExerciseAnalyzer):
         tolerance = profile.tolerances
         open_target = profile.open_target
         closed_target = profile.closed_target
+        
+        elbow_tolerance = max(
+            tolerance.elbow_spread_ratio,
+            abs(profile.thresholds.closed_elbow_ratio - closed_target.elbow_spread_ratio),
+            abs(open_target.elbow_spread_ratio - profile.thresholds.open_elbow_ratio),
+        )
         components = (
             (
                 0.30,
                 self._closeness(
                     open_metrics["elbow_spread_ratio"],
                     open_target.elbow_spread_ratio,
-                    tolerance.elbow_spread_ratio,
+                    elbow_tolerance,
                 ),
             ),
             (
@@ -160,7 +165,7 @@ class ShoulderOpenCloseAnalyzer(ExerciseAnalyzer):
                 self._closeness(
                     closed_metrics["elbow_spread_ratio"],
                     closed_target.elbow_spread_ratio,
-                    tolerance.elbow_spread_ratio,
+                    elbow_tolerance,
                 ),
             ),
             (

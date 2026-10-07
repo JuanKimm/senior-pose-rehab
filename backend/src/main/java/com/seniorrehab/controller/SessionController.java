@@ -3,6 +3,7 @@ package com.seniorrehab.controller;
 import com.seniorrehab.model.dto.ExerciseRecordDto;
 import com.seniorrehab.model.dto.SessionStartRequestDto;
 import com.seniorrehab.model.dto.SessionStartResponseDto;
+import com.seniorrehab.model.dto.SessionEndRequestDto;
 import com.seniorrehab.service.SessionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -41,10 +42,12 @@ public class SessionController {
         return ResponseEntity.ok(response);
     }
 
-    // 운동 세션 종료
+    // 운동 세션 종료 - AI 서버가 운동 종료 시 횟수/운동 시간/회차별 점수를 전송
     @PutMapping("/session/{sessionId}/end")
-    public ResponseEntity<?> endSession(@PathVariable Long sessionId) {
-        ExerciseRecordDto record = sessionService.endSession(sessionId);
+    public ResponseEntity<?> endSession(
+            @PathVariable Long sessionId,
+            @Valid @RequestBody SessionEndRequestDto request) {
+        ExerciseRecordDto record = sessionService.endSession(sessionId, request);
         if (record == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(Map.of("error", "존재하지 않는 세션입니다"));

@@ -10,10 +10,13 @@
         VALUES (#{userId}, #{exerciseTypeId}, CURDATE(), 0, 0)
     </insert>
 
-    <!-- 운동 세션 종료 -->
+    <!-- 운동 세션 종료 - AI가 보낸 횟수/운동 시간 저장 + 저장된 점수 평균으로 정확도 계산 -->
     <update id="endSession">
         UPDATE EXERCISE_SESSION
-        SET accuracy = (SELECT AVG(action_score) FROM EXERCISE_SCORE WHERE session_id = #{sessionId})
+        SET
+            total_count = #{totalCount},
+            duration_sec = #{durationSec},
+            accuracy = (SELECT AVG(action_score) FROM EXERCISE_SCORE WHERE session_id = #{sessionId})
         WHERE session_id = #{sessionId}
     </update>
 

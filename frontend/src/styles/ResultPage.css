@@ -221,6 +221,46 @@
 }
 
 /* =========================
+   보호자 결과 페이지
+========================= */
+
+.guardianNotice {
+  margin: 4px 0 0;
+
+  color: var(--text-secondary);
+
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+
+  text-align: center;
+}
+
+.guardianMessage {
+  margin: 24px 0 0;
+
+  color: var(--text-secondary);
+
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
+
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .guardianNotice {
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  .guardianMessage {
+    font-size: 15px;
+    line-height: 24px;
+  }
+}
+
+/* =========================
    Tablet
 ========================= */
 

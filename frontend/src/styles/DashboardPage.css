@@ -985,8 +985,7 @@
   line-height: 22px;
   font-weight: 600;
 }
-
-.scheduleField input[type="date"],
+.scheduleField > select,
 .scheduleTimeSelect select {
   width: 100%;
   height: 44px;
@@ -1049,8 +1048,7 @@
 
   .dashboardRight {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: start;
   }
 }
@@ -1066,7 +1064,6 @@
 
   .dashboardContainer {
     width: calc(100% - 32px);
-
     padding: 32px 0 56px;
   }
 
@@ -1079,6 +1076,23 @@
     line-height: 36px;
   }
 
+  .dashboardHeading p {
+    font-size: 14px;
+    line-height: 22px;
+    word-break: keep-all;
+  }
+
+  .dashboardLayout,
+  .dashboardLeft,
+  .dashboardRight {
+    gap: 20px;
+  }
+
+  .dashboardRight {
+    display: flex;
+    flex-direction: column;
+  }
+
   .todayDashboardCard,
   .recentDashboardCard,
   .calendarDashboardCard,
@@ -1086,15 +1100,35 @@
     padding: 20px;
   }
 
+  .dashboardCard {
+    border-radius: 16px;
+  }
+
+  .dashboardCardTitleRow {
+    gap: 10px;
+  }
+
+  .dashboardCardTitleRow h2,
+  .recentDashboardCard > h2 {
+    font-size: 17px;
+    line-height: 26px;
+  }
+
+  /* 오늘 운동 기록 */
+
   .todayRecordContent {
     flex-direction: column;
     align-items: stretch;
+    gap: 20px;
   }
 
   .todayRecordStats {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 20px;
+  }
 
-    row-gap: 18px;
+  .todayRecordStat {
+    padding: 0 14px;
   }
 
   .todayRecordStat:nth-child(2)::after {
@@ -1105,6 +1139,16 @@
     padding-left: 0;
   }
 
+  .todayRecordStat span {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .todayRecordStat strong {
+    font-size: 17px;
+    line-height: 26px;
+  }
+
   .todayRecordButton {
     width: 100%;
   }
@@ -1112,10 +1156,17 @@
   .todayEmptyState {
     flex-direction: column;
     align-items: stretch;
+    text-align: center;
   }
 
   .todayEmptyState button {
     width: 100%;
+  }
+
+  /* 최근 운동 기록 */
+
+  .recentDashboardCard > h2 {
+    margin-bottom: 14px;
   }
 
   .recentTableHeader {
@@ -1126,20 +1177,32 @@
     position: relative;
 
     min-height: auto;
-
-    padding: 18px 44px 18px 0;
+    padding: 16px 42px 16px 0;
 
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 
-    row-gap: 8px;
+    column-gap: 12px;
+    row-gap: 7px;
 
     text-align: left;
+  }
+
+  .recentTableRow > span {
+    min-width: 0;
+
+    font-size: 13px;
+    line-height: 20px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .recentTableRow > span:first-child {
     grid-column: 1 / -1;
 
+    font-size: 14px;
     font-weight: 600;
   }
 
@@ -1151,44 +1214,229 @@
     transform: translateY(-50%);
   }
 
-  .dashboardRight {
-    display: flex;
+  .recentMoreButton {
+    margin-top: 14px;
   }
+
+  /* 기록 없음 */
+
+  .allRecordsEmptyCard,
+  .dashboardLoginCard {
+    min-height: 320px;
+    padding: 32px 20px;
+  }
+
+  .allRecordsEmptyCard p,
+  .dashboardLoginCard p {
+    word-break: keep-all;
+  }
+
+  /* 캘린더 */
 
   .calendarDashboardCard {
-    overflow-x: auto;
+    overflow: hidden;
   }
 
-  .dashboardCalendarGrid,
+  .calendarTitleRow {
+    margin-bottom: 22px;
+  }
+
+  .addScheduleButton {
+    height: 38px;
+    padding: 0 12px;
+
+    gap: 5px;
+
+    font-size: 12px;
+
+    white-space: nowrap;
+  }
+
+  .calendarMonthHeader {
+    margin-bottom: 14px;
+  }
+
+  .calendarWeekHeader,
+  .dashboardCalendarGrid {
+    width: 100%;
+    min-width: 0;
+  }
+
   .calendarWeekHeader {
-    min-width: 330px;
+    font-size: 11px;
   }
 
   .dashboardCalendarDay {
-    height: 48px;
+    width: 100%;
+    height: 46px;
+    padding: 4px 0;
+
+    font-size: 12px;
+  }
+
+  .dashboardCalendarDay.today > span,
+  .dashboardCalendarDay.selected > span {
+    width: 32px;
+    height: 32px;
+  }
+
+  .calendarDots {
+    bottom: 2px;
+  }
+
+  .completedDot,
+  .scheduledDot {
+    width: 5px;
+    height: 5px;
+  }
+
+  .calendarLegend {
+    margin-top: 14px;
+
+    gap: 14px;
+
+    font-size: 11px;
+  }
+
+  /* 이번 달 요약 */
+
+  .monthlySummaryCard .dashboardCardTitleRow {
+    margin-bottom: 18px;
+  }
+
+  .monthlySummaryItem {
+    min-height: 82px;
+    padding: 12px 8px;
+  }
+
+  .monthlySummaryItem span {
+    font-size: 12px;
+    line-height: 18px;
+
+    word-break: keep-all;
   }
 
   .monthlySummaryItem strong {
     font-size: 18px;
+    line-height: 26px;
+  }
+
+  /* 모달 */
+
+  .dashboardModalBackdrop {
+    padding: 16px;
+  }
+
+  .recordDetailModal,
+  .scheduleAddModal {
+    width: 100%;
+    max-height: calc(100vh - 32px);
+
+    padding: 22px 20px;
+
+    border-radius: 14px;
+  }
+
+  .dashboardModalHeader {
+    margin-bottom: 20px;
+  }
+
+  .dashboardModalHeader h2 {
+    font-size: 19px;
+    line-height: 28px;
   }
 
   .recordDetailStats {
-    grid-template-columns: repeat(2, 1fr);
-
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
+  }
+
+  .recordVideoArea {
+    margin-bottom: 16px;
   }
 
   .recordModalButtons,
   .scheduleModalButtons {
     grid-template-columns: 1fr;
+    gap: 10px;
   }
 
-  .recordDetailModal,
-  .scheduleAddModal {
-    padding: 22px;
+  .scheduleForm {
+    gap: 18px;
+    margin-bottom: 22px;
   }
 
   .scheduleTimeSelect {
     grid-template-columns: 1fr;
+  }
+
+  .scheduleRadioGroup {
+    gap: 24px;
+  }
+}
+
+/* =========================
+   Small Mobile
+========================= */
+
+@media (max-width: 420px) {
+  .dashboardContainer {
+    width: calc(100% - 28px);
+  }
+
+  .todayDashboardCard,
+  .recentDashboardCard,
+  .calendarDashboardCard,
+  .monthlySummaryCard {
+    padding: 18px 16px;
+  }
+
+  .dashboardCardTitleRow {
+    flex-wrap: wrap;
+  }
+
+  .calendarTitleRow {
+    align-items: flex-start;
+  }
+
+  .addScheduleButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .todayRecordStat {
+    padding: 0 10px;
+  }
+
+  .todayRecordStat strong {
+    font-size: 16px;
+  }
+
+  .dashboardCalendarDay {
+    height: 42px;
+  }
+
+  .dashboardCalendarDay.today > span,
+  .dashboardCalendarDay.selected > span {
+    width: 29px;
+    height: 29px;
+  }
+
+  .calendarLegend {
+    flex-wrap: wrap;
+  }
+
+  .monthlySummaryItem strong {
+    font-size: 17px;
+  }
+
+  .dashboardModalBackdrop {
+    padding: 12px;
+  }
+
+  .recordDetailModal,
+  .scheduleAddModal {
+    max-height: calc(100vh - 24px);
+    padding: 20px 16px;
   }
 }

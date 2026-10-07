@@ -535,13 +535,18 @@
 
   .exerciseSideColumn {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
   }
 
   .cameraBox,
   .webcamVideo,
   .cameraState {
     min-height: 240px;
+  }
+
+  .exerciseFeedback {
+    margin-top: 16px;
   }
 }
 
@@ -552,16 +557,16 @@
 @media (max-width: 600px) {
   .exercisePage {
     min-height: calc(100vh - 60px);
-
     padding: 24px 16px 40px;
   }
 
   .exerciseTitleRow {
     margin-bottom: 24px;
 
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: stretch;
 
-    gap: 12px;
+    gap: 14px;
   }
 
   .exercisePageTitle h1 {
@@ -572,9 +577,13 @@
   .exercisePageTitle p {
     font-size: 14px;
     line-height: 22px;
+
+    word-break: keep-all;
   }
 
   .voiceGuideButton {
+    align-self: flex-start;
+
     height: 40px;
     padding: 0 14px;
 
@@ -591,16 +600,34 @@
     padding: 16px;
   }
 
+  .referencePanel h2,
+  .progressPanel h2,
+  .cameraPanel h2 {
+    margin-bottom: 12px;
+
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .referenceVideo {
+    aspect-ratio: 16 / 9;
+  }
+
   .exerciseSideColumn {
     display: flex;
+    flex-direction: column;
+
+    gap: 16px;
   }
 
   .countText strong {
     font-size: 26px;
+    line-height: 36px;
   }
 
   .countText span {
     font-size: 18px;
+    line-height: 28px;
   }
 
   .cameraBox,
@@ -609,18 +636,58 @@
     min-height: 220px;
   }
 
+  .cameraState {
+    padding: 20px 16px;
+  }
+
   .exerciseFeedback {
+    min-height: 56px;
+
+    margin-top: 16px;
     padding: 12px 16px;
 
     align-items: flex-start;
+
+    gap: 8px;
+  }
+
+  .exerciseFeedback strong {
+    font-size: 14px;
+    line-height: 22px;
+
+    word-break: keep-all;
+  }
+
+  .feedbackIcon {
+    flex-shrink: 0;
   }
 
   .endExerciseButton {
     width: 100%;
     height: 52px;
+
+    margin-top: 20px;
+  }
+
+  .exerciseModalBackdrop {
+    padding: 16px;
+  }
+
+  .exerciseEndModal {
+    padding: 28px 20px 20px;
+  }
+
+  .exerciseEndModal > strong {
+    margin-bottom: 22px;
+
+    word-break: keep-all;
   }
 
   .exerciseModalButtons {
     grid-template-columns: 1fr;
+  }
+
+  .exerciseModalButtons button {
+    height: 48px;
   }
 }

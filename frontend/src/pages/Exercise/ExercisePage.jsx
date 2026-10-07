@@ -76,9 +76,8 @@ function ExercisePage() {
 
   const [aiStatus, setAiStatus] = useState("connecting");
 
-  const [aiFeedback, setAiFeedback] = useState(
-    "카메라 연결을 기다리고 있어요.",
-  );
+  const [aiFeedback, setAiFeedback] =
+    useState("카메라 연결을 기다리고 있어요.");
 
   const [aiAccuracy, setAiAccuracy] = useState(0);
   const [aiFrameUrl, setAiFrameUrl] = useState(null);
@@ -93,9 +92,7 @@ function ExercisePage() {
   const pendingFeedbackRef = useRef("");
   const feedbackTimerRef = useRef(null);
 
-  const displayedFeedbackRef = useRef(
-    "카메라 연결을 기다리고 있어요.",
-  );
+  const displayedFeedbackRef = useRef("카메라 연결을 기다리고 있어요.");
 
   const [targetCount] = useState(12);
 
@@ -105,9 +102,8 @@ function ExercisePage() {
 
   const [cameraStatus, setCameraStatus] = useState("idle");
 
-  const [cameraError, setCameraError] = useState(
-    "카메라 사용 권한을 허용해주세요.",
-  );
+  const [cameraError, setCameraError] =
+    useState("카메라 사용 권한을 허용해주세요.");
 
   /* =========================
      음성 안내
@@ -191,10 +187,7 @@ function ExercisePage() {
         // 가장 최신 문구 하나만 이어서 읽음
         const latestText = pendingSpeechRef.current;
 
-        if (
-          latestText &&
-          latestText !== lastSpokenTextRef.current
-        ) {
+        if (latestText && latestText !== lastSpokenTextRef.current) {
           playNextSpeech();
         }
       };
@@ -292,10 +285,7 @@ function ExercisePage() {
 
       // 1.5초 동안 새로운 피드백이 들어왔다면
       // 가장 최근 문구를 다음에 표시
-      if (
-        latestFeedback &&
-        latestFeedback !== displayedFeedbackRef.current
-      ) {
+      if (latestFeedback && latestFeedback !== displayedFeedbackRef.current) {
         updateFeedback(latestFeedback);
       }
     }, 1500);
@@ -420,10 +410,7 @@ function ExercisePage() {
 
                 setAiStatus("summary");
 
-                sessionStorage.setItem(
-                  "exerciseSummary",
-                  JSON.stringify(data),
-                );
+                sessionStorage.setItem("exerciseSummary", JSON.stringify(data));
 
                 /* 카메라 종료 */
 
@@ -495,10 +482,7 @@ function ExercisePage() {
           return;
         }
 
-        console.error(
-          "운동 세션 생성 또는 AI 연결 실패:",
-          error,
-        );
+        console.error("운동 세션 생성 또는 AI 연결 실패:", error);
 
         setAiStatus("error");
 
@@ -511,10 +495,7 @@ function ExercisePage() {
     return () => {
       isActive = false;
 
-      if (
-        socket &&
-        socket.readyState === WebSocket.OPEN
-      ) {
+      if (socket && socket.readyState === WebSocket.OPEN) {
         socket.close();
       }
 
@@ -561,13 +542,7 @@ function ExercisePage() {
         return;
       }
 
-      context.drawImage(
-        video,
-        0,
-        0,
-        canvas.width,
-        canvas.height,
-      );
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
       canvas.toBlob(
         (blob) => {
@@ -600,22 +575,17 @@ function ExercisePage() {
 
     try {
       if (!navigator.mediaDevices?.getUserMedia) {
-        throw new Error(
-          "이 브라우저에서는 카메라를 사용할 수 없습니다.",
-        );
+        throw new Error("이 브라우저에서는 카메라를 사용할 수 없습니다.");
       }
 
       if (streamRef.current) {
-        streamRef.current
-          .getTracks()
-          .forEach((track) => track.stop());
+        streamRef.current.getTracks().forEach((track) => track.stop());
       }
 
-      const stream =
-        await navigator.mediaDevices.getUserMedia({
-          video: true,
-          audio: false,
-        });
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: false,
+      });
 
       streamRef.current = stream;
 
@@ -645,9 +615,7 @@ function ExercisePage() {
       ) {
         setCameraStatus("permissionDenied");
 
-        setCameraError(
-          "카메라 사용 권한을 허용해주세요.",
-        );
+        setCameraError("카메라 사용 권한을 허용해주세요.");
       } else {
         setCameraStatus("error");
 
@@ -667,9 +635,7 @@ function ExercisePage() {
   useEffect(() => {
     return () => {
       if (streamRef.current) {
-        streamRef.current
-          .getTracks()
-          .forEach((track) => track.stop());
+        streamRef.current.getTracks().forEach((track) => track.stop());
       }
     };
   }, []);
@@ -682,9 +648,10 @@ function ExercisePage() {
     const minute = Math.floor(seconds / 60);
     const second = seconds % 60;
 
-    return `${String(minute).padStart(2, "0")}:${String(
-      second,
-    ).padStart(2, "0")}`;
+    return `${String(minute).padStart(2, "0")}:${String(second).padStart(
+      2,
+      "0",
+    )}`;
   };
 
   /* =========================
@@ -702,10 +669,7 @@ function ExercisePage() {
   const handleEndExercise = () => {
     const socket = socketRef.current;
 
-    if (
-      socket &&
-      socket.readyState === WebSocket.OPEN
-    ) {
+    if (socket && socket.readyState === WebSocket.OPEN) {
       console.log("AI에 운동 종료 요청 전송");
 
       stopVoice();
@@ -723,9 +687,7 @@ function ExercisePage() {
 
     stopVoice();
 
-    console.log(
-      "AI 연결이 없어 결과 화면으로 바로 이동",
-    );
+    console.log("AI 연결이 없어 결과 화면으로 바로 이동");
 
     navigate(`/result?type=${exerciseType}`);
   };
@@ -746,8 +708,7 @@ function ExercisePage() {
 
           <button
             type="button"
-            className={`voiceGuideButton ${isVoiceOn ? "active" : ""
-              }`}
+            className={`voiceGuideButton ${isVoiceOn ? "active" : ""}`}
             onClick={handleVoiceToggle}
           >
             <img
@@ -756,9 +717,7 @@ function ExercisePage() {
               aria-hidden="true"
             />
 
-            {isVoiceOn
-              ? "음성 안내 켜짐"
-              : "음성 안내 켜기"}
+            {isVoiceOn ? "음성 안내 켜짐" : "음성 안내 켜기"}
           </button>
         </div>
 
@@ -806,9 +765,7 @@ function ExercisePage() {
                 />
               </div>
 
-              <p>
-                운동 시간&nbsp; {formatTime(elapsedTime)}
-              </p>
+              <p>운동 시간&nbsp; {formatTime(elapsedTime)}</p>
             </section>
 
             {/* 내 모습 */}
@@ -875,9 +832,7 @@ function ExercisePage() {
                       aria-hidden="true"
                     />
 
-                    <strong>
-                      카메라를 연결하고 있어요.
-                    </strong>
+                    <strong>카메라를 연결하고 있어요.</strong>
                   </div>
                 )}
 

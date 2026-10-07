@@ -77,6 +77,8 @@
   line-height: 44px;
   font-weight: 700;
   letter-spacing: -0.02em;
+
+  word-break: keep-all;
 }
 
 /* =========================
@@ -165,6 +167,8 @@
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
+
+  word-break: keep-all;
 }
 
 /* =========================
@@ -194,8 +198,6 @@
   transition: background-color 0.2s ease;
 }
 
-/* 운동 기록 보기 */
-
 .recordButton {
   background-color: var(--color-primary);
   color: var(--text-inverse);
@@ -207,8 +209,6 @@
   background-color: var(--color-primary-hover);
 }
 
-/* 다시 운동하기 */
-
 .retryButton {
   background-color: var(--color-surface);
   color: var(--color-primary);
@@ -218,6 +218,36 @@
 
 .retryButton:hover {
   background-color: var(--color-primary-light);
+}
+
+/* =========================
+   보호자 결과
+========================= */
+
+.guardianNotice {
+  margin: 4px 0 0;
+
+  color: var(--text-secondary);
+
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+
+  text-align: center;
+  word-break: keep-all;
+}
+
+.guardianMessage {
+  margin: 24px 0 0;
+
+  color: var(--text-secondary);
+
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
+
+  text-align: center;
+  word-break: keep-all;
 }
 
 /* =========================
@@ -247,7 +277,7 @@
   }
 
   .resultCard {
-    padding: 36px 20px 24px;
+    padding: 36px 18px 24px;
 
     border-radius: 16px;
   }
@@ -280,6 +310,10 @@
     padding: 20px 0;
   }
 
+  .resultStat {
+    gap: 6px;
+  }
+
   .resultStat strong {
     font-size: 26px;
     line-height: 36px;
@@ -299,5 +333,17 @@
     height: 52px;
 
     font-size: 16px;
+  }
+
+  .guardianNotice {
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  .guardianMessage {
+    margin-top: 20px;
+
+    font-size: 15px;
+    line-height: 24px;
   }
 }

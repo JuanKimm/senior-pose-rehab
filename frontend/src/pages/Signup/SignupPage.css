@@ -1,25 +1,17 @@
 .signupPage {
   min-height: calc(100vh - 76px);
-
   display: flex;
   justify-content: center;
   align-items: flex-start;
-
   padding: 48px 24px 64px;
-
   background-color: var(--color-background);
 }
-
-/* =========================
-   회원가입 카드
-========================= */
 
 .signupCard {
   width: 100%;
   max-width: 420px;
-
   padding: 32px;
-
+  box-sizing: border-box;
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 12px;
@@ -31,7 +23,6 @@
 
 .signupTitleArea h1 {
   margin: 0 0 8px;
-
   color: var(--color-text-primary);
   font-size: 24px;
   line-height: 34px;
@@ -40,15 +31,11 @@
 
 .signupTitleArea p {
   margin: 0;
-
   color: var(--color-text-secondary);
   font-size: 14px;
   line-height: 22px;
+  word-break: keep-all;
 }
-
-/* =========================
-   Form
-========================= */
 
 .signupForm {
   display: flex;
@@ -71,16 +58,13 @@
 .signupField input {
   width: 100%;
   height: 48px;
-
   padding: 0 14px;
-
+  box-sizing: border-box;
   color: var(--color-text-primary);
   font-size: 14px;
-
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 8px;
-
   outline: none;
 }
 
@@ -96,9 +80,53 @@
   border-color: var(--color-error);
 }
 
-/* =========================
-   비밀번호
-========================= */
+.signupField input:disabled {
+  background-color: var(--color-background);
+  cursor: not-allowed;
+}
+
+.phoneInputRow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.phoneInputRow input {
+  min-width: 0;
+  flex: 1;
+}
+
+.verificationButton {
+  height: 48px;
+  padding: 0 14px;
+  flex-shrink: 0;
+  color: var(--color-primary);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-primary);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.verificationButton:hover:not(:disabled) {
+  background-color: var(--color-primary-light);
+}
+
+.verificationButton:disabled {
+  color: var(--color-text-disabled);
+  border-color: var(--color-border);
+  cursor: not-allowed;
+}
+
+.verificationSuccess {
+  margin: 0;
+  color: var(--color-success);
+  font-size: 12px;
+  line-height: 20px;
+}
 
 .signupPasswordWrap {
   position: relative;
@@ -112,42 +140,32 @@
   position: absolute;
   top: 50%;
   right: 12px;
-
   transform: translateY(-50%);
-
   padding: 0;
-
   background: none;
   border: none;
-
   cursor: pointer;
 }
 
 .signupPasswordToggle img {
   display: block;
-
   width: 24px;
   height: 24px;
 }
 
 .signupHelperText {
   margin: 0;
-
   color: var(--color-text-tertiary);
   font-size: 12px;
   line-height: 20px;
+  word-break: keep-all;
 }
-
-/* =========================
-   오류 메시지
-========================= */
 
 .signupErrorMessage {
   margin: 0;
   display: flex;
   align-items: center;
   gap: 8px;
-
   color: var(--color-error);
   font-size: 14px;
   line-height: 20px;
@@ -160,28 +178,21 @@
   flex-shrink: 0;
 }
 
-/* =========================
-   약관
-========================= */
-
 .agreementRow {
   display: flex;
   align-items: flex-start;
   gap: 8px;
-
   color: var(--color-text-secondary);
   font-size: 12px;
   line-height: 20px;
-
   cursor: pointer;
 }
 
 .agreementRow input {
   width: 16px;
   height: 16px;
-
   margin: 2px 0 0;
-
+  flex-shrink: 0;
   accent-color: var(--color-primary);
 }
 
@@ -189,22 +200,15 @@
   color: var(--color-primary);
 }
 
-/* =========================
-   회원가입 버튼
-========================= */
-
 .signupSubmitButton {
   width: 100%;
   height: 48px;
-
   color: var(--color-text-inverse);
   font-size: 16px;
   font-weight: 600;
-
   background-color: var(--color-primary);
   border: none;
   border-radius: 8px;
-
   cursor: pointer;
 }
 
@@ -212,47 +216,32 @@
   background-color: var(--color-primary-hover);
 }
 
-/* =========================
-   로그인 이동
-========================= */
-
 .loginGuide {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
-
   margin-top: 20px;
-
   color: var(--color-text-secondary);
   font-size: 14px;
 }
 
 .loginGuide button {
   padding: 0;
-
   color: var(--color-primary);
   font-size: 14px;
   font-weight: 600;
-
   background: none;
   border: none;
-
   cursor: pointer;
 }
-
-/* =========================
-   회원가입 성공
-========================= */
 
 .signupSuccessCard {
   width: 100%;
   max-width: 420px;
-
   padding: 40px 32px;
-
+  box-sizing: border-box;
   text-align: center;
-
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 12px;
@@ -261,24 +250,19 @@
 .signupSuccessIcon {
   width: 40px;
   height: 40px;
-
   margin: 0 auto 20px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   color: var(--color-success);
   font-size: 22px;
   font-weight: 700;
-
   border: 1px solid var(--color-success);
   border-radius: 999px;
 }
 
 .signupSuccessCard h1 {
   margin: 0 0 12px;
-
   color: var(--color-text-primary);
   font-size: 20px;
   line-height: 30px;
@@ -287,24 +271,46 @@
 
 .signupSuccessCard p {
   margin: 0 0 28px;
-
   color: var(--color-text-secondary);
   font-size: 14px;
   line-height: 22px;
 }
 
-/* =========================
-   Mobile
-========================= */
-
 @media (max-width: 600px) {
   .signupPage {
     min-height: calc(100vh - 60px);
-    padding: 32px 16px;
+    padding: 32px 16px 48px;
   }
 
   .signupCard,
   .signupSuccessCard {
-    padding: 24px;
+    padding: 28px 20px;
+  }
+
+  .signupTitleArea {
+    margin-bottom: 24px;
+  }
+
+  .signupTitleArea h1 {
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  .signupForm {
+    gap: 18px;
+  }
+
+  .phoneInputRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .verificationButton {
+    width: 100%;
+  }
+
+  .loginGuide {
+    flex-wrap: wrap;
+    row-gap: 4px;
   }
 }

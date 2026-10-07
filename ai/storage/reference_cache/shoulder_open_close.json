@@ -23,8 +23,8 @@
     "symmetry_ratio": 0.020007309594599034
   },
   "thresholds": {
-    "closed_elbow_ratio": 1.4442147820287352,
-    "open_elbow_ratio": 2.2699818315713927
+    "closed_elbow_ratio": 1.562181503391972,
+    "open_elbow_ratio": 2.152015110208156
   },
   "tolerances": {
     "elbow_spread_ratio": 0.1415600656358842,

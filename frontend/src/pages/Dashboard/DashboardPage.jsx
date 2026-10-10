@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import api from "../../libs/api";
 import userRoundIcon from "../../assets/icons/icon=UserRound.svg";
+import clipboardIcon from "../../assets/icons/icon=clipboard.svg";
 import "../../styles/DashboardPage.css";
 
 function DashboardPage() {
@@ -665,7 +666,9 @@ function DashboardPage() {
               </>
             ) : (
               <section className="dashboardCard allRecordsEmptyCard">
-                <div className="emptyRecordIcon">▣</div>
+                <div className="emptyRecordIcon">
+                  <img src={clipboardIcon} alt="" aria-hidden="true" />
+                </div>
 
                 <strong>아직 운동 기록이 없어요.</strong>
 

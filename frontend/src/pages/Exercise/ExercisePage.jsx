@@ -424,6 +424,19 @@ function ExercisePage() {
 
                   console.log("비회원 운동 세션 임시 보관:", finishedSessionId);
                 }
+                /* 로그인 회원은 운동 완료 후 결과 알림 발송 */
+                if (accessToken && finishedSessionId && data.backend_sent) {
+                  api
+                    .post(
+                      `/api/exercise/result/${finishedSessionId}/share-token`,
+                    )
+                    .then(() => {
+                      console.log("운동 결과 문자 발송 완료");
+                    })
+                    .catch((error) => {
+                      console.error("운동 결과 문자 발송 실패:", error);
+                    });
+                }
 
                 /* 카메라 종료 */
 

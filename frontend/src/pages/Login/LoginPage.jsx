@@ -56,9 +56,19 @@ function LoginPage() {
             sessionId: Number(pendingSessionId),
           });
 
+          console.log("비회원 운동 기록 연결 완료:", pendingSessionId);
+
           sessionStorage.removeItem("pendingExerciseSessionId");
 
-          console.log("비회원 운동 기록 연결 완료:", pendingSessionId);
+          try {
+            await api.post(
+              `/api/exercise/result/${pendingSessionId}/share-token`,
+            );
+
+            console.log("운동 결과 문자 발송 완료:", pendingSessionId);
+          } catch (error) {
+            console.error("운동 결과 문자 발송 실패:", error);
+          }
         } catch (error) {
           console.error("비회원 운동 기록 연결 실패:", error);
         }

@@ -292,20 +292,6 @@ function ExercisePage() {
   };
 
   /* =========================
-     운동 시간
-  ========================= */
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setElapsedTime((prev) => prev + 1);
-    }, 1000);
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
-
-  /* =========================
      페이지 종료 시 정리
   ========================= */
 
@@ -400,6 +386,8 @@ function ExercisePage() {
                 setCurrentCount(data.rep_count ?? 0);
 
                 setAiAccuracy(data.accuracy ?? 0);
+
+                setElapsedTime(Math.floor((data.timestamp_ms ?? 0) / 1000));
 
                 updateFeedback(data.feedback);
 

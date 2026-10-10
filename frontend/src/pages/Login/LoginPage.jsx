@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import api from "../../libs/api";
 
@@ -11,6 +11,7 @@ import "./LoginPage.css";
 
 function LoginPage() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [tel, setTel] = useState("");
   const [password, setPassword] = useState("");
@@ -63,7 +64,11 @@ function LoginPage() {
         }
       }
 
-      navigate("/");
+      if (location.state?.fromExerciseResult === true) {
+        navigate("/dashboard");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       console.error("로그인 실패:", error);
       setErrorMessage("전화번호 또는 비밀번호를 다시 확인해주세요.");

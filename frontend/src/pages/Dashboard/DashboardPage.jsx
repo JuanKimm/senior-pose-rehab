@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import api from "../../libs/api";
 import "../../styles/DashboardPage.css";
 
 function DashboardPage() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const accessToken = localStorage.getItem("accessToken");
   const isLoggedIn = Boolean(accessToken);
@@ -76,8 +77,9 @@ function DashboardPage() {
     const date = new Date();
     const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
 
-    return `${date.getMonth() + 1}월 ${date.getDate()}일 (${weekdays[date.getDay()]
-      })`;
+    return `${date.getMonth() + 1}월 ${date.getDate()}일 (${
+      weekdays[date.getDay()]
+    })`;
   };
 
   const toDateString = (year, month, day) => {
@@ -342,15 +344,7 @@ function DashboardPage() {
    * 캘린더에 "운동 예정" 점을 반복 표시한다.
    */
   const scheduleDays = useMemo(() => {
-    const weekdayCodes = [
-      "Sun",
-      "Mon",
-      "Tue",
-      "Wed",
-      "Thu",
-      "Fri",
-      "Sat",
-    ];
+    const weekdayCodes = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
     const scheduledWeekdays = new Set(
       schedules
@@ -368,11 +362,7 @@ function DashboardPage() {
       { length: daysInCurrentMonth },
       (_, index) => index + 1,
     ).filter((day) => {
-      const weekdayIndex = new Date(
-        currentYear,
-        currentMonth,
-        day,
-      ).getDay();
+      const weekdayIndex = new Date(currentYear, currentMonth, day).getDay();
 
       return scheduledWeekdays.has(weekdayCodes[weekdayIndex]);
     });
@@ -387,11 +377,7 @@ function DashboardPage() {
       0,
     ).getDate();
 
-    const daysInPrevMonth = new Date(
-      currentYear,
-      currentMonth,
-      0,
-    ).getDate();
+    const daysInPrevMonth = new Date(currentYear, currentMonth, 0).getDate();
 
     return Array.from({ length: 42 }, (_, index) => {
       const dayNumber = index - firstDay + 1;
@@ -435,15 +421,7 @@ function DashboardPage() {
   ========================= */
 
   const openScheduleModal = () => {
-    const weekdayCodes = [
-      "Sun",
-      "Mon",
-      "Tue",
-      "Wed",
-      "Thu",
-      "Fri",
-      "Sat",
-    ];
+    const weekdayCodes = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
     const today = new Date();
 
@@ -506,32 +484,32 @@ function DashboardPage() {
           <div className="dashboardHeading">
             <h1>운동 기록</h1>
 
-            <p>
-              최근 운동 기록과 이번 달 운동 현황을 한눈에 확인해보세요.
-            </p>
+            <p>최근 운동 기록과 이번 달 운동 현황을 한눈에 확인해보세요.</p>
           </div>
 
           <section className="dashboardLoginCard">
             <div className="dashboardLoginIcon">♙</div>
 
-            <strong>
-              운동 기록을 확인하려면 로그인이 필요해요.
-            </strong>
+            <strong>운동 기록을 확인하려면 로그인이 필요해요.</strong>
 
-            <p>
-              로그인하면 운동 기록과 운동 일정을 확인할 수 있어요.
-            </p>
+            <p>로그인하면 운동 기록과 운동 일정을 확인할 수 있어요.</p>
 
             <button
               type="button"
-              onClick={() => navigate("/login")}
+              onClick={() =>
+                navigate("/login", {
+                  state: {
+                    fromExerciseResult:
+                      location.state?.fromExerciseResult === true,
+                  },
+                })
+              }
             >
               로그인하기
             </button>
 
             <span>
               아직 회원이 아니신가요?{" "}
-
               <button
                 type="button"
                 className="signupLinkButton"
@@ -546,8 +524,7 @@ function DashboardPage() {
     );
   }
 
-  const hasAnyRecord =
-    Boolean(todayRecord) || recentRecords.length > 0;
+  const hasAnyRecord = Boolean(todayRecord) || recentRecords.length > 0;
 
   return (
     <div className="dashboardPage">
@@ -557,9 +534,7 @@ function DashboardPage() {
         <div className="dashboardHeading">
           <h1>운동 기록</h1>
 
-          <p>
-            최근 운동 기록과 이번 달 운동 현황을 한눈에 확인해보세요.
-          </p>
+          <p>최근 운동 기록과 이번 달 운동 현황을 한눈에 확인해보세요.</p>
         </div>
 
         <div className="dashboardLayout">
@@ -585,26 +560,20 @@ function DashboardPage() {
                         <div className="todayRecordStat">
                           <span>운동 부위</span>
 
-                          <strong>
-                            {todayRecord.bodyPart}
-                          </strong>
+                          <strong>{todayRecord.bodyPart}</strong>
                         </div>
 
                         <div className="todayRecordStat">
                           <span>수행 횟수</span>
 
-                          <strong>
-                            {todayRecord.totalCount}회
-                          </strong>
+                          <strong>{todayRecord.totalCount}회</strong>
                         </div>
 
                         <div className="todayRecordStat">
                           <span>운동 시간</span>
 
                           <strong>
-                            {formatDuration(
-                              todayRecord.durationSec,
-                            )}
+                            {formatDuration(todayRecord.durationSec)}
                           </strong>
                         </div>
 
@@ -612,9 +581,7 @@ function DashboardPage() {
                           <span>평균 정확도</span>
 
                           <strong>
-                            {formatAccuracy(
-                              todayRecord.accuracy,
-                            )}
+                            {formatAccuracy(todayRecord.accuracy)}
                           </strong>
                         </div>
                       </div>
@@ -622,11 +589,7 @@ function DashboardPage() {
                       <button
                         type="button"
                         className="todayRecordButton"
-                        onClick={() =>
-                          openRecordModal(
-                            todayRecord.sessionId,
-                          )
-                        }
+                        onClick={() => openRecordModal(todayRecord.sessionId)}
                       >
                         기록보기
                         <span>›</span>
@@ -635,19 +598,12 @@ function DashboardPage() {
                   ) : (
                     <div className="todayEmptyState">
                       <div>
-                        <strong>
-                          오늘 운동 기록이 아직 없어요.
-                        </strong>
+                        <strong>오늘 운동 기록이 아직 없어요.</strong>
 
-                        <p>
-                          오늘도 가볍게 운동을 시작해보세요.
-                        </p>
+                        <p>오늘도 가볍게 운동을 시작해보세요.</p>
                       </div>
 
-                      <button
-                        type="button"
-                        onClick={() => navigate("/")}
-                      >
+                      <button type="button" onClick={() => navigate("/")}>
                         운동 시작하기
                       </button>
                     </div>
@@ -670,42 +626,21 @@ function DashboardPage() {
                     </div>
 
                     {visibleRecords.map((record) => (
-                      <div
-                        className="recentTableRow"
-                        key={record.sessionId}
-                      >
-                        <span>
-                          {formatRecordDate(
-                            record.exerciseDate,
-                          )}
-                        </span>
+                      <div className="recentTableRow" key={record.sessionId}>
+                        <span>{formatRecordDate(record.exerciseDate)}</span>
 
                         <span>{record.bodyPart}</span>
 
-                        <span>
-                          {record.totalCount}회
-                        </span>
+                        <span>{record.totalCount}회</span>
 
-                        <span>
-                          {formatDuration(
-                            record.durationSec,
-                          )}
-                        </span>
+                        <span>{formatDuration(record.durationSec)}</span>
 
-                        <span>
-                          {formatAccuracy(
-                            record.accuracy,
-                          )}
-                        </span>
+                        <span>{formatAccuracy(record.accuracy)}</span>
 
                         <button
                           type="button"
                           className="recordArrowButton"
-                          onClick={() =>
-                            openRecordModal(
-                              record.sessionId,
-                            )
-                          }
+                          onClick={() => openRecordModal(record.sessionId)}
                           aria-label="운동 기록 상세보기"
                         >
                           ›
@@ -714,38 +649,26 @@ function DashboardPage() {
                     ))}
                   </div>
 
-                  {(recentRecords.length >= 5 ||
-                    showAllRecords) && (
-                      <button
-                        type="button"
-                        className="recentMoreButton"
-                        onClick={handleToggleMore}
-                      >
-                        {showAllRecords
-                          ? "접기 ︿"
-                          : "더보기 ﹀"}
-                      </button>
-                    )}
+                  {(recentRecords.length >= 5 || showAllRecords) && (
+                    <button
+                      type="button"
+                      className="recentMoreButton"
+                      onClick={handleToggleMore}
+                    >
+                      {showAllRecords ? "접기 ︿" : "더보기 ﹀"}
+                    </button>
+                  )}
                 </section>
               </>
             ) : (
               <section className="dashboardCard allRecordsEmptyCard">
-                <div className="emptyRecordIcon">
-                  ▣
-                </div>
+                <div className="emptyRecordIcon">▣</div>
 
-                <strong>
-                  아직 운동 기록이 없어요.
-                </strong>
+                <strong>아직 운동 기록이 없어요.</strong>
 
-                <p>
-                  첫 운동을 시작하면 운동 기록을 여기에서 확인할 수 있어요.
-                </p>
+                <p>첫 운동을 시작하면 운동 기록을 여기에서 확인할 수 있어요.</p>
 
-                <button
-                  type="button"
-                  onClick={() => navigate("/")}
-                >
+                <button type="button" onClick={() => navigate("/")}>
                   운동 시작하기
                 </button>
               </section>
@@ -783,8 +706,7 @@ function DashboardPage() {
                 </button>
 
                 <strong>
-                  {currentYear}년{" "}
-                  {currentMonth + 1}월
+                  {currentYear}년 {currentMonth + 1}월
                 </strong>
 
                 <button
@@ -809,17 +731,13 @@ function DashboardPage() {
               <div className="dashboardCalendarGrid">
                 {calendarCells.map((cell, index) => {
                   const completed =
-                    cell.current &&
-                    exerciseDays.includes(cell.day);
+                    cell.current && exerciseDays.includes(cell.day);
 
                   const scheduled =
-                    cell.current &&
-                    scheduleDays.includes(cell.day);
+                    cell.current && scheduleDays.includes(cell.day);
 
                   const selected =
-                    cell.current &&
-                    selectedCalendarDay ===
-                    cell.day;
+                    cell.current && selectedCalendarDay === cell.day;
 
                   return (
                     <button
@@ -828,36 +746,22 @@ function DashboardPage() {
                       disabled={!cell.current}
                       className={[
                         "dashboardCalendarDay",
-                        !cell.current
-                          ? "outsideMonth"
-                          : "",
-                        isToday(cell.day) &&
-                          cell.current
-                          ? "today"
-                          : "",
-                        selected
-                          ? "selected"
-                          : "",
+                        !cell.current ? "outsideMonth" : "",
+                        isToday(cell.day) && cell.current ? "today" : "",
+                        selected ? "selected" : "",
                       ]
                         .filter(Boolean)
                         .join(" ")}
                       onClick={() =>
-                        cell.current &&
-                        handleCalendarDayClick(
-                          cell.day,
-                        )
+                        cell.current && handleCalendarDayClick(cell.day)
                       }
                     >
                       <span>{cell.day}</span>
 
                       <div className="calendarDots">
-                        {completed && (
-                          <i className="completedDot" />
-                        )}
+                        {completed && <i className="completedDot" />}
 
-                        {scheduled && (
-                          <i className="scheduledDot" />
-                        )}
+                        {scheduled && <i className="scheduledDot" />}
                       </div>
                     </button>
                   );
@@ -879,62 +783,47 @@ function DashboardPage() {
 
             {/* 이번 달 요약 */}
 
-            {(monthlySummary?.totalDays ?? 0) >
-              0 && (
-                <section className="dashboardCard monthlySummaryCard">
-                  <div className="dashboardCardTitleRow">
-                    <h2>이번 달 요약</h2>
+            {(monthlySummary?.totalDays ?? 0) > 0 && (
+              <section className="dashboardCard monthlySummaryCard">
+                <div className="dashboardCardTitleRow">
+                  <h2>이번 달 요약</h2>
 
-                    <span>
-                      {currentYear}년{" "}
-                      {currentMonth + 1}월 기준
-                    </span>
+                  <span>
+                    {currentYear}년 {currentMonth + 1}월 기준
+                  </span>
+                </div>
+
+                <div className="monthlySummaryGrid">
+                  <div className="monthlySummaryItem">
+                    <span>총 운동 일수</span>
+
+                    <strong>{monthlySummary?.totalDays ?? 0}일</strong>
                   </div>
 
-                  <div className="monthlySummaryGrid">
-                    <div className="monthlySummaryItem">
-                      <span>총 운동 일수</span>
+                  <div className="monthlySummaryItem">
+                    <span>가장 많이 운동한 부위</span>
 
-                      <strong>
-                        {monthlySummary?.totalDays ??
-                          0}
-                        일
-                      </strong>
-                    </div>
-
-                    <div className="monthlySummaryItem">
-                      <span>
-                        가장 많이 운동한 부위
-                      </span>
-
-                      <strong>
-                        {monthlySummary?.mostFrequentPart ??
-                          "-"}
-                      </strong>
-                    </div>
-
-                    <div className="monthlySummaryItem">
-                      <span>평균 운동 시간</span>
-
-                      <strong>
-                        {formatDuration(
-                          monthlySummary?.avgDurationSec,
-                        )}
-                      </strong>
-                    </div>
-
-                    <div className="monthlySummaryItem">
-                      <span>평균 정확도</span>
-
-                      <strong>
-                        {formatAccuracy(
-                          monthlySummary?.avgAccuracy,
-                        )}
-                      </strong>
-                    </div>
+                    <strong>{monthlySummary?.mostFrequentPart ?? "-"}</strong>
                   </div>
-                </section>
-              )}
+
+                  <div className="monthlySummaryItem">
+                    <span>평균 운동 시간</span>
+
+                    <strong>
+                      {formatDuration(monthlySummary?.avgDurationSec)}
+                    </strong>
+                  </div>
+
+                  <div className="monthlySummaryItem">
+                    <span>평균 정확도</span>
+
+                    <strong>
+                      {formatAccuracy(monthlySummary?.avgAccuracy)}
+                    </strong>
+                  </div>
+                </div>
+              </section>
+            )}
           </div>
         </div>
       </main>
@@ -943,113 +832,89 @@ function DashboardPage() {
           운동 기록 상세
       ========================= */}
 
-      {showRecordModal &&
-        selectedRecord && (
+      {showRecordModal && selectedRecord && (
+        <div className="dashboardModalBackdrop" onMouseDown={closeRecordModal}>
           <div
-            className="dashboardModalBackdrop"
-            onMouseDown={closeRecordModal}
+            className="recordDetailModal"
+            onMouseDown={(event) => event.stopPropagation()}
           >
-            <div
-              className="recordDetailModal"
-              onMouseDown={(event) =>
-                event.stopPropagation()
-              }
-            >
-              <div className="dashboardModalHeader">
-                <div>
-                  <h2>운동 기록 상세</h2>
+            <div className="dashboardModalHeader">
+              <div>
+                <h2>운동 기록 상세</h2>
 
-                  <p>
-                    {formatRecordDate(
-                      selectedRecord.exerciseDate,
-                    )}
-                  </p>
-                </div>
-
-                <button
-                  type="button"
-                  className="modalCloseButton"
-                  onClick={closeRecordModal}
-                >
-                  ×
-                </button>
+                <p>{formatRecordDate(selectedRecord.exerciseDate)}</p>
               </div>
 
-              <div className="recordDetailStats">
-                <div>
-                  <span>운동 부위</span>
+              <button
+                type="button"
+                className="modalCloseButton"
+                onClick={closeRecordModal}
+              >
+                ×
+              </button>
+            </div>
 
-                  <strong>
-                    {selectedRecord.bodyPart}
-                  </strong>
-                </div>
+            <div className="recordDetailStats">
+              <div>
+                <span>운동 부위</span>
 
-                <div>
-                  <span>수행 횟수</span>
-
-                  <strong>
-                    {selectedRecord.totalCount}회
-                  </strong>
-                </div>
-
-                <div>
-                  <span>운동 시간</span>
-
-                  <strong>
-                    {formatDuration(
-                      selectedRecord.durationSec,
-                    )}
-                  </strong>
-                </div>
-
-                <div>
-                  <span>평균 정확도</span>
-
-                  <strong>
-                    {formatAccuracy(
-                      selectedRecord.accuracy,
-                    )}
-                  </strong>
-                </div>
+                <strong>{selectedRecord.bodyPart}</strong>
               </div>
 
-              <div className="recordVideoArea">
-                {videoPreviewUrl ? (
-                  <video
-                    src={videoPreviewUrl}
-                    controls
-                    className="recordDetailVideo"
-                  />
-                ) : (
-                  <div className="recordVideoEmpty">
-                    저장된 운동 영상이 없습니다.
-                  </div>
-                )}
+              <div>
+                <span>수행 횟수</span>
+
+                <strong>{selectedRecord.totalCount}회</strong>
               </div>
 
-              <div className="recordModalButtons">
-                <button
-                  type="button"
-                  className="recordModalCloseButton"
-                  onClick={closeRecordModal}
-                >
-                  닫기
-                </button>
+              <div>
+                <span>운동 시간</span>
 
-                <button
-                  type="button"
-                  className="recordDownloadButton"
-                  disabled={
-                    !selectedRecord.videoPath
-                  }
-                  onClick={handleVideoDownload}
-                >
-                  영상 다운로드
-                </button>
+                <strong>{formatDuration(selectedRecord.durationSec)}</strong>
+              </div>
+
+              <div>
+                <span>평균 정확도</span>
+
+                <strong>{formatAccuracy(selectedRecord.accuracy)}</strong>
               </div>
             </div>
+
+            <div className="recordVideoArea">
+              {videoPreviewUrl ? (
+                <video
+                  src={videoPreviewUrl}
+                  controls
+                  className="recordDetailVideo"
+                />
+              ) : (
+                <div className="recordVideoEmpty">
+                  저장된 운동 영상이 없습니다.
+                </div>
+              )}
+            </div>
+
+            <div className="recordModalButtons">
+              <button
+                type="button"
+                className="recordModalCloseButton"
+                onClick={closeRecordModal}
+              >
+                닫기
+              </button>
+
+              <button
+                type="button"
+                className="recordDownloadButton"
+                disabled={!selectedRecord.videoPath}
+                onClick={handleVideoDownload}
+              >
+                영상 다운로드
+              </button>
+            </div>
           </div>
-        )}
+        </div>
+      )}
 
       {/* =========================
           운동 일정 추가
@@ -1058,31 +923,23 @@ function DashboardPage() {
       {showScheduleModal && (
         <div
           className="dashboardModalBackdrop"
-          onMouseDown={() =>
-            setShowScheduleModal(false)
-          }
+          onMouseDown={() => setShowScheduleModal(false)}
         >
           <div
             className="scheduleAddModal"
-            onMouseDown={(event) =>
-              event.stopPropagation()
-            }
+            onMouseDown={(event) => event.stopPropagation()}
           >
             <div className="dashboardModalHeader">
               <div>
                 <h2>운동 일정 추가</h2>
 
-                <p>
-                  운동할 요일과 시간을 설정해주세요.
-                </p>
+                <p>운동할 요일과 시간을 설정해주세요.</p>
               </div>
 
               <button
                 type="button"
                 className="modalCloseButton"
-                onClick={() =>
-                  setShowScheduleModal(false)
-                }
+                onClick={() => setShowScheduleModal(false)}
               >
                 ×
               </button>
@@ -1090,40 +947,22 @@ function DashboardPage() {
 
             <div className="scheduleForm">
               <div className="scheduleField">
-                <label htmlFor="scheduleDay">
-                  요일
-                </label>
+                <label htmlFor="scheduleDay">요일</label>
 
                 <select
                   id="scheduleDay"
                   value={selectedScheduleDay}
                   onChange={(event) =>
-                    setSelectedScheduleDay(
-                      event.target.value,
-                    )
+                    setSelectedScheduleDay(event.target.value)
                   }
                 >
-                  <option value="Mon">
-                    월요일
-                  </option>
-                  <option value="Tue">
-                    화요일
-                  </option>
-                  <option value="Wed">
-                    수요일
-                  </option>
-                  <option value="Thu">
-                    목요일
-                  </option>
-                  <option value="Fri">
-                    금요일
-                  </option>
-                  <option value="Sat">
-                    토요일
-                  </option>
-                  <option value="Sun">
-                    일요일
-                  </option>
+                  <option value="Mon">월요일</option>
+                  <option value="Tue">화요일</option>
+                  <option value="Wed">수요일</option>
+                  <option value="Thu">목요일</option>
+                  <option value="Fri">금요일</option>
+                  <option value="Sat">토요일</option>
+                  <option value="Sun">일요일</option>
                 </select>
               </div>
 
@@ -1133,53 +972,29 @@ function DashboardPage() {
                 <div className="scheduleTimeSelect">
                   <select
                     value={selectedPeriod}
-                    onChange={(event) =>
-                      setSelectedPeriod(
-                        event.target.value,
-                      )
-                    }
+                    onChange={(event) => setSelectedPeriod(event.target.value)}
                   >
-                    <option value="오전">
-                      오전
-                    </option>
+                    <option value="오전">오전</option>
 
-                    <option value="오후">
-                      오후
-                    </option>
+                    <option value="오후">오후</option>
                   </select>
 
                   <select
                     value={selectedHour}
                     onChange={(event) =>
-                      setSelectedHour(
-                        Number(
-                          event.target.value,
-                        ),
-                      )
+                      setSelectedHour(Number(event.target.value))
                     }
                   >
-                    {Array.from(
-                      { length: 12 },
-                      (_, index) => {
-                        const hour =
-                          index + 1;
+                    {Array.from({ length: 12 }, (_, index) => {
+                      const hour = index + 1;
 
-                        return (
-                          <option
-                            key={hour}
-                            value={hour}
-                          >
-                            {String(
-                              hour,
-                            ).padStart(
-                              2,
-                              "0",
-                            )}
-                            :00
-                          </option>
-                        );
-                      },
-                    )}
+                      return (
+                        <option key={hour} value={hour}>
+                          {String(hour).padStart(2, "0")}
+                          :00
+                        </option>
+                      );
+                    })}
                   </select>
                 </div>
               </div>
@@ -1192,14 +1007,8 @@ function DashboardPage() {
                     <input
                       type="radio"
                       name="alarm"
-                      checked={
-                        alarmEnabled
-                      }
-                      onChange={() =>
-                        setAlarmEnabled(
-                          true,
-                        )
-                      }
+                      checked={alarmEnabled}
+                      onChange={() => setAlarmEnabled(true)}
                     />
                     예
                   </label>
@@ -1208,14 +1017,8 @@ function DashboardPage() {
                     <input
                       type="radio"
                       name="alarm"
-                      checked={
-                        !alarmEnabled
-                      }
-                      onChange={() =>
-                        setAlarmEnabled(
-                          false,
-                        )
-                      }
+                      checked={!alarmEnabled}
+                      onChange={() => setAlarmEnabled(false)}
                     />
                     아니오
                   </label>
@@ -1227,9 +1030,7 @@ function DashboardPage() {
               <button
                 type="button"
                 className="scheduleCancelButton"
-                onClick={() =>
-                  setShowScheduleModal(false)
-                }
+                onClick={() => setShowScheduleModal(false)}
               >
                 취소
               </button>
@@ -1240,9 +1041,7 @@ function DashboardPage() {
                 disabled={scheduleSubmitting}
                 onClick={handleScheduleSubmit}
               >
-                {scheduleSubmitting
-                  ? "등록 중..."
-                  : "일정 추가"}
+                {scheduleSubmitting ? "등록 중..." : "일정 추가"}
               </button>
             </div>
           </div>

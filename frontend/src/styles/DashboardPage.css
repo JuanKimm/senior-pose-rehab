@@ -710,10 +710,11 @@
 
 .dashboardLoginIcon {
   margin-bottom: 18px;
+}
 
-  color: var(--color-primary);
-
-  font-size: 32px;
+.dashboardLoginIcon img {
+  width: 40px;
+  height: 40px;
 }
 
 .dashboardLoginCard strong {

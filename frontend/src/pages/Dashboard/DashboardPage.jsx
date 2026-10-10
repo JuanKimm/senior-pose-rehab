@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import api from "../../libs/api";
+import userRoundIcon from "../../assets/icons/icon=UserRound.svg";
 import "../../styles/DashboardPage.css";
 
 function DashboardPage() {
@@ -488,7 +489,9 @@ function DashboardPage() {
           </div>
 
           <section className="dashboardLoginCard">
-            <div className="dashboardLoginIcon">♙</div>
+            <div className="dashboardLoginIcon">
+              <img src={userRoundIcon} alt="" aria-hidden="true" />
+            </div>
 
             <strong>운동 기록을 확인하려면 로그인이 필요해요.</strong>
 

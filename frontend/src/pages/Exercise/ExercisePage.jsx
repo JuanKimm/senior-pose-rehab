@@ -571,7 +571,7 @@ function ExercisePage() {
         "image/jpeg",
         0.8,
       );
-    }, 200);
+    }, 50);
 
     return () => {
       clearInterval(frameTimer);

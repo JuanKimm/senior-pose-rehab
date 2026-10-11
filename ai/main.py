@@ -1,5 +1,3 @@
-# FastAPI AI 서버를 생성하고 공통 미들웨어와 라우터를 등록합니다.
-# 실행 진입점이며 자세 분석 로직은 services 폴더에 분리되어 있습니다.
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware

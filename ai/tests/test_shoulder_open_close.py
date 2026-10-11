@@ -1,4 +1,4 @@
-# 합성 특징 시퀀스로 팔꿈치 오므림-펼침-오므림 한 회가 계산되는지 검증합니다.
+# 합성 특징 시퀀스로 팔꿈치 오므림-펼침-오므림 한 회가 계산되는지 검증
 import pytest
 
 from models.reference_profile import (

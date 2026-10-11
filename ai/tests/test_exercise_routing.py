@@ -1,4 +1,4 @@
-"""선택한 운동이 WebSocket ready/summary, 분석기, 녹화까지 전달되는지 검증합니다."""
+# 선택한 운동이 WebSocket ready/summary, 분석기, 녹화까지 전달되는지 검증
 
 import cv2
 import numpy as np

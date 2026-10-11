@@ -1,5 +1,3 @@
-# 한 운동 세션의 단계, 반복 횟수, 점수와 피드백 상태를 저장합니다.
-# 분석 함수가 매 프레임 동일한 상태를 이어서 사용할 수 있게 합니다.
 from dataclasses import dataclass, field
 from time import monotonic
 

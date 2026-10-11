@@ -1,5 +1,3 @@
-# 기준 프로필 JSON을 지정 경로에 저장하고 Pydantic 검증 후 불러옵니다.
-# 원본 영상이 바뀐 경우 SHA-256 값으로 오래된 캐시인지 확인할 수 있습니다.
 import hashlib
 from pathlib import Path
 

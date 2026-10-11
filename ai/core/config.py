@@ -55,7 +55,7 @@ BACKEND_BASE_URL = os.getenv(
 # 고정 목표
 TARGET_REP_COUNT = 12
 
-RECORDING_FPS = float(os.getenv("RECORDING_FPS", "5"))
+RECORDING_FPS = float(os.getenv("RECORDING_FPS", "20"))
 CAMERA_INDEX = int(os.getenv("CAMERA_INDEX", "0"))
 JPEG_QUALITY = int(os.getenv("JPEG_QUALITY", "85"))
 MIN_LANDMARK_VISIBILITY = float(os.getenv("MIN_LANDMARK_VISIBILITY", "0.45"))

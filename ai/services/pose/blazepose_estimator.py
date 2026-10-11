@@ -1,5 +1,3 @@
-# MediaPipe Pose Landmarker를 BlazePose 추정기 인터페이스로 감쌉니다.
-# 영상과 웹캠 프레임 모두 동일한 VIDEO 모드로 처리합니다.
 from pathlib import Path
 
 import cv2

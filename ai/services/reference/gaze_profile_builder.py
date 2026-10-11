@@ -1,4 +1,4 @@
-"""실제 영상 표본에서 좌우 팔의 끝 자세와 여유 범위를 산출합니다."""
+"""실제 영상 표본에서 좌우 팔의 끝 자세와 여유 범위를 산출"""
 
 from statistics import mean, pstdev
 
@@ -13,8 +13,8 @@ from models.reference_profile import (
 from models.session_state import SessionState
 from services.exercises.gaze_pull import GazePullAnalyzer
 
-# 허용 오차의 하한. 높이/가로 위치는 어깨 너비, 얼굴 지표는 귀 간격 기준입니다.
-# 최종 허용 오차는 이 하한과 각 끝 자세 표본의 2×표준편차 중 최댓값입니다.
+# 허용 오차의 하한. 높이/가로 위치는 어깨 너비, 얼굴 지표는 귀 간격 기준
+# 최종 허용 오차는 이 하한과 각 끝 자세 표본의 2×표준편차 중 최댓값
 MIN_TOLERANCES = dict(height=0.25, cross=0.30, elbow_angle=20.0, head_turn=0.30, head_lift=0.20)
 LOW_FRACTION = 0.25
 HIGH_FRACTION = 0.75
@@ -66,7 +66,7 @@ def build_gaze_profile(
             cross_threshold=high.cross - max(0.4, tol.cross * 1.5),
             tolerances=tol,
         )
-    # 공통 API 호환용 필드도 영상에서 계산합니다. 실제 판정은 gaze_pull 필드만 사용합니다.
+
     common = {k: mean(getattr(s.features, k) for s in samples) for k in PhaseTarget.model_fields}
     profile = ReferenceProfile(
         exercise_code="gaze_pull",

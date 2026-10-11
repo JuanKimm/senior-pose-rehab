@@ -1,5 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 import api from "../../libs/api";
 import userRoundIcon from "../../assets/icons/icon=UserRound.svg";
 import clipboardIcon from "../../assets/icons/icon=clipboard.svg";
@@ -16,6 +25,7 @@ function DashboardPage() {
 
   const [todayRecord, setTodayRecord] = useState(null);
   const [recentRecords, setRecentRecords] = useState([]);
+  const [accuracyGraph, setAccuracyGraph] = useState([]);
   const [allRecords, setAllRecords] = useState([]);
   const [showAllRecords, setShowAllRecords] = useState(false);
 
@@ -107,7 +117,7 @@ function DashboardPage() {
   };
 
   /* =========================
-     오늘 / 최근 운동 기록
+   오늘 / 최근 운동 기록 / 정확도 그래프
   ========================= */
 
   useEffect(() => {
@@ -117,18 +127,22 @@ function DashboardPage() {
 
     const fetchDashboardRecords = async () => {
       try {
-        const [todayResponse, recentResponse] = await Promise.all([
-          api.get("/api/dashboard/today"),
-          api.get("/api/dashboard/recent-records"),
-        ]);
+        const [todayResponse, recentResponse, accuracyResponse] =
+          await Promise.all([
+            api.get("/api/dashboard/today"),
+            api.get("/api/dashboard/recent-records"),
+            api.get("/api/dashboard/accuracy-graph"),
+          ]);
 
         setTodayRecord(todayResponse.data || null);
         setRecentRecords(recentResponse.data || []);
+        setAccuracyGraph(accuracyResponse.data || []);
       } catch (error) {
         console.error("운동 기록 조회 실패:", error);
 
         setTodayRecord(null);
         setRecentRecords([]);
+        setAccuracyGraph([]);
       }
     };
 
@@ -293,6 +307,16 @@ function DashboardPage() {
   const visibleRecords = showAllRecords
     ? allRecords
     : recentRecords.slice(0, 5);
+
+  const accuracyChartData = useMemo(() => {
+    return accuracyGraph
+      .filter((item) => item.avgAccuracy != null)
+      .slice(-7)
+      .map((item) => ({
+        date: item.exerciseDate?.slice(5).replace("-", "/"),
+        accuracy: Math.round(item.avgAccuracy),
+      }));
+  }, [accuracyGraph]);
 
   /* =========================
      캘린더
@@ -661,6 +685,65 @@ function DashboardPage() {
                     >
                       {showAllRecords ? "접기 ︿" : "더보기 ﹀"}
                     </button>
+                  )}
+                </section>
+
+                {/* 운동 정확도 변화 */}
+
+                <section className="dashboardCard accuracyGraphCard">
+                  <div className="dashboardCardTitleRow">
+                    <div>
+                      <h2>운동 정확도 변화</h2>
+                      <p className="accuracyGraphDescription">
+                        최근 운동의 평균 자세 정확도 변화를 확인해보세요.
+                      </p>
+                    </div>
+                  </div>
+
+                  {accuracyChartData.length > 0 ? (
+                    <div className="accuracyGraphBody">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart
+                          data={accuracyChartData}
+                          margin={{ top: 10, right: 10, left: -10, bottom: 0 }}
+                        >
+                          <CartesianGrid strokeDasharray="3 3" />
+
+                          <XAxis
+                            dataKey="date"
+                            tickLine={false}
+                            axisLine={false}
+                          />
+
+                          <YAxis
+                            domain={[0, 100]}
+                            tickFormatter={(value) => `${value}%`}
+                            tickLine={false}
+                            axisLine={false}
+                          />
+
+                          <Tooltip
+                            formatter={(value) => [
+                              `${Math.round(value)}%`,
+                              "평균 정확도",
+                            ]}
+                          />
+
+                          <Line
+                            type="monotone"
+                            dataKey="accuracy"
+                            stroke="var(--color-primary)"
+                            strokeWidth={3}
+                            dot={{ r: 4 }}
+                            activeDot={{ r: 6 }}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </div>
+                  ) : (
+                    <div className="accuracyGraphEmpty">
+                      정확도 기록이 아직 없어요.
+                    </div>
                   )}
                 </section>
               </>

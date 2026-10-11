@@ -376,6 +376,44 @@
 }
 
 /* =========================
+   정확도 그래프
+========================= */
+
+.accuracyGraphCard {
+  padding: 26px 28px;
+}
+
+.accuracyGraphCard .dashboardCardTitleRow {
+  margin-bottom: 24px;
+}
+
+.accuracyGraphDescription {
+  margin: 4px 0 0;
+
+  color: var(--text-tertiary);
+
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.accuracyGraphBody {
+  width: 100%;
+  height: 260px;
+}
+
+.accuracyGraphEmpty {
+  height: 220px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--text-tertiary);
+
+  font-size: 14px;
+}
+
+/* =========================
    기록 전체 없음
 ========================= */
 
@@ -1097,6 +1135,7 @@
 
   .todayDashboardCard,
   .recentDashboardCard,
+  .accuracyGraphCard,
   .calendarDashboardCard,
   .monthlySummaryCard {
     padding: 20px;
@@ -1218,6 +1257,26 @@
 
   .recentMoreButton {
     margin-top: 14px;
+  }
+
+  /* 정확도 그래프 */
+
+  .accuracyGraphCard .dashboardCardTitleRow {
+    margin-bottom: 18px;
+  }
+
+  .accuracyGraphDescription {
+    font-size: 12px;
+    line-height: 18px;
+    word-break: keep-all;
+  }
+
+  .accuracyGraphBody {
+    height: 220px;
+  }
+
+  .accuracyGraphEmpty {
+    height: 180px;
   }
 
   /* 기록 없음 */
@@ -1388,11 +1447,16 @@
 
   .todayDashboardCard,
   .recentDashboardCard,
+  .accuracyGraphCard,
   .calendarDashboardCard,
   .monthlySummaryCard {
     padding: 18px 16px;
   }
 
+    .accuracyGraphBody {
+    height: 200px;
+  }
+  
   .dashboardCardTitleRow {
     flex-wrap: wrap;
   }

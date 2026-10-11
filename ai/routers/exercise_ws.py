@@ -51,7 +51,7 @@ def _summary(
 
 
 async def _finish_session(session_id: str) -> SessionSummaryResponse | None:
-    # 녹화를 닫고 전송 대기 시간에 영향받지 않도록 운동 요약을 먼저 확정
+
     summary = _summary(session_id, session_manager.end(session_id))
     if summary is None:
         return None
@@ -115,7 +115,7 @@ async def exercise_websocket(
         return
 
     await websocket.accept()
-    # 연동을 켠 경우 백엔드가 발급한 양의 정수 세션 번호만 허용
+
     if backend_client.enabled and (
         not session_id.isascii()
         or not session_id.isdecimal()
@@ -192,7 +192,6 @@ async def exercise_websocket(
             frame_bytes = message.get("bytes")
             if not frame_bytes:
                 continue
-
             encoded = np.frombuffer(frame_bytes, dtype=np.uint8)
             frame = cv2.imdecode(encoded, cv2.IMREAD_COLOR)
             if frame is None:
@@ -277,7 +276,6 @@ async def exercise_websocket(
     except WebSocketDisconnect:
         pass
     finally:
-        # 연결 해제 시에도 결과를 한 번 전송하고 자세 추정기 자원을 정리
         try:
             if session_started:
                 await _finish_session(session_id)

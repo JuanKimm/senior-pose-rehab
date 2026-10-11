@@ -1,4 +1,4 @@
-# 합성 기준 시퀀스에서 단계 임계값과 반복 횟수가 생성되는지 검증합니다.
+# 합성 기준 시퀀스에서 단계 임계값과 반복 횟수가 생성되는지 검증
 from models.reference_profile import MotionFeatures, ReferenceSample
 from services.reference.reference_analyzer import ReferenceAnalyzer
 

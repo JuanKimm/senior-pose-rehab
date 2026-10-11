@@ -1,5 +1,3 @@
-# 자세 추정기가 반환할 관절 형식과 공통 인터페이스를 정의합니다.
-# 분석기는 이 공통 반환 형식을 사용하며 MediaPipe 객체를 직접 참조하지 않습니다.
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 

@@ -1,4 +1,4 @@
-"""시선당기기의 좌우 팔 특징과 영상에서 추출한 기준값."""
+# 시선당기기의 좌우 팔 특징과 영상에서 추출한 기준값
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 

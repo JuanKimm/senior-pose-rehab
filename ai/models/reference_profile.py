@@ -1,5 +1,3 @@
-# 기준 영상에서 추출한 자세 특징, 단계 기준과 시퀀스를 표현합니다.
-# JSON 캐시를 저장하고 다시 검증해서 불러올 때 사용하는 Pydantic 모델입니다.
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from models.gaze_pull import GazePullFeatures, GazePullReference
@@ -63,7 +61,7 @@ class ReferenceProfile(BaseModel):
     source_fps: float
     valid_frame_count: int
     reference_rep_count: int
-    # 어깨 판정용 필드. 시선당기기에서도 기존 JSON/API 형식 호환을 위해 유지합니다.
+    # 어깨 판정용 필드. 시선당기기에서도 기존 JSON/API 형식 호환을 위해 유지
     closed_target: PhaseTarget
     open_target: PhaseTarget
     thresholds: PhaseThresholds

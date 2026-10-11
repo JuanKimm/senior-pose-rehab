@@ -153,7 +153,7 @@ class ShoulderOpenCloseAnalyzer(ExerciseAnalyzer):
         )
         components = (
             (
-                0.30,
+                0.40,
                 self._closeness(
                     open_metrics["elbow_spread_ratio"],
                     open_target.elbow_spread_ratio,
@@ -169,7 +169,7 @@ class ShoulderOpenCloseAnalyzer(ExerciseAnalyzer):
                 ),
             ),
             (
-                0.15,
+                0.30,
                 self._closeness(
                     open_metrics["head_lift_ratio"],
                     open_target.head_lift_ratio,
@@ -224,7 +224,9 @@ class ShoulderOpenCloseAnalyzer(ExerciseAnalyzer):
                 ),
             ),
         )
-        return round(sum(weight * score for weight, score in components), 1)
+        total_weight = sum(weight for weight, _ in components)
+        return round(
+        sum(weight * score for weight, score in components) / total_weight, 1,)
 
     @staticmethod
     def _phase_feedback(
@@ -268,6 +270,9 @@ class ShoulderOpenCloseAnalyzer(ExerciseAnalyzer):
         closed_threshold = profile.thresholds.closed_elbow_ratio
         open_threshold = profile.thresholds.open_elbow_ratio
         metrics = _as_metrics(features)
+        completion_threshold = closed_threshold + (
+            open_threshold - closed_threshold
+        ) * 0.15
 
         if not features.hands_near_ears:
             codes.append("KEEP_HANDS_BY_EARS")
@@ -323,7 +328,7 @@ class ShoulderOpenCloseAnalyzer(ExerciseAnalyzer):
         elif state.phase == "closing":
             if value >= open_threshold:
                 state.phase = "open"
-            elif value <= closed_threshold:
+            elif value <= completion_threshold:
                 state.best_closed_metrics = metrics
                 state.phase = "closed"
                 if state.saw_open and state.best_open_metrics is not None:

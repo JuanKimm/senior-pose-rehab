@@ -1,4 +1,4 @@
-# 세 점 벡터로 계산한 관절 각도와 2차원 거리의 기본값을 검증합니다.
+# 세 점 벡터로 계산한 관절 각도와 2차원 거리의 기본값을 검증
 import pytest
 
 from services.analysis.angle_calculator import angle_degrees, distance_2d

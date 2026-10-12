@@ -9,6 +9,7 @@ import com.seniorrehab.repository.DashboardMapper;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -24,6 +25,9 @@ public class NotificationService {
     private final ScheduleMapper scheduleMapper;
     private final DashboardMapper dashboardMapper;
     private final SmsService smsService;
+
+    @Value("${app.front-url:http://localhost:5173}")
+    private String frontUrl;
 
     // 알림 내역 목록 조회
     public List<NotiHistoryDto> getHistories(Long userId) {
@@ -43,7 +47,7 @@ public class NotificationService {
             String message = "[PoseOn] 안녕하세요, " + schedule.getName() + "님 :)\n" +
                 "오늘 " + schedule.getExerciseTime() + "은 PoseOn 재활 운동 시간이에요!\n" +
                 "지금 바로 시작해보세요!\n" +
-                "→ http://localhost:5173";
+                "→ " + frontUrl; 
 
             // 본인에게 발송
             try {
@@ -70,8 +74,8 @@ public class NotificationService {
         notificationMapper.insertNotification(userId, sessionId, notiType, status, targetTel, shareToken, tokenExpiresAt);
     }
 
-    // 매시간 실행 (TEST)
-    // @Scheduled(cron = "0 0 * * * *") 
+    // 매분 실행
+    @Scheduled(cron = "0 * * * * *")
     public void scheduleAlarmJob() {
         sendScheduleAlarm();
     }
@@ -87,7 +91,7 @@ public class NotificationService {
 
         String message = "[PoseOn] " + record.getName() + "님이 오늘 운동을 완료했어요!\n" +
                 "결과 확인하기 →\n" +
-                "http://localhost:8080/api/exercise/result/share/" + token;
+                frontUrl + "/share/" + token; 
 
         // 본인에게 발송
         try {

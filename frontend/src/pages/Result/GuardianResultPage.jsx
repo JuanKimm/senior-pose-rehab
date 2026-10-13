@@ -54,9 +54,7 @@ function GuardianResultPage() {
         setError("");
 
         const response = await fetch(
-          `http://localhost:8080/api/exercise/result/share/${encodeURIComponent(
-            token,
-          )}`,
+          `/api/exercise/result/share/${encodeURIComponent(token)}`,
         );
 
         if (!response.ok) {

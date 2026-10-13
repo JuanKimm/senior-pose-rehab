@@ -8,6 +8,7 @@
         SELECT session_id AS sessionId, token_expires_at AS tokenExpiresAt
         FROM NOTIFICATION
         WHERE share_token = #{shareToken}
+        LIMIT 1
     </select>
 
 </mapper>

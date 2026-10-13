@@ -7,6 +7,7 @@ class MotionFeatures(BaseModel):
     """공통 응답 형식. 시선당기기 판정은 gaze_pull, 어깨 판정은 최상위 특징을 사용합니다."""
 
     gaze_pull: GazePullFeatures | None = None
+    elbow_distance: float | None = Field(default=None, ge=0.0)
     elbow_spread_ratio: float
     head_lift_ratio: float
     wrist_ear_ratio: float

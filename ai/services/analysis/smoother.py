@@ -1,5 +1,3 @@
-# 실시간 관절 특징에 중앙값과 EMA를 적용하여 프레임별 흔들림을 줄입니다.
-# 상태 전환이 한두 프레임의 오검출로 반복되는 문제를 완화합니다.
 from collections import defaultdict, deque
 from statistics import median
 
@@ -41,6 +39,11 @@ class FeatureSmoother:
     def update(self, features: MotionFeatures) -> MotionFeatures:
         return MotionFeatures(
             gaze_pull=self._smooth_gaze(features.gaze_pull),
+            elbow_distance=(
+                self._smooth_value("elbow_distance", features.elbow_distance)
+                if features.elbow_distance is not None
+                else None
+            ),
             elbow_spread_ratio=self._smooth_value(
                 "elbow_spread_ratio", features.elbow_spread_ratio
             ),

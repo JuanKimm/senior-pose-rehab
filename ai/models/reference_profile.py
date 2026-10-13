@@ -4,7 +4,6 @@ from models.gaze_pull import GazePullFeatures, GazePullReference
 
 
 class MotionFeatures(BaseModel):
-    """공통 응답 형식. 시선당기기 판정은 gaze_pull, 어깨 판정은 최상위 특징을 사용합니다."""
 
     gaze_pull: GazePullFeatures | None = None
 

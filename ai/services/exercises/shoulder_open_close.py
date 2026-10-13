@@ -295,7 +295,11 @@ class ShoulderOpenCloseAnalyzer(ExerciseAnalyzer):
         now = max(0, state.last_pose_timestamp_ms)
 
         if not features.hands_near_ears:
-            codes.append("KEEP_HANDS_BY_EARS")
+            self.reset_motion(state)
+            return ExerciseEvaluation(
+                phase=state.phase,
+                feedback_codes=["KEEP_HANDS_BY_EARS"],
+            )
 
         if state.phase == "waiting_closed":
             self._closed_distance = value

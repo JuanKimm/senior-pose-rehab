@@ -89,9 +89,8 @@ function DashboardPage() {
     const date = new Date();
     const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
 
-    return `${date.getMonth() + 1}월 ${date.getDate()}일 (${
-      weekdays[date.getDay()]
-    })`;
+    return `${date.getMonth() + 1}월 ${date.getDate()}일 (${weekdays[date.getDay()]
+      })`;
   };
 
   const toDateString = (year, month, day) => {

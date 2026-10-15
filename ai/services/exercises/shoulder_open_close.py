@@ -1,4 +1,4 @@
-from math import isfinite
+from math import hypot, isfinite
 from statistics import mean
 
 from core.config import MIN_LANDMARK_VISIBILITY
@@ -21,6 +21,12 @@ REQUIRED_LANDMARKS = (
     L.RIGHT_WRIST,
 )
 
+CLOSE_REDUCTION_RATIO = 0.25
+REOPEN_INCREASE_RATIO = 0.15
+MIN_COUNT_DISTANCE_DELTA = 0.015
+CLOSED_SETTLE_MS = 150
+SETTLE_MOVEMENT_RATIO = 0.01
+
 
 def _as_metrics(features: MotionFeatures) -> dict[str, float]:
     return {
@@ -33,11 +39,23 @@ def _as_metrics(features: MotionFeatures) -> dict[str, float]:
 
 
 class ShoulderOpenCloseAnalyzer(ExerciseAnalyzer):
+    def __init__(self) -> None:
+        self._reset_counter()
+
+    def _reset_counter(self) -> None:
+        self._closed_distance: float | None = None
+        self._peak_distance: float | None = None
+        self._trough_distance: float | None = None
+        self._settle_anchor: float | None = None
+        self._settle_since_ms: int | None = None
+        self._closing_since_ms: int | None = None
+
     def reset_motion(self, state: SessionState) -> None:
         state.phase = "waiting_closed"
         state.best_open_metrics = None
         state.best_closed_metrics = None
         state.saw_open = False
+        self._reset_counter()
 
     def current_feedback(
         self, features: MotionFeatures | None, profile: ReferenceProfile, state: SessionState
@@ -51,11 +69,6 @@ class ShoulderOpenCloseAnalyzer(ExerciseAnalyzer):
         )
         if not features.hands_near_ears:
             codes.append("KEEP_HANDS_BY_EARS")
-        if (
-            state.phase == "waiting_closed"
-            and features.elbow_spread_ratio > profile.thresholds.closed_elbow_ratio
-        ):
-            codes.append("START_WITH_ELBOWS_CLOSED")
         return codes
 
     @staticmethod
@@ -63,6 +76,8 @@ class ShoulderOpenCloseAnalyzer(ExerciseAnalyzer):
         return points[int(index)]
 
     def extract_features(self, pose: PoseResult) -> MotionFeatures | None:
+        if pose.image_width <= 0 or pose.image_height <= 0:
+            return None
         points = pose.normalized
         if len(points) < 33:
             return None
@@ -92,6 +107,10 @@ class ShoulderOpenCloseAnalyzer(ExerciseAnalyzer):
             return None
 
         shoulder_mid = midpoint(left_shoulder, right_shoulder)
+        elbow_distance = hypot(
+            left_elbow.x - right_elbow.x,
+            (left_elbow.y - right_elbow.y) * pose.image_height / pose.image_width,
+        )
         elbow_spread_ratio = distance_2d(left_elbow, right_elbow) / shoulder_width
         wrist_ear_left = distance_2d(left_wrist, left_ear) / shoulder_width
         wrist_ear_right = distance_2d(right_wrist, right_ear) / shoulder_width
@@ -120,6 +139,7 @@ class ShoulderOpenCloseAnalyzer(ExerciseAnalyzer):
             return None
 
         return MotionFeatures(
+            elbow_distance=elbow_distance,
             elbow_spread_ratio=elbow_spread_ratio,
             head_lift_ratio=head_lift_ratio,
             wrist_ear_ratio=wrist_ear_ratio,
@@ -266,89 +286,110 @@ class ShoulderOpenCloseAnalyzer(ExerciseAnalyzer):
         profile: ReferenceProfile,
     ) -> ExerciseEvaluation:
         codes: list[str] = []
-        value = features.elbow_spread_ratio
-        closed_threshold = profile.thresholds.closed_elbow_ratio
-        open_threshold = profile.thresholds.open_elbow_ratio
+        value = (
+            features.elbow_distance
+            if features.elbow_distance is not None
+            else features.elbow_spread_ratio
+        )
         metrics = _as_metrics(features)
-        completion_threshold = closed_threshold + (
-            open_threshold - closed_threshold
-        ) * 0.15
+        now = max(0, state.last_pose_timestamp_ms)
 
         if not features.hands_near_ears:
-            codes.append("KEEP_HANDS_BY_EARS")
+            self.reset_motion(state)
+            return ExerciseEvaluation(
+                phase=state.phase,
+                feedback_codes=["KEEP_HANDS_BY_EARS"],
+            )
 
         if state.phase == "waiting_closed":
-            if value <= closed_threshold:
-                state.phase = "closed"
-                state.best_closed_metrics = metrics
-            else:
-                codes.append("START_WITH_ELBOWS_CLOSED")
+            self._closed_distance = value
+            state.phase = "closed"
+            state.best_closed_metrics = metrics
 
         elif state.phase == "closed":
-            if (
-                state.best_closed_metrics is None
-                or value < state.best_closed_metrics["elbow_spread_ratio"]
-            ):
+            if self._closed_distance is None or value < self._closed_distance:
+                self._closed_distance = value
                 state.best_closed_metrics = metrics
-            if value > closed_threshold:
-                state.phase = "opening"
-                state.best_open_metrics = metrics
-
-        elif state.phase == "opening":
-            if (
-                state.best_open_metrics is None
-                or value > state.best_open_metrics["elbow_spread_ratio"]
-            ):
-                state.best_open_metrics = metrics
-            if value >= open_threshold:
+            baseline = self._closed_distance if self._closed_distance is not None else value
+            reopen_delta = max(
+                baseline * REOPEN_INCREASE_RATIO,
+                MIN_COUNT_DISTANCE_DELTA,
+            )
+            if value >= baseline + reopen_delta:
                 state.phase = "open"
                 state.saw_open = True
-            elif value <= closed_threshold:
-                state.phase = "closed"
-                state.best_open_metrics = None
-
-        elif state.phase == "open":
-            if (
-                state.best_open_metrics is None
-                or value > state.best_open_metrics["elbow_spread_ratio"]
-            ):
+                self._peak_distance = value
                 state.best_open_metrics = metrics
-            if value < open_threshold:
+
+        elif state.phase in ("opening", "open"):
+            if self._peak_distance is None or value > self._peak_distance:
+                self._peak_distance = value
+                state.best_open_metrics = metrics
+            peak = self._peak_distance if self._peak_distance is not None else value
+            close_delta = max(peak * CLOSE_REDUCTION_RATIO, MIN_COUNT_DISTANCE_DELTA)
+            if peak - value + 1e-9 >= close_delta:
                 state.phase = "closing"
-                if state.best_open_metrics is not None:
-                    codes.extend(
-                        self._phase_feedback(
-                            state.best_open_metrics,
-                            profile.open_target,
-                            profile,
-                            "open",
-                        )
-                    )
+                self._trough_distance = value
+                self._settle_anchor = value
+                self._settle_since_ms = now
+                self._closing_since_ms = now
+                state.best_closed_metrics = metrics
 
         elif state.phase == "closing":
-            if value >= open_threshold:
-                state.phase = "open"
-            elif value <= completion_threshold:
+            peak = self._peak_distance if self._peak_distance is not None else value
+            if self._trough_distance is None or value < self._trough_distance:
+                self._trough_distance = value
                 state.best_closed_metrics = metrics
-                state.phase = "closed"
-                if state.saw_open and state.best_open_metrics is not None:
+            movement_delta = max(peak * SETTLE_MOVEMENT_RATIO, 1e-9)
+            if self._settle_anchor is None or value <= self._settle_anchor - movement_delta:
+                self._settle_anchor = value
+                self._settle_since_ms = now
+
+            trough = self._trough_distance if self._trough_distance is not None else value
+            close_delta = max(peak * CLOSE_REDUCTION_RATIO, MIN_COUNT_DISTANCE_DELTA)
+            reopen_delta = max(trough * REOPEN_INCREASE_RATIO, MIN_COUNT_DISTANCE_DELTA)
+            still_closed = peak - value + 1e-9 >= close_delta
+            settled = (
+                still_closed
+                and self._settle_since_ms is not None
+                and now - self._settle_since_ms >= CLOSED_SETTLE_MS
+            )
+            reopening = value - trough + 1e-9 >= reopen_delta
+            turned_back = (
+                reopening
+                and self._closing_since_ms is not None
+                and now - self._closing_since_ms >= CLOSED_SETTLE_MS
+            )
+
+            if settled or turned_back:
+                best_open = state.best_open_metrics
+                best_closed = state.best_closed_metrics
+                if state.saw_open and best_open is not None and best_closed is not None:
                     codes.extend(
-                        self._phase_feedback(
-                            state.best_closed_metrics,
-                            profile.closed_target,
-                            profile,
-                            "closed",
-                        )
+                        self._phase_feedback(best_open, profile.open_target, profile, "open")
                     )
-                    rep_score = self._rep_score(
-                        state.best_open_metrics,
-                        state.best_closed_metrics,
-                        profile,
+                    codes.extend(
+                        self._phase_feedback(best_closed, profile.closed_target, profile, "closed")
                     )
+                    rep_score = self._rep_score(best_open, best_closed, profile)
                     state.rep_count += 1
                     state.rep_scores.append(rep_score)
+                    state.phase = "closed"
                     state.saw_open = False
                     state.best_open_metrics = None
+                    self._closed_distance = trough
+                    self._peak_distance = None
+                    self._trough_distance = None
+                    self._settle_anchor = None
+                    self._settle_since_ms = None
+                    self._closing_since_ms = None
+
+                    if reopening:
+                        state.phase = "open"
+                        state.saw_open = True
+                        self._peak_distance = value
+                        state.best_open_metrics = metrics
+
                     if not codes:
                         codes.append("GOOD_REP")
                     return ExerciseEvaluation(
@@ -357,6 +398,21 @@ class ShoulderOpenCloseAnalyzer(ExerciseAnalyzer):
                         rep_completed=True,
                         rep_score=rep_score,
                     )
+
+            elif reopening:
+
+                state.phase = "open"
+                self._peak_distance = max(peak, value)
+                if value >= peak:
+                    state.best_open_metrics = metrics
+                self._trough_distance = None
+                self._settle_anchor = None
+                self._settle_since_ms = None
+                self._closing_since_ms = None
+
+            elif not still_closed:
+                self._settle_anchor = value
+                self._settle_since_ms = now
 
         return ExerciseEvaluation(
             phase=state.phase,

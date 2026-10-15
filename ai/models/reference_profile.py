@@ -4,9 +4,10 @@ from models.gaze_pull import GazePullFeatures, GazePullReference
 
 
 class MotionFeatures(BaseModel):
-    """공통 응답 형식. 시선당기기 판정은 gaze_pull, 어깨 판정은 최상위 특징을 사용합니다."""
 
     gaze_pull: GazePullFeatures | None = None
+
+    elbow_distance: float | None = Field(default=None, ge=0.0)
     elbow_spread_ratio: float
     head_lift_ratio: float
     wrist_ear_ratio: float
@@ -61,7 +62,7 @@ class ReferenceProfile(BaseModel):
     source_fps: float
     valid_frame_count: int
     reference_rep_count: int
-    # 어깨 판정용 필드. 시선당기기에서도 기존 JSON/API 형식 호환을 위해 유지
+
     closed_target: PhaseTarget
     open_target: PhaseTarget
     thresholds: PhaseThresholds

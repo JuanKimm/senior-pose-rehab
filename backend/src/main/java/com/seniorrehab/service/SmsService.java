@@ -1,0 +1,32 @@
+package com.seniorrehab.service;
+
+import net.nurigo.sdk.NurigoApp;
+import net.nurigo.sdk.message.model.Message;
+import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
+import net.nurigo.sdk.message.service.DefaultMessageService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+@Service
+public class SmsService {
+
+    private final DefaultMessageService messageService;
+    private final String sender;
+
+    public SmsService(
+            @Value("${solapi.api-key}") String apiKey,
+            @Value("${solapi.api-secret}") String apiSecret,
+            @Value("${solapi.sender}") String sender) {
+        this.messageService = NurigoApp.INSTANCE.initialize(apiKey, apiSecret, "https://api.solapi.com");
+        this.sender = sender;
+    }
+
+    // SMS 발송
+    public void sendSms(String to, String text) {
+        Message message = new Message();
+        message.setFrom(sender);
+        message.setTo(to);
+        message.setText(text);
+        messageService.sendOne(new SingleMessageSendingRequest(message));
+    }
+}

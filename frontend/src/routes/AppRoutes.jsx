@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "../components/Header";
 import MainPage from "../pages/Main/MainPage";
@@ -7,6 +8,7 @@ import GuardianResultPage from "../pages/Result/GuardianResultPage";
 import DashboardPage from "../pages/Dashboard/DashboardPage";
 import LoginPage from "../pages/Login/LoginPage";
 import SignupPage from "../pages/Signup/SignupPage";
+import MyPage from "../pages/MyPage/MyPage";
 
 function AppRoutes() {
   return (
@@ -24,6 +26,9 @@ function AppRoutes() {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+
+        {/* 내 정보 */}
+        <Route path="/mypage" element={<MyPage />} />
       </Routes>
     </BrowserRouter>
   );

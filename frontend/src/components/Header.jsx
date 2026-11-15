@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -22,6 +23,13 @@ function Header() {
   const goHome = () => {
     setIsMenuOpen(false);
     navigate("/");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // 내 정보 페이지 이동
+  const handleMyPage = () => {
+    setIsMenuOpen(false);
+    navigate("/mypage");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -66,7 +74,11 @@ function Header() {
 
             {isMenuOpen && (
               <div className="userDropdown">
-                <button type="button" className="dropdownItem">
+                <button
+                  type="button"
+                  className="dropdownItem"
+                  onClick={handleMyPage}
+                >
                   내 정보
                 </button>
 
